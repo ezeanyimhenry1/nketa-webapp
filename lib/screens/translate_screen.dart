@@ -193,6 +193,7 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
       final options = allOptions[i];
       if (options.isEmpty) {
         results[i] = TranslationResult(
+          id: 'result_${i}_${words[i]}',
           igboWord: words[i],
           nsibidi: null,
           definitions: [],

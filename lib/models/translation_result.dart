@@ -114,6 +114,7 @@ class Definition {
 }
 
 class TranslationResult {
+  final String id;
   final String igboWord;
   final String? nsibidi;
   final List<Definition> definitions;
@@ -125,6 +126,7 @@ class TranslationResult {
   final List<Example>? examples;
 
   TranslationResult({
+    required this.id,
     required this.igboWord,
     this.nsibidi,
     required this.definitions,
@@ -170,6 +172,7 @@ class TranslationResult {
     final examples =
         (json['examples'] as List?)?.map((e) => Example.fromJson(e)).toList();
     return TranslationResult(
+      id: json['id'] ?? '',
       igboWord: json['word'] ?? '',
       nsibidi: extractedNsibidi,
       definitions: definitions,
@@ -198,6 +201,7 @@ class TranslationResult {
 
   factory TranslationResult.fromMap(Map<String, dynamic> map) {
     return TranslationResult(
+      id: map['id'] ?? '',
       igboWord: map['igboWord'] ?? '',
       nsibidi: map['nsibidi'],
       definitions:

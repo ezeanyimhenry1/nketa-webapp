@@ -7,6 +7,7 @@ import 'package:the_igbo_bible/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:the_igbo_bible/services/translation_service.dart';
+import 'package:the_igbo_bible/screens/nsibidi_image_page.dart';
 
 class WordDetailScreen extends StatefulWidget {
   final TranslationResult word;
@@ -95,6 +96,23 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                 ),
               ),
               SizedBox(height: AppSpacing.md.h),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => NsibidiImagePage(
+                            nsibidiText: widget.word.nsibidi ?? '',
+                            originalInput: widget.word.igboWord,
+                            results: [widget.word],
+                          ),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.image),
+                label: Text('View as Image'),
+              ),
               Row(
                 children: [
                   IconButton(

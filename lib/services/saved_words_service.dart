@@ -30,8 +30,10 @@ class SavedWordsService {
   Future<void> removeWord(TranslationResult word) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> saved = prefs.getStringList(_key) ?? [];
-    final wordJson = json.encode(word.toMap());
-    saved.remove(wordJson);
+    saved.removeWhere((jsonStr) {
+      final savedWord = TranslationResult.fromMap(json.decode(jsonStr));
+      return savedWord.id == word.id;
+    });
     await prefs.setStringList(_key, saved);
   }
 

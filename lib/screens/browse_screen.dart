@@ -8,6 +8,8 @@ import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:the_igbo_bible/data/proverbs.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
 import 'package:the_igbo_bible/models/image_template.dart';
+import 'package:the_igbo_bible/services/event_service.dart';
+import 'package:the_igbo_bible/models/igbo_event.dart';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -33,6 +35,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
     final saved = await SavedWordsService().getSavedWords();
     final List<TranslationResult> randoms = [
       TranslationResult(
+        id: 'random1',
         igboWord: 'Chinonso',
         nsibidi: '魂帰鉱',
         definitions: [
@@ -49,6 +52,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         relatedTerms: ['Chukwu', 'Onye'],
       ),
       TranslationResult(
+        id: 'random2',
         igboWord: 'Obinna',
         nsibidi: '心穏',
         definitions: [
@@ -65,6 +69,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         relatedTerms: ['Nna', 'Obi'],
       ),
       TranslationResult(
+        id: 'random3',
         igboWord: 'Adaeze',
         nsibidi: '割王',
         definitions: [
@@ -81,6 +86,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         relatedTerms: ['Ada', 'Eze'],
       ),
       TranslationResult(
+        id: 'random4',
         igboWord: 'Chukwu',
         nsibidi: '魂大',
         definitions: [
@@ -97,6 +103,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         relatedTerms: ['Chi', 'Ukwu'],
       ),
       TranslationResult(
+        id: 'random5',
         igboWord: 'Uche',
         nsibidi: '虞',
         definitions: [
@@ -113,6 +120,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
         relatedTerms: ['Obi', 'Mmụọ'],
       ),
       TranslationResult(
+        id: 'random6',
         igboWord: 'Nkem',
         nsibidi: '外花',
         definitions: [
@@ -123,6 +131,25 @@ class _BrowseScreenState extends State<BrowseScreen> {
         attributes: null,
         tags: [],
         relatedTerms: ['Nke', 'Mu'],
+      ),
+      TranslationResult(
+        id: 'random7',
+        igboWord: 'òriàkụ̀',
+        nsibidi: '寍概圧',
+        definitions: [
+          Definition(
+            wordClass: null,
+            definitions: [
+              'a formal title used to address a married woman; missus; Mrs',
+            ],
+            nsibidi: null,
+          ),
+        ],
+        audioUrl: null,
+        tenses: null,
+        attributes: null,
+        tags: [],
+        relatedTerms: ['Oriaku'],
       ),
     ];
     final all = [...saved, ...randoms];
@@ -168,156 +195,253 @@ class _BrowseScreenState extends State<BrowseScreen> {
     final proverb = proverbs[todayIndex];
     return Padding(
       padding: EdgeInsets.all(AppSpacing.lg.w),
-      child: MasonryGridView.count(
-        crossAxisCount: 1,
-        mainAxisSpacing: AppSpacing.lg.h,
-        crossAxisSpacing: AppSpacing.lg.w,
-        itemCount: 2,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          if (index == 0 &&
-              _selectedWord != null &&
-              _selectedTemplate != null) {
-            // Word card
-            return Container(
-              decoration: BoxDecoration(
-                gradient: _selectedTemplate!.gradient,
-                image:
-                    _selectedTemplate!.backgroundImageAsset != null
-                        ? DecorationImage(
-                          image: AssetImage(
-                            _selectedTemplate!.backgroundImageAsset!,
-                          ),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                            Colors.black.withAlpha((0.2 * 255).toInt()),
-                            BlendMode.darken,
-                          ),
-                        )
-                        : null,
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(AppSpacing.lg.w),
-                child: IntrinsicHeight(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          _selectedWord!.igboWord,
-                          style: theme.textTheme.displaySmall?.copyWith(
-                            color: _selectedTemplate!.textColor,
-                            fontSize: 36.sp,
-                            fontFamily: 'AguDisplay',
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      if (_selectedWord!.nsibidi != null &&
-                          _selectedWord!.nsibidi!.isNotEmpty)
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: AppSpacing.md.h,
-                          ),
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              _selectedWord!.nsibidi!,
-                              style: theme.textTheme.displayLarge?.copyWith(
-                                fontSize: 48.sp,
-                                fontFamily: 'Akagu',
-                                color: _selectedTemplate!.textColor,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                      if (_selectedWord!.definitions.isNotEmpty)
-                        Text(
-                          _selectedWord!.definitions.isNotEmpty &&
-                                  _selectedWord!
-                                      .definitions
-                                      .first
-                                      .definitions
-                                      .isNotEmpty
-                              ? _selectedWord!
-                                  .definitions
-                                  .first
-                                  .definitions
-                                  .first
-                              : '',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: _selectedTemplate!.textColor,
-                            fontSize: 16.sp,
-                          ),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      SizedBox(height: AppSpacing.lg.h),
-                      ElevatedButton.icon(
-                        onPressed: () => _viewAsImage(_selectedWord!),
-                        icon: const Icon(Icons.image),
-                        label: const Text('View as Image'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: _selectedTemplate!.accentColor,
-                          foregroundColor: _selectedTemplate!.textColor,
-                          padding: EdgeInsets.symmetric(
-                            vertical: AppSpacing.sm.h,
-                            horizontal: AppSpacing.md.w,
-                          ),
-                          textStyle: Theme.of(
-                            context,
-                          ).textTheme.labelSmall!.copyWith(fontSize: 14.sp),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          } else if (index == 1) {
-            // Proverb card
-            return Container(
-              padding: EdgeInsets.all(AppSpacing.lg.w),
-              decoration: BoxDecoration(
-                color: Colors.orange[50],
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Column(
+      child: Column(
+        children: [
+          // Upcoming Events Section
+          FutureBuilder<List<IgboEvent>>(
+            future: EventService().loadEvents(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const SizedBox();
+              }
+              final now = DateTime.now();
+              final today = DateTime(now.year, now.month, now.day);
+              // Compute next occurrence for each event
+              List<Map<String, dynamic>> eventWithNextDate =
+                  snapshot.data!
+                      .map((event) {
+                        DateTime nextDate;
+                        if (event.recurring) {
+                          nextDate = DateTime(
+                            today.year,
+                            event.date.month,
+                            event.date.day,
+                          );
+                          if (nextDate.isBefore(today)) {
+                            nextDate = DateTime(
+                              today.year + 1,
+                              event.date.month,
+                              event.date.day,
+                            );
+                          }
+                        } else {
+                          nextDate = event.date;
+                        }
+                        return {'event': event, 'nextDate': nextDate};
+                      })
+                      .where((e) {
+                        final nextDate = e['nextDate'] as DateTime?;
+                        return nextDate != null &&
+                            !nextDate.isBefore(today) &&
+                            nextDate.difference(today).inDays <= 30;
+                      })
+                      .toList();
+              eventWithNextDate.sort(
+                (a, b) => a['nextDate'].compareTo(b['nextDate']),
+              );
+              if (eventWithNextDate.isEmpty) {
+                return Text('No upcoming events in the next 30 days.');
+              }
+              final nextEvents = eventWithNextDate.take(3).toList();
+              return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Today's Proverb",
+                    "Upcoming Igbo Events",
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: Colors.orange[900],
+                      color: Colors.green[900],
                     ),
                   ),
                   SizedBox(height: AppSpacing.sm.h),
-                  Text(proverb['igbo']!, style: theme.textTheme.bodyLarge),
-                  SizedBox(height: AppSpacing.sm.h),
-                  Text(
-                    proverb['english']!,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
+                  ...nextEvents.map((e) {
+                    final event = e['event'] as IgboEvent;
+                    final nextDate = e['nextDate'] as DateTime;
+                    return Card(
+                      color: Colors.green[50],
+                      child: ListTile(
+                        leading:
+                            event.imageUrl != null
+                                ? Image.asset(
+                                  event.imageUrl!,
+                                  width: 40,
+                                  height: 40,
+                                )
+                                : null,
+                        title: Text(
+                          event.name,
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                        subtitle: Text(
+                          '${event.description}\n${nextDate.toLocal().toString().split(' ')[0]}${event.location != null ? '\n${event.location}' : ''}',
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    );
+                  }),
+                  SizedBox(height: AppSpacing.lg.h),
                 ],
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
-          }
-        },
+              );
+            },
+          ),
+          Expanded(
+            child: MasonryGridView.count(
+              crossAxisCount: 1,
+              mainAxisSpacing: AppSpacing.lg.h,
+              crossAxisSpacing: AppSpacing.lg.w,
+              itemCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                if (index == 0 &&
+                    _selectedWord != null &&
+                    _selectedTemplate != null) {
+                  // Word card
+                  return Container(
+                    decoration: BoxDecoration(
+                      gradient: _selectedTemplate!.gradient,
+                      image:
+                          _selectedTemplate!.backgroundImageAsset != null
+                              ? DecorationImage(
+                                image: AssetImage(
+                                  _selectedTemplate!.backgroundImageAsset!,
+                                ),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withAlpha((0.2 * 255).toInt()),
+                                  BlendMode.darken,
+                                ),
+                              )
+                              : null,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(AppSpacing.lg.w),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                _selectedWord!.igboWord,
+                                style: theme.textTheme.displaySmall?.copyWith(
+                                  color: _selectedTemplate!.textColor,
+                                  fontSize: 36.sp,
+                                  fontFamily: 'AguDisplay',
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            if (_selectedWord!.nsibidi != null &&
+                                _selectedWord!.nsibidi!.isNotEmpty)
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: AppSpacing.md.h,
+                                ),
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    _selectedWord!.nsibidi!,
+                                    style: theme.textTheme.displayLarge
+                                        ?.copyWith(
+                                          fontSize: 48.sp,
+                                          fontFamily: 'Akagu',
+                                          color: _selectedTemplate!.textColor,
+                                        ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ),
+                            if (_selectedWord!.definitions.isNotEmpty)
+                              Text(
+                                _selectedWord!.definitions.isNotEmpty &&
+                                        _selectedWord!
+                                            .definitions
+                                            .first
+                                            .definitions
+                                            .isNotEmpty
+                                    ? _selectedWord!
+                                        .definitions
+                                        .first
+                                        .definitions
+                                        .first
+                                    : '',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  color: _selectedTemplate!.textColor,
+                                  fontSize: 16.sp,
+                                ),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            SizedBox(height: AppSpacing.lg.h),
+                            ElevatedButton.icon(
+                              onPressed: () => _viewAsImage(_selectedWord!),
+                              icon: const Icon(Icons.image),
+                              label: const Text('View as Image'),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: _selectedTemplate!.accentColor,
+                                foregroundColor: _selectedTemplate!.textColor,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: AppSpacing.sm.h,
+                                  horizontal: AppSpacing.md.w,
+                                ),
+                                textStyle: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall!
+                                    .copyWith(fontSize: 14.sp),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                } else if (index == 1) {
+                  // Proverb card
+                  return Container(
+                    padding: EdgeInsets.all(AppSpacing.lg.w),
+                    decoration: BoxDecoration(
+                      color: Colors.orange[50],
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Today's Proverb",
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: Colors.orange[900],
+                          ),
+                        ),
+                        SizedBox(height: AppSpacing.sm.h),
+                        Text(
+                          proverb['igbo']!,
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                        SizedBox(height: AppSpacing.sm.h),
+                        Text(
+                          proverb['english']!,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

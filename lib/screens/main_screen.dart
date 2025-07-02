@@ -46,9 +46,30 @@ class _MainScreenState extends State<MainScreen> {
         child: ListView(
           padding: EdgeInsets.all(AppSpacing.lg.w),
           children: [
-            DrawerHeader(child: Text('Menu', style: textTheme.headlineMedium)),
+            DrawerHeader(
+              child: Row(
+                children: [
+                  Text(
+                    "運 ",
+                    style: textTheme.headlineMedium!.copyWith(
+                      fontFamily: 'Akagu',
+                    ),
+                  ),
+                  Text(
+                    AppStrings.appTitle,
+                    style: textTheme.headlineMedium!.copyWith(
+                      fontFamily: 'AguDisplay',
+                    ),
+                  ),
+                ],
+              ),
+            ),
             ListTile(
-              leading: Icon(Icons.star, size: AppSpacing.iconSize.sp),
+              leading: Icon(
+                Icons.star,
+                size: AppSpacing.iconSize.sp,
+                color: AppColors.primary,
+              ),
               title: Text('Saved Words', style: textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
@@ -59,7 +80,11 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings, size: AppSpacing.iconSize.sp),
+              leading: Icon(
+                Icons.settings,
+                size: AppSpacing.iconSize.sp,
+                color: AppColors.primary,
+              ),
               title: Text('Settings', style: textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
@@ -70,7 +95,11 @@ class _MainScreenState extends State<MainScreen> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.person, size: AppSpacing.iconSize.sp),
+              leading: Icon(
+                Icons.person,
+                size: AppSpacing.iconSize.sp,
+                color: AppColors.primary,
+              ),
               title: Text('Profile', style: textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);

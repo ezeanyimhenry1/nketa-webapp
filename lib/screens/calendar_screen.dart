@@ -5,6 +5,8 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:the_igbo_bible/services/event_service.dart';
+import 'package:the_igbo_bible/models/igbo_event.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -22,10 +24,22 @@ class _CalendarScreenState extends State<CalendarScreen> {
   final DateTime referenceDate = DateTime(2025, 6, 22);
   final int referenceDayIndex = 0; // 0=Eke, 1=Orie, 2=Afo, 3=Nkwo
 
+  List<IgboEvent> _events = [];
+  bool _eventsLoading = true;
+
   @override
   void initState() {
     super.initState();
     _singleDatePickerValueWithDefaultValue = [_getNigerianDateTime()];
+    _loadEvents();
+  }
+
+  Future<void> _loadEvents() async {
+    final events = await EventService().loadEvents();
+    setState(() {
+      _events = events;
+      _eventsLoading = false;
+    });
   }
 
   // Helper method to get current Nigerian time
@@ -193,6 +207,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
             CustomContainer(
               content: _buildSingleDatePickerWithValue(textTheme),
             ),
+            SizedBox(height: AppSpacing.md.h),
+            CustomContainer(content: _buildEventsForSelectedDate()),
             SizedBox(height: AppSpacing.lg.h),
             CustomContainer(
               content: Column(
@@ -228,7 +244,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     final config = CalendarDatePicker2Config(
       selectedDayHighlightColor: Colors.transparent,
-      selectedDayTextStyle: TextStyle(color: Colors.black),
+      selectedYearTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      selectedMonthTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      disabledMonthTextStyle: const TextStyle(
+        color: Colors.grey,
+        fontWeight: FontWeight.bold,
+      ),
+      monthTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
+      selectedDayTextStyle: const TextStyle(
+        color: Colors.black87,
+        fontWeight: FontWeight.bold,
+      ),
       weekdayLabels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       weekdayLabelTextStyle: const TextStyle(
         color: Colors.black38,
@@ -239,7 +274,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       dayMaxWidth: 25,
       animateToDisplayedMonthDate: true,
       controlsTextStyle: const TextStyle(
-        color: Colors.black,
+        color: Colors.black87,
         fontSize: 15,
         fontWeight: FontWeight.bold,
       ),
@@ -269,13 +304,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         nigerianNow.month + 2,
         nigerianNow.day + 10,
       ),
-      selectableDayPredicate: (day) {
-        final nigerianToday = _getNigerianDateTime();
-        return !day
-                .difference(nigerianToday.add(const Duration(days: 3)))
-                .isNegative &&
-            day.isBefore(nigerianToday.add(const Duration(days: 30)));
-      },
+      selectableDayPredicate: (day) => true,
       currentDate: nigerianNow,
       dayBuilder: ({
         required date,
@@ -290,7 +319,36 @@ class _CalendarScreenState extends State<CalendarScreen> {
             date.year == nigerianToday.year &&
             date.month == nigerianToday.month &&
             date.day == nigerianToday.day;
-
+        final hasEvent = _events.any(
+          (event) =>
+              (event.recurring &&
+                  event.date.month == date.month &&
+                  event.date.day == date.day) ||
+              (!event.recurring &&
+                  event.date.year == date.year &&
+                  event.date.month == date.month &&
+                  event.date.day == date.day),
+        );
+        Widget dayText = Text('${date.day}', style: textStyle);
+        if (hasEvent) {
+          dayText = Stack(
+            alignment: Alignment.center,
+            children: [
+              dayText,
+              Positioned(
+                bottom: 2,
+                child: Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
         if (isNigerianToday) {
           return Container(
             decoration: BoxDecoration(
@@ -309,8 +367,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           );
         }
-
-        return null;
+        return dayText;
       },
     );
 
@@ -342,6 +399,64 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildEventsForSelectedDate() {
+    if (_eventsLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    final selectedDate = _singleDatePickerValueWithDefaultValue.first;
+    if (selectedDate == null) return const SizedBox();
+    final normalizedSelected = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+    );
+
+    final eventsForDay =
+        _events.where((event) {
+          if (event.recurring) {
+            return event.date.month == normalizedSelected.month &&
+                event.date.day == normalizedSelected.day;
+          } else {
+            final normalizedEvent = DateTime(
+              event.date.year,
+              event.date.month,
+              event.date.day,
+            );
+            return normalizedEvent == normalizedSelected;
+          }
+        }).toList();
+
+    if (eventsForDay.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text('No Igbo events on this day.'),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Events on this day:',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        ...eventsForDay.map(
+          (event) => Card(
+            color: Colors.green[50],
+            child: ListTile(
+              leading:
+                  event.imageUrl != null
+                      ? Image.asset(event.imageUrl!, width: 40, height: 40)
+                      : null,
+              title: Text(event.name),
+              subtitle: Text('${event.description}\n${event.location ?? ''}'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

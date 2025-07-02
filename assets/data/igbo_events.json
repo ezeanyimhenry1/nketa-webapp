@@ -1,0 +1,58 @@
+[
+    {
+        "name": "New Yam Festival (Iri Ji)",
+        "description": "Celebrates the yam harvest, a major event in Igbo culture.",
+        "date": "2024-08-15",
+        "location": "Various Igbo communities",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Biafra Remembrance Day",
+        "description": "Honors those who died in the Nigerian Civil War (Biafran War).",
+        "date": "2024-05-30",
+        "location": "Igboland",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Igbo Day",
+        "description": "Celebrates Igbo unity and culture.",
+        "date": "2024-09-29",
+        "location": "All Igbo communities",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Ofala Festival",
+        "description": "Celebrates the king (Obi/Igwe) and his reign in various Igbo towns.",
+        "date": "2024-10-10",
+        "location": "Onitsha, Nnewi, and other towns",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Mmanwu Festival",
+        "description": "Masquerade festival, honoring ancestors and spirits.",
+        "date": "2024-12-20",
+        "location": "Enugu, Nsukka, and other towns",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Ekpe Festival",
+        "description": "Secret society festival, especially in Arochukwu and some Igbo communities.",
+        "date": "2024-12-28",
+        "location": "Arochukwu, Abia State",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    },
+    {
+        "name": "Aju Festival",
+        "description": "Women's festival, especially in some parts of Anambra.",
+        "date": "2024-07-05",
+        "location": "Anambra State",
+        "imageUrl": "assets/icons/appicon.png",
+        "recurring": true
+    }
+]
