@@ -1,4 +1,4 @@
-package com.henryezeanyim.the_igbo_bible
+package com.henryezeanyim.theigbobible
 
 import io.flutter.embedding.android.FlutterActivity
 

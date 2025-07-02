@@ -59,8 +59,7 @@ Input: "$input"
         "temperature": 0.4,
       }),
     );
-    print('api key: ${dotenv.env['OPENAI_API_KEY']}');
-    print(response.body);
+
     if (response.statusCode == 200) {
       final body = json.decode(response.body);
       final content = body['choices'][0]['message']['content'];

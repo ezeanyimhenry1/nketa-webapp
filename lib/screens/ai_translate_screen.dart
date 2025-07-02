@@ -56,6 +56,7 @@ class _AiTranslateScreenState extends State<AiTranslateScreen> {
       }
     } catch (e) {
       debugPrint('Error: $e');
+      if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Translation failed. Try again.')));

@@ -5,7 +5,6 @@
     <string name="firebase_database_url" translatable="false">
         https://the-igbo-bible-default-rtdb.firebaseio.com</string>
     <string name="gcm_defaultSenderId" translatable="false">994305615388</string>
-    <string name="google_api_key" translatable="false">AIzaSyCGCLh9n-eiN9PMVSU7RGkOD9ODzQCjPeM</string>
     <string name="google_app_id" translatable="false">1:994305615388:android:386d0f88e8a65dc85a21d9</string>
     <string name="google_crash_reporting_api_key" translatable="false">
         AIzaSyCGCLh9n-eiN9PMVSU7RGkOD9ODzQCjPeM</string>
