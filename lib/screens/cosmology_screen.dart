@@ -16,6 +16,7 @@ class CosmologyScreen extends StatefulWidget {
 class _CosmologyScreenState extends State<CosmologyScreen> {
   late Future<List<CosmologyItem>> _futureItems;
   final AudioPlayer _audioPlayer = AudioPlayer();
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -27,6 +28,18 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
   void dispose() {
     _audioPlayer.dispose();
     super.dispose();
+  }
+
+  List<CosmologyItem> _filterItems(List<CosmologyItem> items) {
+    if (_searchQuery.isEmpty) return items;
+    final q = _searchQuery.toLowerCase();
+    return items
+        .where(
+          (item) =>
+              item.name.toLowerCase().contains(q) ||
+              item.description.toLowerCase().contains(q),
+        )
+        .toList();
   }
 
   void _showDetailsModal(BuildContext context, CosmologyItem item) {
@@ -217,7 +230,7 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
                 SizedBox(height: AppSpacing.sm),
                 Text(
                   item.description.length > 100
-                      ? item.description.substring(0, 100) + '...'
+                      ? '${item.description.substring(0, 100)}...'
                       : item.description,
                   style: Theme.of(
                     context,
@@ -270,26 +283,73 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
               ),
             );
           }
-          final items = snapshot.data!;
+          final items = _filterItems(snapshot.data!);
           // Group by section
           final Map<String, List<CosmologyItem>> grouped = {};
           for (final item in items) {
             grouped.putIfAbsent(item.section, () => []).add(item);
           }
-          return ListView(
+          return Padding(
             padding: EdgeInsets.symmetric(
               vertical: AppSpacing.lg,
               horizontal: AppSpacing.md,
             ),
-            children:
-                grouped.entries.expand((entry) {
-                  final section = entry.key;
-                  final sectionItems = entry.value;
-                  return [
-                    _buildSectionHeader(section),
-                    ...sectionItems.map(_buildCosmologyCard),
-                  ];
-                }).toList(),
+            child: Column(
+              children: [
+                // Search bar
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search cosmology...',
+                    prefixIcon: Icon(Icons.search, color: AppColors.primary),
+                    suffixIcon:
+                        _searchQuery.isNotEmpty
+                            ? IconButton(
+                              icon: Icon(
+                                Icons.clear,
+                                color: AppColors.secondary,
+                              ),
+                              onPressed:
+                                  () => setState(() => _searchQuery = ''),
+                            )
+                            : null,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide(
+                        color: AppColors.primary.withAlpha(80),
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 0,
+                      horizontal: 16,
+                    ),
+                  ),
+                  onChanged: (val) => setState(() => _searchQuery = val),
+                ),
+                SizedBox(height: AppSpacing.md),
+                // Cosmology content
+                Expanded(
+                  child:
+                      items.isEmpty
+                          ? Center(
+                            child: Text(
+                              'No results found.',
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                          )
+                          : ListView(
+                            children:
+                                grouped.entries.expand((entry) {
+                                  final section = entry.key;
+                                  final sectionItems = entry.value;
+                                  return [
+                                    _buildSectionHeader(section),
+                                    ...sectionItems.map(_buildCosmologyCard),
+                                  ];
+                                }).toList(),
+                          ),
+                ),
+              ],
+            ),
           );
         },
       ),

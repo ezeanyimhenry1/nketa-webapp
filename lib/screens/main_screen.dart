@@ -14,6 +14,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
 import 'package:the_igbo_bible/screens/cosmology_screen.dart';
+import 'package:the_igbo_bible/screens/content_hub_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -118,6 +119,24 @@ class _MainScreenState extends State<MainScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => CosmologyScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.menu_book,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      'Igbo Stories & Essays',
+                      style: textTheme.bodyLarge,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ContentHubScreen()),
                       );
                     },
                   ),
