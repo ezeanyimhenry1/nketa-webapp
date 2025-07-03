@@ -12,6 +12,7 @@ import 'package:the_igbo_bible/screens/settings_screen.dart';
 import 'package:the_igbo_bible/screens/profile_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -81,6 +82,26 @@ class _MainScreenState extends State<MainScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => SavedWordsScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.timeline,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      'Igbo History Timeline',
+                      style: textTheme.bodyLarge,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => HistoryTimelineScreen(),
+                        ),
                       );
                     },
                   ),
