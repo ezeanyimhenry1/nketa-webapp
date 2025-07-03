@@ -7,6 +7,7 @@ import 'package:the_igbo_bible/theme/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:the_igbo_bible/screens/support_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -506,6 +507,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       size: 16,
                     ),
                     onTap: _openPrivacyPolicy,
+                  ),
+                  Divider(
+                    height: 0,
+                    color: AppColors.border,
+                    indent: AppSpacing.lg,
+                    endIndent: AppSpacing.lg,
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.mail_outline,
+                      color: AppColors.secondary,
+                      size: AppSpacing.iconSize,
+                    ),
+                    title: Text(
+                      'Make Suggestions',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.secondary,
+                      size: 16,
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const SupportScreen(),
+                        ),
+                      );
+                    },
                   ),
                   Divider(
                     height: 0,

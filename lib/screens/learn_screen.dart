@@ -127,7 +127,32 @@ class _LearnScreenState extends State<LearnScreen> {
             ),
             SizedBox(height: AppSpacing.md.h),
             if (_loading)
-              const Center(child: ShimmerLoader(height: 32, width: 32))
+              // Full-page shimmer placeholders for the entire learn page
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Search bar shimmer
+                  ShimmerLoader(height: 48, width: double.infinity),
+                  SizedBox(height: AppSpacing.md.h),
+                  // Grid shimmer (6 items)
+                  GridView.count(
+                    crossAxisCount: 2,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    crossAxisSpacing: AppSpacing.sm.w,
+                    mainAxisSpacing: AppSpacing.sm.h,
+                    children: List.generate(
+                      6,
+                      (i) => ShimmerLoader(height: 100, width: double.infinity),
+                    ),
+                  ),
+                  SizedBox(height: AppSpacing.md.h),
+                  // About section shimmer
+                  ShimmerLoader(height: 24, width: 120),
+                  SizedBox(height: 8),
+                  ShimmerLoader(height: 40, width: double.infinity),
+                ],
+              )
             else if (_words.isEmpty)
               Text(
                 'No Nsibidi symbols found for "${_searchController.text}".',
