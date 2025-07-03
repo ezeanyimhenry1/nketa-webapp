@@ -9,19 +9,41 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:the_igbo_bible/services/notification_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
   await NotificationService.initialize();
-  await NotificationService.scheduleDailyProverbNotification(
-    const TimeOfDay(hour: 8, minute: 0),
-  );
+
+  // Check user preferences before scheduling notifications
+  await _checkAndScheduleNotifications();
+
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
 
   runApp(const MyApp());
+}
+
+Future<void> _checkAndScheduleNotifications() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final notificationsEnabled =
+        prefs.getBool('notifications_enabled') ?? false;
+
+    if (notificationsEnabled) {
+      final hour = prefs.getInt('notification_hour') ?? 8;
+      final minute = prefs.getInt('notification_minute') ?? 0;
+      final notificationTime = TimeOfDay(hour: hour, minute: minute);
+
+      await NotificationService.scheduleDailyProverbNotification(
+        notificationTime,
+      );
+    }
+  } catch (e) {
+    debugPrint('Error checking notification preferences: $e');
+  }
 }
 
 class MyApp extends StatefulWidget {

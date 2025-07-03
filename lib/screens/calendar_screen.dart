@@ -7,6 +7,7 @@ import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/services/event_service.dart';
 import 'package:the_igbo_bible/models/igbo_event.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -404,7 +405,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   Widget _buildEventsForSelectedDate() {
     if (_eventsLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: ShimmerLoader(height: 32, width: 32));
     }
     final selectedDate = _singleDatePickerValueWithDefaultValue.first;
     if (selectedDate == null) return const SizedBox();

@@ -15,6 +15,7 @@ import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:the_igbo_bible/data/constants.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class TranslateScreen extends StatefulWidget {
   const TranslateScreen({super.key});
@@ -512,12 +513,13 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
             onPressed: _loading ? null : _handleTranslate,
             icon:
                 _loading
-                    ? SizedBox(
-                      width: 16.w,
-                      height: 16.w,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ? const SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: ShimmerLoader(
+                        height: 16,
+                        width: 16,
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
                     )
                     : Icon(
@@ -1004,8 +1006,12 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                                       child: SizedBox(
                                         width: 24,
                                         height: 24,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2,
+                                        child: ShimmerLoader(
+                                          height: 24,
+                                          width: 24,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(12),
+                                          ),
                                         ),
                                       ),
                                     );

@@ -12,6 +12,9 @@ import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:the_igbo_bible/services/openai_service.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
+import 'package:android_intent_plus/android_intent.dart';
+import 'package:android_intent_plus/flag.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
@@ -320,6 +323,31 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                     Row(
                       children: [
                         Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed:
+                                _isGenerating
+                                    ? null
+                                    : _generateAndShareToTikTok,
+                            icon: const Icon(Icons.video_library),
+                            label: const Text('TikTok'),
+                            style: OutlinedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(
+                                vertical: AppSpacing.md.h,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  AppSpacing.buttonRadius,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSpacing.sm.h),
+                    Row(
+                      children: [
+                        Expanded(
                           child: ElevatedButton.icon(
                             onPressed:
                                 _isGenerating ? null : _generateAndSaveImage,
@@ -328,12 +356,12 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                                     ? SizedBox(
                                       width: 16.w,
                                       height: 16.w,
-                                      child: const CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                              Colors.white,
-                                            ),
+                                      child: const ShimmerLoader(
+                                        height: 16,
+                                        width: 16,
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8),
+                                        ),
                                       ),
                                     )
                                     : const Icon(
@@ -515,7 +543,13 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                             ? SizedBox(
                               height: 28,
                               width: 28,
-                              child: CircularProgressIndicator(strokeWidth: 2),
+                              child: const ShimmerLoader(
+                                height: 28,
+                                width: 28,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(14),
+                                ),
+                              ),
                             )
                             : AutoSizeText(
                               meaning,
@@ -645,6 +679,44 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Failed to share image'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } finally {
+      setState(() => _isGenerating = false);
+    }
+  }
+
+  Future<void> _generateAndShareToTikTok() async {
+    setState(() => _isGenerating = true);
+    try {
+      final imageData = await _captureImage();
+      final directory = await getTemporaryDirectory();
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final imagePath = '${directory.path}/nsibidi_tiktok_$timestamp.png';
+      final file = File(imagePath);
+      await file.writeAsBytes(imageData);
+      if (Platform.isAndroid) {
+        final intent = AndroidIntent(
+          action: 'android.intent.action.SEND',
+          type: 'image/*',
+          package: 'com.zhiliaoapp.musically',
+          flags: <int>[Flag.FLAG_GRANT_READ_URI_PERMISSION],
+          data: Uri.file(file.path).toString(),
+          // TikTok may require the file to be in MediaStore, but try direct first
+        );
+        await intent.launch();
+      } else {
+        // Fallback to share sheet on iOS
+        await _shareImageFile(file);
+      }
+    } catch (e) {
+      debugPrint('Error sharing to TikTok: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to share image to TikTok'),
           backgroundColor: Colors.red,
           behavior: SnackBarBehavior.floating,
         ),

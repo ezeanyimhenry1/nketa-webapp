@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:the_igbo_bible/services/translation_service.dart';
 import 'package:the_igbo_bible/screens/nsibidi_image_page.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class WordDetailScreen extends StatefulWidget {
   final TranslationResult word;
@@ -293,14 +294,17 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                       builder: (context, snapshot) {
                         if (!snapshot.hasData) {
                           return Padding(
-                            padding: EdgeInsets.only(
-                              left: AppSpacing.md.w,
-                              bottom: AppSpacing.xs.h,
-                            ),
+                            padding: EdgeInsets.only(left: 16.w, bottom: 4.h),
                             child: SizedBox(
                               width: 24,
                               height: 24,
-                              child: CircularProgressIndicator(strokeWidth: 2),
+                              child: ShimmerLoader(
+                                height: 24,
+                                width: 24,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                              ),
                             ),
                           );
                         }

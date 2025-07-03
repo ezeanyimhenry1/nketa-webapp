@@ -4,6 +4,7 @@ import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
 import 'package:the_igbo_bible/screens/word_detail_screen.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class SavedWordsScreen extends StatefulWidget {
   const SavedWordsScreen({super.key});
@@ -48,7 +49,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
       appBar: AppBar(title: Text('Saved Words')),
       body:
           _loading
-              ? Center(child: CircularProgressIndicator())
+              ? const Center(child: ShimmerLoader(height: 32, width: 32))
               : _savedWords.isEmpty
               ? Center(child: Text('No saved words yet.'))
               : Padding(

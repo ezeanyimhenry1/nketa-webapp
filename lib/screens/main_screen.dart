@@ -10,6 +10,8 @@ import 'package:the_igbo_bible/screens/saved_words_screen.dart';
 import 'package:the_igbo_bible/screens/browse_screen.dart';
 import 'package:the_igbo_bible/screens/settings_screen.dart';
 import 'package:the_igbo_bible/screens/profile_screen.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -43,69 +45,119 @@ class _MainScreenState extends State<MainScreen> {
       key: _scaffoldKey,
       endDrawer: Drawer(
         backgroundColor: theme.colorScheme.surface,
-        child: ListView(
-          padding: EdgeInsets.all(AppSpacing.lg.w),
+        child: Column(
           children: [
-            DrawerHeader(
-              child: Row(
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.all(AppSpacing.lg.w),
                 children: [
-                  Text(
-                    "運 ",
-                    style: textTheme.headlineMedium!.copyWith(
-                      fontFamily: 'Akagu',
+                  DrawerHeader(
+                    child: Row(
+                      children: [
+                        Text(
+                          "\u904b ",
+                          style: textTheme.headlineMedium!.copyWith(
+                            fontFamily: 'Akagu',
+                          ),
+                        ),
+                        Text(
+                          AppStrings.appTitle,
+                          style: textTheme.headlineMedium!.copyWith(
+                            fontFamily: 'AguDisplay',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    AppStrings.appTitle,
-                    style: textTheme.headlineMedium!.copyWith(
-                      fontFamily: 'AguDisplay',
+                  ListTile(
+                    leading: Icon(
+                      Icons.star,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
                     ),
+                    title: Text('Saved Words', style: textTheme.bodyLarge),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SavedWordsScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.settings,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
+                    ),
+                    title: Text('Settings', style: textTheme.bodyLarge),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SettingsScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
+                    ),
+                    title: Text('Profile', style: textTheme.bodyLarge),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ProfileScreen()),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-            ListTile(
-              leading: Icon(
-                Icons.star,
-                size: AppSpacing.iconSize.sp,
-                color: AppColors.primary,
-              ),
-              title: Text('Saved Words', style: textTheme.bodyLarge),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => SavedWordsScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                size: AppSpacing.iconSize.sp,
-                color: AppColors.primary,
-              ),
-              title: Text('Settings', style: textTheme.bodyLarge),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => SettingsScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.person,
-                size: AppSpacing.iconSize.sp,
-                color: AppColors.primary,
-              ),
-              title: Text('Profile', style: textTheme.bodyLarge),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => ProfileScreen()),
+            FutureBuilder<PackageInfo>(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, snapshot) {
+                final version = snapshot.hasData ? snapshot.data!.version : '';
+                return Padding(
+                  padding: EdgeInsets.only(bottom: AppSpacing.lg.h, top: 8),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircleAvatar(
+                        radius: 28,
+                        backgroundImage: AssetImage('assets/icons/appicon.png'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      SizedBox(height: 8),
+                      Text('Version $version', style: textTheme.bodySmall),
+                      SizedBox(height: 8),
+                      ElevatedButton.icon(
+                        onPressed: () async {
+                          // Replace with your app store URL
+                          const url = 'https://theigbobible.netlify.app';
+                          final uri = Uri.parse(url);
+                          if (await canLaunchUrl(uri)) {
+                            await launchUrl(
+                              uri,
+                              mode: LaunchMode.externalApplication,
+                            );
+                          }
+                        },
+                        icon: Icon(Icons.system_update),
+                        label: Text('Check for Update'),
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          textStyle: textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -158,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         child: Row(
           children: [
-            _buildNavItem(0, Icons.photo_library_outlined, 'Browse', textTheme),
+            _buildNavItem(0, Icons.home, 'Home', textTheme),
             _buildNavItem(1, Icons.event_note, 'Calendar', textTheme),
             _buildNavItem(2, Icons.menu_book_rounded, 'Learn', textTheme),
             _buildNavItem(3, Icons.translate, 'Translate', textTheme),

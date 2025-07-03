@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:io';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -271,7 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
     if (_loading || _checkingPurchases) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: ShimmerLoader(height: 32, width: 32));
     }
     if (user == null) {
       return Scaffold(

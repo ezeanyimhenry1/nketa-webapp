@@ -1,13 +1,543 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:the_igbo_bible/services/notification_service.dart';
+import 'package:the_igbo_bible/theme/app_theme.dart';
+import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:the_igbo_bible/theme/app_strings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool _notificationsEnabled = false;
+  bool _eventNotificationsEnabled = false;
+  TimeOfDay _notificationTime = const TimeOfDay(hour: 8, minute: 0);
+  bool _loading = true;
+  bool _permissionGranted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings();
+    _checkNotificationPermission();
+  }
+
+  Future<void> _loadSettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      setState(() {
+        _notificationsEnabled = prefs.getBool('notifications_enabled') ?? false;
+        _eventNotificationsEnabled =
+            prefs.getBool('event_notifications_enabled') ?? false;
+        final hour = prefs.getInt('notification_hour') ?? 8;
+        final minute = prefs.getInt('notification_minute') ?? 0;
+        _notificationTime = TimeOfDay(hour: hour, minute: minute);
+        _loading = false;
+      });
+    } catch (e) {
+      debugPrint('Error loading settings: $e');
+      setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _saveSettings() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('notifications_enabled', _notificationsEnabled);
+      await prefs.setBool(
+        'event_notifications_enabled',
+        _eventNotificationsEnabled,
+      );
+      await prefs.setInt('notification_hour', _notificationTime.hour);
+      await prefs.setInt('notification_minute', _notificationTime.minute);
+    } catch (e) {
+      debugPrint('Error saving settings: $e');
+    }
+  }
+
+  Future<void> _checkNotificationPermission() async {
+    try {
+      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      final androidPlugin =
+          flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin
+              >();
+
+      if (androidPlugin != null) {
+        final granted = await androidPlugin.areNotificationsEnabled();
+        setState(() {
+          _permissionGranted =
+              granted ?? true; // Default to true if we can't determine
+        });
+      } else {
+        // If we can't check Android permissions, assume they're granted
+        setState(() {
+          _permissionGranted = true;
+        });
+      }
+    } catch (e) {
+      debugPrint('Error checking notification permission: $e');
+      // If there's an error checking permissions, assume they're granted
+      setState(() {
+        _permissionGranted = true;
+      });
+    }
+  }
+
+  Future<void> _requestNotificationPermission() async {
+    try {
+      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      final androidPlugin =
+          flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin
+              >();
+
+      if (androidPlugin != null) {
+        final granted = await androidPlugin.requestNotificationsPermission();
+        setState(() {
+          _permissionGranted =
+              granted ?? true; // Default to true if we can't determine
+        });
+
+        if ((granted ?? true) && _notificationsEnabled) {
+          await NotificationService.scheduleDailyProverbNotification(
+            _notificationTime,
+          );
+        }
+      } else {
+        // If we can't request permissions, assume they're granted
+        setState(() {
+          _permissionGranted = true;
+        });
+        if (_notificationsEnabled) {
+          await NotificationService.scheduleDailyProverbNotification(
+            _notificationTime,
+          );
+        }
+      }
+    } catch (e) {
+      debugPrint('Error requesting notification permission: $e');
+      // If there's an error, assume permissions are granted
+      setState(() {
+        _permissionGranted = true;
+      });
+      if (_notificationsEnabled) {
+        await NotificationService.scheduleDailyProverbNotification(
+          _notificationTime,
+        );
+      }
+    }
+  }
+
+  Future<void> _pickNotificationTime() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _notificationTime,
+    );
+    if (picked != null) {
+      setState(() => _notificationTime = picked);
+      await _saveSettings();
+      if (_notificationsEnabled && _permissionGranted) {
+        await NotificationService.scheduleDailyProverbNotification(picked);
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Notification time updated to ${picked.format(context)}',
+            ),
+            backgroundColor: AppColors.success,
+          ),
+        );
+      }
+    }
+  }
+
+  void _toggleNotifications(bool value) async {
+    if (value && !_permissionGranted) {
+      await _requestNotificationPermission();
+      if (!_permissionGranted) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Notification permission is required to enable notifications',
+            ),
+            backgroundColor: AppColors.warning,
+          ),
+        );
+        return;
+      }
+    }
+
+    setState(() => _notificationsEnabled = value);
+    await _saveSettings();
+
+    if (value) {
+      await NotificationService.scheduleDailyProverbNotification(
+        _notificationTime,
+      );
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Daily proverb notifications enabled for ${_notificationTime.format(context)}',
+          ),
+          backgroundColor: AppColors.success,
+        ),
+      );
+    } else {
+      await NotificationService.cancelAllNotifications();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Daily proverb notifications disabled'),
+          backgroundColor: AppColors.info,
+        ),
+      );
+    }
+  }
+
+  void _openPrivacyPolicy() async {
+    const url = 'https://theigbobible.netlify.app/privacy';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _contactSupport() async {
+    final email = Uri(
+      scheme: 'mailto',
+      path: 'theigbobible@gmail.com',
+      query: 'subject=The Igbo Bible App Support',
+    );
+    if (await canLaunchUrl(email)) {
+      await launchUrl(email);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    if (_loading) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Settings',
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: Colors.white,
+              fontFamily: 'AguDisplay',
+            ),
+          ),
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+        ),
+        body: const Center(child: ShimmerLoader(height: 32, width: 32)),
+      );
+    }
+
     return Scaffold(
-      appBar: AppBar(title: Text('Settings')),
-      body: Center(child: Text('Settings will appear here.')),
+      appBar: AppBar(
+        title: Text(
+          'Settings',
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+            fontFamily: 'AguDisplay',
+          ),
+        ),
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
+      ),
+      body: Container(
+        color: AppColors.background,
+        child: ListView(
+          padding: EdgeInsets.all(AppSpacing.lg),
+          children: [
+            // App branding header
+            Container(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [AppColors.primary, AppColors.secondary],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child: Row(
+                children: [
+                  Text(
+                    "運 ",
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontFamily: 'Akagu',
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    AppStrings.appTitle,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontFamily: 'AguDisplay',
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: AppSpacing.xl),
+
+            // Notifications Section
+            Text(
+              'Notifications',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondary,
+              ),
+            ),
+            SizedBox(height: AppSpacing.sm),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child: Column(
+                children: [
+                  if (!_permissionGranted)
+                    Container(
+                      padding: EdgeInsets.all(AppSpacing.md),
+                      margin: EdgeInsets.all(AppSpacing.sm),
+                      decoration: BoxDecoration(
+                        color: AppColors.warning.withAlpha((0.1 * 255).toInt()),
+                        borderRadius: BorderRadius.circular(
+                          AppSpacing.cardRadius,
+                        ),
+                        border: Border.all(
+                          color: AppColors.warning.withAlpha(
+                            (0.3 * 255).toInt(),
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: AppColors.warning,
+                            size: 20,
+                          ),
+                          SizedBox(width: AppSpacing.sm),
+                          Expanded(
+                            child: Text(
+                              'Notification permission required',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: AppColors.warning,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  SwitchListTile(
+                    title: Text(
+                      'Daily Proverb Notifications',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    subtitle: Text(
+                      _notificationsEnabled
+                          ? 'You\'ll receive daily proverbs at ${_notificationTime.format(context)}'
+                          : 'Get inspired with daily Igbo proverbs',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    secondary: Icon(
+                      Icons.notifications_active,
+                      color:
+                          _notificationsEnabled
+                              ? AppColors.primary
+                              : Colors.grey,
+                      size: AppSpacing.iconSize,
+                    ),
+                    value: _notificationsEnabled,
+                    onChanged: _permissionGranted ? _toggleNotifications : null,
+                    activeColor: AppColors.primary,
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.access_time,
+                      color: AppColors.secondary,
+                      size: AppSpacing.iconSize,
+                    ),
+                    title: Text(
+                      'Notification Time',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    subtitle: Text(
+                      _notificationTime.format(context),
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    trailing: OutlinedButton(
+                      onPressed:
+                          _notificationsEnabled ? _pickNotificationTime : null,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primary,
+                        side: BorderSide(color: AppColors.primary),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppSpacing.buttonRadius,
+                          ),
+                        ),
+                      ),
+                      child: const Text('Change'),
+                    ),
+                    enabled: _notificationsEnabled,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: AppSpacing.sm),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child: Column(
+                children: [
+                  SwitchListTile(
+                    title: Text(
+                      'Event Notifications',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    subtitle: Text(
+                      'Get notified on the day of Igbo events',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    secondary: Icon(
+                      Icons.event,
+                      color:
+                          _eventNotificationsEnabled
+                              ? AppColors.primary
+                              : Colors.grey,
+                      size: AppSpacing.iconSize,
+                    ),
+                    value: _eventNotificationsEnabled,
+                    onChanged: (value) async {
+                      setState(() => _eventNotificationsEnabled = value);
+                      final prefs = await SharedPreferences.getInstance();
+                      await prefs.setBool('event_notifications_enabled', value);
+                      if (value) {
+                        await NotificationService.scheduleEventNotifications();
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Event notifications enabled'),
+                            backgroundColor: AppColors.success,
+                          ),
+                        );
+                      } else {
+                        await NotificationService.cancelEventNotifications();
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Event notifications disabled'),
+                            backgroundColor: AppColors.info,
+                          ),
+                        );
+                      }
+                    },
+                    activeColor: AppColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: AppSpacing.xl),
+
+            // App Info & Support Section
+            Text(
+              'App Info & Support',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondary,
+              ),
+            ),
+            SizedBox(height: AppSpacing.sm),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: Icon(
+                      Icons.privacy_tip,
+                      color: AppColors.secondary,
+                      size: AppSpacing.iconSize,
+                    ),
+                    title: Text(
+                      'Privacy Policy',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.secondary,
+                      size: 16,
+                    ),
+                    onTap: _openPrivacyPolicy,
+                  ),
+                  Divider(
+                    height: 0,
+                    color: AppColors.border,
+                    indent: AppSpacing.lg,
+                    endIndent: AppSpacing.lg,
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.email,
+                      color: AppColors.secondary,
+                      size: AppSpacing.iconSize,
+                    ),
+                    title: Text(
+                      'Contact Support',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.secondary,
+                      size: 16,
+                    ),
+                    onTap: _contactSupport,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

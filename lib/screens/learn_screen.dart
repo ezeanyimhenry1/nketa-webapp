@@ -5,6 +5,7 @@ import 'package:the_igbo_bible/services/translation_service.dart';
 import 'package:the_igbo_bible/widgets/custom_container.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});
@@ -126,7 +127,7 @@ class _LearnScreenState extends State<LearnScreen> {
             ),
             SizedBox(height: AppSpacing.md.h),
             if (_loading)
-              Center(child: CircularProgressIndicator())
+              const Center(child: ShimmerLoader(height: 32, width: 32))
             else if (_words.isEmpty)
               Text(
                 'No Nsibidi symbols found for "${_searchController.text}".',

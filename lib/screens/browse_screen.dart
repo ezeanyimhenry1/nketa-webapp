@@ -5,11 +5,13 @@ import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:the_igbo_bible/screens/nsibidi_image_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
-import 'package:the_igbo_bible/data/proverbs.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
 import 'package:the_igbo_bible/models/image_template.dart';
 import 'package:the_igbo_bible/services/event_service.dart';
 import 'package:the_igbo_bible/models/igbo_event.dart';
+import 'package:the_igbo_bible/services/igbo_nsibidi_names_service.dart';
+import 'package:the_igbo_bible/services/proverbs_service.dart';
+import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -18,140 +20,71 @@ class BrowseScreen extends StatefulWidget {
   State<BrowseScreen> createState() => _BrowseScreenState();
 }
 
-class _BrowseScreenState extends State<BrowseScreen> {
+class _BrowseScreenState extends State<BrowseScreen>
+    with TickerProviderStateMixin {
   // List<TranslationResult> _words = [];
   bool _loading = true;
   TranslationResult? _selectedWord;
   ImageTemplate? _selectedTemplate;
+  final List<Color> _proverbColors = [
+    Colors.orange[50]!,
+    Colors.yellow[50]!,
+    Colors.pink[50]!,
+    Colors.blue[50]!,
+    Colors.green[50]!,
+    Colors.purple[50]!,
+    Colors.teal[50]!,
+  ];
+  int _currentProverbColorIndex = 0;
+  late AnimationController _colorController;
+  late Animation<Color?> _colorAnimation;
 
   @override
   void initState() {
     super.initState();
     _loadWords();
+    _colorController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+    _colorAnimation = ColorTween(
+      begin: _proverbColors[0],
+      end: _proverbColors[1],
+    ).animate(_colorController);
+    _colorController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          _currentProverbColorIndex =
+              (_currentProverbColorIndex + 1) % _proverbColors.length;
+          final nextIndex =
+              (_currentProverbColorIndex + 1) % _proverbColors.length;
+          _colorAnimation = ColorTween(
+            begin: _proverbColors[_currentProverbColorIndex],
+            end: _proverbColors[nextIndex],
+          ).animate(_colorController);
+        });
+        _colorController.forward(from: 0);
+      }
+    });
+    _colorController.forward();
+  }
+
+  @override
+  void dispose() {
+    _colorController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadWords() async {
     setState(() => _loading = true);
     final saved = await SavedWordsService().getSavedWords();
-    final List<TranslationResult> randoms = [
-      TranslationResult(
-        id: 'random1',
-        igboWord: 'Chinonso',
-        nsibidi: '魂帰鉱',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: ['God is nearby'],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: ['name'],
-        relatedTerms: ['Chukwu', 'Onye'],
-      ),
-      TranslationResult(
-        id: 'random2',
-        igboWord: 'Obinna',
-        nsibidi: '心穏',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: ["Father's heart"],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: ['name'],
-        relatedTerms: ['Nna', 'Obi'],
-      ),
-      TranslationResult(
-        id: 'random3',
-        igboWord: 'Adaeze',
-        nsibidi: '割王',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: ['daughter of a king', 'princess'],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: ['name'],
-        relatedTerms: ['Ada', 'Eze'],
-      ),
-      TranslationResult(
-        id: 'random4',
-        igboWord: 'Chukwu',
-        nsibidi: '魂大',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: ['God exists'],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: ['name'],
-        relatedTerms: ['Chi', 'Ukwu'],
-      ),
-      TranslationResult(
-        id: 'random5',
-        igboWord: 'Uche',
-        nsibidi: '虞',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: ['Thought, will'],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: [],
-        relatedTerms: ['Obi', 'Mmụọ'],
-      ),
-      TranslationResult(
-        id: 'random6',
-        igboWord: 'Nkem',
-        nsibidi: '外花',
-        definitions: [
-          Definition(wordClass: null, definitions: ['Mine'], nsibidi: null),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: [],
-        relatedTerms: ['Nke', 'Mu'],
-      ),
-      TranslationResult(
-        id: 'random7',
-        igboWord: 'òriàkụ̀',
-        nsibidi: '寍概圧',
-        definitions: [
-          Definition(
-            wordClass: null,
-            definitions: [
-              'a formal title used to address a married woman; missus; Mrs',
-            ],
-            nsibidi: null,
-          ),
-        ],
-        audioUrl: null,
-        tenses: null,
-        attributes: null,
-        tags: [],
-        relatedTerms: ['Oriaku'],
-      ),
-    ];
+    List<TranslationResult> randoms = [];
+    try {
+      randoms = await IgboNsibidiNamesService().fetchRandomResults();
+    } catch (e) {
+      // Fallback to hardcoded if fetch fails
+      randoms = [];
+    }
     final all = [...saved, ...randoms];
     all.shuffle();
     final word = all.isNotEmpty ? all.first : null;
@@ -186,13 +119,8 @@ class _BrowseScreenState extends State<BrowseScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     if (_loading) {
-      return const Center(child: CircularProgressIndicator());
+      return const Center(child: ShimmerLoader(height: 32, width: 32));
     }
-    // Pick a proverb of the day based on date
-    final todayIndex =
-        DateTime.now().difference(DateTime(2024, 1, 1)).inDays %
-        proverbs.length;
-    final proverb = proverbs[todayIndex];
     return Padding(
       padding: EdgeInsets.all(AppSpacing.lg.w),
       child: Column(
@@ -404,36 +332,59 @@ class _BrowseScreenState extends State<BrowseScreen> {
                     ),
                   );
                 } else if (index == 1) {
-                  // Proverb card
-                  return Container(
-                    padding: EdgeInsets.all(AppSpacing.lg.w),
-                    decoration: BoxDecoration(
-                      color: Colors.orange[50],
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Today's Proverb",
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: Colors.orange[900],
+                  // Proverb card (now dynamic, animated color)
+                  return FutureBuilder<Map<String, String>>(
+                    future: ProverbsService().fetchProverbOfTheDay(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Container(
+                          padding: EdgeInsets.all(AppSpacing.lg.w),
+                          decoration: BoxDecoration(
+                            color: _proverbColors[_currentProverbColorIndex],
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
-                        ),
-                        SizedBox(height: AppSpacing.sm.h),
-                        Text(
-                          proverb['igbo']!,
-                          style: theme.textTheme.bodyLarge,
-                        ),
-                        SizedBox(height: AppSpacing.sm.h),
-                        Text(
-                          proverb['english']!,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            fontStyle: FontStyle.italic,
+                          child: const Center(
+                            child: ShimmerLoader(height: 32, width: 32),
                           ),
-                        ),
-                      ],
-                    ),
+                        );
+                      }
+                      final proverb = snapshot.data!;
+                      return AnimatedBuilder(
+                        animation: _colorAnimation,
+                        builder: (context, child) {
+                          return Container(
+                            padding: EdgeInsets.all(AppSpacing.lg.w),
+                            decoration: BoxDecoration(
+                              color: _colorAnimation.value,
+                              borderRadius: BorderRadius.circular(16.r),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Today's Proverb",
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    color: Colors.orange[900],
+                                  ),
+                                ),
+                                SizedBox(height: AppSpacing.sm.h),
+                                Text(
+                                  proverb['igbo'] ?? '',
+                                  style: theme.textTheme.bodyLarge,
+                                ),
+                                SizedBox(height: AppSpacing.sm.h),
+                                Text(
+                                  proverb['english'] ?? '',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
                   );
                 } else {
                   return const SizedBox.shrink();
