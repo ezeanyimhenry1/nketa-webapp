@@ -119,4 +119,51 @@ final List<ImageTemplate> imageTemplates = [
       colors: [Colors.blue.withAlpha((0.4 * 255).toInt()), Colors.transparent],
     ),
   ),
+  ImageTemplate(
+    name: 'Dessert',
+    backgroundImageAsset: 'assets/templates/dessert.jpg',
+    accentColor: Color(0xFF0EA5E9),
+    textColor: Colors.white,
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Colors.blue.withAlpha((0.6 * 255).toInt()), Colors.transparent],
+    ),
+  ),
+  ImageTemplate(
+    name: 'Forest Art',
+    backgroundImageAsset: 'assets/templates/forest_art.jpg',
+    accentColor: Color(0xFF0EA5E9),
+    textColor: Colors.white,
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Colors.black.withAlpha((0.5 * 255).toInt()), Colors.transparent],
+    ),
+  ),
+  ImageTemplate(
+    name: 'Stream',
+    backgroundImageAsset: 'assets/templates/stream.jpg',
+    accentColor: Color(0xFF0EA5E9),
+    textColor: Colors.white,
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [Colors.blue.withAlpha((0.6 * 255).toInt()), Colors.transparent],
+    ),
+  ),
+  ImageTemplate(
+    name: 'Yellow Pattern',
+    backgroundImageAsset: 'assets/templates/yellow_pattern.jpg',
+    accentColor: Color(0xFF0EA5E9),
+    textColor: Colors.white,
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Colors.black.withAlpha((0.75 * 255).toInt()),
+        Colors.black.withAlpha((0.75 * 255).toInt()),
+      ],
+    ),
+  ),
 ];

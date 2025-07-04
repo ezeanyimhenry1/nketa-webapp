@@ -14,6 +14,7 @@ import 'package:the_igbo_bible/services/openai_service.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
+import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 
 class NsibidiImagePage extends StatefulWidget {
@@ -444,19 +445,6 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            // App branding
-            AutoSizeText(
-              'The Igbo Bible',
-              style: TextStyle(
-                color: template.textColor,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 1.2,
-              ),
-              maxLines: 1,
-              minFontSize: 6,
-              overflow: TextOverflow.ellipsis,
-            ),
             SizedBox(height: AppSpacing.sm.h),
             // Original text
             if (_showOriginalText)
@@ -571,16 +559,58 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
               ),
             SizedBox(height: AppSpacing.sm.h),
             // Footer
-            AutoSizeText(
-              'Created with The Igbo Bible App',
-              style: TextStyle(
-                color: template.textColor.withAlpha((0.8 * 255).toInt()),
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w400,
-              ),
-              maxLines: 1,
-              minFontSize: 6,
-              overflow: TextOverflow.ellipsis,
+            Wrap(
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                AutoSizeText(
+                  'Created with',
+                  style: TextStyle(
+                    color: template.textColor.withAlpha((0.8 * 255).toInt()),
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  maxLines: 1,
+                  minFontSize: 6,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                SizedBox(width: AppSpacing.sm),
+                Container(
+                  padding: EdgeInsets.all(2.sp),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppColors.primary, AppColors.secondary],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                  ),
+                  child: AutoSizeText(
+                    "\u904b ",
+                    style: TextStyle(
+                      color: template.textColor,
+                      fontFamily: 'Akagu',
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.2,
+                    ),
+                    maxLines: 1,
+                    minFontSize: 6,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SizedBox(width: AppSpacing.xs),
+                AutoSizeText(
+                  'The Igbo Bible App',
+                  style: TextStyle(
+                    color: template.textColor.withAlpha((0.8 * 255).toInt()),
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  maxLines: 1,
+                  minFontSize: 6,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
           ],
         ),
