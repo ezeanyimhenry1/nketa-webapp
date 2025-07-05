@@ -29,15 +29,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _iapAvailable = false;
   bool _checkingPurchases = false;
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: ['email'],
+    serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'],
+  );
+
   @override
   void initState() {
     super.initState();
     _checkSubscription();
+    print(dotenv.env['GOOGLE_SERVER_CLIENT_ID']);
     if (FirebaseAuth.instance.currentUser != null) {
       _initIAP(); // Initialize IAP if user is already logged in
     }
+
+    _googleSignIn.onCurrentUserChanged.listen((account) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+
     _periodicPurchaseCheck();
-    _initGoogleSignIn();
   }
 
   Future<void> _initIAP() async {
@@ -196,29 +208,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  Future<void> _initGoogleSignIn() async {
-    try {
-      await GoogleSignIn.instance.initialize(
-        serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'],
-      );
-    } catch (e) {
-      // Optionally handle initialization error
-    }
-  }
-
   Future<void> _signInWithGoogle() async {
     setState(() => _loading = true);
     try {
-      final GoogleSignInAccount account =
-          await GoogleSignIn.instance.authenticate();
-      final googleAuth = account.authentication;
-      final credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      await _checkSubscription();
-      await _initIAP();
+      final GoogleSignInAccount? account = await _googleSignIn.signIn();
+      if (account != null) {
+        final GoogleSignInAuthentication googleAuth =
+            await account.authentication;
+        final credential = GoogleAuthProvider.credential(
+          idToken: googleAuth.idToken,
+          accessToken: googleAuth.accessToken,
+        );
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        await _checkSubscription();
+        await _initIAP();
+      }
     } catch (e) {
+      print(e);
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
@@ -341,11 +347,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () async {
                 await FirebaseAuth.instance.signOut();
                 // Sign out from Google if needed
-                try {
-                  await GoogleSignIn.instance.disconnect();
-                } catch (e) {
-                  // Handle sign out error if needed
-                }
+                await _googleSignIn.disconnect();
                 setState(() {});
               },
               child: const Text('Logout'),
