@@ -10,12 +10,17 @@ import 'package:the_igbo_bible/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:the_igbo_bible/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:io';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   await Firebase.initializeApp();
   await NotificationService.initialize();
+
+  // Request notification permission on startup
+  await requestNotificationPermissionOnStartup();
 
   // Check user preferences before scheduling notifications
   await _checkAndScheduleNotifications();
@@ -24,6 +29,26 @@ void main() async {
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
 
   runApp(const MyApp());
+}
+
+Future<void> requestNotificationPermissionOnStartup() async {
+  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  if (Platform.isIOS) {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+          IOSFlutterLocalNotificationsPlugin
+        >()
+        ?.requestPermissions(alert: true, badge: true, sound: true);
+  } else if (Platform.isAndroid) {
+    final androidPlugin =
+        flutterLocalNotificationsPlugin
+            .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin
+            >();
+    if (androidPlugin != null) {
+      await androidPlugin.requestNotificationsPermission();
+    }
+  }
 }
 
 Future<void> _checkAndScheduleNotifications() async {

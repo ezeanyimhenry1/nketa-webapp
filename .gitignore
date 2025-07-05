@@ -48,3 +48,5 @@ app.*.map.json
 /lib/firebase_options.dart
 upload_certificate.pem
 /android/app/src/main/res/values/secrets.xml
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist

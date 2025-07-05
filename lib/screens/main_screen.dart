@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:the_igbo_bible/screens/calendar_screen.dart';
 import 'package:the_igbo_bible/screens/learn_screen.dart';
@@ -193,7 +195,10 @@ class _MainScreenState extends State<MainScreen> {
                       ElevatedButton.icon(
                         onPressed: () async {
                           // Replace with your app store URL
-                          const url = 'https://theigbobible.netlify.app';
+                          final url =
+                              Platform.isAndroid
+                                  ? 'https://play.google.com/store/apps/details?id=com.henryezeanyim.theigbobible&hl=en-US&ah=xTLCnMKW5V-Ogzb3EscC8zkLR44&pli=1'
+                                  : 'https://theigbobible.netlify.app';
                           final uri = Uri.parse(url);
                           if (await canLaunchUrl(uri)) {
                             await launchUrl(

@@ -5,8 +5,8 @@ class UsageService {
   factory UsageService() => _instance;
   UsageService._internal();
 
-  static const int translationLimit = 10;
-  static const int imageLimit = 3;
+  static const int translationLimit = 3;
+  static const int imageLimit = 5;
 
   Future<bool> isSubscribed() async {
     final prefs = await SharedPreferences.getInstance();

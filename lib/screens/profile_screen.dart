@@ -33,7 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _checkSubscription();
-    _initIAP();
+    if (FirebaseAuth.instance.currentUser != null) {
+      _initIAP(); // Initialize IAP if user is already logged in
+    }
     _periodicPurchaseCheck();
     _initGoogleSignIn();
   }
@@ -184,6 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       }
       await _checkSubscription();
+      await _initIAP();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
@@ -198,49 +201,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await GoogleSignIn.instance.initialize(
         serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'],
       );
-      GoogleSignIn.instance.authenticationEvents.listen(_handleGoogleAuthEvent);
     } catch (e) {
       // Optionally handle initialization error
-    }
-  }
-
-  Future<void> _handleGoogleAuthEvent(
-    GoogleSignInAuthenticationEvent event,
-  ) async {
-    if (event is GoogleSignInAuthenticationEventSignIn) {
-      final user = event.user;
-      final googleAuth = user.authentication;
-      final credential = GoogleAuthProvider.credential(
-        idToken: googleAuth.idToken,
-      );
-      try {
-        await FirebaseAuth.instance.signInWithCredential(credential);
-        await _checkSubscription();
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Firebase sign-in error: $e')));
-        }
-      }
-      if (mounted) setState(() => _loading = false);
-    } else if (event is GoogleSignInAuthenticationEventSignOut) {
-      // Optionally handle sign out event
-      if (mounted) setState(() {});
     }
   }
 
   Future<void> _signInWithGoogle() async {
     setState(() => _loading = true);
     try {
-      await GoogleSignIn.instance.authenticate();
-      // The authentication event will be handled by the listener
+      final GoogleSignInAccount account =
+          await GoogleSignIn.instance.authenticate();
+      final googleAuth = account.authentication;
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+      await _checkSubscription();
+      await _initIAP();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text('Google sign-in error: $e')));
-      setState(() => _loading = false);
+    } finally {
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -259,6 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
       await FirebaseAuth.instance.signInWithCredential(oauthCredential);
       await _checkSubscription();
+      await _initIAP();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
