@@ -12,6 +12,10 @@ import 'package:the_igbo_bible/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io';
+import 'package:provider/provider.dart';
+import 'dart:async';
+import 'package:the_igbo_bible/services/network_status_provider.dart';
+import 'package:the_igbo_bible/widgets/global_network_banner.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +32,12 @@ void main() async {
   // Check user preferences before scheduling notifications
   await _checkAndScheduleNotifications();
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => NetworkStatusProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 Future<void> requestNotificationPermissionOnStartup() async {
@@ -112,7 +121,9 @@ class _MyAppState extends State<MyApp> {
           theme: AppTheme.lightTheme,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [Locale('en', '')],
-          home: _showSplash ? const SplashScreen() : const MainScreen(),
+          home: GlobalNetworkBanner(
+            child: _showSplash ? const SplashScreen() : const MainScreen(),
+          ),
         );
       },
     );

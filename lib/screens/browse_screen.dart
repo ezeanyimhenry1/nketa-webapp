@@ -461,7 +461,7 @@ class _BrowseScreenState extends State<BrowseScreen>
                     (a, b) => a['nextDate'].compareTo(b['nextDate']),
                   );
                   if (eventWithNextDate.isEmpty) {
-                    return Text('No upcoming events in the next 30 days.');
+                    return SizedBox();
                   }
                   final nextEvents = eventWithNextDate.take(3).toList();
                   return Column(

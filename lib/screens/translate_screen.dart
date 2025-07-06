@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:the_igbo_bible/models/translation_result.dart';
+import 'package:the_igbo_bible/services/network_status_provider.dart';
 import 'package:the_igbo_bible/services/translation_service.dart';
 import 'package:the_igbo_bible/services/openai_service.dart';
 import 'package:the_igbo_bible/widgets/custom_container.dart';
@@ -16,6 +16,8 @@ import 'package:the_igbo_bible/services/usage_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:the_igbo_bible/data/constants.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:the_igbo_bible/services/igbo_nsibidi_names_service.dart';
+import 'package:provider/provider.dart';
 
 class TranslateScreen extends StatefulWidget {
   const TranslateScreen({super.key});
@@ -49,6 +51,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
   List<TranslationResult> _results = [];
   List<String> _originalWords = [];
   bool _usedAI = false; // Track whether AI was used
+  bool _usedNamesList = false; // Track if result came from names list
 
   final TranslationService _translationService = TranslationService();
   final OpenAIService _openAIService = OpenAIService();
@@ -96,6 +99,21 @@ class _TranslateScreenState extends State<TranslateScreen> {
     });
 
     try {
+      // 1. Check for known name in Nsibidi names list (fuzzy)
+      final nsibidiNameService = IgboNsibidiNamesService();
+      final foundName = await nsibidiNameService.findName(inputText);
+      if (foundName != null) {
+        setState(() {
+          _results = [foundName];
+          _originalWords = [foundName.igboWord];
+          _loading = false;
+          _usedAI = false;
+          _usedNamesList = true;
+        });
+        _scrollToResults();
+        return;
+      }
+
       // Use OpenAI to break text into words and word classes
       final wordBreakdownPrompt = '''
 Break "$inputText" into Igbo word components and their word classes using these codes: WH (wh-word), AV (adverb), NNC (common noun), etc.
@@ -145,6 +163,7 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
         _results = contextAwareResults;
         _loading = false;
         _usedAI = true;
+        _usedNamesList = false;
       });
 
       // Auto-scroll to results
@@ -338,13 +357,20 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
 
   void _showError(String message) {
     setState(() => _errorMessage = message);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+    // Only show SnackBar for non-network errors
+    if (Provider.of<NetworkStatusProvider>(
+          context,
+          listen: false,
+        ).bannerMessage ==
+        null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   void _scrollToResults() {
@@ -398,35 +424,42 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    return SingleChildScrollView(
-      controller: _scrollController,
-      child: Padding(
-        padding: EdgeInsets.all(AppSpacing.lg.w),
-        child: Column(
-          children: [
-            CustomContainer(
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    final networkStatus = Provider.of<NetworkStatusProvider>(context);
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Padding(
+              padding: EdgeInsets.all(AppSpacing.lg.w),
+              child: Column(
                 children: [
-                  _buildHeader(textTheme),
-                  SizedBox(height: AppSpacing.md.h),
-                  _buildInputSection(textTheme),
-                  SizedBox(height: AppSpacing.md.h),
-                  _buildActionButtons(textTheme),
-                  if (_errorMessage != null) ...[
-                    SizedBox(height: AppSpacing.md.h),
-                    _buildErrorCard(textTheme),
-                  ],
-                  if (_results.isNotEmpty) ...[
-                    SizedBox(height: AppSpacing.lg.h),
-                    _buildResultsSection(textTheme),
-                  ],
+                  CustomContainer(
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildHeader(textTheme),
+                        SizedBox(height: AppSpacing.md.h),
+                        _buildInputSection(textTheme),
+                        SizedBox(height: AppSpacing.md.h),
+                        _buildActionButtons(textTheme, networkStatus),
+                        if (_errorMessage != null) ...[
+                          SizedBox(height: AppSpacing.md.h),
+                          _buildErrorCard(textTheme),
+                        ],
+                        if (_results.isNotEmpty) ...[
+                          SizedBox(height: AppSpacing.lg.h),
+                          _buildResultsSection(textTheme),
+                        ],
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -505,12 +538,16 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     );
   }
 
-  Widget _buildActionButtons(TextTheme textTheme) {
+  Widget _buildActionButtons(
+    TextTheme textTheme, [
+    NetworkStatusProvider? networkStatus,
+  ]) {
+    final isNetworkDown = networkStatus?.hasConnection == false;
     return Row(
       children: [
         Expanded(
           child: ElevatedButton.icon(
-            onPressed: _loading ? null : _handleTranslate,
+            onPressed: _loading || isNetworkDown ? null : _handleTranslate,
             icon:
                 _loading
                     ? const SizedBox(
@@ -989,56 +1026,79 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                                 style: textTheme.titleMedium,
                               ),
                               SizedBox(height: AppSpacing.xs.h),
-                              FutureBuilder<List<TranslationResult?>>(
-                                future: Future.wait(
-                                  result.relatedTerms!.map(
-                                    (id) =>
-                                        TranslationService().fetchWordById(id),
+                              if (_usedNamesList) ...[
+                                // Just display as plain text
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 16.w,
+                                    bottom: 4.h,
                                   ),
-                                ),
-                                builder: (context, snapshot) {
-                                  if (!snapshot.hasData) {
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                        left: 16.w,
-                                        bottom: 4.h,
-                                      ),
-                                      child: SizedBox(
-                                        width: 24,
-                                        height: 24,
-                                        child: ShimmerLoader(
-                                          height: 24,
-                                          width: 24,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(12),
-                                          ),
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  final terms = snapshot.data!;
-                                  return Column(
+                                  child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children:
-                                        terms
-                                            .where((term) => term != null)
+                                        result.relatedTerms!
                                             .map(
-                                              (term) => Padding(
-                                                padding: EdgeInsets.only(
-                                                  left: 16.w,
-                                                  bottom: 4.h,
-                                                ),
-                                                child: Text(
-                                                  '• ${term!.igboWord} (${term.definitions.expand((def) => def.definitions).join(', ')})',
-                                                  style: textTheme.bodyMedium,
-                                                ),
+                                              (term) => Text(
+                                                '• $term',
+                                                style: textTheme.bodyMedium,
                                               ),
                                             )
                                             .toList(),
-                                  );
-                                },
-                              ),
+                                  ),
+                                ),
+                              ] else ...[
+                                FutureBuilder<List<TranslationResult?>>(
+                                  future: Future.wait(
+                                    result.relatedTerms!.map(
+                                      (id) => TranslationService()
+                                          .fetchWordById(id),
+                                    ),
+                                  ),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Padding(
+                                        padding: EdgeInsets.only(
+                                          left: 16.w,
+                                          bottom: 4.h,
+                                        ),
+                                        child: SizedBox(
+                                          width: 24,
+                                          height: 24,
+                                          child: ShimmerLoader(
+                                            height: 24,
+                                            width: 24,
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(12),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final terms = snapshot.data!;
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children:
+                                          terms
+                                              .where((term) => term != null)
+                                              .map(
+                                                (term) => Padding(
+                                                  padding: EdgeInsets.only(
+                                                    left: 16.w,
+                                                    bottom: 4.h,
+                                                  ),
+                                                  child: Text(
+                                                    '• \\${term!.igboWord} (\\${term.definitions.expand((def) => def.definitions).join(', ')})',
+                                                    style: textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                              )
+                                              .toList(),
+                                    );
+                                  },
+                                ),
+                              ],
                               SizedBox(height: AppSpacing.md.h),
                             ],
                             if (result.examples?.isNotEmpty == true) ...[
