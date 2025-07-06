@@ -38,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _checkSubscription();
-    print(dotenv.env['GOOGLE_SERVER_CLIENT_ID']);
     if (FirebaseAuth.instance.currentUser != null) {
       _initIAP(); // Initialize IAP if user is already logged in
     }
@@ -224,7 +223,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         await _initIAP();
       }
     } catch (e) {
-      print(e);
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,

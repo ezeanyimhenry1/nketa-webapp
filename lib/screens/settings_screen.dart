@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:the_igbo_bible/services/notification_service.dart';
+import 'package:the_igbo_bible/services/usage_service.dart';
 import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:the_igbo_bible/theme/app_strings.dart';
@@ -23,11 +24,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _loading = true;
   bool _permissionGranted = false;
 
+  // Usage tracking
+  Map<String, int> _usageStats = {'translations': 0, 'images': 0};
+  bool _isSubscribed = false;
+  bool _loadingUsage = true;
+
   @override
   void initState() {
     super.initState();
     _loadSettings();
     _checkNotificationPermission();
+    _loadUsageStats();
   }
 
   Future<void> _loadSettings() async {
@@ -60,6 +67,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
       await prefs.setInt('notification_minute', _notificationTime.minute);
     } catch (e) {
       debugPrint('Error saving settings: $e');
+    }
+  }
+
+  Future<void> _loadUsageStats() async {
+    try {
+      final usageService = UsageService();
+      final stats = await usageService.getUsageStats();
+      final subscribed = await usageService.isSubscribed();
+
+      setState(() {
+        _usageStats = stats;
+        _isSubscribed = subscribed;
+        _loadingUsage = false;
+      });
+    } catch (e) {
+      debugPrint('Error loading usage stats: $e');
+      setState(() => _loadingUsage = false);
     }
   }
 
@@ -470,6 +494,166 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(height: AppSpacing.xl),
+
+            // Usage Tracking Section
+            Text(
+              'Usage Limits',
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: AppColors.secondary,
+              ),
+            ),
+            SizedBox(height: AppSpacing.sm),
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child:
+                  _loadingUsage
+                      ? const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: ShimmerLoader(
+                          height: 60,
+                          width: double.infinity,
+                        ),
+                      )
+                      : Column(
+                        children: [
+                          if (_isSubscribed)
+                            Container(
+                              padding: EdgeInsets.all(AppSpacing.sm),
+                              margin: EdgeInsets.all(AppSpacing.sm),
+                              decoration: BoxDecoration(
+                                color: AppColors.success.withAlpha(
+                                  (0.1 * 255).toInt(),
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  AppSpacing.cardRadius,
+                                ),
+                                border: Border.all(
+                                  color: AppColors.success.withAlpha(
+                                    (0.3 * 255).toInt(),
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.check_circle,
+                                    color: AppColors.success,
+                                    size: 20,
+                                  ),
+                                  SizedBox(width: AppSpacing.sm),
+                                  Expanded(
+                                    child: Text(
+                                      'Unlimited access with subscription',
+                                      style: theme.textTheme.bodyMedium
+                                          ?.copyWith(
+                                            color: AppColors.success,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.translate,
+                              color: AppColors.secondary,
+                              size: AppSpacing.iconSize,
+                            ),
+                            title: Text(
+                              'Translations Used',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${_usageStats['translations']} / ${UsageService.translationLimit}',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color:
+                                    _usageStats['translations']! >=
+                                            UsageService.translationLimit
+                                        ? AppColors.error
+                                        : AppColors.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            trailing:
+                                _usageStats['translations']! >=
+                                        UsageService.translationLimit
+                                    ? Icon(
+                                      Icons.block,
+                                      color: AppColors.error,
+                                      size: 20,
+                                    )
+                                    : Icon(
+                                      Icons.check_circle,
+                                      color: AppColors.success,
+                                      size: 20,
+                                    ),
+                          ),
+                          Divider(
+                            height: 0,
+                            color: AppColors.border,
+                            indent: AppSpacing.lg,
+                            endIndent: AppSpacing.lg,
+                          ),
+                          ListTile(
+                            leading: Icon(
+                              Icons.image,
+                              color: AppColors.secondary,
+                              size: AppSpacing.iconSize,
+                            ),
+                            title: Text(
+                              'Images Generated',
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '${_usageStats['images']} / ${UsageService.imageLimit}',
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color:
+                                    _usageStats['images']! >=
+                                            UsageService.imageLimit
+                                        ? AppColors.error
+                                        : AppColors.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            trailing:
+                                _usageStats['images']! >=
+                                        UsageService.imageLimit
+                                    ? Icon(
+                                      Icons.block,
+                                      color: AppColors.error,
+                                      size: 20,
+                                    )
+                                    : Icon(
+                                      Icons.check_circle,
+                                      color: AppColors.success,
+                                      size: 20,
+                                    ),
+                          ),
+                          if (!_isSubscribed)
+                            Padding(
+                              padding: EdgeInsets.all(AppSpacing.md),
+                              child: Text(
+                                'Subscribe for unlimited access to translations and image generation. Limits are permanent until you subscribe.',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: Colors.grey[600],
+                                  fontStyle: FontStyle.italic,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                        ],
+                      ),
             ),
             SizedBox(height: AppSpacing.xl),
 

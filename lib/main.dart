@@ -22,17 +22,18 @@ void main() async {
   // Request notification permission on startup
   await requestNotificationPermissionOnStartup();
 
-  // Check user preferences before scheduling notifications
-  await _checkAndScheduleNotifications();
-
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
+
+  // Check user preferences before scheduling notifications
+  await _checkAndScheduleNotifications();
 
   runApp(const MyApp());
 }
 
 Future<void> requestNotificationPermissionOnStartup() async {
   final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
   if (Platform.isIOS) {
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
@@ -45,7 +46,9 @@ Future<void> requestNotificationPermissionOnStartup() async {
             .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin
             >();
+
     if (androidPlugin != null) {
+      // Request notification permission only
       await androidPlugin.requestNotificationsPermission();
     }
   }
@@ -56,6 +59,8 @@ Future<void> _checkAndScheduleNotifications() async {
     final prefs = await SharedPreferences.getInstance();
     final notificationsEnabled =
         prefs.getBool('notifications_enabled') ?? false;
+    final eventNotificationsEnabled =
+        prefs.getBool('event_notifications_enabled') ?? false;
 
     if (notificationsEnabled) {
       final hour = prefs.getInt('notification_hour') ?? 8;
@@ -65,6 +70,10 @@ Future<void> _checkAndScheduleNotifications() async {
       await NotificationService.scheduleDailyProverbNotification(
         notificationTime,
       );
+    }
+    // Schedule event notifications by default unless user turned off
+    if (eventNotificationsEnabled) {
+      await NotificationService.scheduleEventNotifications();
     }
   } catch (e) {
     debugPrint('Error checking notification preferences: $e');

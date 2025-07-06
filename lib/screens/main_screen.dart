@@ -197,7 +197,7 @@ class _MainScreenState extends State<MainScreen> {
                           // Replace with your app store URL
                           final url =
                               Platform.isAndroid
-                                  ? 'https://play.google.com/store/apps/details?id=com.henryezeanyim.theigbobible&hl=en-US&ah=xTLCnMKW5V-Ogzb3EscC8zkLR44&pli=1'
+                                  ? 'https://play.google.com/store/apps/details?id=com.henryezeanyim.theigbobible'
                                   : 'https://theigbobible.netlify.app';
                           final uri = Uri.parse(url);
                           if (await canLaunchUrl(uri)) {
