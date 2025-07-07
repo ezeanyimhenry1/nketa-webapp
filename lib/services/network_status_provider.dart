@@ -26,6 +26,7 @@ class NetworkStatusProvider extends ChangeNotifier {
             'google.com',
           ).timeout(Duration(seconds: 5));
           stopwatch.stop();
+
           if (lookup.isEmpty || stopwatch.elapsedMilliseconds > 2500) {
             _hasConnection = false;
             _bannerMessage = 'Network is very slow. Please try again later.';
@@ -42,6 +43,8 @@ class NetworkStatusProvider extends ChangeNotifier {
         // Connection restored
         if (!_hasConnection || _bannerMessage != null) {
           _hasConnection = true;
+          // Small delay to allow the UI to detect the transition
+          await Future.delayed(const Duration(milliseconds: 100));
           _bannerMessage = null;
           notifyListeners();
         }

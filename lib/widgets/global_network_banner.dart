@@ -18,6 +18,7 @@ class _GlobalNetworkBannerState extends State<GlobalNetworkBanner> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     final networkStatus = Provider.of<NetworkStatusProvider>(context);
+
     if (_lastBannerMessage != null &&
         _lastBannerMessage!.isNotEmpty &&
         networkStatus.bannerMessage == null) {
@@ -34,6 +35,7 @@ class _GlobalNetworkBannerState extends State<GlobalNetworkBanner> {
   Widget build(BuildContext context) {
     final networkStatus = Provider.of<NetworkStatusProvider>(context);
     final showWarning = networkStatus.bannerMessage != null;
+
     final overlayText =
         _showRestored ? 'Connection Restored' : networkStatus.bannerMessage;
     final overlayColor = _showRestored ? Colors.green[400] : Colors.amber[700];

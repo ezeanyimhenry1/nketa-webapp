@@ -16,6 +16,7 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:the_igbo_bible/services/usage_service.dart';
 
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
@@ -619,6 +620,20 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
   }
 
   Future<void> _generateAndSaveImage() async {
+    final usageService = UsageService();
+    if (!await usageService.canUseImage()) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Image generation limit reached. Subscribe for unlimited access.',
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
     setState(() => _isGenerating = true);
     try {
       final hasAccess = await _requestGalleryAccess();
@@ -643,6 +658,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
       await file.writeAsBytes(imageData);
       try {
         await Gal.putImage(file.path, album: 'The Igbo Bible');
+        await usageService.incrementImage();
       } on GalException catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -690,8 +706,21 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
   }
 
   Future<void> _generateAndShareImage() async {
+    final usageService = UsageService();
+    if (!await usageService.canUseImage()) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Image generation limit reached. Subscribe for unlimited access.',
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
     setState(() => _isGenerating = true);
-
     try {
       final imageData = await _captureImage();
       final directory = await getTemporaryDirectory();
@@ -702,6 +731,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
       await file.writeAsBytes(imageData);
 
       await _shareImageFile(file);
+      await usageService.incrementImage();
     } catch (e) {
       debugPrint('Error sharing image: $e');
       if (!mounted) return;

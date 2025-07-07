@@ -542,12 +542,12 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     TextTheme textTheme, [
     NetworkStatusProvider? networkStatus,
   ]) {
-    final isNetworkDown = networkStatus?.hasConnection == false;
+    // final isNetworkDown = networkStatus?.hasConnection == false;
     return Row(
       children: [
         Expanded(
           child: ElevatedButton.icon(
-            onPressed: _loading || isNetworkDown ? null : _handleTranslate,
+            onPressed: _loading ? null : _handleTranslate,
             icon:
                 _loading
                     ? const SizedBox(
@@ -753,20 +753,6 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                         ),
                         tooltip: 'Generate Image',
                         onPressed: () async {
-                          final usageService = UsageService();
-                          if (!await usageService.canUseImage()) {
-                            if (!mounted) return;
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  'Image generation limit reached. Subscribe for unlimited access.',
-                                ),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                            return;
-                          }
-                          await usageService.incrementImage();
                           if (!mounted) return;
                           Navigator.push(
                             context,
