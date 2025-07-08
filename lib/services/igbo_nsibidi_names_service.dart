@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:the_igbo_bible/models/translation_result.dart';
+import 'package:diacritic/diacritic.dart';
 
 class IgboNsibidiNamesService {
   static String resultsUrl =
@@ -10,13 +11,9 @@ class IgboNsibidiNamesService {
 
   /// Normalize Igbo text: remove diacritics, spaces, and lowercase
   static String normalizeIgbo(String input) {
-    // Remove diacritics using Unicode normalization
-    final normalized = input
-        .toLowerCase()
-        .replaceAll(RegExp(r'[\u0300-\u036f]'), '') // Remove combining marks
-        .replaceAll(RegExp(r'[^a-zA-Z0-9]'), ''); // Remove non-alphanum
-    // Remove spaces
-    return normalized.replaceAll(' ', '');
+    // Remove diacritics using the diacritic package
+    final noDiacritics = removeDiacritics(input.toLowerCase());
+    return noDiacritics.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
   }
 
   /// Fetch and cache the names list

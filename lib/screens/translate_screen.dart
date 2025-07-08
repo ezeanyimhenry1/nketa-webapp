@@ -70,6 +70,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
   }
 
   Future<void> _handleTranslate() async {
+    setState(() => _loading = true);
     final usageService = UsageService();
     if (!await usageService.canUseTranslation()) {
       _showError('Translation limit reached. Subscribe for unlimited access.');

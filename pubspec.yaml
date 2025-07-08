@@ -70,6 +70,7 @@ dependencies:
   flutter_email_sender: ^7.0.0
   connectivity_plus: ^5.0.2
   provider: ^6.1.2
+  diacritic: ^0.1.6
 
 dev_dependencies:
   flutter_test:
