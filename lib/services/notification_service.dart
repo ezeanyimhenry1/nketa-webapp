@@ -115,7 +115,6 @@ class NotificationService {
         presentBadge: true,
         presentSound: true,
         sound: 'default',
-        badgeNumber: 1,
       );
       final notificationDetails = NotificationDetails(
         android: androidDetails,

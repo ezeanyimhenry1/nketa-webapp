@@ -23,14 +23,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isLogin = true;
 
   // In-app purchase
-  static final String _kSubscriptionId =
-      Platform.isIOS
-          ? dotenv.env['APPLE_SUBSCRIPTION_ID']!
-          : dotenv.env['SUBSCRIPTION_ID']!;
+  static String get _kSubscriptionId {
+    // Fallback subscription IDs if environment variables are not available
+    if (Platform.isIOS) {
+      return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
+    } else {
+      return dotenv.env['SUBSCRIPTION_ID'] ?? 'the_igbo_bible';
+    }
+  }
+
   late Stream<List<PurchaseDetails>> _purchaseStream;
   List<ProductDetails> _products = [];
   bool _iapAvailable = false;
   bool _checkingPurchases = false;
+  bool _iapInitialized = false;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email'],
@@ -55,27 +61,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _initIAP() async {
-    _iapAvailable = await InAppPurchase.instance.isAvailable();
-    if (!_iapAvailable) return;
-    _purchaseStream = InAppPurchase.instance.purchaseStream;
-    _purchaseStream.listen(_onPurchaseUpdate);
-    final ProductDetailsResponse response = await InAppPurchase.instance
-        .queryProductDetails({_kSubscriptionId});
-    if (response.notFoundIDs.isNotEmpty) {
-      // Handle missing product
+    try {
+      _iapAvailable = await InAppPurchase.instance.isAvailable();
+
+      if (!_iapAvailable) {
+        setState(() {
+          _iapInitialized = true;
+        });
+        return;
+      }
+
+      _purchaseStream = InAppPurchase.instance.purchaseStream;
+      _purchaseStream.listen(_onPurchaseUpdate);
+
+      final ProductDetailsResponse response = await InAppPurchase.instance
+          .queryProductDetails({_kSubscriptionId});
+
+      if (response.notFoundIDs.isNotEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Subscription product not found. Product ID: $_kSubscriptionId',
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        _products = response.productDetails;
+        _iapInitialized = true;
+      });
+    } catch (e) {
+      setState(() {
+        _iapInitialized = true;
+      });
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Subscription product not found. Check your product ID.',
-          ),
-        ),
+        SnackBar(content: Text('Failed to initialize purchases: $e')),
       );
-      return;
     }
-    setState(() {
-      _products = response.productDetails;
-    });
   }
 
   // Periodically call restorePurchases to ensure status is up to date
@@ -89,30 +114,112 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   void _onPurchaseUpdate(List<PurchaseDetails> purchases) async {
     for (final purchase in purchases) {
-      if (purchase.productID == _kSubscriptionId &&
-          purchase.status == PurchaseStatus.purchased) {
-        // You should verify the purchase with your backend here for security (not possible with Firebase-only)
-        await _updateSubscriptionStatus();
-        await _checkSubscription(); // Refresh subscription status from Firestore
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Subscription successful!')),
-        );
+      // Handle all purchase statuses
+      switch (purchase.status) {
+        case PurchaseStatus.pending:
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Purchase is pending...')),
+          );
+          break;
+
+        case PurchaseStatus.purchased:
+          await _updateSubscriptionStatus();
+          await _checkSubscription(); // Refresh subscription status from Firestore
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Subscription successful!')),
+          );
+          break;
+
+        case PurchaseStatus.restored:
+          await _updateSubscriptionStatus();
+          await _checkSubscription();
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Purchase restored successfully!'),
+              backgroundColor: Colors.green,
+            ),
+          );
+          break;
+
+        case PurchaseStatus.error:
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Purchase failed:  ${purchase.error?.message ?? "Unknown error"}',
+              ),
+            ),
+          );
+          break;
+
+        case PurchaseStatus.canceled:
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Purchase was canceled')),
+          );
+          break;
       }
+
+      // Always complete pending purchases
       if (purchase.pendingCompletePurchase) {
-        await InAppPurchase.instance.completePurchase(purchase);
+        try {
+          await InAppPurchase.instance.completePurchase(purchase);
+        } catch (e) {
+          //
+        }
       }
     }
   }
 
   Future<void> _buySubscription() async {
-    if (_products.isEmpty) return;
+    if (!_iapAvailable) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('In-app purchases are not available on this device'),
+        ),
+      );
+      return;
+    }
+
+    if (!_iapInitialized) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please wait while we initialize purchases...'),
+        ),
+      );
+      return;
+    }
+
+    if (_products.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'No subscription products available. Please try again later.',
+          ),
+        ),
+      );
+      return;
+    }
+
     final ProductDetails product = _products.first;
+
     final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
     try {
-      await InAppPurchase.instance.buyNonConsumable(
+      final bool success = await InAppPurchase.instance.buyNonConsumable(
         purchaseParam: purchaseParam,
       );
+
+      if (!success) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to initiate purchase. Please try again.'),
+          ),
+        );
+      }
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
@@ -141,21 +248,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Future<void> _updateSubscriptionStatus({bool active = true}) async {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      print('No user logged in, cannot update subscription status');
       return;
     }
     final expiry = DateTime.now().add(const Duration(days: 30));
-    print('Updating subscription status for user: ${user.uid}');
-    print(
-      'Setting subscriptionActive: $active, expiry: ${expiry.toIso8601String()}',
-    );
 
     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
       'email': user.email,
       'subscriptionActive': active,
       'subscriptionExpiry': expiry.toIso8601String(),
     }, SetOptions(merge: true));
-    print('Subscription status updated in Firestore successfully');
   }
 
   Future<void> _checkSubscription() async {
@@ -210,7 +311,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       }
       await _checkSubscription();
-      await _initIAP();
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
@@ -233,7 +333,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
         await FirebaseAuth.instance.signInWithCredential(credential);
         await _checkSubscription();
-        await _initIAP();
       }
     } catch (e) {
       if (!mounted) return;
@@ -274,7 +373,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
     if (_loading || _checkingPurchases) {
-      return const Center(child: ShimmerLoader(height: 32, width: 32));
+      return Scaffold(
+        appBar: AppBar(title: const Text('Profile')),
+        body: const Center(child: ShimmerLoader(height: 32, width: 32)),
+      );
     }
     if (user == null) {
       return Scaffold(
@@ -342,14 +444,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               _isSubscribed ? 'Subscription: Active' : 'Subscription: Inactive',
             ),
+            if (!_iapInitialized)
+              const Text(
+                'Initializing purchases...',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed:
-                  _isSubscribed || !_iapAvailable ? null : _buySubscription,
+                  _isSubscribed ||
+                          !_iapAvailable ||
+                          !_iapInitialized ||
+                          _products.isEmpty
+                      ? null
+                      : _buySubscription,
               child: Text(
                 _products.isNotEmpty
                     ? 'Subscribe for ${_products.first.price}'
-                    : 'Subscribe',
+                    : _iapInitialized
+                    ? 'No Products Available'
+                    : 'Loading...',
               ),
             ),
             const SizedBox(height: 8),
