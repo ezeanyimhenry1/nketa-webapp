@@ -29,7 +29,7 @@ class _LearnScreenState extends State<LearnScreen> {
     'family',
     'moon',
     'love',
-    'God',
+    'king',
     'death',
     'life',
     'earth',

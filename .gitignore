@@ -50,3 +50,4 @@ upload_certificate.pem
 /android/app/src/main/res/values/secrets.xml
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
+/ios/Runner/Configuration.storeKit

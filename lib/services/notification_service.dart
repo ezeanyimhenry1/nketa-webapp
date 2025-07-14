@@ -77,43 +77,27 @@ class NotificationService {
         final notificationPermission =
             await androidPlugin.requestNotificationsPermission();
         debugPrint('Android notification permission: $notificationPermission');
+        final enabled = await androidPlugin.areNotificationsEnabled();
+        debugPrint('Android areNotificationsEnabled after request: $enabled');
+      } else {
+        debugPrint('Android plugin not available for permission request');
       }
     }
   }
 
   static Future<void> scheduleDailyProverbNotification(TimeOfDay time) async {
-    // debugPrint('=== Starting Daily Proverb Notification Setup ===');
-    // debugPrint('Time: ${time.hour}:${time.minute.toString().padLeft(2, '0')}');
-
     try {
-      // Cancel any existing notifications first
       await cancelAllNotifications();
-
-      // Check if we have permission
       final hasPermission = await _checkNotificationPermission();
       if (!hasPermission) {
         debugPrint('ERROR: No notification permission granted');
         return;
       }
-
-      // Fetch proverb of the day from API
-      final proverb = await ProverbsService().fetchProverbOfTheDay();
-      // debugPrint('Proverb fetched: ${proverb['igbo']} | ${proverb['english']}');
-
-      // Create notification channels for Android
       if (Platform.isAndroid) {
         await _createNotificationChannel();
-
-        // Check if we can schedule exact notifications
-        _notificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >();
-
-        // Removed exact alarm permission checks - using standard notifications only
       }
-
-      // Platform-specific notification details
+      // Fetch proverb of the day from API at scheduling time
+      final proverb = await ProverbsService().fetchProverbOfTheDay();
       final androidDetails = AndroidNotificationDetails(
         'proverb_channel',
         'Proverb Notifications',
@@ -126,7 +110,6 @@ class NotificationService {
         ticker: 'Daily Proverb',
         largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
       );
-
       final iosDetails = DarwinNotificationDetails(
         presentAlert: true,
         presentBadge: true,
@@ -134,13 +117,10 @@ class NotificationService {
         sound: 'default',
         badgeNumber: 1,
       );
-
       final notificationDetails = NotificationDetails(
         android: androidDetails,
         iOS: iosDetails,
       );
-
-      // Calculate schedule time
       final now = tz.TZDateTime.now(tz.local);
       final firstNotificationTime = tz.TZDateTime(
         tz.local,
@@ -150,34 +130,23 @@ class NotificationService {
         time.hour,
         time.minute,
       );
-
       final scheduleTime =
           firstNotificationTime.isAfter(now)
               ? firstNotificationTime
               : firstNotificationTime.add(Duration(days: 1));
-
-      // debugPrint('Current time: $now');
-      // debugPrint('First notification time: $firstNotificationTime');
-      // debugPrint('Scheduled time: $scheduleTime');
-      // debugPrint('Time until notification: ${scheduleTime.difference(now)}');
-
-      // Schedule notifications using inexact alarms (no exact alarm permission needed)
+      // Set the notification body to the proverb text
       await _notificationsPlugin.zonedSchedule(
         0,
         "Proverb of the Day",
         '${proverb['igbo'] ?? ''}\n${proverb['english'] ?? ''}',
         scheduleTime,
         notificationDetails,
+        payload: 'proverb_of_the_day',
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
-      // debugPrint('Notification scheduled with inexact alarm');
-
-      // debugPrint('Notification scheduled successfully');
-
-      // Verify the notification was scheduled
       await debugNotificationStatus();
     } catch (e, stack) {
       debugPrint('ERROR scheduling notification: $e');
@@ -194,8 +163,10 @@ class NotificationService {
               >();
       if (androidPlugin != null) {
         final enabled = await androidPlugin.areNotificationsEnabled();
-        // debugPrint('Android notifications enabled: $enabled');
+        debugPrint('Android areNotificationsEnabled: $enabled');
         return enabled ?? false;
+      } else {
+        debugPrint('Android plugin not available for permission check');
       }
     }
     return true; // Assume iOS has permission if we get here
@@ -517,6 +488,38 @@ class NotificationService {
     // debugPrint('Cancelling event notifications...');
     for (int i = 0; i < 1000; i++) {
       await _notificationsPlugin.cancel(1000 + i);
+    }
+  }
+
+  // Add a method to clear the iOS badge
+  static Future<void> clearBadge() async {
+    if (Platform.isIOS) {
+      try {
+        // Create a silent notification with badgeNumber: 0 to clear the badge
+        final iosDetails = DarwinNotificationDetails(
+          presentAlert: false, // Don't show alert
+          presentBadge: true, // But do update badge
+          presentSound: false, // No sound
+          badgeNumber: 0, // Set badge to 0 to clear it
+        );
+
+        final notificationDetails = NotificationDetails(iOS: iosDetails);
+
+        // Show a silent notification to clear the badge
+        await _notificationsPlugin.show(
+          9999, // Use a unique ID for badge clearing
+          null, // No title
+          null, // No body
+          notificationDetails,
+        );
+
+        // Immediately cancel the notification so it doesn't show
+        await _notificationsPlugin.cancel(9999);
+
+        debugPrint('iOS badge cleared successfully');
+      } catch (e) {
+        debugPrint('Error clearing iOS badge: $e');
+      }
     }
   }
 }

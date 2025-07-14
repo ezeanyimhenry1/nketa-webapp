@@ -12,8 +12,6 @@ import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:the_igbo_bible/services/openai_service.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
-import 'package:android_intent_plus/android_intent.dart';
-import 'package:android_intent_plus/flag.dart';
 import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
@@ -322,30 +320,31 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                     ),
                     SizedBox(height: AppSpacing.lg.h),
                     // Action Buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed:
-                                _isGenerating
-                                    ? null
-                                    : _generateAndShareToTikTok,
-                            icon: const Icon(Icons.video_library),
-                            label: const Text('TikTok'),
-                            style: OutlinedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(
-                                vertical: AppSpacing.md.h,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                  AppSpacing.buttonRadius,
+                    if (Platform.isAndroid)
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed:
+                                  _isGenerating
+                                      ? null
+                                      : _generateAndShareToTikTok,
+                              icon: const Icon(Icons.video_library),
+                              label: const Text('TikTok'),
+                              style: OutlinedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: AppSpacing.md.h,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    AppSpacing.buttonRadius,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                     SizedBox(height: AppSpacing.sm.h),
                     Row(
                       children: [
@@ -455,7 +454,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                 style: TextStyle(
                   color: template.textColor.withAlpha((0.9 * 255).toInt()),
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   height: 1.4,
                 ),
                 maxLines: 2,
@@ -476,8 +475,8 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: template.textColor,
-                          fontSize: 40.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 42.sp,
+                          fontWeight: FontWeight.normal,
                           fontFamily: 'Akagu',
                           letterSpacing: 2,
                           height: 1.2,
@@ -757,18 +756,21 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
       final imagePath = '${directory.path}/nsibidi_tiktok_$timestamp.png';
       final file = File(imagePath);
       await file.writeAsBytes(imageData);
+
       if (Platform.isAndroid) {
-        final intent = AndroidIntent(
-          action: 'android.intent.action.SEND',
-          type: 'image/*',
-          package: 'com.zhiliaoapp.musically',
-          flags: <int>[Flag.FLAG_GRANT_READ_URI_PERMISSION],
-          data: Uri.file(file.path).toString(),
-          // TikTok may require the file to be in MediaStore, but try direct first
+        // Save to gallery to ensure TikTok can access it
+        await Gal.putImage(file.path, album: 'The Igbo Bible');
+        // Use share_plus to open the share sheet
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [XFile(file.path, mimeType: 'image/png')],
+            text:
+                'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
+            subject: 'Nsibidi Translation from The Igbo Bible',
+          ),
         );
-        await intent.launch();
       } else {
-        // Fallback to share sheet on iOS
+        // iOS: just use the share sheet
         await _shareImageFile(file);
       }
     } catch (e) {

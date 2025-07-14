@@ -16,21 +16,20 @@ import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:the_igbo_bible/services/network_status_provider.dart';
 import 'package:the_igbo_bible/widgets/global_network_banner.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase with proper options first
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Load environment variables
   await dotenv.load(fileName: ".env");
-  await Firebase.initializeApp();
-  await NotificationService.initialize();
 
-  // Request notification permission on startup
-  await requestNotificationPermissionOnStartup();
-
+  // Initialize timezone data
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
-
-  // Check user preferences before scheduling notifications
-  await _checkAndScheduleNotifications();
 
   runApp(
     ChangeNotifierProvider(
@@ -40,55 +39,6 @@ void main() async {
   );
 }
 
-Future<void> requestNotificationPermissionOnStartup() async {
-  final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  if (Platform.isIOS) {
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-          IOSFlutterLocalNotificationsPlugin
-        >()
-        ?.requestPermissions(alert: true, badge: true, sound: true);
-  } else if (Platform.isAndroid) {
-    final androidPlugin =
-        flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin
-            >();
-
-    if (androidPlugin != null) {
-      // Request notification permission only
-      await androidPlugin.requestNotificationsPermission();
-    }
-  }
-}
-
-Future<void> _checkAndScheduleNotifications() async {
-  try {
-    final prefs = await SharedPreferences.getInstance();
-    final notificationsEnabled =
-        prefs.getBool('notifications_enabled') ?? false;
-    final eventNotificationsEnabled =
-        prefs.getBool('event_notifications_enabled') ?? false;
-
-    if (notificationsEnabled) {
-      final hour = prefs.getInt('notification_hour') ?? 8;
-      final minute = prefs.getInt('notification_minute') ?? 0;
-      final notificationTime = TimeOfDay(hour: hour, minute: minute);
-
-      await NotificationService.scheduleDailyProverbNotification(
-        notificationTime,
-      );
-    }
-    // Schedule event notifications by default unless user turned off
-    if (eventNotificationsEnabled) {
-      await NotificationService.scheduleEventNotifications();
-    }
-  } catch (e) {
-    debugPrint('Error checking notification preferences: $e');
-  }
-}
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -96,17 +46,124 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   bool _showSplash = true;
 
   @override
   void initState() {
     super.initState();
+
+    // Add lifecycle observer
+    WidgetsBinding.instance.addObserver(this);
+
+    // Initialize non-critical services after app starts
+    _initializeServicesAsync();
+
+    // Clear badge on iOS when app is opened
+    NotificationService.clearBadge();
+
+    // Set up notification tap handler
+    _setupNotificationHandler();
+
+    // Show splash for shorter duration
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() => _showSplash = false);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    // Clear badge when app is resumed
+    if (state == AppLifecycleState.resumed) {
+      NotificationService.clearBadge();
+    }
+  }
+
+  Future<void> _initializeServicesAsync() async {
+    try {
+      // Initialize notification service
+      await NotificationService.initialize();
+
+      // Request notification permissions
+      await _requestNotificationPermissions();
+
+      // Schedule notifications
+      await _checkAndScheduleNotifications();
+    } catch (e) {
+      debugPrint('Error initializing services: $e');
+    }
+  }
+
+  Future<void> _requestNotificationPermissions() async {
+    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    if (Platform.isIOS) {
+      await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin
+          >()
+          ?.requestPermissions(alert: true, badge: true, sound: true);
+    } else if (Platform.isAndroid) {
+      final androidPlugin =
+          flutterLocalNotificationsPlugin
+              .resolvePlatformSpecificImplementation<
+                AndroidFlutterLocalNotificationsPlugin
+              >();
+
+      if (androidPlugin != null) {
+        await androidPlugin.requestNotificationsPermission();
+      }
+    }
+  }
+
+  Future<void> _checkAndScheduleNotifications() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final notificationsEnabled =
+          prefs.getBool('notifications_enabled') ?? false;
+      final eventNotificationsEnabled =
+          prefs.getBool('event_notifications_enabled') ?? false;
+
+      if (notificationsEnabled) {
+        final hour = prefs.getInt('notification_hour') ?? 8;
+        final minute = prefs.getInt('notification_minute') ?? 0;
+        final notificationTime = TimeOfDay(hour: hour, minute: minute);
+
+        await NotificationService.scheduleDailyProverbNotification(
+          notificationTime,
+        );
+      }
+
+      if (eventNotificationsEnabled) {
+        await NotificationService.scheduleEventNotifications();
+      }
+    } catch (e) {
+      debugPrint('Error checking notification preferences: $e');
+    }
+  }
+
+  void _setupNotificationHandler() {
+    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+        iOS: DarwinInitializationSettings(),
+      ),
+      onDidReceiveNotificationResponse: (response) async {
+        // Clear badge on tap (no dialog needed)
+        NotificationService.clearBadge();
+      },
+    );
   }
 
   @override

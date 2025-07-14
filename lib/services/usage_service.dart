@@ -7,7 +7,7 @@ class UsageService {
   factory UsageService() => _instance;
   UsageService._internal();
 
-  static const int translationLimit = 3;
+  static const int translationLimit = 53;
   static const int imageLimit = 5;
 
   Future<bool> isSubscribed() async {

@@ -23,7 +23,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _isLogin = true;
 
   // In-app purchase
-  static final String _kSubscriptionId = dotenv.env['SUBSCRIPTION_ID']!;
+  static final String _kSubscriptionId =
+      Platform.isIOS
+          ? dotenv.env['APPLE_SUBSCRIPTION_ID']!
+          : dotenv.env['SUBSCRIPTION_ID']!;
   late Stream<List<PurchaseDetails>> _purchaseStream;
   List<ProductDetails> _products = [];
   bool _iapAvailable = false;
@@ -90,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           purchase.status == PurchaseStatus.purchased) {
         // You should verify the purchase with your backend here for security (not possible with Firebase-only)
         await _updateSubscriptionStatus();
-        setState(() => _isSubscribed = true);
+        await _checkSubscription(); // Refresh subscription status from Firestore
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Subscription successful!')),
@@ -122,6 +125,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() => _checkingPurchases = true);
     try {
       await InAppPurchase.instance.restorePurchases();
+      await _checkSubscription(); // Refresh subscription status after restore
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
@@ -136,13 +140,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _updateSubscriptionStatus({bool active = true}) async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user == null) return;
+    if (user == null) {
+      print('No user logged in, cannot update subscription status');
+      return;
+    }
     final expiry = DateTime.now().add(const Duration(days: 30));
+    print('Updating subscription status for user: ${user.uid}');
+    print(
+      'Setting subscriptionActive: $active, expiry: ${expiry.toIso8601String()}',
+    );
+
     await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
       'email': user.email,
       'subscriptionActive': active,
       'subscriptionExpiry': expiry.toIso8601String(),
     }, SetOptions(merge: true));
+    print('Subscription status updated in Firestore successfully');
   }
 
   Future<void> _checkSubscription() async {
@@ -333,7 +346,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ElevatedButton(
               onPressed:
                   _isSubscribed || !_iapAvailable ? null : _buySubscription,
-              child: const Text('Subscribe for \$2/month'),
+              child: Text(
+                _products.isNotEmpty
+                    ? 'Subscribe for ${_products.first.price}'
+                    : 'Subscribe',
+              ),
             ),
             const SizedBox(height: 8),
             ElevatedButton(

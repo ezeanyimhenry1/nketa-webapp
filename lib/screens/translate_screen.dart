@@ -6,6 +6,7 @@ import 'package:the_igbo_bible/models/translation_result.dart';
 import 'package:the_igbo_bible/services/network_status_provider.dart';
 import 'package:the_igbo_bible/services/translation_service.dart';
 import 'package:the_igbo_bible/services/openai_service.dart';
+import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/custom_container.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:the_igbo_bible/theme/app_strings.dart';
@@ -57,10 +58,19 @@ class _TranslateScreenState extends State<TranslateScreen> {
   final OpenAIService _openAIService = OpenAIService();
   final AudioPlayer _audioPlayer = AudioPlayer();
 
+  Map<String, int> _usageStats = {'translations': 0, 'images': 0};
+  bool _loadingUsage = true;
+
   @override
   void initState() {
     super.initState();
     _controller.addListener(_onTextChanged);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _loadUsageStats();
   }
 
   void _onTextChanged() {
@@ -76,7 +86,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
       _showError('Translation limit reached. Subscribe for unlimited access.');
       return;
     }
-    await usageService.incrementTranslation();
+
     final inputText = _controller.text.trim();
 
     if (inputText.isEmpty) {
@@ -98,6 +108,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
       _results = [];
       _originalWords = [];
     });
+
+    await usageService.incrementTranslation();
 
     try {
       // 1. Check for known name in Nsibidi names list (fuzzy)
@@ -176,6 +188,7 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
       _showError(_getErrorMessage(e));
       setState(() => _loading = false);
     }
+    await _loadUsageStats();
   }
 
   Future<List<List<TranslationResult>>> _fetchAllTranslationOptions(
@@ -421,6 +434,21 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     }
   }
 
+  Future<void> _loadUsageStats() async {
+    try {
+      final usageService = UsageService();
+      final stats = await usageService.getUsageStats();
+
+      setState(() {
+        _usageStats = stats;
+        _loadingUsage = false;
+      });
+    } catch (e) {
+      debugPrint('Error loading usage stats: $e');
+      setState(() => _loadingUsage = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -544,42 +572,82 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     NetworkStatusProvider? networkStatus,
   ]) {
     // final isNetworkDown = networkStatus?.hasConnection == false;
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: ElevatedButton.icon(
-            onPressed: _loading ? null : _handleTranslate,
-            icon:
-                _loading
-                    ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: ShimmerLoader(
-                        height: 16,
-                        width: 16,
-                        borderRadius: BorderRadius.all(Radius.circular(8)),
-                      ),
-                    )
-                    : Icon(
-                      Icons.translate,
-                      color: Colors.white,
-                      size: AppSpacing.iconSize.sp,
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _loading ? null : _handleTranslate,
+                icon:
+                    _loading
+                        ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: ShimmerLoader(
+                            height: 16,
+                            width: 16,
+                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                          ),
+                        )
+                        : Icon(
+                          Icons.translate,
+                          color: Colors.white,
+                          size: AppSpacing.iconSize.sp,
+                        ),
+                label: Text(
+                  _loading
+                      ? AppStrings.translatingButton
+                      : AppStrings.translateButton,
+                  style: textTheme.titleMedium?.copyWith(color: Colors.white),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.md.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                      AppSpacing.buttonRadius,
                     ),
-            label: Text(
-              _loading
-                  ? AppStrings.translatingButton
-                  : AppStrings.translateButton,
-              style: textTheme.titleMedium?.copyWith(color: Colors.white),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              padding: EdgeInsets.symmetric(vertical: AppSpacing.md.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
+                  ),
+                  elevation: 2,
+                ),
               ),
-              elevation: 2,
             ),
-          ),
+          ],
+        ),
+        SizedBox(height: AppSpacing.xs.h),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Translation Limit',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            _loadingUsage
+                ? const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: ShimmerLoader(
+                    height: 16,
+                    width: 16,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                )
+                : Text(
+                  '${_usageStats['translations']} / ${UsageService.translationLimit}',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color:
+                        _usageStats['translations']! >=
+                                UsageService.translationLimit
+                            ? AppColors.error
+                            : AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+          ],
         ),
       ],
     );
