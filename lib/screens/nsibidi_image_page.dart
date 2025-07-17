@@ -15,6 +15,7 @@ import 'package:the_igbo_bible/data/image_templates.dart';
 import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
+import 'package:the_igbo_bible/screens/profile_screen.dart';
 
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
@@ -42,6 +43,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
   bool _isGenerating = false;
   String? _aiMeaning;
   bool _loadingMeaning = false;
+  bool _isSubscribed = false;
 
   // Heuristic for full meaning/definition or AI fallback
   String get _heuristicMeaning {
@@ -69,6 +71,16 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
   void initState() {
     super.initState();
     _fetchMeaningIfNeeded();
+    _checkSubscription();
+  }
+
+  Future<void> _checkSubscription() async {
+    final subscribed = await UsageService().isSubscribed();
+    if (mounted) {
+      setState(() {
+        _isSubscribed = subscribed;
+      });
+    }
   }
 
   Future<void> _fetchMeaningIfNeeded() async {
@@ -191,70 +203,133 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                         itemBuilder: (context, index) {
                           final template = imageTemplates[index];
                           final isSelected = index == _selectedTemplateIndex;
+                          final isPremium =
+                              template.backgroundImageAsset != null;
+                          final isLocked = isPremium && !_isSubscribed;
                           return GestureDetector(
-                            onTap: () {
+                            onTap: () async {
+                              if (isLocked) {
+                                await showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => AlertDialog(
+                                        title: const Text('Premium Template'),
+                                        content: const Text(
+                                          'This template is for premium users. Subscribe to unlock all templates!',
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: const Text('Cancel'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              Navigator.of(context).push(
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (_) =>
+                                                          const ProfileScreen(),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('Upgrade'),
+                                          ),
+                                        ],
+                                      ),
+                                );
+                                return;
+                              }
                               setState(() {
                                 _selectedTemplateIndex = index;
                               });
                             },
-                            child: Container(
-                              width: 60.w,
-                              margin: EdgeInsets.only(right: AppSpacing.sm.w),
-                              decoration: BoxDecoration(
-                                gradient: template.gradient,
-                                borderRadius: BorderRadius.circular(8.r),
-                                border: Border.all(
-                                  color:
-                                      isSelected
-                                          ? theme.colorScheme.primary
-                                          : Colors.transparent,
-                                  width: 3,
-                                ),
-                                image:
-                                    template.backgroundImageAsset != null
-                                        ? DecorationImage(
-                                          image: AssetImage(
-                                            template.backgroundImageAsset!,
+                            child: Stack(
+                              children: [
+                                Container(
+                                  width: 60.w,
+                                  margin: EdgeInsets.only(
+                                    right: AppSpacing.sm.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    gradient: template.gradient,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    border: Border.all(
+                                      color:
+                                          isSelected
+                                              ? theme.colorScheme.primary
+                                              : Colors.transparent,
+                                      width: 3,
+                                    ),
+                                    image:
+                                        template.backgroundImageAsset != null
+                                            ? DecorationImage(
+                                              image: AssetImage(
+                                                template.backgroundImageAsset!,
+                                              ),
+                                              fit: BoxFit.cover,
+                                              colorFilter: ColorFilter.mode(
+                                                template.overlay ??
+                                                    Colors.black.withAlpha(
+                                                      (0.2 * 255).toInt(),
+                                                    ),
+                                                BlendMode.darken,
+                                              ),
+                                            )
+                                            : null,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      template.backgroundImageAsset != null
+                                          ? Icon(
+                                            Icons.image,
+                                            color: template.textColor,
+                                            size: 20.sp,
+                                          )
+                                          : Text(
+                                            '𝔸',
+                                            style: TextStyle(
+                                              color: template.textColor,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                          fit: BoxFit.cover,
-                                          colorFilter: ColorFilter.mode(
-                                            template.overlay ??
-                                                Colors.black.withAlpha(
-                                                  (0.2 * 255).toInt(),
-                                                ),
-                                            BlendMode.darken,
-                                          ),
-                                        )
-                                        : null,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  template.backgroundImageAsset != null
-                                      ? Icon(
-                                        Icons.image,
-                                        color: template.textColor,
-                                        size: 20.sp,
-                                      )
-                                      : Text(
-                                        '𝔸',
+                                      SizedBox(height: 4.h),
+                                      Text(
+                                        template.name,
                                         style: TextStyle(
                                           color: template.textColor,
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10.sp,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
-                                  SizedBox(height: 4.h),
-                                  Text(
-                                    template.name,
-                                    style: TextStyle(
-                                      color: template.textColor,
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w500,
+                                    ],
+                                  ),
+                                ),
+                                if (isLocked)
+                                  Positioned.fill(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withAlpha(
+                                          (0.5 * 255).toInt(),
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          8.r,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.lock,
+                                          color: Colors.white,
+                                          size: 28.sp,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
+                              ],
                             ),
                           );
                         },

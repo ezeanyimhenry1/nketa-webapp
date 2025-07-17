@@ -20,6 +20,7 @@ import 'package:the_igbo_bible/models/cosmology_item.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:the_igbo_bible/screens/support_screen.dart';
+import 'dart:math';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -133,19 +134,37 @@ class _BrowseScreenState extends State<BrowseScreen>
     try {
       randoms = await IgboNsibidiNamesService().fetchRandomResults();
     } catch (e) {
-      // Fallback to hardcoded if fetch fails
       randoms = [];
     }
     final all = [...saved, ...randoms];
-    all.shuffle();
-    final word = all.isNotEmpty ? all.first : null;
+
+    // Sort for deterministic order
+    all.sort((a, b) => a.igboWord.compareTo(b.igboWord));
+
+    // Seed random with today's date
+    final now = DateTime.now();
+    final todaySeed = int.parse(
+      '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}',
+    );
+    final seededRandom = Random(todaySeed);
+
+    // Pick 5 unique indices
+    final indices = <int>{};
+    while (indices.length < 5 && indices.length < all.length) {
+      indices.add(seededRandom.nextInt(all.length));
+    }
+    final todaysWords = indices.map((i) => all[i]).toList();
+
+    // Shuffle the 5 for display
+    todaysWords.shuffle();
+
+    final word = todaysWords.isNotEmpty ? todaysWords.first : null;
     final List<ImageTemplate> browseImageTemplates =
         imageTemplates.where((t) => t.backgroundImageAsset != null).toList();
     browseImageTemplates.shuffle();
     final selectedTemplate =
         browseImageTemplates.isNotEmpty ? browseImageTemplates.first : null;
     setState(() {
-      // _words = all;
       _selectedWord = word;
       _selectedTemplate = selectedTemplate;
       _loading = false;
@@ -646,6 +665,7 @@ class _BrowseScreenState extends State<BrowseScreen>
                       animation: _colorAnimation,
                       builder: (context, child) {
                         return Container(
+                          width: double.infinity,
                           padding: EdgeInsets.all(AppSpacing.lg.w),
                           decoration: BoxDecoration(
                             color: _colorAnimation.value,

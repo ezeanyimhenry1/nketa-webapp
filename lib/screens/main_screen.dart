@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
 import 'package:the_igbo_bible/screens/cosmology_screen.dart';
 import 'package:the_igbo_bible/screens/content_hub_screen.dart';
+import 'package:the_igbo_bible/services/usage_service.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -28,6 +29,29 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  bool _isSubscribed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSubscriptionStatus();
+  }
+
+  Future<void> _loadSubscriptionStatus() async {
+    try {
+      // UsageService is used in settings for subscription status
+      final usageService = UsageService();
+      final subscribed = await usageService.isSubscribed();
+      if (mounted) {
+        setState(() {
+          _isSubscribed = subscribed;
+        });
+      }
+    } catch (e) {
+      // ignore error
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -172,6 +196,46 @@ class _MainScreenState extends State<MainScreen> {
                       );
                     },
                   ),
+                  ListTile(
+                    leading: Icon(
+                      _isSubscribed
+                          ? Icons.all_inclusive
+                          : Icons.workspace_premium,
+                      size: AppSpacing.iconSize.sp,
+                      color:
+                          _isSubscribed ? AppColors.success : AppColors.primary,
+                    ),
+                    title: Text(
+                      _isSubscribed ? 'Premium: Unlimited' : 'Go Premium',
+                      style: textTheme.bodyLarge,
+                    ),
+                    subtitle:
+                        _isSubscribed
+                            ? Text(
+                              'You have unlimited access.',
+                              style: textTheme.bodySmall?.copyWith(
+                                color: AppColors.success,
+                              ),
+                            )
+                            : Text(
+                              'Unlock unlimited translations and images.',
+                              style: textTheme.bodySmall?.copyWith(
+                                color: AppColors.primary,
+                              ),
+                            ),
+                    onTap:
+                        _isSubscribed
+                            ? null
+                            : () {
+                              Navigator.pop(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => ProfileScreen(),
+                                ),
+                              );
+                            },
+                  ),
                 ],
               ),
             ),
@@ -198,7 +262,7 @@ class _MainScreenState extends State<MainScreen> {
                           final url =
                               Platform.isAndroid
                                   ? 'https://play.google.com/store/apps/details?id=com.henryezeanyim.theigbobible'
-                                  : 'https://theigbobible.netlify.app';
+                                  : 'https://apps.apple.com/us/app/the-igbo-bible/id6748525748';
                           final uri = Uri.parse(url);
                           if (await canLaunchUrl(uri)) {
                             await launchUrl(

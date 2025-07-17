@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/screens/support_screen.dart';
+import 'package:the_igbo_bible/screens/profile_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -233,6 +234,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   void _openPrivacyPolicy() async {
     const url = 'https://theigbobible.netlify.app/privacy';
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  void _openTermsOfUse() async {
+    const url = 'https://theigbobible.netlify.app/terms';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -573,29 +582,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
                             subtitle: Text(
-                              '${_usageStats['translations']} / ${UsageService.translationLimit}',
+                              _isSubscribed
+                                  ? 'Unlimited'
+                                  : '${_usageStats['translations']} /  {UsageService.translationLimit}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color:
-                                    _usageStats['translations']! >=
-                                            UsageService.translationLimit
-                                        ? AppColors.error
-                                        : AppColors.primary,
+                                    _isSubscribed
+                                        ? AppColors.success
+                                        : (_usageStats['translations']! >=
+                                                UsageService.translationLimit
+                                            ? AppColors.error
+                                            : AppColors.primary),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             trailing:
-                                _usageStats['translations']! >=
-                                        UsageService.translationLimit
+                                _isSubscribed
                                     ? Icon(
-                                      Icons.block,
-                                      color: AppColors.error,
-                                      size: 20,
-                                    )
-                                    : Icon(
-                                      Icons.check_circle,
+                                      Icons.all_inclusive,
                                       color: AppColors.success,
                                       size: 20,
-                                    ),
+                                    )
+                                    : (_usageStats['translations']! >=
+                                            UsageService.translationLimit
+                                        ? Icon(
+                                          Icons.block,
+                                          color: AppColors.error,
+                                          size: 20,
+                                        )
+                                        : Icon(
+                                          Icons.check_circle,
+                                          color: AppColors.success,
+                                          size: 20,
+                                        )),
                           ),
                           Divider(
                             height: 0,
@@ -616,29 +635,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               ),
                             ),
                             subtitle: Text(
-                              '${_usageStats['images']} / ${UsageService.imageLimit}',
+                              _isSubscribed
+                                  ? 'Unlimited'
+                                  : '${_usageStats['images']} /  {UsageService.imageLimit}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color:
-                                    _usageStats['images']! >=
-                                            UsageService.imageLimit
-                                        ? AppColors.error
-                                        : AppColors.primary,
+                                    _isSubscribed
+                                        ? AppColors.success
+                                        : (_usageStats['images']! >=
+                                                UsageService.imageLimit
+                                            ? AppColors.error
+                                            : AppColors.primary),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             trailing:
-                                _usageStats['images']! >=
-                                        UsageService.imageLimit
+                                _isSubscribed
                                     ? Icon(
-                                      Icons.block,
-                                      color: AppColors.error,
-                                      size: 20,
-                                    )
-                                    : Icon(
-                                      Icons.check_circle,
+                                      Icons.all_inclusive,
                                       color: AppColors.success,
                                       size: 20,
-                                    ),
+                                    )
+                                    : (_usageStats['images']! >=
+                                            UsageService.imageLimit
+                                        ? Icon(
+                                          Icons.block,
+                                          color: AppColors.error,
+                                          size: 20,
+                                        )
+                                        : Icon(
+                                          Icons.check_circle,
+                                          color: AppColors.success,
+                                          size: 20,
+                                        )),
                           ),
                           if (!_isSubscribed)
                             Padding(
@@ -654,6 +683,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             ),
                         ],
                       ),
+            ),
+            SizedBox(height: AppSpacing.xl),
+
+            // Go Premium Section
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+              ),
+              child: ListTile(
+                leading: Icon(
+                  _isSubscribed ? Icons.all_inclusive : Icons.workspace_premium,
+                  color: _isSubscribed ? AppColors.success : AppColors.primary,
+                  size: AppSpacing.iconSize,
+                ),
+                title: Text(
+                  _isSubscribed ? 'Premium: Unlimited' : 'Go Premium',
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                subtitle: Text(
+                  _isSubscribed
+                      ? 'You have unlimited access.'
+                      : 'Unlock unlimited translations and images. Subscription renews monthly.',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color:
+                        _isSubscribed ? AppColors.success : AppColors.primary,
+                  ),
+                ),
+                trailing:
+                    _isSubscribed
+                        ? null
+                        : Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: AppColors.primary,
+                        ),
+                onTap:
+                    _isSubscribed
+                        ? null
+                        : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (_) => ProfileScreen()),
+                          );
+                        },
+              ),
             ),
             SizedBox(height: AppSpacing.xl),
 
@@ -691,6 +768,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       size: 16,
                     ),
                     onTap: _openPrivacyPolicy,
+                  ),
+                  Divider(
+                    height: 0,
+                    color: AppColors.border,
+                    indent: AppSpacing.lg,
+                    endIndent: AppSpacing.lg,
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.article,
+                      color: AppColors.secondary,
+                      size: AppSpacing.iconSize,
+                    ),
+                    title: Text(
+                      'Terms of Use',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.secondary,
+                      size: 16,
+                    ),
+                    onTap: _openTermsOfUse,
                   ),
                   Divider(
                     height: 0,
