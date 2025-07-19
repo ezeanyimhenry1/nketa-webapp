@@ -60,6 +60,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
 
   Map<String, int> _usageStats = {'translations': 0, 'images': 0};
   bool _loadingUsage = true;
+  bool _isSubscribed = false; // Track subscription status
 
   @override
   void initState() {
@@ -438,9 +439,10 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     try {
       final usageService = UsageService();
       final stats = await usageService.getUsageStats();
-
+      final subscribed = await usageService.isSubscribed();
       setState(() {
         _usageStats = stats;
+        _isSubscribed = subscribed;
         _loadingUsage = false;
       });
     } catch (e) {
@@ -634,6 +636,14 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                     height: 16,
                     width: 16,
                     borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                )
+                : _isSubscribed
+                ? Text(
+                  'Unlimited',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.success,
+                    fontWeight: FontWeight.w500,
                   ),
                 )
                 : Text(

@@ -97,7 +97,52 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       // Request notification permissions
       await _requestNotificationPermissions();
 
-      // Schedule notifications
+      // --- Begin: Auto-enable notifications on first grant ---
+      final prefs = await SharedPreferences.getInstance();
+      final notificationsEnabled =
+          prefs.getBool('notifications_enabled') ?? false;
+      final eventNotificationsEnabled =
+          prefs.getBool('event_notifications_enabled') ?? false;
+
+      // Check if notifications are enabled in system
+      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      bool permissionGranted = true;
+      if (Platform.isAndroid) {
+        final androidPlugin =
+            flutterLocalNotificationsPlugin
+                .resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin
+                >();
+        if (androidPlugin != null) {
+          permissionGranted =
+              await androidPlugin.areNotificationsEnabled() ?? true;
+        }
+      }
+      // For iOS, assume permission is granted if we get here
+
+      if (permissionGranted &&
+          (!notificationsEnabled || !eventNotificationsEnabled)) {
+        // Set default notification time if not set
+        final hour = prefs.getInt('notification_hour') ?? 8;
+        final minute = prefs.getInt('notification_minute') ?? 0;
+        final notificationTime = TimeOfDay(hour: hour, minute: minute);
+
+        if (!notificationsEnabled) {
+          await prefs.setBool('notifications_enabled', true);
+          await prefs.setInt('notification_hour', hour);
+          await prefs.setInt('notification_minute', minute);
+          await NotificationService.scheduleDailyProverbNotification(
+            notificationTime,
+          );
+        }
+        if (!eventNotificationsEnabled) {
+          await prefs.setBool('event_notifications_enabled', true);
+          await NotificationService.scheduleEventNotifications();
+        }
+      }
+      // --- End: Auto-enable notifications on first grant ---
+
+      // Schedule notifications (in case user already enabled them)
       await _checkAndScheduleNotifications();
     } catch (e) {
       debugPrint('Error initializing services: $e');

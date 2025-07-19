@@ -298,17 +298,131 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _loginOrRegister() async {
     setState(() => _loading = true);
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
     try {
+      final methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(
+        email,
+      );
       if (_isLogin) {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+        if (methods.isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'No account found for this email. If you registered with Google or Apple, please use that method.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else if (methods.contains('google.com')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'This email is registered with Google. Please sign in with Google.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else if (methods.contains('apple.com')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'This email is registered with Apple. Please sign in with Apple.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else if (methods.contains('password')) {
+          // Proceed with email/password login
+          try {
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: email,
+              password: password,
+            );
+          } on FirebaseAuthException catch (e) {
+            if (e.code == 'wrong-password') {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Incorrect password.')),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Auth error: ${e.message ?? e.code}')),
+              );
+            }
+            setState(() => _loading = false);
+            return;
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'This email is registered with: ${methods.join(", ")}. Please use the correct sign-in method.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        }
       } else {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim(),
-        );
+        // Registration
+        if (methods.isEmpty) {
+          // No account exists, allow registration
+          try {
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: email,
+              password: password,
+            );
+          } on FirebaseAuthException catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Auth error: ${e.message ?? e.code}')),
+            );
+            setState(() => _loading = false);
+            return;
+          }
+        } else if (methods.contains('google.com')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'This email is registered with Google. Please sign in with Google, then set a password in your profile.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else if (methods.contains('apple.com')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'This email is registered with Apple. Please sign in with Apple, then set a password in your profile.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else if (methods.contains('password')) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'An account with this email already exists. Please log in.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'This email is registered with: ${methods.join(", ")}. Please use the correct sign-in method.',
+              ),
+            ),
+          );
+          setState(() => _loading = false);
+          return;
+        }
       }
       await _checkSubscription();
     } catch (e) {
@@ -317,6 +431,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
         context,
       ).showSnackBar(SnackBar(content: Text('Auth error: $e')));
       setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _showForgotPasswordDialog() async {
+    final controller = TextEditingController(text: _emailController.text);
+    final result = await showDialog<String>(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Reset Password'),
+            content: TextField(
+              controller: controller,
+              decoration: const InputDecoration(labelText: 'Enter your email'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed:
+                    () => Navigator.of(context).pop(controller.text.trim()),
+                child: const Text('Send Reset Email'),
+              ),
+            ],
+          ),
+    );
+    if (result != null && result.isNotEmpty) {
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: result);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Password reset email sent!')),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Failed to send reset email: $e')),
+          );
+        }
+      }
     }
   }
 
@@ -407,6 +563,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onPressed: _loginOrRegister,
                   child: Text(_isLogin ? 'Login' : 'Register'),
                 ),
+                if (_isLogin)
+                  TextButton(
+                    onPressed: _showForgotPasswordDialog,
+                    child: const Text('Forgot Password?'),
+                  ),
                 TextButton(
                   onPressed: () => setState(() => _isLogin = !_isLogin),
                   child: Text(
@@ -460,7 +621,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       : _buySubscription,
               child: Text(
                 _products.isNotEmpty
-                    ? 'Subscribe for ${_products.first.price}'
+                    ? 'Subscribe for ${_products.first.price}/month'
                     : _iapInitialized
                     ? 'No Products Available'
                     : 'Loading...',
@@ -480,6 +641,99 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 setState(() {});
               },
               child: const Text('Logout'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async {
+                final confirmed = await showDialog<bool>(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: const Text('Delete Account'),
+                        content: const Text(
+                          'Are you sure you want to delete your account? This action cannot be undone.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: const Text('Delete'),
+                          ),
+                        ],
+                      ),
+                );
+                if (confirmed != true) return;
+                setState(() => _loading = true);
+                final user = FirebaseAuth.instance.currentUser;
+                try {
+                  if (user != null) {
+                    // Delete Firestore user document and subcollections
+                    final userDoc = FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(user.uid);
+                    // Delete 'usage' subcollection if exists
+                    final usageDocs = await userDoc.collection('usage').get();
+                    for (final doc in usageDocs.docs) {
+                      await doc.reference.delete();
+                    }
+                    await userDoc.delete();
+                    // Delete Firebase Auth user
+                    await user.delete();
+                    // Sign out from Google if needed
+                    await _googleSignIn.disconnect();
+                    if (context.mounted) {
+                      setState(() {});
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Account deleted successfully.'),
+                        ),
+                      );
+                    }
+                  }
+                } on FirebaseAuthException catch (e) {
+                  if (e.code == 'requires-recent-login') {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Please log in again before deleting your account.',
+                          ),
+                        ),
+                      );
+                    }
+                  } else {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Failed to delete account: ${e.message}',
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Failed to delete account: ${e.toString()}',
+                        ),
+                      ),
+                    );
+                  }
+                } finally {
+                  if (mounted) setState(() => _loading = false);
+                }
+              },
+              child: const Text('Delete Account'),
             ),
           ],
         ),

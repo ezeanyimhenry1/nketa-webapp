@@ -584,7 +584,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             subtitle: Text(
                               _isSubscribed
                                   ? 'Unlimited'
-                                  : '${_usageStats['translations']} /  {UsageService.translationLimit}',
+                                  : '${_usageStats['translations']} /  ${UsageService.translationLimit}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color:
                                     _isSubscribed
@@ -637,7 +637,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             subtitle: Text(
                               _isSubscribed
                                   ? 'Unlimited'
-                                  : '${_usageStats['images']} /  {UsageService.imageLimit}',
+                                  : '${_usageStats['images']} /  ${UsageService.imageLimit}',
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color:
                                     _isSubscribed
