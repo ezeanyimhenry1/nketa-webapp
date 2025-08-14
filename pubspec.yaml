@@ -103,6 +103,7 @@ flutter:
     - assets/templates/
     - assets/data/igbo_events.json
     - assets/icons/appicon.png
+    - assets/icons/google_logo.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

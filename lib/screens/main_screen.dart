@@ -18,6 +18,7 @@ import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
 import 'package:the_igbo_bible/screens/cosmology_screen.dart';
 import 'package:the_igbo_bible/screens/content_hub_screen.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
+import 'package:the_igbo_bible/screens/subscription_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -231,7 +232,7 @@ class _MainScreenState extends State<MainScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => ProfileScreen(),
+                                  builder: (_) => SubscriptionScreen(),
                                 ),
                               );
                             },

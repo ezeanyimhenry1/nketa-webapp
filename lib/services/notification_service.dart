@@ -10,6 +10,7 @@ class NotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
   static bool _tzInitialized = false;
+  static Function(String)? _notificationCallback;
 
   static Future<void> initialize() async {
     if (!_tzInitialized) {
@@ -37,6 +38,13 @@ class NotificationService {
       initializationSettings,
       onDidReceiveNotificationResponse: (response) async {
         debugPrint('Notification response received: ${response.payload}');
+        // Clear badge on tap
+        clearBadge();
+
+        // Handle proverb notification
+        if (response.payload == 'proverb_of_the_day') {
+          _notificationCallback?.call('proverb_of_the_day');
+        }
       },
     );
 
@@ -96,8 +104,7 @@ class NotificationService {
       if (Platform.isAndroid) {
         await _createNotificationChannel();
       }
-      // Fetch proverb of the day from API at scheduling time
-      final proverb = await ProverbsService().fetchProverbOfTheDay();
+
       final androidDetails = AndroidNotificationDetails(
         'proverb_channel',
         'Proverb Notifications',
@@ -133,7 +140,18 @@ class NotificationService {
           firstNotificationTime.isAfter(now)
               ? firstNotificationTime
               : firstNotificationTime.add(Duration(days: 1));
-      // Set the notification body to the proverb text
+
+      // Calculate which day the notification will appear
+      final notificationDate = DateTime(
+        scheduleTime.year,
+        scheduleTime.month,
+        scheduleTime.day,
+      );
+
+      // Fetch the proverb for the day the notification will appear
+      final proverb = await _getProverbForDate(notificationDate);
+
+      // Schedule the notification with the actual proverb text
       await _notificationsPlugin.zonedSchedule(
         0,
         "Proverb of the Day",
@@ -146,6 +164,7 @@ class NotificationService {
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
+
       await debugNotificationStatus();
     } catch (e, stack) {
       debugPrint('ERROR scheduling notification: $e');
@@ -345,21 +364,47 @@ class NotificationService {
     try {
       debugPrint('=== Testing Scheduled Notification (30 seconds) ===');
 
-      // Create channels
+      // Check permissions first
+      final hasPermission = await _checkNotificationPermission();
+      if (!hasPermission) {
+        debugPrint('ERROR: No notification permission for test');
+        return;
+      }
+
+      // Create channel if Android
       if (Platform.isAndroid) {
         await _createNotificationChannel();
+
+        // Create test channel
+        final androidPlugin =
+            _notificationsPlugin
+                .resolvePlatformSpecificImplementation<
+                  AndroidFlutterLocalNotificationsPlugin
+                >();
+
+        if (androidPlugin != null) {
+          await androidPlugin.createNotificationChannel(
+            const AndroidNotificationChannel(
+              'test_channel',
+              'Test Notifications',
+              description: 'Test notifications',
+              importance: Importance.max,
+              showBadge: true,
+              enableVibration: true,
+              playSound: true,
+            ),
+          );
+        }
       }
 
       final androidDetails = AndroidNotificationDetails(
-        'proverb_channel',
-        'Proverb Notifications',
-        channelDescription: 'Daily proverb of the day',
+        'test_channel',
+        'Test Notifications',
+        channelDescription: 'Test notifications',
         importance: Importance.max,
         priority: Priority.high,
-        showWhen: true,
         enableVibration: true,
         playSound: true,
-        ticker: 'Test Scheduled',
       );
 
       final iosDetails = DarwinNotificationDetails(
@@ -414,6 +459,12 @@ class NotificationService {
       final events = await EventService().loadEvents();
       final now = DateTime.now();
       int baseId = 1000;
+      // Advance reminder offsets (in days)
+      final List<int> advanceDays = [
+        7,
+        1,
+        0,
+      ]; // 7 days before, 1 day before, event day
 
       for (int i = 0; i < events.length; i++) {
         final event = events[i];
@@ -432,51 +483,67 @@ class NotificationService {
           }
         }
 
-        if (eventDate.isBefore(now)) continue;
+        for (int j = 0; j < advanceDays.length; j++) {
+          final daysBefore = advanceDays[j];
+          final reminderDate = eventDate.subtract(Duration(days: daysBefore));
+          if (reminderDate.isBefore(now)) {
+            continue; // Don't schedule in the past
+          }
 
-        final scheduleTime = tz.TZDateTime(
-          tz.local,
-          eventDate.year,
-          eventDate.month,
-          eventDate.day,
-          8, // 8:00 AM
-          0,
-        );
+          final scheduleTime = tz.TZDateTime(
+            tz.local,
+            reminderDate.year,
+            reminderDate.month,
+            reminderDate.day,
+            8, // 8:00 AM
+            0,
+          );
 
-        final androidDetails = AndroidNotificationDetails(
-          'event_channel',
-          'Event Notifications',
-          channelDescription: 'Igbo event reminders',
-          importance: Importance.max,
-          priority: Priority.high,
-        );
+          final androidDetails = AndroidNotificationDetails(
+            'event_channel',
+            'Event Notifications',
+            channelDescription: 'Igbo event reminders',
+            importance: Importance.max,
+            priority: Priority.high,
+          );
 
-        final iosDetails = DarwinNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-        );
+          final iosDetails = DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          );
 
-        final notificationDetails = NotificationDetails(
-          android: androidDetails,
-          iOS: iosDetails,
-        );
+          final notificationDetails = NotificationDetails(
+            android: androidDetails,
+            iOS: iosDetails,
+          );
 
-        await _notificationsPlugin.zonedSchedule(
-          baseId + i,
-          'Igbo Event: ${event.name}',
-          '${event.description}\n${eventDate.toLocal().toString().split(' ')[0]}${event.location != null ? '\n${event.location}' : ''}',
-          scheduleTime,
-          notificationDetails,
-          androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime,
-          matchDateTimeComponents: DateTimeComponents.dayOfMonthAndTime,
-        );
+          // Notification title and body
+          String title = 'Igbo Event:  {event.name}';
+          String body =
+              ' {event.description}\n${eventDate.toLocal().toString().split(' ')[0]}';
+          if (event.location != null) {
+            body += '\n${event.location}';
+          }
+          if (daysBefore > 0) {
+            title += ' (in $daysBefore day${daysBefore > 1 ? 's' : ''})';
+          } else {
+            title += ' (Today!)';
+          }
 
-        // debugPrint(
-        //   'Scheduled event notification for ${event.name} on $scheduleTime',
-        // );
+          await _notificationsPlugin.zonedSchedule(
+            baseId + i * 10 + j, // Unique ID for each reminder
+            title,
+            body,
+            scheduleTime,
+            notificationDetails,
+            androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+            uiLocalNotificationDateInterpretation:
+                UILocalNotificationDateInterpretation.absoluteTime,
+            matchDateTimeComponents:
+                DateTimeComponents.dateAndTime, // Only fire on exact date
+          );
+        }
       }
     } catch (e) {
       debugPrint('Error scheduling event notifications: $e');
@@ -519,6 +586,66 @@ class NotificationService {
       } catch (e) {
         debugPrint('Error clearing iOS badge: $e');
       }
+    }
+  }
+
+  static void setNotificationCallback(Function(String) callback) {
+    _notificationCallback = callback;
+  }
+
+  static Future<Map<String, String>> _getProverbForDate(DateTime date) async {
+    try {
+      final proverbs = await ProverbsService().fetchProverbs();
+      final daysSince2024 = date.difference(DateTime(2024, 1, 1)).inDays;
+      final proverbIndex = daysSince2024 % proverbs.length;
+      return proverbs[proverbIndex];
+    } catch (e) {
+      debugPrint('Error fetching proverb for date: $e');
+      return {
+        'igbo': 'Proverb of the Day',
+        'english': 'Tap to see today\'s wisdom',
+      };
+    }
+  }
+
+  static Future<void> showProverbNotification() async {
+    try {
+      // Fetch the current day's proverb
+      final proverb = await ProverbsService().fetchProverbOfTheDay();
+
+      final androidDetails = AndroidNotificationDetails(
+        'proverb_channel',
+        'Proverb Notifications',
+        channelDescription: 'Daily proverb of the day',
+        importance: Importance.max,
+        priority: Priority.high,
+        showWhen: true,
+        enableVibration: true,
+        playSound: true,
+        ticker: 'Daily Proverb',
+        largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
+      );
+      final iosDetails = DarwinNotificationDetails(
+        presentAlert: true,
+        presentBadge: true,
+        presentSound: true,
+        sound: 'default',
+      );
+      final notificationDetails = NotificationDetails(
+        android: androidDetails,
+        iOS: iosDetails,
+      );
+
+      // Show the notification with the actual proverb text
+      await _notificationsPlugin.show(
+        0,
+        "Proverb of the Day",
+        '${proverb['igbo'] ?? ''}\n${proverb['english'] ?? ''}',
+        notificationDetails,
+        payload: 'proverb_of_the_day',
+      );
+    } catch (e) {
+      debugPrint('Error showing proverb notification: $e');
     }
   }
 }

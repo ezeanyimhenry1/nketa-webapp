@@ -7,6 +7,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:io';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:the_igbo_bible/screens/subscription_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -33,9 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   late Stream<List<PurchaseDetails>> _purchaseStream;
+  // ignore: unused_field
   List<ProductDetails> _products = [];
   bool _iapAvailable = false;
   bool _checkingPurchases = false;
+  // ignore: unused_field
   bool _iapInitialized = false;
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -174,60 +177,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  Future<void> _buySubscription() async {
-    if (!_iapAvailable) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('In-app purchases are not available on this device'),
-        ),
-      );
-      return;
-    }
-
-    if (!_iapInitialized) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please wait while we initialize purchases...'),
-        ),
-      );
-      return;
-    }
-
-    if (_products.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'No subscription products available. Please try again later.',
-          ),
-        ),
-      );
-      return;
-    }
-
-    final ProductDetails product = _products.first;
-
-    final PurchaseParam purchaseParam = PurchaseParam(productDetails: product);
-    try {
-      final bool success = await InAppPurchase.instance.buyNonConsumable(
-        purchaseParam: purchaseParam,
-      );
-
-      if (!success) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to initiate purchase. Please try again.'),
-          ),
-        );
-      }
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text('Purchase failed: $e')));
-    }
-  }
-
   Future<void> _restorePurchases() async {
     setState(() => _checkingPurchases = true);
     try {
@@ -301,125 +250,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
     try {
-      final methods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(
-        email,
-      );
       if (_isLogin) {
-        if (methods.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'No account found for this email. If you registered with Google or Apple, please use that method.',
-              ),
-            ),
+        // Attempt login directly
+        try {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: email,
+            password: password,
           );
-          setState(() => _loading = false);
-          return;
-        } else if (methods.contains('google.com')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'This email is registered with Google. Please sign in with Google.',
-              ),
-            ),
-          );
-          setState(() => _loading = false);
-          return;
-        } else if (methods.contains('apple.com')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'This email is registered with Apple. Please sign in with Apple.',
-              ),
-            ),
-          );
-          setState(() => _loading = false);
-          return;
-        } else if (methods.contains('password')) {
-          // Proceed with email/password login
-          try {
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-              email: email,
-              password: password,
-            );
-          } on FirebaseAuthException catch (e) {
-            if (e.code == 'wrong-password') {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Incorrect password.')),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Auth error: ${e.message ?? e.code}')),
-              );
-            }
-            setState(() => _loading = false);
-            return;
+        } on FirebaseAuthException catch (e) {
+          if (!mounted) return;
+          String message = 'Login failed. Please check your credentials.';
+          if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+            message =
+                'Invalid email or password. If you registered with Google or Apple, please use those sign-in options.';
+          } else if (e.code == 'user-disabled') {
+            message = 'This account has been disabled.';
           }
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'This email is registered with: ${methods.join(", ")}. Please use the correct sign-in method.',
-              ),
-            ),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(message)));
           setState(() => _loading = false);
           return;
         }
       } else {
-        // Registration
-        if (methods.isEmpty) {
-          // No account exists, allow registration
-          try {
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: email,
-              password: password,
-            );
-          } on FirebaseAuthException catch (e) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Auth error: ${e.message ?? e.code}')),
-            );
-            setState(() => _loading = false);
-            return;
+        // Attempt registration directly
+        try {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
+        } on FirebaseAuthException catch (e) {
+          if (!mounted) return;
+          String message = 'Registration failed. Please try again.';
+          if (e.code == 'email-already-in-use') {
+            message = 'An account with this email already exists.';
+          } else if (e.code == 'invalid-email') {
+            message = 'Invalid email address.';
+          } else if (e.code == 'weak-password') {
+            message = 'Password is too weak.';
           }
-        } else if (methods.contains('google.com')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'This email is registered with Google. Please sign in with Google, then set a password in your profile.',
-              ),
-            ),
-          );
-          setState(() => _loading = false);
-          return;
-        } else if (methods.contains('apple.com')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'This email is registered with Apple. Please sign in with Apple, then set a password in your profile.',
-              ),
-            ),
-          );
-          setState(() => _loading = false);
-          return;
-        } else if (methods.contains('password')) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text(
-                'An account with this email already exists. Please log in.',
-              ),
-            ),
-          );
-          setState(() => _loading = false);
-          return;
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'This email is registered with: ${methods.join(", ")}. Please use the correct sign-in method.',
-              ),
-            ),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(message)));
           setState(() => _loading = false);
           return;
         }
@@ -518,9 +390,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await _initIAP();
     } catch (e) {
       if (!mounted) return;
+      String errorMessage = 'Apple sign-in failed. Please try again.';
+      if (e.toString().contains('canceled')) {
+        errorMessage = 'Sign-in was canceled.';
+      } else if (e.toString().contains('not available')) {
+        errorMessage = 'Sign in with Apple is not available on this device.';
+      }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Apple sign-in error: $e')));
+      ).showSnackBar(SnackBar(content: Text(errorMessage)));
       setState(() => _loading = false);
     }
   }
@@ -577,17 +455,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.login),
-                  label: const Text('Sign in with Google'),
-                  onPressed: _signInWithGoogle,
-                ),
-                if (Platform.isIOS)
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.login),
-                    label: const Text('Sign in with Apple'),
-                    onPressed: _signInWithApple,
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: _signInWithGoogle,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset('assets/icons/google_logo.png', height: 20),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Sign in with Google',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                ),
+                if (Platform.isIOS) ...[
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: SignInWithAppleButton(
+                      onPressed: _signInWithApple,
+                      style: SignInWithAppleButtonStyle.black,
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -605,32 +512,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               _isSubscribed ? 'Subscription: Active' : 'Subscription: Inactive',
             ),
-            if (!_iapInitialized)
-              const Text(
-                'Initializing purchases...',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed:
-                  _isSubscribed ||
-                          !_iapAvailable ||
-                          !_iapInitialized ||
-                          _products.isEmpty
-                      ? null
-                      : _buySubscription,
-              child: Text(
-                _products.isNotEmpty
-                    ? 'Subscribe for ${_products.first.price}/month'
-                    : _iapInitialized
-                    ? 'No Products Available'
-                    : 'Loading...',
-              ),
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _restorePurchases,
-              child: const Text('Restore Purchases'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SubscriptionScreen()),
+                );
+              },
+              child: const Text('Manage Subscription'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(

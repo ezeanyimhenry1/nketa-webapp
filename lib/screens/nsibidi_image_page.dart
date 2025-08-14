@@ -16,6 +16,7 @@ import 'package:the_igbo_bible/theme/app_theme.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
 import 'package:the_igbo_bible/screens/profile_screen.dart';
+import 'package:the_igbo_bible/screens/subscription_screen.dart';
 
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
@@ -697,15 +698,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     final usageService = UsageService();
     if (!await usageService.canUseImage()) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Image generation limit reached. Subscribe for unlimited access.',
-          ),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      _showSubscriptionDialog();
       return;
     }
     setState(() => _isGenerating = true);
@@ -783,15 +776,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     final usageService = UsageService();
     if (!await usageService.canUseImage()) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Image generation limit reached. Subscribe for unlimited access.',
-          ),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
+      _showSubscriptionDialog();
       return;
     }
     setState(() => _isGenerating = true);
@@ -884,6 +869,37 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
             'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
         subject: 'Nsibidi Translation from The Igbo Bible',
       ),
+    );
+  }
+
+  void _showSubscriptionDialog() {
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Image Generation Limit Reached'),
+            content: const Text(
+              'You\'ve reached your free image generation limit. Subscribe to get unlimited image generation and access to all features.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SubscriptionScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Subscribe'),
+              ),
+            ],
+          ),
     );
   }
 }

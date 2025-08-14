@@ -18,6 +18,9 @@ import 'package:the_igbo_bible/services/network_status_provider.dart';
 import 'package:the_igbo_bible/widgets/global_network_banner.dart';
 import 'firebase_options.dart';
 
+// Global navigator key for handling notification navigation
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -62,9 +65,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     // Clear badge on iOS when app is opened
     NotificationService.clearBadge();
 
-    // Set up notification tap handler
-    _setupNotificationHandler();
-
     // Show splash for shorter duration
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
@@ -93,6 +93,16 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     try {
       // Initialize notification service
       await NotificationService.initialize();
+
+      // Set up notification callback
+      NotificationService.setNotificationCallback((payload) {
+        if (payload == 'proverb_of_the_day' && mounted) {
+          navigatorKey.currentState?.pushNamedAndRemoveUntil(
+            '/',
+            (route) => false,
+          );
+        }
+      });
 
       // Request notification permissions
       await _requestNotificationPermissions();
@@ -197,20 +207,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     }
   }
 
-  void _setupNotificationHandler() {
-    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(
-      const InitializationSettings(
-        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
-        iOS: DarwinInitializationSettings(),
-      ),
-      onDidReceiveNotificationResponse: (response) async {
-        // Clear badge on tap (no dialog needed)
-        NotificationService.clearBadge();
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -221,6 +217,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         return MaterialApp(
           title: 'The Igbo Bible',
           theme: AppTheme.lightTheme,
+          navigatorKey: navigatorKey,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           supportedLocales: const [Locale('en', '')],
           home: GlobalNetworkBanner(

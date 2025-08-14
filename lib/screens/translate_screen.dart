@@ -19,6 +19,7 @@ import 'package:the_igbo_bible/data/constants.dart';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/services/igbo_nsibidi_names_service.dart';
 import 'package:provider/provider.dart';
+import 'package:the_igbo_bible/screens/subscription_screen.dart';
 
 class TranslateScreen extends StatefulWidget {
   const TranslateScreen({super.key});
@@ -84,7 +85,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
     setState(() => _loading = true);
     final usageService = UsageService();
     if (!await usageService.canUseTranslation()) {
-      _showError('Translation limit reached. Subscribe for unlimited access.');
+      _showSubscriptionDialog();
       return;
     }
 
@@ -386,6 +387,41 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
         ),
       );
     }
+  }
+
+  void _showSubscriptionDialog() {
+    setState(() {
+      _loading = false;
+    });
+
+    showDialog(
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Translation Limit Reached'),
+            content: const Text(
+              'You\'ve reached your free translation limit. Subscribe to get unlimited translations and access to all features.',
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SubscriptionScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Subscribe'),
+              ),
+            ],
+          ),
+    );
   }
 
   void _scrollToResults() {
