@@ -148,6 +148,25 @@ class NotificationService {
         scheduleTime.day,
       );
 
+      // Check if we've completed the full proverb cycle
+      final proverbs = await ProverbsService().fetchProverbs();
+      final daysSince2024 =
+          notificationDate.difference(DateTime(2024, 1, 1)).inDays;
+      final proverbIndex = daysSince2024 % proverbs.length;
+
+      debugPrint(
+        'Days since 2024: $daysSince2024, Proverb index: $proverbIndex, Total proverbs: ${proverbs.length}',
+      );
+
+      // If we've gone through all proverbs once, stop scheduling to prevent repetition
+      if (daysSince2024 >= proverbs.length) {
+        debugPrint(
+          'All proverbs have been shown. Stopping daily notifications to prevent repetition.',
+        );
+        await cancelAllNotifications();
+        return;
+      }
+
       // Fetch the proverb for the day the notification will appear
       final proverb = await _getProverbForDate(notificationDate);
 
@@ -519,9 +538,9 @@ class NotificationService {
           );
 
           // Notification title and body
-          String title = 'Igbo Event:  {event.name}';
+          String title = 'Igbo Event: ${event.name}';
           String body =
-              ' {event.description}\n${eventDate.toLocal().toString().split(' ')[0]}';
+              ' ${event.description}\n${eventDate.toLocal().toString().split(' ')[0]}';
           if (event.location != null) {
             body += '\n${event.location}';
           }
@@ -591,6 +610,17 @@ class NotificationService {
 
   static void setNotificationCallback(Function(String) callback) {
     _notificationCallback = callback;
+  }
+
+  // Method to restart the proverb cycle from the beginning
+  static Future<void> restartProverbCycle(TimeOfDay time) async {
+    try {
+      debugPrint('Restarting proverb cycle from the beginning...');
+      await cancelAllNotifications();
+      await scheduleDailyProverbNotification(time);
+    } catch (e) {
+      debugPrint('Error restarting proverb cycle: $e');
+    }
   }
 
   static Future<Map<String, String>> _getProverbForDate(DateTime date) async {

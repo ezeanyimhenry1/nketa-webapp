@@ -262,7 +262,7 @@ class _MainScreenState extends State<MainScreen> {
                           // Replace with your app store URL
                           final url =
                               Platform.isAndroid
-                                  ? 'https://play.google.com/store/apps/details?id=com.henryezeanyim.theigbobible'
+                                  ? 'https://drive.google.com/file/d/1NRwjGUIKJrFspVAH4CAawgnxDOcw6Fzt/view?usp=drive_link'
                                   : 'https://apps.apple.com/us/app/the-igbo-bible/id6748525748';
                           final uri = Uri.parse(url);
                           if (await canLaunchUrl(uri)) {
