@@ -584,6 +584,8 @@ class AlternativePaymentService {
         'currency': pricing['currency'],
         'redirect_url': 'https://theigbobible.netlify.app/payment-success',
         'payment_options': 'card,mobilemoney,ussd,banktransfer',
+        // Attach the recurring payment plan so Flutterwave can validate the request
+        'payment_plan': planId,
         'customer': {'email': customerEmail, 'name': customerName},
         'customizations': {
           'title': 'Igbo Bible Premium Subscription',

@@ -182,11 +182,13 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               isFraudulentWebsiteWarningEnabled: false,
               clearCache: true,
               cacheEnabled: true,
-              // Better user agent
-              userAgent:
-                  'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Mobile/15E148 Safari/604.1',
+              // Use default user agent to avoid third-party blocking heuristics
+              userAgent: null,
               // Mixed content handling for Android
               mixedContentMode: MixedContentMode.MIXED_CONTENT_ALWAYS_ALLOW,
+              // Android-specific: allow third-party cookies and relax safe browsing for payment flows
+              thirdPartyCookiesEnabled: true,
+              safeBrowsingEnabled: false,
               // Additional security settings
               allowsPictureInPictureMediaPlayback: true,
               resourceCustomSchemes: [],
@@ -223,6 +225,19 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               debugPrint('Request URL: ${request.url}');
               debugPrint('Request Method: ${request.method}');
 
+              // Ignore subresource errors and ORB blocking which can occur for third-party assets
+              final isMainFrame = request.isForMainFrame ?? true;
+              final isOrbBlocked = error.description.toUpperCase().contains(
+                'ERR_BLOCKED_BY_ORB',
+              );
+
+              if (!isMainFrame || isOrbBlocked) {
+                debugPrint(
+                  'Ignoring non-fatal webview error (mainFrame=$isMainFrame, ORB=$isOrbBlocked)',
+                );
+                return;
+              }
+
               setState(() {
                 _isLoading = false;
                 _hasError = true;
@@ -234,6 +249,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               debugPrint('HTTP Status Code: ${errorResponse.statusCode}');
               debugPrint('HTTP Reason: ${errorResponse.reasonPhrase}');
               debugPrint('Request URL: ${request.url}');
+
+              final isMainFrame = request.isForMainFrame ?? true;
+              if (!isMainFrame) {
+                debugPrint('Ignoring HTTP error for subresource');
+                return;
+              }
 
               setState(() {
                 _isLoading = false;
