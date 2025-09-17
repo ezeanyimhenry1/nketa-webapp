@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:io';
 import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
 import 'package:the_igbo_bible/theme/app_theme.dart';
+import 'package:the_igbo_bible/services/alternative_payment_service.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
@@ -140,6 +141,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   }
 
   Future<void> _buySubscription() async {
+    // For Android users, show alternative payment options
+    if (Platform.isAndroid) {
+      await AlternativePaymentService.showAndroidSubscriptionOptions(context);
+      return;
+    }
+
+    // For iOS users, use the existing in-app purchase system
     if (!_iapAvailable) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

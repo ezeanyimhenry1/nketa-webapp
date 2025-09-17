@@ -18,6 +18,7 @@ import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
 import 'package:the_igbo_bible/screens/cosmology_screen.dart';
 import 'package:the_igbo_bible/screens/content_hub_screen.dart';
 import 'package:the_igbo_bible/services/usage_service.dart';
+import 'package:the_igbo_bible/services/review_service.dart';
 import 'package:the_igbo_bible/screens/subscription_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -32,11 +33,13 @@ class _MainScreenState extends State<MainScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   bool _isSubscribed = false;
+  final ReviewService _reviewService = ReviewService();
 
   @override
   void initState() {
     super.initState();
     _loadSubscriptionStatus();
+    _checkForReviewPrompt();
   }
 
   Future<void> _loadSubscriptionStatus() async {
@@ -58,6 +61,26 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
+
+    // Track app usage for review prompt timing
+    _reviewService.incrementAppUsage();
+
+    // Check for review prompt after navigation (with a delay)
+    Future.delayed(Duration(seconds: 2), () {
+      _checkForReviewPrompt();
+    });
+  }
+
+  Future<void> _checkForReviewPrompt() async {
+    try {
+      final shouldShow = await _reviewService.shouldShowReviewPrompt();
+      if (shouldShow && mounted) {
+        await _reviewService.showCustomReviewDialog(context);
+      }
+    } catch (e) {
+      // Silently handle errors to avoid disrupting user experience
+      debugPrint('Error checking for review prompt: $e');
+    }
   }
 
   final List<Widget> _screens = [
@@ -197,6 +220,19 @@ class _MainScreenState extends State<MainScreen> {
                       );
                     },
                   ),
+                  if (Platform.isIOS)
+                    ListTile(
+                      leading: Icon(
+                        Icons.star,
+                        size: AppSpacing.iconSize.sp,
+                        color: Colors.amber,
+                      ),
+                      title: Text('Rate App', style: textTheme.bodyLarge),
+                      onTap: () {
+                        Navigator.pop(context);
+                        _reviewService.requestReview();
+                      },
+                    ),
                   ListTile(
                     leading: Icon(
                       _isSubscribed
