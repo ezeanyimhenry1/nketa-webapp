@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:the_igbo_bible/models/translation_result.dart';
 import 'package:the_igbo_bible/services/saved_words_service.dart';
 import 'package:the_igbo_bible/screens/nsibidi_image_page.dart';
+import 'package:the_igbo_bible/screens/proverb_image_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:the_igbo_bible/theme/app_spacing.dart';
 import 'package:the_igbo_bible/data/image_templates.dart';
@@ -681,11 +682,44 @@ class _BrowseScreenState extends State<BrowseScreen>
                                 ),
                               ),
                               SizedBox(height: AppSpacing.sm.h),
-                              Text(
-                                proverb['igbo'] ?? '',
-                                style: theme.textTheme.bodyLarge,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      proverb['igbo'] ?? '',
+                                      style: theme.textTheme.bodyLarge,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    icon: Icon(
+                                      Icons.image,
+                                      color: Colors.orange[900],
+                                      size: 20,
+                                    ),
+                                    tooltip: 'Generate Proverb Image',
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (_) => ProverbImagePage(
+                                                igboText: proverb['igbo'] ?? '',
+                                                englishText:
+                                                    proverb['english'] ?? '',
+                                              ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
                               SizedBox(height: AppSpacing.sm.h),
                               Text(

@@ -653,11 +653,39 @@ class AlternativePaymentService {
       // Show verification loading dialog
       _showPaymentVerificationLoadingDialog(context);
 
-      // Verify payment with Flutterwave API
-      final verificationResult = await _verifyPaymentWithFlutterwave(
-        paymentData['txRef'],
-        paymentData['transactionId'],
-      );
+      // Verify payment with Flutterwave API (transactionId first, then tx_ref)
+      Map<String, dynamic>? verificationResult =
+          await _verifyPaymentWithFlutterwave(
+            paymentData['txRef'],
+            paymentData['transactionId'],
+          );
+
+      // Fallback: verify by reference if transactionId verification failed
+      if (verificationResult == null ||
+          verificationResult['status'] != 'success') {
+        debugPrint(
+          'Primary verification failed, attempting verify_by_reference using tx_ref...',
+        );
+        verificationResult = await _verifyPaymentWithFlutterwaveByTxRef(
+          paymentData['txRef'],
+        );
+      }
+
+      // Sometimes the gateway needs a moment to finalize; retry briefly if pending
+      if (verificationResult == null ||
+          verificationResult['status'] != 'success') {
+        for (int attempt = 1; attempt <= 3; attempt++) {
+          await Future.delayed(Duration(seconds: 2 * attempt));
+          debugPrint('Retrying verification (attempt $attempt)...');
+          verificationResult = await _verifyPaymentWithFlutterwaveByTxRef(
+            paymentData['txRef'],
+          );
+          if (verificationResult != null &&
+              verificationResult['status'] == 'success') {
+            break;
+          }
+        }
+      }
 
       // Close verification dialog
       if (context.mounted) {
@@ -701,7 +729,7 @@ class AlternativePaymentService {
         if (context.mounted) {
           _showPaymentError(
             context,
-            'Payment verification failed. Please contact support if you were charged.',
+            'Payment verification failed. If you were charged, please contact support with your reference: ${paymentData['txRef']}.',
           );
         }
       }
@@ -780,6 +808,55 @@ class AlternativePaymentService {
       }
     } catch (e) {
       debugPrint('Error verifying payment: $e');
+      return null;
+    }
+  }
+
+  /// Verify payment using tx_ref (verify_by_reference)
+  static Future<Map<String, dynamic>?> _verifyPaymentWithFlutterwaveByTxRef(
+    String txRef,
+  ) async {
+    try {
+      final apiKey = _flutterwaveSecretKey;
+      if (apiKey.contains('missing_key') ||
+          apiKey.contains('invalid_key_format')) {
+        debugPrint('Cannot verify payment by tx_ref: API key not configured');
+        return null;
+      }
+
+      final url = Uri.parse(
+        'https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref=$txRef',
+      );
+      final headers = {
+        'Authorization': 'Bearer $apiKey',
+        'Content-Type': 'application/json',
+      };
+
+      debugPrint('Verifying payment by reference: $txRef');
+
+      final response = await http.get(url, headers: headers);
+
+      debugPrint('Verify_by_reference status: ${response.statusCode}');
+      debugPrint('Verify_by_reference body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['status'] == 'success') {
+          final transactionData = data['data'];
+          // Ensure the charge actually succeeded
+          if (transactionData['status'] == 'successful') {
+            return {'status': 'success', 'data': transactionData};
+          }
+          return {'status': 'failed', 'data': transactionData};
+        }
+        debugPrint('Verify_by_reference API error: ${data['message']}');
+        return null;
+      }
+
+      debugPrint('Verify_by_reference HTTP error: ${response.statusCode}');
+      return null;
+    } catch (e) {
+      debugPrint('Error verifying by tx_ref: $e');
       return null;
     }
   }
