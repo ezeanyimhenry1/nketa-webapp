@@ -163,7 +163,7 @@ class NotificationService {
         debugPrint(
           'All proverbs have been shown. Stopping daily notifications to prevent repetition.',
         );
-        await cancelAllNotifications();
+        restartProverbCycle(time);
         return;
       }
 
