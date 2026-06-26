@@ -7,16 +7,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:gal/gal.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:the_igbo_bible/services/openai_service.dart';
-import 'package:the_igbo_bible/data/image_templates.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/services/usage_service.dart';
-import 'package:the_igbo_bible/screens/profile_screen.dart';
-import 'package:the_igbo_bible/screens/subscription_screen.dart';
+import 'package:nketa/services/openai_service.dart';
+import 'package:nketa/data/image_templates.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/services/usage_service.dart';
+import 'package:nketa/screens/profile_screen.dart';
+import 'package:nketa/screens/subscription_screen.dart';
 
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
@@ -676,7 +676,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                 ),
                 SizedBox(width: AppSpacing.xs),
                 AutoSizeText(
-                  'The Igbo Bible App',
+                  'Nketa',
                   style: TextStyle(
                     color: template.textColor.withAlpha((0.8 * 255).toInt()),
                     fontSize: 10.sp,
@@ -724,7 +724,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
       final file = File(imagePath);
       await file.writeAsBytes(imageData);
       try {
-        await Gal.putImage(file.path, album: 'The Igbo Bible');
+        await Gal.putImage(file.path, album: 'Nketa');
         await usageService.incrementImage();
       } on GalException catch (e) {
         if (!mounted) return;
@@ -819,14 +819,14 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
 
       if (Platform.isAndroid) {
         // Save to gallery to ensure TikTok can access it
-        await Gal.putImage(file.path, album: 'The Igbo Bible');
+        await Gal.putImage(file.path, album: 'Nketa');
         // Use share_plus to open the share sheet
         await SharePlus.instance.share(
           ShareParams(
             files: [XFile(file.path, mimeType: 'image/png')],
             text:
                 'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
-            subject: 'Nsibidi Translation from The Igbo Bible',
+            subject: 'Nsibidi Translation from Nketa',
           ),
         );
       } else {
@@ -867,7 +867,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
         files: [XFile(file.path, mimeType: 'image/png')],
         text:
             'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
-        subject: 'Nsibidi Translation from The Igbo Bible',
+        subject: 'Nsibidi Translation from Nketa',
       ),
     );
   }

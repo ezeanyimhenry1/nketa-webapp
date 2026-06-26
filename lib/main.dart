@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:the_igbo_bible/screens/main_screen.dart';
+import 'package:nketa/screens/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
-import 'package:the_igbo_bible/theme/app_theme.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/screens/splash_screen.dart';
+import 'package:nketa/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:the_igbo_bible/services/notification_service.dart';
+import 'package:nketa/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
 import 'dart:async';
-import 'package:the_igbo_bible/services/network_status_provider.dart';
-import 'package:the_igbo_bible/widgets/global_network_banner.dart';
+import 'package:nketa/services/network_status_provider.dart';
+import 'package:nketa/widgets/global_network_banner.dart';
 import 'firebase_options.dart';
 
 // Global navigator key for handling notification navigation
@@ -215,7 +216,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          title: 'The Igbo Bible',
+          title: AppStrings.appTitle,
           theme: AppTheme.lightTheme,
           navigatorKey: navigatorKey,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,

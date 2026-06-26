@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
-import 'package:the_igbo_bible/screens/word_detail_screen.dart';
-import 'package:the_igbo_bible/services/translation_service.dart';
-import 'package:the_igbo_bible/widgets/custom_container.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/screens/word_detail_screen.dart';
+import 'package:nketa/services/translation_service.dart';
+import 'package:nketa/widgets/custom_container.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});

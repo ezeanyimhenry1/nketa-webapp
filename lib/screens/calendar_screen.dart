@@ -1,13 +1,13 @@
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/widgets/custom_container.dart';
+import 'package:nketa/widgets/custom_container.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:intl/intl.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/services/event_service.dart';
-import 'package:the_igbo_bible/models/igbo_event.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:nketa/services/event_service.dart';
+import 'package:nketa/models/igbo_event.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});

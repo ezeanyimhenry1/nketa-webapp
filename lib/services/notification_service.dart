@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tzdata;
 import 'dart:io' show Platform;
-import 'package:the_igbo_bible/services/event_service.dart';
-import 'package:the_igbo_bible/services/proverbs_service.dart';
+import 'package:nketa/services/event_service.dart';
+import 'package:nketa/services/proverbs_service.dart';
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
@@ -350,7 +350,7 @@ class NotificationService {
       await _notificationsPlugin.show(
         999,
         'Test Notification',
-        'This is a test notification from The Igbo Bible App',
+        'This is a test notification from Nketa',
         notificationDetails,
       );
 

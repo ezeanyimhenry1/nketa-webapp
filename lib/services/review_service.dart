@@ -129,7 +129,7 @@ class ReviewService {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Your feedback helps us improve the Igbo Bible app and reach more people who want to understand Igbo culture and cosmology.',
+                'Your feedback helps us improve the Nketa app and reach more people who want to understand Igbo culture and cosmology.',
                 style: TextStyle(fontSize: 16),
               ),
               SizedBox(height: 16),

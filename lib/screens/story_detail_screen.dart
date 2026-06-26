@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/models/story_item.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/models/story_item.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';

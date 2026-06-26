@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
-import 'package:the_igbo_bible/services/api_service.dart';
+import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/services/api_service.dart';
 
 class TranslationService extends ApiService {
   TranslationService()

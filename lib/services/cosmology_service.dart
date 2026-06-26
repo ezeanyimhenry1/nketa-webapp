@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:the_igbo_bible/models/cosmology_item.dart';
+import 'package:nketa/models/cosmology_item.dart';
 
 class CosmologyService {
   // Replace with your actual GitHub raw URL

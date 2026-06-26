@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/services/history_timeline_service.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/services/history_timeline_service.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
 
 class HistoryTimelineScreen extends StatefulWidget {
   const HistoryTimelineScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:the_igbo_bible/services/api_service.dart';
+import 'package:nketa/services/api_service.dart';
 
 class OpenAIService extends ApiService {
   OpenAIService()

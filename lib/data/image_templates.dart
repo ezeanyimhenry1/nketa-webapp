@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/models/image_template.dart';
+import 'package:nketa/models/image_template.dart';
 
 final List<ImageTemplate> imageTemplates = [
   ImageTemplate(

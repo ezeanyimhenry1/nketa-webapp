@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
+import 'package:nketa/models/translation_result.dart';
 
 class SavedWordsService {
   static final SavedWordsService _instance = SavedWordsService._internal();

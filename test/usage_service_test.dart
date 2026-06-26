@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:the_igbo_bible/services/usage_service.dart';
+import 'package:nketa/services/usage_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {

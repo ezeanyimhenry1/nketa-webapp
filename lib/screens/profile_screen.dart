@@ -6,8 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'dart:io';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/screens/subscription_screen.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/screens/subscription_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -29,7 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (Platform.isIOS) {
       return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
     } else {
-      return dotenv.env['SUBSCRIPTION_ID'] ?? 'the_igbo_bible';
+      return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
     }
   }
 

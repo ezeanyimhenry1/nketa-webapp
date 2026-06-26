@@ -1,25 +1,25 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/screens/calendar_screen.dart';
-import 'package:the_igbo_bible/screens/learn_screen.dart';
-import 'package:the_igbo_bible/screens/translate_screen.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
-import 'package:the_igbo_bible/theme/app_strings.dart';
+import 'package:nketa/screens/calendar_screen.dart';
+import 'package:nketa/screens/learn_screen.dart';
+import 'package:nketa/screens/translate_screen.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
+import 'package:nketa/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/screens/saved_words_screen.dart';
-import 'package:the_igbo_bible/screens/browse_screen.dart';
-import 'package:the_igbo_bible/screens/settings_screen.dart';
-import 'package:the_igbo_bible/screens/profile_screen.dart';
+import 'package:nketa/screens/saved_words_screen.dart';
+import 'package:nketa/screens/browse_screen.dart';
+import 'package:nketa/screens/settings_screen.dart';
+import 'package:nketa/screens/profile_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:the_igbo_bible/screens/history_timeline_screen.dart';
-import 'package:the_igbo_bible/screens/cosmology_screen.dart';
-import 'package:the_igbo_bible/screens/content_hub_screen.dart';
-import 'package:the_igbo_bible/services/usage_service.dart';
-import 'package:the_igbo_bible/services/review_service.dart';
-import 'package:the_igbo_bible/screens/subscription_screen.dart';
+import 'package:nketa/screens/history_timeline_screen.dart';
+import 'package:nketa/screens/cosmology_screen.dart';
+import 'package:nketa/screens/content_hub_screen.dart';
+import 'package:nketa/services/usage_service.dart';
+import 'package:nketa/services/review_service.dart';
+import 'package:nketa/screens/subscription_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:the_igbo_bible/models/translation_result.dart';
+import 'package:nketa/models/translation_result.dart';
 import 'package:diacritic/diacritic.dart';
 
 class IgboNsibidiNamesService {

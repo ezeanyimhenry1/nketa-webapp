@@ -1,4 +1,4 @@
-package com.example.the_igbo_bible
+package com.henryezeanyim.nketa
 
 import android.content.ContentValues
 import android.content.Context
@@ -13,8 +13,8 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.OutputStream
 
-class MainActivity: FlutterActivity() {
-    private val CHANNEL = "the_igbo_bible/gallery"
+class MainActivity : FlutterActivity() {
+    private val CHANNEL = "nketa/gallery"
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)

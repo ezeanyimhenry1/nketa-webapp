@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:the_igbo_bible/services/notification_service.dart';
-import 'package:the_igbo_bible/services/usage_service.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
-import 'package:the_igbo_bible/theme/app_strings.dart';
+import 'package:nketa/services/notification_service.dart';
+import 'package:nketa/services/usage_service.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
+import 'package:nketa/theme/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/screens/support_screen.dart';
-import 'package:the_igbo_bible/screens/profile_screen.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/screens/support_screen.dart';
+import 'package:nketa/screens/profile_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -233,7 +233,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _openPrivacyPolicy() async {
-    const url = 'https://theigbobible.netlify.app/privacy';
+    const url = 'https://nketa.netlify.app/privacy';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -241,7 +241,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _openTermsOfUse() async {
-    const url = 'https://theigbobible.netlify.app/terms';
+    const url = 'https://nketa.netlify.app/terms';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -252,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final email = Uri(
       scheme: 'mailto',
       path: 'theigbobible@gmail.com',
-      query: 'subject=The Igbo Bible App Support',
+      query: 'subject=Nketa App Support',
     );
     if (await canLaunchUrl(email)) {
       await launchUrl(email);

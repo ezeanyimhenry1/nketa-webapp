@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
-import 'package:the_igbo_bible/widgets/custom_container.dart';
+import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/widgets/custom_container.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
-import 'package:the_igbo_bible/theme/app_strings.dart';
+import 'package:nketa/theme/app_spacing.dart';
+import 'package:nketa/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/services/saved_words_service.dart';
-import 'package:the_igbo_bible/services/translation_service.dart';
-import 'package:the_igbo_bible/screens/nsibidi_image_page.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:nketa/services/saved_words_service.dart';
+import 'package:nketa/services/translation_service.dart';
+import 'package:nketa/screens/nsibidi_image_page.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
 
 class WordDetailScreen extends StatefulWidget {
   final TranslationResult word;

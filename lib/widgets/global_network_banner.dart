@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:the_igbo_bible/services/network_status_provider.dart';
+import 'package:nketa/services/network_status_provider.dart';
 
 class GlobalNetworkBanner extends StatefulWidget {
   final Widget child;

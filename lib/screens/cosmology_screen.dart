@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/services/cosmology_service.dart';
-import 'package:the_igbo_bible/models/cosmology_item.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/services/cosmology_service.dart';
+import 'package:nketa/models/cosmology_item.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class CosmologyScreen extends StatefulWidget {

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/services/story_service.dart';
-import 'package:the_igbo_bible/models/story_item.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/services/story_service.dart';
+import 'package:nketa/models/story_item.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:the_igbo_bible/screens/story_detail_screen.dart';
+import 'package:nketa/screens/story_detail_screen.dart';
 
 class ContentHubScreen extends StatefulWidget {
   const ContentHubScreen({super.key});

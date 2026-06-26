@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
+import 'package:nketa/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';

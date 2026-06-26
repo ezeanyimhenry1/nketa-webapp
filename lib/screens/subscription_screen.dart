@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:io';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/services/alternative_payment_service.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/services/alternative_payment_service.dart';
 
 class SubscriptionScreen extends StatefulWidget {
   const SubscriptionScreen({super.key});
@@ -18,7 +18,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     if (Platform.isIOS) {
       return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
     } else {
-      return dotenv.env['SUBSCRIPTION_ID'] ?? 'the_igbo_bible';
+      return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
     }
   }
 

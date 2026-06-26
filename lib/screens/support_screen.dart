@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
+import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:io';
@@ -56,7 +56,7 @@ class _SupportScreenState extends State<SupportScreen> {
   }
 
   void _setDefaultSubject() {
-    _subjectController.text = 'Support Request - The Igbo Bible App';
+    _subjectController.text = 'Support Request - Nketa App';
   }
 
   Future<void> _sendEmail() async {

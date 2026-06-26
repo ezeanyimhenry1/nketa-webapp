@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/models/translation_result.dart';
-import 'package:the_igbo_bible/services/saved_words_service.dart';
+import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/services/saved_words_service.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:the_igbo_bible/data/image_templates.dart';
-import 'package:the_igbo_bible/screens/word_detail_screen.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
+import 'package:nketa/data/image_templates.dart';
+import 'package:nketa/screens/word_detail_screen.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
 
 class SavedWordsScreen extends StatefulWidget {
   const SavedWordsScreen({super.key});

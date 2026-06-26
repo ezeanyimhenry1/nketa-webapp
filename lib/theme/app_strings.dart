@@ -1,5 +1,5 @@
 class AppStrings {
-  static const String appTitle = 'The Igbo Bible';
+  static const String appTitle = 'Nketa';
   static const String translateScreenTitle = 'Name to Nsibidi';
   static const String translateScreenSubtitle =
       'Translate your igbo name to ancient Igbo symbols';

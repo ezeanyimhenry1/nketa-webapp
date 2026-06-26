@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:the_igbo_bible/screens/payment_webview_screen.dart';
+import 'package:nketa/screens/payment_webview_screen.dart';
 
 class AlternativePaymentService {
   // Flutterwave configuration
@@ -387,7 +387,7 @@ class AlternativePaymentService {
 
       final body = {
         'amount': pricing['amount'],
-        'name': 'Igbo Bible Premium - ${pricing['name']}',
+        'name': 'Nketa Premium - ${pricing['name']}',
         'interval': 'monthly',
         'currency': pricing['currency'],
         'duration': 12, // 12 months maximum
@@ -582,15 +582,15 @@ class AlternativePaymentService {
         'tx_ref': txRef,
         'amount': pricing['amount'],
         'currency': pricing['currency'],
-        'redirect_url': 'https://theigbobible.netlify.app/payment-success',
+        'redirect_url': 'https://nketa.netlify.app/payment-success',
         'payment_options': 'card,mobilemoney,ussd,banktransfer',
         // Attach the recurring payment plan so Flutterwave can validate the request
         'payment_plan': planId,
         'customer': {'email': customerEmail, 'name': customerName},
         'customizations': {
-          'title': 'Igbo Bible Premium Subscription',
+          'title': 'Nketa Premium Subscription',
           'description': 'Monthly premium subscription for unlimited access',
-          'logo': 'https://theigbobible.netlify.app/logo.png',
+          'logo': 'https://nketa.netlify.app/logo.png',
         },
         'meta': {'payment_plan_id': planId, 'subscription_type': 'monthly'},
       };
@@ -1043,7 +1043,7 @@ class AlternativePaymentService {
   /// Open web-based subscription page
   static Future<void> openWebSubscription(BuildContext context) async {
     const url =
-        'https://theigbobible.netlify.app/subscribe'; // Replace with your actual URL
+        'https://nketa.netlify.app/subscribe'; // Replace with your actual URL
 
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {

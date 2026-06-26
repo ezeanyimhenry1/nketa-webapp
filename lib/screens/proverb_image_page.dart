@@ -8,11 +8,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gal/gal.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:the_igbo_bible/data/image_templates.dart';
-import 'package:the_igbo_bible/theme/app_spacing.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
-import 'package:the_igbo_bible/widgets/shimmer_loader.dart';
-import 'package:the_igbo_bible/services/usage_service.dart';
+import 'package:nketa/data/image_templates.dart';
+import 'package:nketa/theme/app_spacing.dart';
+import 'package:nketa/theme/app_theme.dart';
+import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/services/usage_service.dart';
 
 class ProverbImagePage extends StatefulWidget {
   final String igboText;
@@ -435,7 +435,7 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
                 ),
                 SizedBox(width: AppSpacing.xs),
                 AutoSizeText(
-                  'The Igbo Bible App',
+                  'Nketa',
                   style: TextStyle(
                     color: template.textColor.withAlpha((0.8 * 255).toInt()),
                     fontSize: 10.sp,
@@ -483,7 +483,7 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
       final file = File(imagePath);
       await file.writeAsBytes(imageData);
       try {
-        await Gal.putImage(file.path, album: 'The Igbo Bible');
+        await Gal.putImage(file.path, album: 'Nketa');
         await usageService.incrementImage();
       } on GalException catch (e) {
         if (!mounted) return;
@@ -575,7 +575,7 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
     await SharePlus.instance.share(
       ShareParams(
         files: [XFile(file.path, mimeType: 'image/png')],
-        text: 'Check out today\'s proverb on The Igbo Bible App',
+        text: 'Check out today\'s proverb on Nketa',
         subject: 'Proverb of the Day',
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:the_igbo_bible/theme/app_strings.dart';
+import 'package:nketa/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:the_igbo_bible/theme/app_theme.dart';
+import 'package:nketa/theme/app_theme.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
