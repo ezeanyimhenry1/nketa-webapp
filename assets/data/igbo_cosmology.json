@@ -1,0 +1,72 @@
+[
+  {
+    "section": "Supreme Being",
+    "name": "Chukwu",
+    "description": "Chukwu is the supreme being, the creator of the universe, and the source of all life and power. All other deities (Alusi) derive their authority from Chukwu.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Cosmic Realms",
+    "name": "Uwa",
+    "description": "The Igbo universe is divided into the physical world (Uwa mmadu), the spirit world (Uwa mmuo), and the world of the ancestors (Ala mmuo). These realms are interconnected, and life is seen as a cycle between them.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Earth Deity",
+    "name": "Ala",
+    "description": "Ala is the earth goddess, guardian of morality, fertility, and the ancestors. She is one of the most important deities in Igbo cosmology and is closely tied to the land and community.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Solar Deity",
+    "name": "Anyanwu",
+    "description": "Anyanwu is the sun god, representing light, warmth, and divine vision. Anyanwu watches over the living world and is often associated with clarity and truth.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Personal Deity",
+    "name": "Chi",
+    "description": "Chi is the personal spiritual guardian assigned to each person at birth. It guides destiny and is invoked in proverbs such as 'Onye kwe, chi ya ekwe.'",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Deities",
+    "name": "Amadioha",
+    "description": "Amadioha is the god of thunder and justice, often associated with oaths, truth, and retribution against wrongdoing.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Deities",
+    "name": "Ikenga",
+    "description": "Ikenga is the horned deity of achievement, strength, and personal success. It is widely represented in Igbo art and ritual.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Water Spirits",
+    "name": "Mami Wata",
+    "description": "Mami Wata is a water spirit associated with beauty, wealth, and the mysteries of rivers and streams in Igbo folklore.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Ancestral World",
+    "name": "Ndị Ichie",
+    "description": "Ndị Ichie are the venerated ancestors who remain spiritually present in the community and are honored through libations, festivals, and masquerades.",
+    "image": null,
+    "audio": null
+  },
+  {
+    "section": "Masquerade",
+    "name": "Mmuo",
+    "description": "Mmuo represent spirits of the ancestors during festivals. Masquerades embody spiritual presence and community order in Igbo tradition.",
+    "image": null,
+    "audio": null
+  }
+]

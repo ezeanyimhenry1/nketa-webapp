@@ -1,0 +1,2472 @@
+[
+  {
+    "id": "1",
+    "word": "Chinedu",
+    "igboWord": "Chinedu",
+    "nsibidi": "𞲠𞲡𞲢",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God leads"
+        ],
+        "nsibidi": "𞲠𞲡𞲢"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "2",
+    "word": "Chidi",
+    "igboWord": "Chidi",
+    "nsibidi": "𞲷",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God exists"
+        ],
+        "nsibidi": "𞲷"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "3",
+    "word": "Chiamaka",
+    "igboWord": "Chiamaka",
+    "nsibidi": "𞲠𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is beautiful"
+        ],
+        "nsibidi": "𞲠𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "4",
+    "word": "Chinonso",
+    "igboWord": "Chinonso",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is near"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "5",
+    "word": "Chukwudi",
+    "igboWord": "Chukwudi",
+    "nsibidi": "𞲰𞲱𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God exists"
+        ],
+        "nsibidi": "𞲰𞲱𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "6",
+    "word": "Chukwuma",
+    "igboWord": "Chukwuma",
+    "nsibidi": "𞲰𞲱𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God knows"
+        ],
+        "nsibidi": "𞲰𞲱𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "7",
+    "word": "Chibueze",
+    "igboWord": "Chibueze",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is king"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "8",
+    "word": "Chigozie",
+    "igboWord": "Chigozie",
+    "nsibidi": "𞲠𞲣𞲤𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God has blessed"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "9",
+    "word": "Chisom",
+    "igboWord": "Chisom",
+    "nsibidi": "𞲠𞲻",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God follows me"
+        ],
+        "nsibidi": "𞲠𞲻"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "10",
+    "word": "Chinwe",
+    "igboWord": "Chinwe",
+    "nsibidi": "𞲠𞲣𞳇",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God owns"
+        ],
+        "nsibidi": "𞲠𞲣𞳇"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "11",
+    "word": "Chinweike",
+    "igboWord": "Chinweike",
+    "nsibidi": "𞲠𞲣𞳇𞲵",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God owns strength"
+        ],
+        "nsibidi": "𞲠𞲣𞳇𞲵"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "12",
+    "word": "Chizoba",
+    "igboWord": "Chizoba",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God saves"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "13",
+    "word": "Chizitere",
+    "igboWord": "Chizitere",
+    "nsibidi": "𞲠𞲤𞲥𞲦𞲧𞲨",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God sent"
+        ],
+        "nsibidi": "𞲠𞲤𞲥𞲦𞲧𞲨"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "14",
+    "word": "Ngozi",
+    "igboWord": "Ngozi",
+    "nsibidi": "𞲶",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Blessing"
+        ],
+        "nsibidi": "𞲶"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "15",
+    "word": "Amaka",
+    "igboWord": "Amaka",
+    "nsibidi": "𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Beauty"
+        ],
+        "nsibidi": "𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "16",
+    "word": "Amarachi",
+    "igboWord": "Amarachi",
+    "nsibidi": "𞲥𞲢𞲣𞲤𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's grace"
+        ],
+        "nsibidi": "𞲥𞲢𞲣𞲤𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "17",
+    "word": "Adanna",
+    "igboWord": "Adanna",
+    "nsibidi": "𞲲𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's daughter"
+        ],
+        "nsibidi": "𞲲𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "18",
+    "word": "Adaku",
+    "igboWord": "Adaku",
+    "nsibidi": "𞲲𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Daughter of wealth"
+        ],
+        "nsibidi": "𞲲𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "19",
+    "word": "Ifeoma",
+    "igboWord": "Ifeoma",
+    "nsibidi": "𞲫𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good thing"
+        ],
+        "nsibidi": "𞲫𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "20",
+    "word": "Ifunanya",
+    "igboWord": "Ifunanya",
+    "nsibidi": "𞲠𞲡𞲢𞲨𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Love"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲨𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "21",
+    "word": "Obinna",
+    "igboWord": "Obinna",
+    "nsibidi": "𞲧𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's heart"
+        ],
+        "nsibidi": "𞲧𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "22",
+    "word": "Obiora",
+    "igboWord": "Obiora",
+    "nsibidi": "𞲧𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Heart of the people"
+        ],
+        "nsibidi": "𞲧𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "23",
+    "word": "Obioma",
+    "igboWord": "Obioma",
+    "nsibidi": "𞲧𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good heart"
+        ],
+        "nsibidi": "𞲧𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "24",
+    "word": "Obiageli",
+    "igboWord": "Obiageli",
+    "nsibidi": "𞲧𞲣𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "The time has come to enjoy wealth"
+        ],
+        "nsibidi": "𞲧𞲣𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "25",
+    "word": "Ogechi",
+    "igboWord": "Ogechi",
+    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's time"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "26",
+    "word": "Uchenna",
+    "igboWord": "Uchenna",
+    "nsibidi": "𞲳𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's thought"
+        ],
+        "nsibidi": "𞲳𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "27",
+    "word": "Uchechi",
+    "igboWord": "Uchechi",
+    "nsibidi": "𞲳𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's will"
+        ],
+        "nsibidi": "𞲳𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "28",
+    "word": "Ugochukwu",
+    "igboWord": "Ugochukwu",
+    "nsibidi": "𞲠𞲣𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Eagle of God"
+        ],
+        "nsibidi": "𞲠𞲣𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "29",
+    "word": "Ugonna",
+    "igboWord": "Ugonna",
+    "nsibidi": "𞲠𞲣𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Eagle of the father"
+        ],
+        "nsibidi": "𞲠𞲣𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "30",
+    "word": "Ebuka",
+    "igboWord": "Ebuka",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is great"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "31",
+    "word": "Ebere",
+    "igboWord": "Ebere",
+    "nsibidi": "𞲴",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Mercy"
+        ],
+        "nsibidi": "𞲴"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "32",
+    "word": "Echezona",
+    "igboWord": "Echezona",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲨",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Do not forget"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲨"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "33",
+    "word": "Emeka",
+    "igboWord": "Emeka",
+    "nsibidi": "𞲩𞲪",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God has done great"
+        ],
+        "nsibidi": "𞲩𞲪"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "34",
+    "word": "Ikenna",
+    "igboWord": "Ikenna",
+    "nsibidi": "𞲵𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's power"
+        ],
+        "nsibidi": "𞲵𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "35",
+    "word": "Ikechukwu",
+    "igboWord": "Ikechukwu",
+    "nsibidi": "𞲵𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's power"
+        ],
+        "nsibidi": "𞲵𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "36",
+    "word": "Kelechi",
+    "igboWord": "Kelechi",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Thank God"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "37",
+    "word": "Kosisochukwu",
+    "igboWord": "Kosisochukwu",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "As it pleases God"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "38",
+    "word": "Nnamdi",
+    "igboWord": "Nnamdi",
+    "nsibidi": "𞲸",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "My father lives"
+        ],
+        "nsibidi": "𞲸"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "39",
+    "word": "Nnenna",
+    "igboWord": "Nnenna",
+    "nsibidi": "𞲮𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's mother"
+        ],
+        "nsibidi": "𞲮𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "40",
+    "word": "Nkiruka",
+    "igboWord": "Nkiruka",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "The best is still to come"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "41",
+    "word": "Nkechi",
+    "igboWord": "Nkechi",
+    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's gift"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "42",
+    "word": "Somtochukwu",
+    "igboWord": "Somtochukwu",
+    "nsibidi": "𞲻𞲼",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Join me in praising God"
+        ],
+        "nsibidi": "𞲻𞲼"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "43",
+    "word": "Tochukwu",
+    "igboWord": "Tochukwu",
+    "nsibidi": "𞲼",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Praise God"
+        ],
+        "nsibidi": "𞲼"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "44",
+    "word": "Jideofor",
+    "igboWord": "Jideofor",
+    "nsibidi": "𞳃𞳄",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Hold firm"
+        ],
+        "nsibidi": "𞳃𞳄"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "45",
+    "word": "Jidenna",
+    "igboWord": "Jidenna",
+    "nsibidi": "𞳃𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Hold the father"
+        ],
+        "nsibidi": "𞳃𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "46",
+    "word": "Osinachi",
+    "igboWord": "Osinachi",
+    "nsibidi": "𞲠𞲡𞲢𞲨𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "From God"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲨𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "47",
+    "word": "Onyinyechi",
+    "igboWord": "Onyinyechi",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's gift"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "48",
+    "word": "Onyeka",
+    "igboWord": "Onyeka",
+    "nsibidi": "𞲾𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Who is greater than God"
+        ],
+        "nsibidi": "𞲾𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "49",
+    "word": "Oluchi",
+    "igboWord": "Oluchi",
+    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's work"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "50",
+    "word": "Oluoma",
+    "igboWord": "Oluoma",
+    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good work"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "51",
+    "word": "Chioma",
+    "igboWord": "Chioma",
+    "nsibidi": "𞲺",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good God"
+        ],
+        "nsibidi": "𞲺"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "52",
+    "word": "Chinecherem",
+    "igboWord": "Chinecherem",
+    "nsibidi": "𞲠𞲡𞲥𞲦𞲧𞲨𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God thinks of me"
+        ],
+        "nsibidi": "𞲠𞲡𞲥𞲦𞲧𞲨𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "53",
+    "word": "Chineze",
+    "igboWord": "Chineze",
+    "nsibidi": "𞲠𞲡𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God saves"
+        ],
+        "nsibidi": "𞲠𞲡𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "54",
+    "word": "Chidimma",
+    "igboWord": "Chidimma",
+    "nsibidi": "𞲷𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is good"
+        ],
+        "nsibidi": "𞲷𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "55",
+    "word": "Chidiebere",
+    "igboWord": "Chidiebere",
+    "nsibidi": "𞲷𞲴",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is merciful"
+        ],
+        "nsibidi": "𞲷𞲴"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "56",
+    "word": "Chidozie",
+    "igboWord": "Chidozie",
+    "nsibidi": "𞲠𞲣𞲤𞲤𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God has repaired"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲤𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "57",
+    "word": "Chigoziem",
+    "igboWord": "Chigoziem",
+    "nsibidi": "𞲠𞲣𞲤𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God has blessed me"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "58",
+    "word": "Chika",
+    "igboWord": "Chika",
+    "nsibidi": "𞲠𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is supreme"
+        ],
+        "nsibidi": "𞲠𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "59",
+    "word": "Chikamso",
+    "igboWord": "Chikamso",
+    "nsibidi": "𞲠𞲣𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "It is only God I follow"
+        ],
+        "nsibidi": "𞲠𞲣𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "60",
+    "word": "Chikodi",
+    "igboWord": "Chikodi",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "It is in God's hand"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "61",
+    "word": "Chinaza",
+    "igboWord": "Chinaza",
+    "nsibidi": "𞲠𞲨𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God answers"
+        ],
+        "nsibidi": "𞲠𞲨𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "62",
+    "word": "Chisara",
+    "igboWord": "Chisara",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God answers prayer"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "63",
+    "word": "Chizaram",
+    "igboWord": "Chizaram",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God answered me"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "64",
+    "word": "Ekwi",
+    "igboWord": "Ekwi",
+    "nsibidi": "𞲠𞲡𞲢𞲣",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Speak"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "65",
+    "word": "Ekwueme",
+    "igboWord": "Ekwueme",
+    "nsibidi": "𞲠𞲡𞲱𞲩𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "One who does as he says"
+        ],
+        "nsibidi": "𞲠𞲡𞲱𞲩𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "66",
+    "word": "Ezinne",
+    "igboWord": "Ezinne",
+    "nsibidi": "𞲠𞲤𞲮",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good mother"
+        ],
+        "nsibidi": "𞲠𞲤𞲮"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "67",
+    "word": "Ifeyinwa",
+    "igboWord": "Ifeyinwa",
+    "nsibidi": "𞲫𞲣𞲤𞲿",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Nothing compares to a child"
+        ],
+        "nsibidi": "𞲫𞲣𞲤𞲿"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "68",
+    "word": "Ijeoma",
+    "igboWord": "Ijeoma",
+    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good journey"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "69",
+    "word": "Ikemefuna",
+    "igboWord": "Ikemefuna",
+    "nsibidi": "𞲵𞲣𞲤𞲥𞲦𞲨",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Let my strength not be in vain"
+        ],
+        "nsibidi": "𞲵𞲣𞲤𞲥𞲦𞲨"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "70",
+    "word": "Lotanna",
+    "igboWord": "Lotanna",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Remember the father"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "71",
+    "word": "Mmesoma",
+    "igboWord": "Mmesoma",
+    "nsibidi": "𞲠𞲡𞲢𞲻𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good deed"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲻𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "72",
+    "word": "Ngozika",
+    "igboWord": "Ngozika",
+    "nsibidi": "𞲶𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Blessing is the greatest"
+        ],
+        "nsibidi": "𞲶𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "73",
+    "word": "Nkeiruka",
+    "igboWord": "Nkeiruka",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Future is greater"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "74",
+    "word": "Nneka",
+    "igboWord": "Nneka",
+    "nsibidi": "𞲮𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Mother is supreme"
+        ],
+        "nsibidi": "𞲮𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "75",
+    "word": "Obi",
+    "igboWord": "Obi",
+    "nsibidi": "𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Heart"
+        ],
+        "nsibidi": "𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "76",
+    "word": "Ogechukwu",
+    "igboWord": "Ogechukwu",
+    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's time"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "77",
+    "word": "Okwudili",
+    "igboWord": "Okwudili",
+    "nsibidi": "𞲠𞲡𞲱𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Strong pillar"
+        ],
+        "nsibidi": "𞲠𞲡𞲱𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "78",
+    "word": "Olaedo",
+    "igboWord": "Olaedo",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Gold/wealth"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "79",
+    "word": "Olisa",
+    "igboWord": "Olisa",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "80",
+    "word": "Onyekachi",
+    "igboWord": "Onyekachi",
+    "nsibidi": "𞲾𞲤𞲥𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Who is greater than God"
+        ],
+        "nsibidi": "𞲾𞲤𞲥𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "81",
+    "word": "Onyekwere",
+    "igboWord": "Onyekwere",
+    "nsibidi": "𞲾𞲤𞳇𞲧𞲨",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Who believes in God"
+        ],
+        "nsibidi": "𞲾𞲤𞳇𞲧𞲨"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "82",
+    "word": "Onyinye",
+    "igboWord": "Onyinye",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Gift"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "83",
+    "word": "Ozioma",
+    "igboWord": "Ozioma",
+    "nsibidi": "𞲠𞲤𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good news"
+        ],
+        "nsibidi": "𞲠𞲤𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "84",
+    "word": "Oziomachukwu",
+    "igboWord": "Oziomachukwu",
+    "nsibidi": "𞲠𞲤𞲬𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good news from God"
+        ],
+        "nsibidi": "𞲠𞲤𞲬𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "85",
+    "word": "Ugochi",
+    "igboWord": "Ugochi",
+    "nsibidi": "𞲠𞲣𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Eagle of God"
+        ],
+        "nsibidi": "𞲠𞲣𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "86",
+    "word": "Ugomma",
+    "igboWord": "Ugomma",
+    "nsibidi": "𞲠𞲣𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Beautiful eagle"
+        ],
+        "nsibidi": "𞲠𞲣𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "87",
+    "word": "Uzoamaka",
+    "igboWord": "Uzoamaka",
+    "nsibidi": "𞲠𞲡𞲢𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good road"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "88",
+    "word": "Zinachidi",
+    "igboWord": "Zinachidi",
+    "nsibidi": "𞲤𞲨𞲷",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Show that God exists"
+        ],
+        "nsibidi": "𞲤𞲨𞲷"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "89",
+    "word": "Adaeze",
+    "igboWord": "Adaeze",
+    "nsibidi": "𞲲𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Princess"
+        ],
+        "nsibidi": "𞲲𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "90",
+    "word": "Adimchi",
+    "igboWord": "Adimchi",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲠",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "My direction"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲠"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "91",
+    "word": "Akunna",
+    "igboWord": "Akunna",
+    "nsibidi": "𞲠𞲡𞲢𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's wealth"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "92",
+    "word": "Amarachukwu",
+    "igboWord": "Amarachukwu",
+    "nsibidi": "𞲥𞲢𞲣𞲤𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's grace"
+        ],
+        "nsibidi": "𞲥𞲢𞲣𞲤𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "93",
+    "word": "Anulika",
+    "igboWord": "Anulika",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's joy"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "94",
+    "word": "Buchi",
+    "igboWord": "Buchi",
+    "nsibidi": "𞳀",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Belonging to God"
+        ],
+        "nsibidi": "𞳀"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "95",
+    "word": "Chidubem",
+    "igboWord": "Chidubem",
+    "nsibidi": "𞲠𞲢𞲥𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God is my guide"
+        ],
+        "nsibidi": "𞲠𞲢𞲥𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "96",
+    "word": "Chigozirim",
+    "igboWord": "Chigozirim",
+    "nsibidi": "𞲠𞲣𞲤𞲧𞲨𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God bless my journey"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲧𞲨𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "97",
+    "word": "Chimamanda",
+    "igboWord": "Chimamanda",
+    "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "My God will not fail"
+        ],
+        "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "98",
+    "word": "Chimaraoke",
+    "igboWord": "Chimaraoke",
+    "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God knows why"
+        ],
+        "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "99",
+    "word": "Chinagorom",
+    "igboWord": "Chinagorom",
+    "nsibidi": "𞲠𞲨𞲣𞲧𞲨𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God will avenge me"
+        ],
+        "nsibidi": "𞲠𞲨𞲣𞲧𞲨𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "100",
+    "word": "Chinedum",
+    "igboWord": "Chinedum",
+    "nsibidi": "𞲠𞲡𞲢𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God leads me"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "101",
+    "word": "Chinwendu",
+    "igboWord": "Chinwendu",
+    "nsibidi": "𞲠𞲣𞳇𞲦𞲢",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God owns life"
+        ],
+        "nsibidi": "𞲠𞲣𞳇𞲦𞲢"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "102",
+    "word": "Chizurum",
+    "igboWord": "Chizurum",
+    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God rebuilds me"
+        ],
+        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "103",
+    "word": "Ebelechukwu",
+    "igboWord": "Ebelechukwu",
+    "nsibidi": "𞲽𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's mercy"
+        ],
+        "nsibidi": "𞲽𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "104",
+    "word": "Ekene",
+    "igboWord": "Ekene",
+    "nsibidi": "𞲠𞲯",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Praise"
+        ],
+        "nsibidi": "𞲠𞲯"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "105",
+    "word": "Ekenechukwu",
+    "igboWord": "Ekenechukwu",
+    "nsibidi": "𞲠𞲯𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Praise God"
+        ],
+        "nsibidi": "𞲠𞲯𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "106",
+    "word": "Enyinnaya",
+    "igboWord": "Enyinnaya",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲭𞲧𞲨",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Father's friend"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲭𞲧𞲨"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "107",
+    "word": "Ezinwa",
+    "igboWord": "Ezinwa",
+    "nsibidi": "𞲠𞲤𞲿",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good child"
+        ],
+        "nsibidi": "𞲠𞲤𞲿"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "108",
+    "word": "Ifeanyi",
+    "igboWord": "Ifeanyi",
+    "nsibidi": "𞲫𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Nothing is impossible"
+        ],
+        "nsibidi": "𞲫𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "109",
+    "word": "Ifechukwu",
+    "igboWord": "Ifechukwu",
+    "nsibidi": "𞲫𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's light"
+        ],
+        "nsibidi": "𞲫𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "110",
+    "word": "Ihuoma",
+    "igboWord": "Ihuoma",
+    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good face"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "111",
+    "word": "Kamso",
+    "igboWord": "Kamso",
+    "nsibidi": "𞲠𞲥𞲣𞲤",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "I only follow"
+        ],
+        "nsibidi": "𞲠𞲥𞲣𞲤"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "112",
+    "word": "Kamsiyochukwu",
+    "igboWord": "Kamsiyochukwu",
+    "nsibidi": "𞳂𞲥𞲦𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "As I asked God"
+        ],
+        "nsibidi": "𞳂𞲥𞲦𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "113",
+    "word": "Kenechukwu",
+    "igboWord": "Kenechukwu",
+    "nsibidi": "𞲯𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Thanks be to God"
+        ],
+        "nsibidi": "𞲯𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "114",
+    "word": "Munachim",
+    "igboWord": "Munachim",
+    "nsibidi": "𞲠𞲡𞲨𞲠𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "I am with God"
+        ],
+        "nsibidi": "𞲠𞲡𞲨𞲠𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "115",
+    "word": "Ndidiamaka",
+    "igboWord": "Ndidiamaka",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Patience is good"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "116",
+    "word": "Ngoziem",
+    "igboWord": "Ngoziem",
+    "nsibidi": "𞲶𞲩",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "My blessing"
+        ],
+        "nsibidi": "𞲶𞲩"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "117",
+    "word": "Nkiruka",
+    "igboWord": "Nkiruka",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "What is ahead is greater"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "118",
+    "word": "Obumneme",
+    "igboWord": "Obumneme",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲡𞲦𞲧",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "The heart knows me"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲡𞲦𞲧"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "119",
+    "word": "Ogechioma",
+    "igboWord": "Ogechioma",
+    "nsibidi": "𞲠𞲡𞲢𞲺",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's good time"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲺"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "120",
+    "word": "Ogechukwu",
+    "igboWord": "Ogechukwu",
+    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's appointed time"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "121",
+    "word": "Okorie",
+    "igboWord": "Okorie",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Born on market day"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "122",
+    "word": "Oluchioma",
+    "igboWord": "Oluchioma",
+    "nsibidi": "𞲠𞲡𞲢𞲺",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good God's work"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲺"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "123",
+    "word": "Onyebuchi",
+    "igboWord": "Onyebuchi",
+    "nsibidi": "𞲾𞳀",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Who is God"
+        ],
+        "nsibidi": "𞲾𞳀"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "124",
+    "word": "Onyinyechukwu",
+    "igboWord": "Onyinyechukwu",
+    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's gift"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "125",
+    "word": "Uchechioma",
+    "igboWord": "Uchechioma",
+    "nsibidi": "𞲳𞲺",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good God's will"
+        ],
+        "nsibidi": "𞲳𞲺"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "126",
+    "word": "Uchenna",
+    "igboWord": "Uchenna",
+    "nsibidi": "𞲳𞲭",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's mind"
+        ],
+        "nsibidi": "𞲳𞲭"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "127",
+    "word": "Udochukwu",
+    "igboWord": "Udochukwu",
+    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "God's peace"
+        ],
+        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "128",
+    "word": "Ugonne",
+    "igboWord": "Ugonne",
+    "nsibidi": "𞲠𞲣𞲮",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Mother's eagle"
+        ],
+        "nsibidi": "𞲠𞲣𞲮"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "129",
+    "word": "Uzoma",
+    "igboWord": "Uzoma",
+    "nsibidi": "𞲠𞲡𞲬",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Good path"
+        ],
+        "nsibidi": "𞲠𞲡𞲬"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  },
+  {
+    "id": "130",
+    "word": "Zikora",
+    "igboWord": "Zikora",
+    "nsibidi": "𞲤𞲢𞲣𞲤𞲥",
+    "definitions": [
+      {
+        "wordClass": "NNP",
+        "definitions": [
+          "Show the world"
+        ],
+        "nsibidi": "𞲤𞲢𞲣𞲤𞲥"
+      }
+    ],
+    "tags": [
+      "generated-v1",
+      "name"
+    ]
+  }
+]

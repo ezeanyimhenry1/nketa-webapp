@@ -1,0 +1,146 @@
+[
+  {
+    "era": "Ancient Origins",
+    "title": "Kingdom of Nri Established",
+    "period": "1043 CE",
+    "icon": "👑",
+    "description": "The Kingdom of Nri is formally established with Eze Nri Ifikuanim as the first priest-king, becoming a major religious and political institution in Igboland.",
+    "story": "Nri emissaries spread ritual order across Igbo communities through purification ceremonies and spiritual law."
+  },
+  {
+    "era": "Ancient Origins",
+    "title": "Igbo Ukwu Bronze Civilization",
+    "period": "9th–10th century",
+    "icon": "🏺",
+    "description": "Advanced bronze casting flourishes at Igbo Ukwu, producing sophisticated artifacts that reveal early Igbo technological achievement.",
+    "story": "Archaeological discoveries show long-distance trade and complex artistry in pre-colonial southeastern Nigeria."
+  },
+  {
+    "era": "Pre-Colonial Era",
+    "title": "Height of Nri Influence",
+    "period": "12th–15th century",
+    "icon": "🌍",
+    "description": "Nri influence extends across much of Igboland through ritual authority rather than military conquest.",
+    "story": "Traveling mburiichi helped install rulers and spread taboos that shaped Igbo social order."
+  },
+  {
+    "era": "Pre-Colonial Era",
+    "title": "Aro Confederacy Rises",
+    "period": "17th–19th century",
+    "icon": "⚖️",
+    "description": "The Aro Confederacy grows in economic and spiritual influence, especially through long-distance trade networks.",
+    "story": "Regional power shifts as new commercial centers challenge older ritual hegemonies."
+  },
+  {
+    "era": "Colonial Period",
+    "title": "British Colonial Rule Begins",
+    "period": "1900s",
+    "icon": "🏛️",
+    "description": "British administration expands across southeastern Nigeria, introducing indirect rule and warrant chiefs.",
+    "story": "Colonial policies reshape governance and taxation in Igbo communities."
+  },
+  {
+    "era": "Colonial Period",
+    "title": "Aba Women's War (Ogu Umunwanyi)",
+    "period": "1929",
+    "icon": "✊",
+    "description": "Thousands of Igbo women protest colonial taxation and warrant chiefs in one of West Africa's largest anti-colonial uprisings.",
+    "story": "The movement forced colonial authorities to revise policies and curb warrant chief power."
+  },
+  {
+    "era": "Colonial Period",
+    "title": "Igbo Landing",
+    "period": "1803",
+    "icon": "🌊",
+    "description": "Enslaved Igbo people revolt at Dunbar Creek in Georgia, choosing death over bondage in a powerful symbol of resistance.",
+    "story": "The event remains a touchstone of Igbo diaspora memory and courage."
+  },
+  {
+    "era": "Independence Era",
+    "title": "Nigerian Independence",
+    "period": "1960",
+    "icon": "🇳🇬",
+    "description": "Nigeria gains independence, with Igbo leaders playing major roles in politics, education, and commerce.",
+    "story": "Post-independence hopes are followed by rising ethnic and political tensions."
+  },
+  {
+    "era": "Independence Era",
+    "title": "Anti-Igbo Violence in the North",
+    "period": "1966",
+    "icon": "⚠️",
+    "description": "Pogroms across northern Nigeria kill thousands of Igbo people and displace many more toward the Eastern Region.",
+    "story": "Mass return migration reshapes Igbo society and sets the stage for secession debates."
+  },
+  {
+    "era": "Biafra Period",
+    "title": "Republic of Biafra Declared",
+    "period": "1967",
+    "icon": "🕊️",
+    "description": "The Republic of Biafra is declared under Colonel Chukwuemeka Odumegwu Ojukwu amid national crisis.",
+    "story": "Secession follows months of failed peace talks and regional insecurity."
+  },
+  {
+    "era": "Biafra Period",
+    "title": "Nigerian Civil War",
+    "period": "1967–1970",
+    "icon": "🕯️",
+    "description": "The Biafran War devastates Igboland, with widespread loss of life from conflict, famine, and displacement.",
+    "story": "The war ends in January 1970 with reintegration under the 'no victor, no vanquished' policy."
+  },
+  {
+    "era": "Post-War Revival",
+    "title": "Igbo Economic Rebuilding",
+    "period": "1970s–1980s",
+    "icon": "📈",
+    "description": "Igbo communities rebuild through trade, education, and enterprise despite post-war devastation.",
+    "story": "The period is often described as the Igbo spirit of resilience and self-reliance."
+  },
+  {
+    "era": "Post-War Revival",
+    "title": "Nri Cultural Revival",
+    "period": "1974",
+    "icon": "🔄",
+    "description": "The Kingdom of Nri undergoes formal socio-cultural revival, reconnecting modern communities with ancient traditions.",
+    "story": "Revival efforts preserve ritual heritage and historical identity."
+  },
+  {
+    "era": "Modern Era",
+    "title": "Ekumeku Resistance Remembered",
+    "period": "1883–1914",
+    "icon": "🛡️",
+    "description": "The Ekumeku movement represents sustained Igbo resistance to British encroachment in the Niger area.",
+    "story": "Oral and written histories preserve Ekumeku as a symbol of anti-colonial struggle."
+  },
+  {
+    "era": "Modern Era",
+    "title": "Global Igbo Diaspora Growth",
+    "period": "1990s–present",
+    "icon": "🌐",
+    "description": "Igbo communities expand globally, maintaining language, festivals, and identity abroad.",
+    "story": "Organizations and digital platforms help diaspora Igbo reconnect with homeland culture."
+  },
+  {
+    "era": "Modern Era",
+    "title": "New Yam Festival (Iri Ji)",
+    "period": "Annual",
+    "icon": "🍠",
+    "description": "Iri Ji remains a major cultural festival celebrating harvest, community, and gratitude across Igboland.",
+    "story": "The festival ties agricultural cycles to spiritual thanksgiving and social reunion."
+  },
+  {
+    "era": "Modern Era",
+    "title": "Ofala Festival Revival",
+    "period": "20th–21st century",
+    "icon": "🎭",
+    "description": "Ofala festivals in towns such as Onitsha celebrate royal tradition, culture, and community pride.",
+    "story": "Ofala draws visitors and strengthens cultural continuity in urban Igbo kingdoms."
+  },
+  {
+    "era": "Modern Era",
+    "title": "Ikeji Festival of Arondizuogu",
+    "period": "Annual",
+    "icon": "🥁",
+    "description": "The Ikeji festival is a major cultural gathering known for masquerades, trade, and reunion of Arondizuogu communities.",
+    "story": "The festival combines spiritual symbolism with economic and social exchange."
+  }
+]

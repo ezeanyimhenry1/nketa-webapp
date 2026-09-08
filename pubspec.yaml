@@ -104,6 +104,12 @@ flutter:
     - assets/templates/igbo_art.jpg
     - assets/templates/
     - assets/data/igbo_events.json
+    - assets/data/events.json
+    - assets/data/proverbs.json
+    - assets/data/stories.json
+    - assets/data/timeline.json
+    - assets/data/igbo_cosmology.json
+    - assets/data/dictionary.json
     - assets/icons/appicon.png
     - assets/icons/google_logo.png
   #   - images/a_dot_ham.jpeg
