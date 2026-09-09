@@ -17,6 +17,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:nketa/screens/history_timeline_screen.dart';
 import 'package:nketa/screens/cosmology_screen.dart';
 import 'package:nketa/screens/content_hub_screen.dart';
+import 'package:nketa/screens/proverb_practice_screen.dart';
 import 'package:nketa/services/usage_service.dart';
 import 'package:nketa/services/review_service.dart';
 import 'package:nketa/screens/subscription_screen.dart';
@@ -187,6 +188,26 @@ class _MainScreenState extends State<MainScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (_) => ContentHubScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(
+                      Icons.mic,
+                      size: AppSpacing.iconSize.sp,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      'Proverb Voice Practice',
+                      style: textTheme.bodyLarge,
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ProverbPracticeScreen(),
+                        ),
                       );
                     },
                   ),

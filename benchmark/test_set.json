@@ -1,0 +1,212 @@
+[
+  {
+    "id": "name_1",
+    "reference": "Chinedu",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_2",
+    "reference": "Chidi",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_3",
+    "reference": "Chiamaka",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_4",
+    "reference": "Chinonso",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_5",
+    "reference": "Chukwudi",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_6",
+    "reference": "Chukwuma",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_7",
+    "reference": "Chibueze",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_8",
+    "reference": "Chigozie",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_9",
+    "reference": "Chisom",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_10",
+    "reference": "Chinwe",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_11",
+    "reference": "Chinweike",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_12",
+    "reference": "Chizoba",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_13",
+    "reference": "Chizitere",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_14",
+    "reference": "Ngozi",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_15",
+    "reference": "Amaka",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_16",
+    "reference": "Amarachi",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_17",
+    "reference": "Adanna",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_18",
+    "reference": "Adaku",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_19",
+    "reference": "Ifeoma",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_20",
+    "reference": "Ifunanya",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_21",
+    "reference": "Obinna",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_22",
+    "reference": "Obiora",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_23",
+    "reference": "Obioma",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_24",
+    "reference": "Obiageli",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "name_25",
+    "reference": "Ogechi",
+    "audio_path": null,
+    "category": "igbo_name"
+  },
+  {
+    "id": "cs_1",
+    "reference": "My name is Chinedu",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_2",
+    "reference": "Kedu aha g\u1ecb",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_3",
+    "reference": "Nna m b\u1ee5 Emeka",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_4",
+    "reference": "I am from Enugu",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_5",
+    "reference": "Chukwu gozie g\u1ecb",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_6",
+    "reference": "Onye kwe chi ya ekwe",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_7",
+    "reference": "Biko kwuo ya \u1ecdz\u1ecd",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_8",
+    "reference": "N\u1ecd n'\u1ee5l\u1ecd",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_9",
+    "reference": "Igbo amaka",
+    "audio_path": null,
+    "category": "code_switched"
+  },
+  {
+    "id": "cs_10",
+    "reference": "Ndewo how are you",
+    "audio_path": null,
+    "category": "code_switched"
+  }
+]

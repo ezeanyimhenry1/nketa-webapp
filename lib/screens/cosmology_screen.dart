@@ -4,7 +4,8 @@ import 'package:nketa/models/cosmology_item.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/theme/app_theme.dart';
 import 'package:nketa/theme/app_spacing.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:nketa/widgets/pronunciation_button.dart';
+import 'package:nketa/widgets/voice_input_button.dart';
 
 class CosmologyScreen extends StatefulWidget {
   const CosmologyScreen({super.key});
@@ -15,7 +16,7 @@ class CosmologyScreen extends StatefulWidget {
 
 class _CosmologyScreenState extends State<CosmologyScreen> {
   late Future<List<CosmologyItem>> _futureItems;
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
   @override
@@ -26,7 +27,7 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -94,17 +95,11 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (item.audio != null && item.audio!.isNotEmpty)
-                          IconButton(
-                            icon: Icon(
-                              Icons.volume_up,
-                              color: AppColors.secondary,
-                            ),
-                            onPressed: () async {
-                              await _audioPlayer.stop();
-                              await _audioPlayer.play(UrlSource(item.audio!));
-                            },
-                          ),
+                        PronunciationButton(
+                          text: item.name,
+                          existingAudioUrl: item.audio,
+                          color: AppColors.secondary,
+                        ),
                       ],
                     ),
                     SizedBox(height: AppSpacing.md),
@@ -217,14 +212,11 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
                         ),
                       ),
                     ),
-                    if (item.audio != null && item.audio!.isNotEmpty)
-                      IconButton(
-                        icon: Icon(Icons.volume_up, color: AppColors.secondary),
-                        onPressed: () async {
-                          await _audioPlayer.stop();
-                          await _audioPlayer.play(UrlSource(item.audio!));
-                        },
-                      ),
+                    PronunciationButton(
+                      text: item.name,
+                      existingAudioUrl: item.audio,
+                      color: AppColors.secondary,
+                    ),
                   ],
                 ),
                 SizedBox(height: AppSpacing.sm),
@@ -298,20 +290,33 @@ class _CosmologyScreenState extends State<CosmologyScreen> {
               children: [
                 // Search bar
                 TextField(
+                  controller: _searchController,
                   decoration: InputDecoration(
                     hintText: 'Search cosmology...',
                     prefixIcon: Icon(Icons.search, color: AppColors.primary),
-                    suffixIcon:
-                        _searchQuery.isNotEmpty
-                            ? IconButton(
-                              icon: Icon(
-                                Icons.clear,
-                                color: AppColors.secondary,
-                              ),
-                              onPressed:
-                                  () => setState(() => _searchQuery = ''),
-                            )
-                            : null,
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        VoiceInputButton(
+                          onTranscript: (text) {
+                            _searchController.text = text;
+                            setState(() => _searchQuery = text);
+                          },
+                          color: AppColors.primary,
+                        ),
+                        if (_searchQuery.isNotEmpty)
+                          IconButton(
+                            icon: Icon(
+                              Icons.clear,
+                              color: AppColors.secondary,
+                            ),
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() => _searchQuery = '');
+                            },
+                          ),
+                      ],
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(24),
                       borderSide: BorderSide(

@@ -18,7 +18,9 @@ import 'package:nketa/services/story_service.dart';
 import 'package:nketa/screens/story_detail_screen.dart';
 import 'package:nketa/services/cosmology_service.dart';
 import 'package:nketa/models/cosmology_item.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:nketa/widgets/pronunciation_button.dart';
+import 'package:nketa/widgets/voice_input_button.dart';
+import 'package:nketa/screens/word_detail_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nketa/screens/support_screen.dart';
 import 'dart:math';
@@ -58,8 +60,10 @@ class _BrowseScreenState extends State<BrowseScreen>
   );
   List<CosmologyItem>? _randomCosmology;
   bool _loadingCosmology = true;
-  final AudioPlayer _cosmoAudioPlayer = AudioPlayer();
   late AnimationController _shakeController;
+  final TextEditingController _nameSearchController = TextEditingController();
+  List<TranslationResult> _nameSearchResults = [];
+  bool _searchingNames = false;
   late Animation<double> _shakeAnimation;
 
   @override
@@ -123,9 +127,37 @@ class _BrowseScreenState extends State<BrowseScreen>
     _colorController.dispose();
     _storiesPageController.dispose();
     _cosmologyPageController.dispose();
-    _cosmoAudioPlayer.dispose();
+    _nameSearchController.dispose();
     _shakeController.dispose();
     super.dispose();
+  }
+
+  Future<void> _searchNames(String query) async {
+    final trimmed = query.trim();
+    if (trimmed.isEmpty) {
+      setState(() {
+        _nameSearchResults = [];
+        _searchingNames = false;
+      });
+      return;
+    }
+    setState(() => _searchingNames = true);
+    try {
+      final names = await IgboNsibidiNamesService().fetchNamesList();
+      final normalized = IgboNsibidiNamesService.normalizeIgbo(trimmed);
+      final results = names.where((name) {
+        final n = IgboNsibidiNamesService.normalizeIgbo(name.igboWord);
+        return n.contains(normalized) || normalized.contains(n);
+      }).take(8).toList();
+      if (mounted) {
+        setState(() {
+          _nameSearchResults = results;
+          _searchingNames = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() => _searchingNames = false);
+    }
   }
 
   Future<void> _loadWords() async {
@@ -265,19 +297,11 @@ class _BrowseScreenState extends State<BrowseScreen>
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (item.audio != null && item.audio!.isNotEmpty)
-                          IconButton(
-                            icon: Icon(
-                              Icons.volume_up,
-                              color: Colors.teal[700],
-                            ),
-                            onPressed: () async {
-                              await _cosmoAudioPlayer.stop();
-                              await _cosmoAudioPlayer.play(
-                                UrlSource(item.audio!),
-                              );
-                            },
-                          ),
+                        PronunciationButton(
+                          text: item.name,
+                          existingAudioUrl: item.audio,
+                          color: Colors.teal[700],
+                        ),
                       ],
                     ),
                     SizedBox(height: 16),
@@ -446,6 +470,71 @@ class _BrowseScreenState extends State<BrowseScreen>
                     return const SizedBox();
                   },
                 ),
+
+                TextField(
+                  controller: _nameSearchController,
+                  decoration: InputDecoration(
+                    hintText: 'Search Igbo names by voice or text...',
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        VoiceInputButton(
+                          onTranscript: (text) {
+                            _nameSearchController.text = text;
+                            _searchNames(text);
+                          },
+                        ),
+                        if (_nameSearchController.text.isNotEmpty)
+                          IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              _nameSearchController.clear();
+                              _searchNames('');
+                            },
+                          ),
+                      ],
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                  ),
+                  onChanged: _searchNames,
+                ),
+                if (_searchingNames)
+                  Padding(
+                    padding: EdgeInsets.only(top: AppSpacing.sm.h),
+                    child: const Center(
+                      child: ShimmerLoader(height: 24, width: 24),
+                    ),
+                  ),
+                if (_nameSearchResults.isNotEmpty) ...[
+                  SizedBox(height: AppSpacing.sm.h),
+                  ..._nameSearchResults.map(
+                    (name) => ListTile(
+                      leading: Text(
+                        name.nsibidi ?? '',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontFamily: 'Akagu',
+                        ),
+                      ),
+                      title: Text(name.igboWord),
+                      trailing: PronunciationButton(
+                        text: name.igboWord,
+                        existingAudioUrl: name.audioUrl,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => WordDetailScreen(word: name),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: AppSpacing.md.h),
+                ],
 
                 // Upcoming Events Section
                 FutureBuilder<List<IgboEvent>>(
@@ -694,6 +783,11 @@ class _BrowseScreenState extends State<BrowseScreen>
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
+                                  ),
+                                  PronunciationButton(
+                                    text: proverb['igbo'] ?? '',
+                                    iconSize: 20,
+                                    color: Colors.orange[900],
                                   ),
                                   IconButton(
                                     visualDensity: VisualDensity.compact,

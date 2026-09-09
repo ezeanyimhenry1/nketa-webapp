@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nketa/models/translation_result.dart';
 import 'package:nketa/widgets/custom_container.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:nketa/widgets/pronunciation_button.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:nketa/theme/app_strings.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,10 +56,6 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final player = AudioPlayer();
-    final hasAudio =
-        widget.word.audioUrl != null && widget.word.audioUrl!.isNotEmpty;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.word.igboWord, style: textTheme.titleMedium),
@@ -116,36 +112,18 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
               ),
               Row(
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.volume_up, size: AppSpacing.iconSize.sp),
-                    onPressed:
-                        hasAudio
-                            ? () async {
-                              await player.play(
-                                UrlSource(widget.word.audioUrl!),
-                              );
-                            }
-                            : null,
-                    tooltip: AppStrings.playPronunciation,
-                    color: hasAudio ? theme.colorScheme.primary : Colors.grey,
+                  PronunciationButton(
+                    text: widget.word.igboWord,
+                    existingAudioUrl: widget.word.audioUrl,
+                    iconSize: AppSpacing.iconSize.sp,
+                    compact: false,
                   ),
                   Text(
                     AppStrings.playPronunciation,
                     style: textTheme.bodyMedium?.copyWith(
-                      color: hasAudio ? theme.colorScheme.primary : Colors.grey,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
-                  if (!hasAudio)
-                    Padding(
-                      padding: EdgeInsets.only(left: AppSpacing.sm.w),
-                      child: Text(
-                        '(unavailable)',
-                        style: textTheme.bodySmall?.copyWith(
-                          color: Colors.red,
-                          fontSize: 12.sp,
-                        ),
-                      ),
-                    ),
                 ],
               ),
               Divider(height: AppSpacing.lg.h * 1.2),

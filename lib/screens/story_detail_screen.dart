@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nketa/models/story_item.dart';
 import 'package:nketa/theme/app_theme.dart';
 import 'package:nketa/theme/app_spacing.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:nketa/widgets/pronunciation_button.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,8 +18,12 @@ class StoryDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final audioPlayer = AudioPlayer();
     final readTime = _estimateReadTime(story.text);
+    final narrationText = story.excerpt?.isNotEmpty == true
+        ? story.excerpt!
+        : (story.title.length > 120
+            ? story.title.substring(0, 120)
+            : story.title);
     return Scaffold(
       appBar: AppBar(
         title: Text(story.title),
@@ -122,19 +126,17 @@ class StoryDetailScreen extends StatelessWidget {
             ),
           ],
           SizedBox(height: AppSpacing.lg),
-          if (story.audio != null && story.audio!.isNotEmpty)
-            Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.volume_up, color: AppColors.secondary),
-                  onPressed: () async {
-                    await audioPlayer.stop();
-                    await audioPlayer.play(UrlSource(story.audio!));
-                  },
-                ),
-                Text('Listen to audio', style: theme.textTheme.bodyMedium),
-              ],
-            ),
+          Row(
+            children: [
+              PronunciationButton(
+                text: narrationText,
+                existingAudioUrl: story.audio,
+                color: AppColors.secondary,
+                compact: false,
+              ),
+              Text('Listen to audio', style: theme.textTheme.bodyMedium),
+            ],
+          ),
           SizedBox(height: AppSpacing.lg),
           MarkdownBody(
             data: story.text,

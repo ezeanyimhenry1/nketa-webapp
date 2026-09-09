@@ -73,6 +73,10 @@ dependencies:
   diacritic: ^0.1.6
   in_app_review: ^2.0.9
   flutter_inappwebview: ^6.1.5
+  record: ^6.0.0
+  web_socket_channel: ^3.0.2
+  crypto: ^3.0.6
+  permission_handler: ^11.4.0
 
 dev_dependencies:
   flutter_test:
@@ -110,6 +114,7 @@ flutter:
     - assets/data/timeline.json
     - assets/data/igbo_cosmology.json
     - assets/data/dictionary.json
+    - assets/audio/
     - assets/icons/appicon.png
     - assets/icons/google_logo.png
   #   - images/a_dot_ham.jpeg

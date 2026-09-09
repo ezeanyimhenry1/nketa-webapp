@@ -8,12 +8,17 @@ import json
 import re
 import shutil
 import sys
+import unicodedata
 import urllib.request
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "assets" / "data"
 CACHE_DIR = ROOT / "scripts" / ".chatgpt_cache"
+IGBO_API_NSIBIDI_PATH = (
+    Path(__file__).resolve().parents[2] / "igbo_api" / "src" / "dictionaries" / "nsibidi" / "nsibidi_dictionary.ts"
+)
 
 CHATGPT_URLS = {
     "proverbs": "https://chatgpt.com/share/6aa0071f-5d24-83ea-aabb-b36b0953bcac",
@@ -21,50 +26,151 @@ CHATGPT_URLS = {
     "folktales": "https://chatgpt.com/share/6aa010c1-1bcc-83ea-9ca8-58fd14e7b89c",
 }
 
-# Unicode Nsibidi block (U+1ECA0–U+1ECFF) for generated name compositions
-NSIBIDI_CHARS = [chr(0x1ECA0 + i) for i in range(40)]
-
-SYLLABLE_MAP = {
-    "chi": NSIBIDI_CHARS[0],
-    "ne": NSIBIDI_CHARS[1],
-    "du": NSIBIDI_CHARS[2],
-    "go": NSIBIDI_CHARS[3],
-    "zi": NSIBIDI_CHARS[4],
-    "am": NSIBIDI_CHARS[5],
-    "aka": NSIBIDI_CHARS[6],
-    "obi": NSIBIDI_CHARS[7],
-    "na": NSIBIDI_CHARS[8],
-    "em": NSIBIDI_CHARS[9],
-    "eka": NSIBIDI_CHARS[10],
-    "ife": NSIBIDI_CHARS[11],
-    "oma": NSIBIDI_CHARS[12],
-    "nna": NSIBIDI_CHARS[13],
-    "nne": NSIBIDI_CHARS[14],
-    "kene": NSIBIDI_CHARS[15],
-    "chuk": NSIBIDI_CHARS[16],
-    "wu": NSIBIDI_CHARS[17],
-    "ada": NSIBIDI_CHARS[18],
-    "uche": NSIBIDI_CHARS[19],
-    "ebere": NSIBIDI_CHARS[20],
-    "ike": NSIBIDI_CHARS[21],
-    "ngozi": NSIBIDI_CHARS[22],
-    "chidi": NSIBIDI_CHARS[23],
-    "nnamdi": NSIBIDI_CHARS[24],
-    "to": NSIBIDI_CHARS[25],
-    "chioma": NSIBIDI_CHARS[26],
-    "som": NSIBIDI_CHARS[27],
-    "tochukwu": NSIBIDI_CHARS[28],
-    "ebele": NSIBIDI_CHARS[29],
-    "onye": NSIBIDI_CHARS[30],
-    "nwa": NSIBIDI_CHARS[31],
-    "buchi": NSIBIDI_CHARS[32],
-    "dike": NSIBIDI_CHARS[33],
-    "kamsi": NSIBIDI_CHARS[34],
-    "jide": NSIBIDI_CHARS[35],
-    "ofor": NSIBIDI_CHARS[36],
-    "chima": NSIBIDI_CHARS[37],
-    "ng": NSIBIDI_CHARS[38],
-    "we": NSIBIDI_CHARS[39],
+# Igbo name morpheme hints mapped to tonal pronunciations in igbo_api nsibidi dictionary.
+NAME_PRONUNCIATION_HINTS = {
+    "chukwu": "chí:úkwú",
+    "chukw": "chukwu",
+    "chi": "chí",
+    "chị": "chị̀",
+    "ngozi": "ń:gọ́:zí",
+    "gozi": "gọ́:zí",
+    "gozie": "gọ́:zí",
+    "di": "dị̀",
+    "du": "dú",
+    "edu": "è:dú",
+    "nedu": "nè:dú",
+    "ne": "nè",
+    "ma": "m:á",
+    "ka": "ká",
+    "amaka": "á:mà:ká",
+    "aka": "áká",
+    "obi": "ó:bì",
+    "nna": "nà",
+    "nne": "nè",
+    "nnamdi": "nà:m:dị̀",
+    "ife": "ị́:fé",
+    "oma": "ọ́:má",
+    "ifeoma": "ị́:fé:ọ́:má",
+    "uche": "úchè",
+    "uchenna": "úchè:nà",
+    "eme": "é:mé",
+    "emeka": "é:mé:ká",
+    "eka": "éká",
+    "kele": "kè:lè",
+    "kelechi": "kè:lè:chí",
+    "som": "sọ̀:m",
+    "to": "tọ̀",
+    "chukwuma": "chí:úkwú:m:á",
+    "bueze": "bụ́:é:zè",
+    "chibueze": "chí:bụ́:é:zè",
+    "chidi": "chí:dị̀",
+    "chinedu": "chí:nè:dú",
+    "chiamaka": "chí:á:mà:ká",
+    "chisom": "chí:sọ̀:m",
+    "chinonso": "chí:nọ̀:n:sọ̀",
+    "chinwe": "chí:nwè",
+    "chinweike": "chí:nwè:í:ké",
+    "chizoba": "chí:zọ̀:bá",
+    "chizitere": "chí:zị̀:téré",
+    "adanna": "á:dá:nà",
+    "adaku": "á:dá:kú",
+    "amarachi": "á:má:rá:chí",
+    "onyinye": "ó:nyé:nyé",
+    "oluchi": "ó:lú:chí",
+    "oluoma": "ó:lú:ọ́:má",
+    "ebere": "é:bé:rè",
+    "ebuka": "é:bú:ká",
+    "ikenna": "í:ké:nà",
+    "ikechukwu": "í:ké:chí:úkwú",
+    "jide": "jí:dé",
+    "ofor": "ó:fò:r",
+    "kamsi": "ká:m:sí",
+    "kosi": "kọ̀:sí",
+    "nkiru": "ń:kí:rú",
+    "nkechi": "ń:ké:chí",
+    "osita": "ó:sị̀:tá",
+    "osinachi": "ó:sị̀:ná:chí",
+    "ugochukwu": "ú:gó:chí:úkwú",
+    "ugonna": "ú:gó:nà",
+    "tochukwu": "tọ̀:chí:úkwú",
+    "somtochukwu": "sọ̀:m:tọ̀:chí:úkwú",
+    "obinna": "ò:bì:nà",
+    "obiora": "ò:bì:ó:rá",
+    "obioma": "ò:bì:ọ́:má",
+    "oge": "ó:gé",
+    "ogechi": "ó:gé:chí",
+    "chinecherem": "chí:né:ché:rè:m",
+    "chineze": "chí:né:zè",
+    "chidimma": "chí:dị̀:m:má",
+    "chidiebere": "chí:dị̀:é:bé:rè",
+    "chidozie": "chí:dọ̀:zí",
+    "chigoziem": "chí:gọ́:zí:m",
+    "chika": "chí:ká",
+    "chikamso": "chí:ká:m:sọ̀",
+    "chikodi": "chí:kó:dí",
+    "chinaza": "chí:ná:zá",
+    "chisara": "chí:sá:rá",
+    "chizaram": "chí:zá:rá:m",
+    "ekene": "é:ké:nè",
+    "ekenechukwu": "é:ké:nè:chí:úkwú",
+    "ezinne": "é:zì:nè",
+    "ifeanyi": "ị́:fé:á:nyí",
+    "ifechukwu": "ị́:fé:chí:úkwú",
+    "ihuoma": "í:hú:ọ́:má",
+    "kamso": "ká:m:sọ̀",
+    "kamsiyochukwu": "ká:m:sí:yó:chí:úkwú",
+    "kenechukwu": "ké:nè:chí:úkwú",
+    "munachim": "mú:ná:chí:m",
+    "ndidiamaka": "ń:dị̀:á:mà:ká",
+    "ngoziem": "ń:gọ́:zí:m",
+    "nkiruka": "ń:kí:rú:ká",
+    "obumneme": "ò:bù:m:né:mé",
+    "ogechioma": "ó:gé:chí:ọ́:má",
+    "ogechukwu": "ó:gé:chí:úkwú",
+    "okorie": "ó:kó:rí",
+    "oluchioma": "ó:lú:chí:ọ́:má",
+    "onyebuchi": "ó:nyé:bù:chí",
+    "onyinyechukwu": "ó:nyé:nyé:chí:úkwú",
+    "uchechioma": "ú:chè:chí:ọ́:má",
+    "udochukwu": "ú:dò:chí:úkwú",
+    "ugonne": "ú:gó:nè",
+    "uzoma": "ú:zó:má",
+    "zikora": "zí:kó:rá",
+    "adaeze": "á:dá:é:zè",
+    "adimchi": "á:dị̀:m:chí",
+    "akunna": "á:kú:nà",
+    "amarachukwu": "á:má:rá:chí:úkwú",
+    "anulika": "á:nú:lí:ká",
+    "buchi": "bù:chí",
+    "chidubem": "chí:dù:bé:m",
+    "chigozirim": "chí:gọ́:zí:rí:m",
+    "chimamanda": "chí:má:má:ń:dá",
+    "chimaraoke": "chí:má:rá:ó:ké",
+    "chinagorom": "chí:ná:gó:ró:m",
+    "chinedum": "chí:né:dù:m",
+    "chinwendu": "chí:n:wé:ń:dù",
+    "chizurum": "chí:zú:rú:m",
+    "ebelechukwu": "é:bé:lè:chí:úkwú",
+    "enyinnaya": "é:nyí:nà:yá",
+    "ezinwa": "é:zì:ń:wá",
+    "lotanna": "ló:tá:nà",
+    "mmesoma": "m:mé:sọ̀:má",
+    "ngozika": "ń:gọ́:zí:ká",
+    "nkeiruka": "ń:ké:í:rú:ká",
+    "nneka": "nè:ká",
+    "onyeka": "ó:nyé:ká",
+    "onyekachi": "ó:nyé:ká:chí",
+    "obiageli": "ó:bì:lì",
+    "ekwi": "kwú",
+    "olisa": "chí:úkwú",
+    "jideofor": "jí:dé:ó:fò",
+    "onyekwere": "ó:nyé:kwé:rè",
+    "ozioma": "ó:zí:ọ́:má",
+    "oziomachukwu": "ó:zí:ọ́:má:chí:úkwú",
+    "ugochi": "ú:gó:chí",
+    "ugomma": "ú:gó:m:má",
+    "uzoamaka": "ú:zó:á:mà:ká",
+    "zinachidi": "zí:ná:chí:dị̀",
 }
 
 COMMON_IGBO_NAMES = [
@@ -567,29 +673,121 @@ def extract_stories(page_text: str) -> list[dict]:
     return sorted(best.values(), key=lambda s: s["title"])
 
 
-def compose_nsibidi(name: str) -> str:
-    lower = name.lower()
-    keys = sorted(SYLLABLE_MAP.keys(), key=len, reverse=True)
-    i = 0
-    parts: list[str] = []
-    while i < len(lower):
+def normalize_pronunciation(value: str) -> str:
+    text = unicodedata.normalize("NFD", value)
+    text = "".join(char for char in text if unicodedata.category(char) != "Mn")
+    return text.lower().replace(":", "")
+
+
+def parse_igbo_api_nsibidi_dictionary(path: Path) -> list[dict]:
+    if not path.exists():
+        raise FileNotFoundError(f"Igbo API nsibidi dictionary not found: {path}")
+    text = path.read_text(encoding="utf-8")
+    entries: list[dict] = []
+    pattern = re.compile(
+        r"\{\s*sym: '((?:\\'|[^'])*)',\s*pro: ([^,]+),\s*form: '((?:\\'|[^'])*)',\s*defs: '((?:\\'|[^'])*)',?\s*\}"
+    )
+    for match in pattern.finditer(text):
+        sym, pro, _form, defs = match.groups()
+        if pro.strip() == "null":
+            continue
+        entries.append(
+            {
+                "sym": sym.replace("\\'", "'"),
+                "pro": pro.strip("'"),
+                "defs": defs.replace("\\'", "'"),
+            }
+        )
+    return entries
+
+
+@lru_cache(maxsize=1)
+def load_nsibidi_lookup() -> tuple[dict[str, dict], dict[str, dict]]:
+    entries = parse_igbo_api_nsibidi_dictionary(IGBO_API_NSIBIDI_PATH)
+    by_pro: dict[str, dict] = {}
+    by_norm: dict[str, dict] = {}
+    for entry in entries:
+        by_pro[entry["pro"].lower()] = entry
+        norm_key = normalize_pronunciation(entry["pro"])
+        if norm_key not in by_norm:
+            by_norm[norm_key] = entry
+    return by_pro, by_norm
+
+
+def lookup_symbol(pro: str, by_pro: dict[str, dict], by_norm: dict[str, dict]) -> str | None:
+    entry = by_pro.get(pro.lower()) or by_norm.get(normalize_pronunciation(pro))
+    if entry:
+        return entry["sym"]
+    # Tone-insensitive fallback for single-token lookups.
+    target = normalize_pronunciation(pro)
+    for key, candidate in by_norm.items():
+        if key == target:
+            return candidate["sym"]
+    return None
+
+
+def symbols_from_pronunciation(pro: str, by_pro: dict[str, dict], by_norm: dict[str, dict]) -> str:
+    if pro.lower() in by_pro:
+        return by_pro[pro.lower()]["sym"]
+
+    parts = pro.split(":")
+    symbols: list[str] = []
+    index = 0
+    while index < len(parts):
         matched = False
-        for key in keys:
-            if lower.startswith(key, i):
-                parts.append(SYLLABLE_MAP[key])
-                i += len(key)
+        for end in range(len(parts), index, -1):
+            chunk = ":".join(parts[index:end])
+            symbol = lookup_symbol(chunk, by_pro, by_norm)
+            if symbol:
+                symbols.append(symbol)
+                index = end
                 matched = True
                 break
         if not matched:
-            parts.append(NSIBIDI_CHARS[i % len(NSIBIDI_CHARS)])
+            symbols.append("?")
+            index += 1
+    return "".join(symbols)
+
+
+def compose_nsibidi(name: str) -> tuple[str, str]:
+    by_pro, by_norm = load_nsibidi_lookup()
+    lower = name.lower()
+
+    if lower in NAME_PRONUNCIATION_HINTS:
+        pronunciation = NAME_PRONUNCIATION_HINTS[lower]
+        return symbols_from_pronunciation(pronunciation, by_pro, by_norm), pronunciation
+
+    norm_name = normalize_pronunciation(name)
+    if norm_name in by_norm:
+        entry = by_norm[norm_name]
+        return entry["sym"], entry["pro"]
+
+    parts: list[str] = []
+    i = 0
+    hint_keys = sorted(NAME_PRONUNCIATION_HINTS.keys(), key=len, reverse=True)
+    while i < len(lower):
+        matched = None
+        for key in hint_keys:
+            if lower.startswith(key, i):
+                matched = NAME_PRONUNCIATION_HINTS[key]
+                i += len(key)
+                break
+        if matched is None:
+            matched = lower[i]
             i += 1
-    return "".join(parts)
+        parts.append(matched)
+
+    pronunciation = ":".join(parts)
+    return symbols_from_pronunciation(pronunciation, by_pro, by_norm), pronunciation
 
 
 def build_dictionary() -> list[dict]:
     entries: list[dict] = []
+    missing = 0
     for idx, (name, meaning) in enumerate(COMMON_IGBO_NAMES, start=1):
-        nsibidi = compose_nsibidi(name)
+        nsibidi, pronunciation = compose_nsibidi(name)
+        if "?" in nsibidi:
+            missing += 1
         entries.append(
             {
                 "id": str(idx),
@@ -603,9 +801,11 @@ def build_dictionary() -> list[dict]:
                         "nsibidi": nsibidi,
                     }
                 ],
-                "tags": ["generated-v1", "name"],
+                "tags": ["generated-v2-igbo-api", "name", f"pro:{pronunciation}"],
             }
         )
+    if missing:
+        print(f"  dictionary warning: {missing} names have unresolved nsibidi segments")
     return entries
 
 

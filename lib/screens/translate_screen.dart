@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nketa/models/translation_result.dart';
@@ -20,6 +19,8 @@ import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/services/igbo_nsibidi_names_service.dart';
 import 'package:provider/provider.dart';
 import 'package:nketa/screens/subscription_screen.dart';
+import 'package:nketa/widgets/voice_input_button.dart';
+import 'package:nketa/widgets/pronunciation_button.dart';
 
 class TranslateScreen extends StatefulWidget {
   const TranslateScreen({super.key});
@@ -54,10 +55,11 @@ class _TranslateScreenState extends State<TranslateScreen> {
   List<String> _originalWords = [];
   bool _usedAI = false; // Track whether AI was used
   bool _usedNamesList = false; // Track if result came from names list
+  String _partialTranscript = '';
+  String? _heardTranscript;
 
   final TranslationService _translationService = TranslationService();
   final OpenAIService _openAIService = OpenAIService();
-  final AudioPlayer _audioPlayer = AudioPlayer();
 
   Map<String, int> _usageStats = {'translations': 0, 'images': 0};
   bool _loadingUsage = true;
@@ -76,9 +78,11 @@ class _TranslateScreenState extends State<TranslateScreen> {
   }
 
   void _onTextChanged() {
-    if (_errorMessage != null) {
-      setState(() => _errorMessage = null);
-    }
+    setState(() {
+      if (_errorMessage != null) {
+        _errorMessage = null;
+      }
+    });
   }
 
   Future<void> _handleTranslate() async {
@@ -457,20 +461,6 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     );
   }
 
-  Future<void> _playAudio(String? audioUrl) async {
-    if (audioUrl == null || audioUrl.isEmpty) {
-      _showError('Audio not available for this word');
-      return;
-    }
-
-    try {
-      await _audioPlayer.play(UrlSource(audioUrl));
-    } catch (e) {
-      debugPrint("Audio playback error: $e");
-      _showError('Unable to play audio');
-    }
-  }
-
   Future<void> _loadUsageStats() async {
     try {
       final usageService = UsageService();
@@ -564,6 +554,15 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     );
   }
 
+  void _onVoiceTranscript(String transcript) {
+    setState(() {
+      _controller.text = transcript;
+      _heardTranscript = transcript;
+      _partialTranscript = '';
+    });
+    _handleTranslate();
+  }
+
   Widget _buildInputSection(TextTheme textTheme) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -592,15 +591,59 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                 width: 2,
               ),
             ),
-            suffixIcon:
-                _controller.text.isNotEmpty
-                    ? IconButton(
-                      icon: Icon(Icons.clear, size: AppSpacing.iconSize.sp),
-                      onPressed: _clearText,
-                    )
-                    : null,
+            suffixIcon: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                VoiceInputButton(
+                  onTranscript: _onVoiceTranscript,
+                  onPartialTranscript: (partial) {
+                    setState(() => _partialTranscript = partial);
+                  },
+                  onError: (msg) => _showError(msg),
+                  iconSize: AppSpacing.iconSize.sp,
+                ),
+                if (_controller.text.isNotEmpty)
+                  IconButton(
+                    icon: Icon(Icons.clear, size: AppSpacing.iconSize.sp),
+                    onPressed: _clearText,
+                  ),
+              ],
+            ),
           ),
         ),
+        if (_partialTranscript.isNotEmpty)
+          Padding(
+            padding: EdgeInsets.only(top: AppSpacing.xs.h),
+            child: Chip(
+              avatar: Icon(Icons.mic, size: 16.sp, color: Colors.red),
+              label: Text(
+                _partialTranscript,
+                style: textTheme.bodySmall,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        if (_heardTranscript != null && _heardTranscript!.isNotEmpty)
+          Padding(
+            padding: EdgeInsets.only(top: AppSpacing.xs.h),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Heard: ${_heardTranscript!}',
+                    style: textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => setState(() => _heardTranscript = null),
+                  child: const Text('Dismiss'),
+                ),
+              ],
+            ),
+          ),
       ],
     );
   }
@@ -1333,7 +1376,6 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
     _controller.dispose();
     _scrollController.dispose();
     _focusNode.dispose();
-    _audioPlayer.dispose();
     super.dispose();
   }
 }
@@ -1440,7 +1482,6 @@ class _TranslationResultCardState extends State<TranslationResultCard> {
     final textTheme = widget.textTheme;
     final hasTranslation = result.definitions.isNotEmpty;
     final hasNsibidi = result.nsibidi?.isNotEmpty == true;
-    final hasAudio = result.audioUrl?.isNotEmpty == true;
     final originalWord = widget.originalWord;
 
     return Card(
@@ -1518,23 +1559,11 @@ class _TranslationResultCardState extends State<TranslationResultCard> {
                           minHeight: 32,
                         ),
                       ),
-                      if (hasAudio)
-                        IconButton(
-                          icon: Icon(Icons.volume_up, size: 18.sp),
-                          onPressed:
-                              () => (context as Element)
-                                  .findAncestorStateOfType<
-                                    _TranslateScreenState
-                                  >()
-                                  ?._playAudio(result.audioUrl),
-                          tooltip: AppStrings.playPronunciation,
-                          visualDensity: VisualDensity.compact,
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                        ),
+                      PronunciationButton(
+                        text: result.igboWord,
+                        existingAudioUrl: result.audioUrl,
+                        iconSize: 18.sp,
+                      ),
                       IconButton(
                         icon: Icon(Icons.copy, size: 18.sp),
                         onPressed:

@@ -6,6 +6,7 @@ import 'package:nketa/widgets/custom_container.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
+import 'package:nketa/widgets/voice_input_button.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});
@@ -116,6 +117,13 @@ class _LearnScreenState extends State<LearnScreen> {
                     Icons.search,
                     color: Colors.grey,
                     size: AppSpacing.iconSize.sp,
+                  ),
+                  suffixIcon: VoiceInputButton(
+                    onTranscript: (text) {
+                      _searchController.text = text;
+                      _onSearch(text);
+                    },
+                    iconSize: AppSpacing.iconSize.sp,
                   ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(AppSpacing.inputRadius),

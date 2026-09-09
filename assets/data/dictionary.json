@@ -3,2470 +3,2600 @@
     "id": "1",
     "word": "Chinedu",
     "igboWord": "Chinedu",
-    "nsibidi": "𞲠𞲡𞲢",
+    "nsibidi": "鼓魚及",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God leads"
         ],
-        "nsibidi": "𞲠𞲡𞲢"
+        "nsibidi": "鼓魚及"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:nè:dú"
     ]
   },
   {
     "id": "2",
     "word": "Chidi",
     "igboWord": "Chidi",
-    "nsibidi": "𞲷",
+    "nsibidi": "鼓延",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God exists"
         ],
-        "nsibidi": "𞲷"
+        "nsibidi": "鼓延"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:dị̀"
     ]
   },
   {
     "id": "3",
     "word": "Chiamaka",
     "igboWord": "Chiamaka",
-    "nsibidi": "𞲠𞲥𞲦",
+    "nsibidi": "鼓á肩環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is beautiful"
         ],
-        "nsibidi": "𞲠𞲥𞲦"
+        "nsibidi": "鼓á肩環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:á:mà:ká"
     ]
   },
   {
     "id": "4",
     "word": "Chinonso",
     "igboWord": "Chinonso",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "nsibidi": "鼓帰可",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is near"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+        "nsibidi": "鼓帰可"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:nọ̀:n:sọ̀"
     ]
   },
   {
     "id": "5",
     "word": "Chukwudi",
     "igboWord": "Chukwudi",
-    "nsibidi": "𞲰𞲱𞲦𞲧",
+    "nsibidi": "魂大延",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God exists"
         ],
-        "nsibidi": "𞲰𞲱𞲦𞲧"
+        "nsibidi": "魂大延"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:úkwú:dị̀"
     ]
   },
   {
     "id": "6",
     "word": "Chukwuma",
     "igboWord": "Chukwuma",
-    "nsibidi": "𞲰𞲱𞲦𞲧",
+    "nsibidi": "魂大m霊",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God knows"
         ],
-        "nsibidi": "𞲰𞲱𞲦𞲧"
+        "nsibidi": "魂大m霊"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:úkwú:m:á"
     ]
   },
   {
     "id": "7",
     "word": "Chibueze",
     "igboWord": "Chibueze",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "nsibidi": "鼓看骸",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is king"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+        "nsibidi": "鼓看骸"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:bụ́:é:zè"
     ]
   },
   {
     "id": "8",
     "word": "Chigozie",
     "igboWord": "Chigozie",
-    "nsibidi": "𞲠𞲣𞲤𞲧",
+    "nsibidi": "鼓岳向",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God has blessed"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲧"
+        "nsibidi": "鼓岳向"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:gọ́:zí"
     ]
   },
   {
     "id": "9",
     "word": "Chisom",
     "igboWord": "Chisom",
-    "nsibidi": "𞲠𞲻",
+    "nsibidi": "鼓壇征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God follows me"
         ],
-        "nsibidi": "𞲠𞲻"
+        "nsibidi": "鼓壇征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:sọ̀:m"
     ]
   },
   {
     "id": "10",
     "word": "Chinwe",
     "igboWord": "Chinwe",
-    "nsibidi": "𞲠𞲣𞳇",
+    "nsibidi": "鼓禾",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God owns"
         ],
-        "nsibidi": "𞲠𞲣𞳇"
+        "nsibidi": "鼓禾"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:nwè"
     ]
   },
   {
     "id": "11",
     "word": "Chinweike",
     "igboWord": "Chinweike",
-    "nsibidi": "𞲠𞲣𞳇𞲵",
+    "nsibidi": "鼓禾果",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God owns strength"
         ],
-        "nsibidi": "𞲠𞲣𞳇𞲵"
+        "nsibidi": "鼓禾果"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:nwè:í:ké"
     ]
   },
   {
     "id": "12",
     "word": "Chizoba",
     "igboWord": "Chizoba",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "nsibidi": "鼓釜真",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God saves"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+        "nsibidi": "鼓釜真"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:zọ̀:bá"
     ]
   },
   {
     "id": "13",
     "word": "Chizitere",
     "igboWord": "Chizitere",
-    "nsibidi": "𞲠𞲤𞲥𞲦𞲧𞲨",
+    "nsibidi": "鼓向査ré",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God sent"
         ],
-        "nsibidi": "𞲠𞲤𞲥𞲦𞲧𞲨"
+        "nsibidi": "鼓向査ré"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:zị̀:téré"
     ]
   },
   {
     "id": "14",
     "word": "Ngozi",
     "igboWord": "Ngozi",
-    "nsibidi": "𞲶",
+    "nsibidi": "ń岳向",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Blessing"
         ],
-        "nsibidi": "𞲶"
+        "nsibidi": "ń岳向"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:gọ́:zí"
     ]
   },
   {
     "id": "15",
     "word": "Amaka",
     "igboWord": "Amaka",
-    "nsibidi": "𞲥𞲦",
+    "nsibidi": "á肩環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Beauty"
         ],
-        "nsibidi": "𞲥𞲦"
+        "nsibidi": "á肩環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:mà:ká"
     ]
   },
   {
     "id": "16",
     "word": "Amarachi",
     "igboWord": "Amarachi",
-    "nsibidi": "𞲥𞲢𞲣𞲤𞲠",
+    "nsibidi": "業鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's grace"
         ],
-        "nsibidi": "𞲥𞲢𞲣𞲤𞲠"
+        "nsibidi": "業鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:má:rá:chí"
     ]
   },
   {
     "id": "17",
     "word": "Adanna",
     "igboWord": "Adanna",
-    "nsibidi": "𞲲𞲭",
+    "nsibidi": "á員寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's daughter"
         ],
-        "nsibidi": "𞲲𞲭"
+        "nsibidi": "á員寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:dá:nà"
     ]
   },
   {
     "id": "18",
     "word": "Adaku",
     "igboWord": "Adaku",
-    "nsibidi": "𞲲𞲣𞲤",
+    "nsibidi": "á員券",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Daughter of wealth"
         ],
-        "nsibidi": "𞲲𞲣𞲤"
+        "nsibidi": "á員券"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:dá:kú"
     ]
   },
   {
     "id": "19",
     "word": "Ifeoma",
     "igboWord": "Ifeoma",
-    "nsibidi": "𞲫𞲬",
+    "nsibidi": "台均ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good thing"
         ],
-        "nsibidi": "𞲫𞲬"
+        "nsibidi": "台均ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ị́:fé:ọ́:má"
     ]
   },
   {
     "id": "20",
     "word": "Ifunanya",
     "igboWord": "Ifunanya",
-    "nsibidi": "𞲠𞲡𞲢𞲨𞲥𞲦𞲧",
+    "nsibidi": "願鏡畝脅",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Love"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲨𞲥𞲦𞲧"
+        "nsibidi": "願鏡畝脅"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:i:f:u:n:a:n:y:a"
     ]
   },
   {
     "id": "21",
     "word": "Obinna",
     "igboWord": "Obinna",
-    "nsibidi": "𞲧𞲭",
+    "nsibidi": "ò原寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's heart"
         ],
-        "nsibidi": "𞲧𞲭"
+        "nsibidi": "ò原寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ò:bì:nà"
     ]
   },
   {
     "id": "22",
     "word": "Obiora",
     "igboWord": "Obiora",
-    "nsibidi": "𞲧𞲣𞲤𞲥",
+    "nsibidi": "心詮",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Heart of the people"
         ],
-        "nsibidi": "𞲧𞲣𞲤𞲥"
+        "nsibidi": "心詮"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ò:bì:ó:rá"
     ]
   },
   {
     "id": "23",
     "word": "Obioma",
     "igboWord": "Obioma",
-    "nsibidi": "𞲧𞲬",
+    "nsibidi": "心ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good heart"
         ],
-        "nsibidi": "𞲧𞲬"
+        "nsibidi": "心ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ò:bì:ọ́:má"
     ]
   },
   {
     "id": "24",
     "word": "Obiageli",
     "igboWord": "Obiageli",
-    "nsibidi": "𞲧𞲣𞲤𞲥𞲦𞲧",
+    "nsibidi": "ó粗悔",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "The time has come to enjoy wealth"
         ],
-        "nsibidi": "𞲧𞲣𞲤𞲥𞲦𞲧"
+        "nsibidi": "ó粗悔"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:bì:lì"
     ]
   },
   {
     "id": "25",
     "word": "Ogechi",
     "igboWord": "Ogechi",
-    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "nsibidi": "潰鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's time"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲠"
+        "nsibidi": "潰鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:gé:chí"
     ]
   },
   {
     "id": "26",
     "word": "Uchenna",
     "igboWord": "Uchenna",
-    "nsibidi": "𞲳𞲭",
+    "nsibidi": "虞寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's thought"
         ],
-        "nsibidi": "𞲳𞲭"
+        "nsibidi": "虞寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:úchè:nà"
     ]
   },
   {
     "id": "27",
     "word": "Uchechi",
     "igboWord": "Uchechi",
-    "nsibidi": "𞲳𞲠",
+    "nsibidi": "虞鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's will"
         ],
-        "nsibidi": "𞲳𞲠"
+        "nsibidi": "虞鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:úchè:chí"
     ]
   },
   {
     "id": "28",
     "word": "Ugochukwu",
     "igboWord": "Ugochukwu",
-    "nsibidi": "𞲠𞲣𞲰𞲱",
+    "nsibidi": "古魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Eagle of God"
         ],
-        "nsibidi": "𞲠𞲣𞲰𞲱"
+        "nsibidi": "古魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:gó:chí:úkwú"
     ]
   },
   {
     "id": "29",
     "word": "Ugonna",
     "igboWord": "Ugonna",
-    "nsibidi": "𞲠𞲣𞲭",
+    "nsibidi": "古寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Eagle of the father"
         ],
-        "nsibidi": "𞲠𞲣𞲭"
+        "nsibidi": "古寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:gó:nà"
     ]
   },
   {
     "id": "30",
     "word": "Ebuka",
     "igboWord": "Ebuka",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤",
+    "nsibidi": "体環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is great"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤"
+        "nsibidi": "体環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:bú:ká"
     ]
   },
   {
     "id": "31",
     "word": "Ebere",
     "igboWord": "Ebere",
-    "nsibidi": "𞲴",
+    "nsibidi": "é砕漸",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Mercy"
         ],
-        "nsibidi": "𞲴"
+        "nsibidi": "é砕漸"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:bé:rè"
     ]
   },
   {
     "id": "32",
     "word": "Echezona",
     "igboWord": "Echezona",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲨",
+    "nsibidi": "宛崖z鏡畝",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Do not forget"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲨"
+        "nsibidi": "宛崖z鏡畝"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:e:c:h:e:z:o:n:a"
     ]
   },
   {
     "id": "33",
     "word": "Emeka",
     "igboWord": "Emeka",
-    "nsibidi": "𞲩𞲪",
+    "nsibidi": "宛壊環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God has done great"
         ],
-        "nsibidi": "𞲩𞲪"
+        "nsibidi": "宛壊環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:mé:ká"
     ]
   },
   {
     "id": "34",
     "word": "Ikenna",
     "igboWord": "Ikenna",
-    "nsibidi": "𞲵𞲭",
+    "nsibidi": "果寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's power"
         ],
-        "nsibidi": "𞲵𞲭"
+        "nsibidi": "果寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:í:ké:nà"
     ]
   },
   {
     "id": "35",
     "word": "Ikechukwu",
     "igboWord": "Ikechukwu",
-    "nsibidi": "𞲵𞲰𞲱",
+    "nsibidi": "果魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's power"
         ],
-        "nsibidi": "𞲵𞲰𞲱"
+        "nsibidi": "果魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:í:ké:chí:úkwú"
     ]
   },
   {
     "id": "36",
     "word": "Kelechi",
     "igboWord": "Kelechi",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲠",
+    "nsibidi": "液鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Thank God"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲠"
+        "nsibidi": "液鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:kè:lè:chí"
     ]
   },
   {
     "id": "37",
     "word": "Kosisochukwu",
     "igboWord": "Kosisochukwu",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲰𞲱",
+    "nsibidi": "歯拷壇魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "As it pleases God"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲰𞲱"
+        "nsibidi": "歯拷壇魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:kọ̀:sí:s:o:chí:úkwú"
     ]
   },
   {
     "id": "38",
     "word": "Nnamdi",
     "igboWord": "Nnamdi",
-    "nsibidi": "𞲸",
+    "nsibidi": "寡征延",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "My father lives"
         ],
-        "nsibidi": "𞲸"
+        "nsibidi": "寡征延"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:nà:m:dị̀"
     ]
   },
   {
     "id": "39",
     "word": "Nnenna",
     "igboWord": "Nnenna",
-    "nsibidi": "𞲮𞲭",
+    "nsibidi": "温穏",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's mother"
         ],
-        "nsibidi": "𞲮𞲭"
+        "nsibidi": "温穏"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:nè:nà"
     ]
   },
   {
     "id": "40",
     "word": "Nkiruka",
     "igboWord": "Nkiruka",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "nsibidi": "縄収達環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "The best is still to come"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+        "nsibidi": "縄収達環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:kí:rú:ká"
     ]
   },
   {
     "id": "41",
     "word": "Nkechi",
     "igboWord": "Nkechi",
-    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "nsibidi": "ń捜鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's gift"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲠"
+        "nsibidi": "ń捜鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:ké:chí"
     ]
   },
   {
     "id": "42",
     "word": "Somtochukwu",
     "igboWord": "Somtochukwu",
-    "nsibidi": "𞲻𞲼",
+    "nsibidi": "壇征享魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Join me in praising God"
         ],
-        "nsibidi": "𞲻𞲼"
+        "nsibidi": "壇征享魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:sọ̀:m:tọ̀:chí:úkwú"
     ]
   },
   {
     "id": "43",
     "word": "Tochukwu",
     "igboWord": "Tochukwu",
-    "nsibidi": "𞲼",
+    "nsibidi": "享魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Praise God"
         ],
-        "nsibidi": "𞲼"
+        "nsibidi": "享魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:tọ̀:chí:úkwú"
     ]
   },
   {
     "id": "44",
     "word": "Jideofor",
     "igboWord": "Jideofor",
-    "nsibidi": "𞳃𞳄",
+    "nsibidi": "議豪惰",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Hold firm"
         ],
-        "nsibidi": "𞳃𞳄"
+        "nsibidi": "議豪惰"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:jí:dé:ó:fò"
     ]
   },
   {
     "id": "45",
     "word": "Jidenna",
     "igboWord": "Jidenna",
-    "nsibidi": "𞳃𞲭",
+    "nsibidi": "議豪寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Hold the father"
         ],
-        "nsibidi": "𞳃𞲭"
+        "nsibidi": "議豪寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:jí:dé:nà"
     ]
   },
   {
     "id": "46",
     "word": "Osinachi",
     "igboWord": "Osinachi",
-    "nsibidi": "𞲠𞲡𞲢𞲨𞲠",
+    "nsibidi": "激宗畝鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "From God"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲨𞲠"
+        "nsibidi": "激宗畝鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:sị̀:ná:chí"
     ]
   },
   {
     "id": "47",
     "word": "Onyinyechi",
     "igboWord": "Onyinyechi",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲠",
+    "nsibidi": "衣角鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's gift"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲠"
+        "nsibidi": "衣角鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:nyé:chí"
     ]
   },
   {
     "id": "48",
     "word": "Onyeka",
     "igboWord": "Onyeka",
-    "nsibidi": "𞲾𞲤𞲥",
+    "nsibidi": "衣環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Who is greater than God"
         ],
-        "nsibidi": "𞲾𞲤𞲥"
+        "nsibidi": "衣環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:ká"
     ]
   },
   {
     "id": "49",
     "word": "Oluchi",
     "igboWord": "Oluchi",
-    "nsibidi": "𞲠𞲡𞲢𞲠",
+    "nsibidi": "圏鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's work"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲠"
+        "nsibidi": "圏鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:lú:chí"
     ]
   },
   {
     "id": "50",
     "word": "Oluoma",
     "igboWord": "Oluoma",
-    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "nsibidi": "圏ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good work"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲬"
+        "nsibidi": "圏ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:lú:ọ́:má"
     ]
   },
   {
     "id": "51",
     "word": "Chioma",
     "igboWord": "Chioma",
-    "nsibidi": "𞲺",
+    "nsibidi": "鼓ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good God"
         ],
-        "nsibidi": "𞲺"
+        "nsibidi": "鼓ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:ọ́:má"
     ]
   },
   {
     "id": "52",
     "word": "Chinecherem",
     "igboWord": "Chinecherem",
-    "nsibidi": "𞲠𞲡𞲥𞲦𞲧𞲨𞲩",
+    "nsibidi": "鼓魚等ré征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God thinks of me"
         ],
-        "nsibidi": "𞲠𞲡𞲥𞲦𞲧𞲨𞲩"
+        "nsibidi": "鼓魚等ré征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:né:ché:rè:m"
     ]
   },
   {
     "id": "53",
     "word": "Chineze",
     "igboWord": "Chineze",
-    "nsibidi": "𞲠𞲡𞲥𞲦",
+    "nsibidi": "鼓魚障",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God saves"
         ],
-        "nsibidi": "𞲠𞲡𞲥𞲦"
+        "nsibidi": "鼓魚障"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:né:zè"
     ]
   },
   {
     "id": "54",
     "word": "Chidimma",
     "igboWord": "Chidimma",
-    "nsibidi": "𞲷𞲥𞲦𞲧",
+    "nsibidi": "鼓延ḿ肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is good"
         ],
-        "nsibidi": "𞲷𞲥𞲦𞲧"
+        "nsibidi": "鼓延ḿ肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:dị̀:m:má"
     ]
   },
   {
     "id": "55",
     "word": "Chidiebere",
     "igboWord": "Chidiebere",
-    "nsibidi": "𞲷𞲴",
+    "nsibidi": "鼓延é砕漸",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is merciful"
         ],
-        "nsibidi": "𞲷𞲴"
+        "nsibidi": "鼓延é砕漸"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:dị̀:é:bé:rè"
     ]
   },
   {
     "id": "56",
     "word": "Chidozie",
     "igboWord": "Chidozie",
-    "nsibidi": "𞲠𞲣𞲤𞲤𞲧",
+    "nsibidi": "鼓災向",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God has repaired"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲤𞲧"
+        "nsibidi": "鼓災向"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:dọ̀:zí"
     ]
   },
   {
     "id": "57",
     "word": "Chigoziem",
     "igboWord": "Chigoziem",
-    "nsibidi": "𞲠𞲣𞲤𞲩",
+    "nsibidi": "鼓岳向征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God has blessed me"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲩"
+        "nsibidi": "鼓岳向征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:gọ́:zí:m"
     ]
   },
   {
     "id": "58",
     "word": "Chika",
     "igboWord": "Chika",
-    "nsibidi": "𞲠𞲣𞲤",
+    "nsibidi": "鼓環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is supreme"
         ],
-        "nsibidi": "𞲠𞲣𞲤"
+        "nsibidi": "鼓環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:ká"
     ]
   },
   {
     "id": "59",
     "word": "Chikamso",
     "igboWord": "Chikamso",
-    "nsibidi": "𞲠𞲣𞲥𞲦𞲧",
+    "nsibidi": "鼓環征壇",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "It is only God I follow"
         ],
-        "nsibidi": "𞲠𞲣𞲥𞲦𞲧"
+        "nsibidi": "鼓環征壇"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:ká:m:sọ̀"
     ]
   },
   {
     "id": "60",
     "word": "Chikodi",
     "igboWord": "Chikodi",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "nsibidi": "厚歌情",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "It is in God's hand"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+        "nsibidi": "厚歌情"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:kó:dí"
     ]
   },
   {
     "id": "61",
     "word": "Chinaza",
     "igboWord": "Chinaza",
-    "nsibidi": "𞲠𞲨𞲥𞲦",
+    "nsibidi": "鼓畝z公",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God answers"
         ],
-        "nsibidi": "𞲠𞲨𞲥𞲦"
+        "nsibidi": "鼓畝z公"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:ná:zá"
     ]
   },
   {
     "id": "62",
     "word": "Chisara",
     "igboWord": "Chisara",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦",
+    "nsibidi": "鼓髄膳",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God answers prayer"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦"
+        "nsibidi": "鼓髄膳"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:sá:rá"
     ]
   },
   {
     "id": "63",
     "word": "Chizaram",
     "igboWord": "Chizaram",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲥",
+    "nsibidi": "鼓z公膳征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God answered me"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲥"
+        "nsibidi": "鼓z公膳征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:zá:rá:m"
     ]
   },
   {
     "id": "64",
     "word": "Ekwi",
     "igboWord": "Ekwi",
-    "nsibidi": "𞲠𞲡𞲢𞲣",
+    "nsibidi": "衛",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Speak"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣"
+        "nsibidi": "衛"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:kwú"
     ]
   },
   {
     "id": "65",
     "word": "Ekwueme",
     "igboWord": "Ekwueme",
-    "nsibidi": "𞲠𞲡𞲱𞲩𞲦",
+    "nsibidi": "海宛偶",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "One who does as he says"
         ],
-        "nsibidi": "𞲠𞲡𞲱𞲩𞲦"
+        "nsibidi": "海宛偶"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:e:k:w:u:é:mé"
     ]
   },
   {
     "id": "66",
     "word": "Ezinne",
     "igboWord": "Ezinne",
-    "nsibidi": "𞲠𞲤𞲮",
+    "nsibidi": "功魚",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good mother"
         ],
-        "nsibidi": "𞲠𞲤𞲮"
+        "nsibidi": "功魚"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:zì:nè"
     ]
   },
   {
     "id": "67",
     "word": "Ifeyinwa",
     "igboWord": "Ifeyinwa",
-    "nsibidi": "𞲫𞲣𞲤𞲿",
+    "nsibidi": "台均緊子",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Nothing compares to a child"
         ],
-        "nsibidi": "𞲫𞲣𞲤𞲿"
+        "nsibidi": "台均緊子"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ị́:fé:y:i:n:w:a"
     ]
   },
   {
     "id": "68",
     "word": "Ijeoma",
     "igboWord": "Ijeoma",
-    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "nsibidi": "í宛ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good journey"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲬"
+        "nsibidi": "í宛ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:i:j:e:ọ́:má"
     ]
   },
   {
     "id": "69",
     "word": "Ikemefuna",
     "igboWord": "Ikemefuna",
-    "nsibidi": "𞲵𞲣𞲤𞲥𞲦𞲨",
+    "nsibidi": "果壊階畝",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Let my strength not be in vain"
         ],
-        "nsibidi": "𞲵𞲣𞲤𞲥𞲦𞲨"
+        "nsibidi": "果壊階畝"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:i:k:é:mé:f:u:n:a"
     ]
   },
   {
     "id": "70",
     "word": "Lotanna",
     "igboWord": "Lotanna",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲭",
+    "nsibidi": "鐘樹寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Remember the father"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲭"
+        "nsibidi": "鐘樹寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ló:tá:nà"
     ]
   },
   {
     "id": "71",
     "word": "Mmesoma",
     "igboWord": "Mmesoma",
-    "nsibidi": "𞲠𞲡𞲢𞲻𞲦",
+    "nsibidi": "征偶壇拳",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good deed"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲻𞲦"
+        "nsibidi": "征偶壇拳"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:m:mé:sọ̀:má"
     ]
   },
   {
     "id": "72",
     "word": "Ngozika",
     "igboWord": "Ngozika",
-    "nsibidi": "𞲶𞲥𞲦",
+    "nsibidi": "ń岳向環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Blessing is the greatest"
         ],
-        "nsibidi": "𞲶𞲥𞲦"
+        "nsibidi": "ń岳向環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:gọ́:zí:ká"
     ]
   },
   {
     "id": "73",
     "word": "Nkeiruka",
     "igboWord": "Nkeiruka",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲧",
+    "nsibidi": "ń捜ì製環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Future is greater"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲧"
+        "nsibidi": "ń捜ì製環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:ké:í:rú:ká"
     ]
   },
   {
     "id": "74",
     "word": "Nneka",
     "igboWord": "Nneka",
-    "nsibidi": "𞲮𞲣𞲤",
+    "nsibidi": "魚環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Mother is supreme"
         ],
-        "nsibidi": "𞲮𞲣𞲤"
+        "nsibidi": "魚環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:nè:ká"
     ]
   },
   {
     "id": "75",
     "word": "Obi",
     "igboWord": "Obi",
-    "nsibidi": "𞲧",
+    "nsibidi": "ó粗",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Heart"
         ],
-        "nsibidi": "𞲧"
+        "nsibidi": "ó粗"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:bì"
     ]
   },
   {
     "id": "76",
     "word": "Ogechukwu",
     "igboWord": "Ogechukwu",
-    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "nsibidi": "潰魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's time"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+        "nsibidi": "潰魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:gé:chí:úkwú"
     ]
   },
   {
     "id": "77",
     "word": "Okwudili",
     "igboWord": "Okwudili",
-    "nsibidi": "𞲠𞲡𞲱𞲤𞲥𞲦𞲧",
+    "nsibidi": "依延結",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Strong pillar"
         ],
-        "nsibidi": "𞲠𞲡𞲱𞲤𞲥𞲦𞲧"
+        "nsibidi": "依延結"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:o:k:w:u:dị̀:l:i"
     ]
   },
   {
     "id": "78",
     "word": "Olaedo",
     "igboWord": "Olaedo",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥",
+    "nsibidi": "権郭",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Gold/wealth"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥"
+        "nsibidi": "権郭"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ọ́là:èdò"
     ]
   },
   {
     "id": "79",
     "word": "Olisa",
     "igboWord": "Olisa",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤",
+    "nsibidi": "魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤"
+        "nsibidi": "魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:úkwú"
     ]
   },
   {
     "id": "80",
     "word": "Onyekachi",
     "igboWord": "Onyekachi",
-    "nsibidi": "𞲾𞲤𞲥𞲠",
+    "nsibidi": "衣環鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Who is greater than God"
         ],
-        "nsibidi": "𞲾𞲤𞲥𞲠"
+        "nsibidi": "衣環鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:ká:chí"
     ]
   },
   {
     "id": "81",
     "word": "Onyekwere",
     "igboWord": "Onyekwere",
-    "nsibidi": "𞲾𞲤𞳇𞲧𞲨",
+    "nsibidi": "衣身漸",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Who believes in God"
         ],
-        "nsibidi": "𞲾𞲤𞳇𞲧𞲨"
+        "nsibidi": "衣身漸"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:kwé:rè"
     ]
   },
   {
     "id": "82",
     "word": "Onyinye",
     "igboWord": "Onyinye",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "nsibidi": "衣角",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Gift"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+        "nsibidi": "衣角"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:nyé"
     ]
   },
   {
     "id": "83",
     "word": "Ozioma",
     "igboWord": "Ozioma",
-    "nsibidi": "𞲠𞲤𞲬",
+    "nsibidi": "託ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good news"
         ],
-        "nsibidi": "𞲠𞲤𞲬"
+        "nsibidi": "託ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:zí:ọ́:má"
     ]
   },
   {
     "id": "84",
     "word": "Oziomachukwu",
     "igboWord": "Oziomachukwu",
-    "nsibidi": "𞲠𞲤𞲬𞲰𞲱",
+    "nsibidi": "託ọ́肢魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good news from God"
         ],
-        "nsibidi": "𞲠𞲤𞲬𞲰𞲱"
+        "nsibidi": "託ọ́肢魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:zí:ọ́:má:chí:úkwú"
     ]
   },
   {
     "id": "85",
     "word": "Ugochi",
     "igboWord": "Ugochi",
-    "nsibidi": "𞲠𞲣𞲠",
+    "nsibidi": "古鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Eagle of God"
         ],
-        "nsibidi": "𞲠𞲣𞲠"
+        "nsibidi": "古鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:gó:chí"
     ]
   },
   {
     "id": "86",
     "word": "Ugomma",
     "igboWord": "Ugomma",
-    "nsibidi": "𞲠𞲣𞲣𞲤𞲥",
+    "nsibidi": "古ḿ煙",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Beautiful eagle"
         ],
-        "nsibidi": "𞲠𞲣𞲣𞲤𞲥"
+        "nsibidi": "古ḿ煙"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:gó:m:má"
     ]
   },
   {
     "id": "87",
     "word": "Uzoamaka",
     "igboWord": "Uzoamaka",
-    "nsibidi": "𞲠𞲡𞲢𞲥𞲦",
+    "nsibidi": "ù窟á肩環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good road"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲥𞲦"
+        "nsibidi": "ù窟á肩環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:zó:á:mà:ká"
     ]
   },
   {
     "id": "88",
     "word": "Zinachidi",
     "igboWord": "Zinachidi",
-    "nsibidi": "𞲤𞲨𞲷",
+    "nsibidi": "航畝鼓延",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Show that God exists"
         ],
-        "nsibidi": "𞲤𞲨𞲷"
+        "nsibidi": "航畝鼓延"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:zí:ná:chí:dị̀"
     ]
   },
   {
     "id": "89",
     "word": "Adaeze",
     "igboWord": "Adaeze",
-    "nsibidi": "𞲲𞲣𞲤𞲥",
+    "nsibidi": "割王",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Princess"
         ],
-        "nsibidi": "𞲲𞲣𞲤𞲥"
+        "nsibidi": "割王"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:dá:é:zè"
     ]
   },
   {
     "id": "90",
     "word": "Adimchi",
     "igboWord": "Adimchi",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲠",
+    "nsibidi": "倉延征鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "My direction"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲠"
+        "nsibidi": "倉延征鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:dị̀:m:chí"
     ]
   },
   {
     "id": "91",
     "word": "Akunna",
     "igboWord": "Akunna",
-    "nsibidi": "𞲠𞲡𞲢𞲭",
+    "nsibidi": "成寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's wealth"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲭"
+        "nsibidi": "成寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:kú:nà"
     ]
   },
   {
     "id": "92",
     "word": "Amarachukwu",
     "igboWord": "Amarachukwu",
-    "nsibidi": "𞲥𞲢𞲣𞲤𞲰𞲱",
+    "nsibidi": "業魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's grace"
         ],
-        "nsibidi": "𞲥𞲢𞲣𞲤𞲰𞲱"
+        "nsibidi": "業魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:má:rá:chí:úkwú"
     ]
   },
   {
     "id": "93",
     "word": "Anulika",
     "igboWord": "Anulika",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "nsibidi": "我結環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's joy"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+        "nsibidi": "我結環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:á:nú:lí:ká"
     ]
   },
   {
     "id": "94",
     "word": "Buchi",
     "igboWord": "Buchi",
-    "nsibidi": "𞳀",
+    "nsibidi": "穫鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Belonging to God"
         ],
-        "nsibidi": "𞳀"
+        "nsibidi": "穫鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:bù:chí"
     ]
   },
   {
     "id": "95",
     "word": "Chidubem",
     "igboWord": "Chidubem",
-    "nsibidi": "𞲠𞲢𞲥𞲩",
+    "nsibidi": "鼓及裾征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God is my guide"
         ],
-        "nsibidi": "𞲠𞲢𞲥𞲩"
+        "nsibidi": "鼓及裾征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:dù:bé:m"
     ]
   },
   {
     "id": "96",
     "word": "Chigozirim",
     "igboWord": "Chigozirim",
-    "nsibidi": "𞲠𞲣𞲤𞲧𞲨𞲩",
+    "nsibidi": "鼓岳向軒征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God bless my journey"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲧𞲨𞲩"
+        "nsibidi": "鼓岳向軒征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:gọ́:zí:rí:m"
     ]
   },
   {
     "id": "97",
     "word": "Chimamanda",
     "igboWord": "Chimamanda",
-    "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩",
+    "nsibidi": "鼓隔氏着",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "My God will not fail"
         ],
-        "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩"
+        "nsibidi": "鼓隔氏着"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:má:má:ń:dá"
     ]
   },
   {
     "id": "98",
     "word": "Chimaraoke",
     "igboWord": "Chimaraoke",
-    "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩",
+    "nsibidi": "鼓拳膳男",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God knows why"
         ],
-        "nsibidi": "𞳅𞲥𞲦𞲧𞲨𞲩"
+        "nsibidi": "鼓拳膳男"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:má:rá:ó:ké"
     ]
   },
   {
     "id": "99",
     "word": "Chinagorom",
     "igboWord": "Chinagorom",
-    "nsibidi": "𞲠𞲨𞲣𞲧𞲨𞲩",
+    "nsibidi": "鼓畝測丈征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God will avenge me"
         ],
-        "nsibidi": "𞲠𞲨𞲣𞲧𞲨𞲩"
+        "nsibidi": "鼓畝測丈征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:ná:gó:ró:m"
     ]
   },
   {
     "id": "100",
     "word": "Chinedum",
     "igboWord": "Chinedum",
-    "nsibidi": "𞲠𞲡𞲢𞲧",
+    "nsibidi": "鼓魚遷",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God leads me"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲧"
+        "nsibidi": "鼓魚遷"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:né:dù:m"
     ]
   },
   {
     "id": "101",
     "word": "Chinwendu",
     "igboWord": "Chinwendu",
-    "nsibidi": "𞲠𞲣𞳇𞲦𞲢",
+    "nsibidi": "鼓禾ń及",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God owns life"
         ],
-        "nsibidi": "𞲠𞲣𞳇𞲦𞲢"
+        "nsibidi": "鼓禾ń及"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:n:wé:ń:dù"
     ]
   },
   {
     "id": "102",
     "word": "Chizurum",
     "igboWord": "Chizurum",
-    "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧",
+    "nsibidi": "鼓暑達征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God rebuilds me"
         ],
-        "nsibidi": "𞲠𞲣𞲤𞲥𞲦𞲧"
+        "nsibidi": "鼓暑達征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:chí:zú:rú:m"
     ]
   },
   {
     "id": "103",
     "word": "Ebelechukwu",
     "igboWord": "Ebelechukwu",
-    "nsibidi": "𞲽𞲰𞲱",
+    "nsibidi": "é砕浪魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's mercy"
         ],
-        "nsibidi": "𞲽𞲰𞲱"
+        "nsibidi": "é砕浪魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:bé:lè:chí:úkwú"
     ]
   },
   {
     "id": "104",
     "word": "Ekene",
     "igboWord": "Ekene",
-    "nsibidi": "𞲠𞲯",
+    "nsibidi": "久魚",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Praise"
         ],
-        "nsibidi": "𞲠𞲯"
+        "nsibidi": "久魚"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:ké:nè"
     ]
   },
   {
     "id": "105",
     "word": "Ekenechukwu",
     "igboWord": "Ekenechukwu",
-    "nsibidi": "𞲠𞲯𞲰𞲱",
+    "nsibidi": "久魚魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Praise God"
         ],
-        "nsibidi": "𞲠𞲯𞲰𞲱"
+        "nsibidi": "久魚魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:ké:nè:chí:úkwú"
     ]
   },
   {
     "id": "106",
     "word": "Enyinnaya",
     "igboWord": "Enyinnaya",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲭𞲧𞲨",
+    "nsibidi": "関寡y案",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Father's friend"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲭𞲧𞲨"
+        "nsibidi": "関寡y案"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:nyí:nà:yá"
     ]
   },
   {
     "id": "107",
     "word": "Ezinwa",
     "igboWord": "Ezinwa",
-    "nsibidi": "𞲠𞲤𞲿",
+    "nsibidi": "功子",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good child"
         ],
-        "nsibidi": "𞲠𞲤𞲿"
+        "nsibidi": "功子"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:é:zì:ń:wá"
     ]
   },
   {
     "id": "108",
     "word": "Ifeanyi",
     "igboWord": "Ifeanyi",
-    "nsibidi": "𞲫𞲣𞲤𞲥𞲦",
+    "nsibidi": "台均菓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Nothing is impossible"
         ],
-        "nsibidi": "𞲫𞲣𞲤𞲥𞲦"
+        "nsibidi": "台均菓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ị́:fé:á:nyí"
     ]
   },
   {
     "id": "109",
     "word": "Ifechukwu",
     "igboWord": "Ifechukwu",
-    "nsibidi": "𞲫𞲰𞲱",
+    "nsibidi": "台均魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's light"
         ],
-        "nsibidi": "𞲫𞲰𞲱"
+        "nsibidi": "台均魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ị́:fé:chí:úkwú"
     ]
   },
   {
     "id": "110",
     "word": "Ihuoma",
     "igboWord": "Ihuoma",
-    "nsibidi": "𞲠𞲡𞲢𞲬",
+    "nsibidi": "市ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good face"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲬"
+        "nsibidi": "市ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:í:hú:ọ́:má"
     ]
   },
   {
     "id": "111",
     "word": "Kamso",
     "igboWord": "Kamso",
-    "nsibidi": "𞲠𞲥𞲣𞲤",
+    "nsibidi": "環征壇",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "I only follow"
         ],
-        "nsibidi": "𞲠𞲥𞲣𞲤"
+        "nsibidi": "環征壇"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ká:m:sọ̀"
     ]
   },
   {
     "id": "112",
     "word": "Kamsiyochukwu",
     "igboWord": "Kamsiyochukwu",
-    "nsibidi": "𞳂𞲥𞲦𞲰𞲱",
+    "nsibidi": "環征拷掃魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "As I asked God"
         ],
-        "nsibidi": "𞳂𞲥𞲦𞲰𞲱"
+        "nsibidi": "環征拷掃魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ká:m:sí:yó:chí:úkwú"
     ]
   },
   {
     "id": "113",
     "word": "Kenechukwu",
     "igboWord": "Kenechukwu",
-    "nsibidi": "𞲯𞲰𞲱",
+    "nsibidi": "椅魚魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Thanks be to God"
         ],
-        "nsibidi": "𞲯𞲰𞲱"
+        "nsibidi": "椅魚魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ké:nè:chí:úkwú"
     ]
   },
   {
     "id": "114",
     "word": "Munachim",
     "igboWord": "Munachim",
-    "nsibidi": "𞲠𞲡𞲨𞲠𞲧",
+    "nsibidi": "花畝襟ṃ",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "I am with God"
         ],
-        "nsibidi": "𞲠𞲡𞲨𞲠𞲧"
+        "nsibidi": "花畝襟ṃ"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:mú:ná:chí:m"
     ]
   },
   {
     "id": "115",
     "word": "Ndidiamaka",
     "igboWord": "Ndidiamaka",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "nsibidi": "以á肩環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Patience is good"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+        "nsibidi": "以á肩環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:dị̀:á:mà:ká"
     ]
   },
   {
     "id": "116",
     "word": "Ngoziem",
     "igboWord": "Ngoziem",
-    "nsibidi": "𞲶𞲩",
+    "nsibidi": "ń岳向征",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "My blessing"
         ],
-        "nsibidi": "𞲶𞲩"
+        "nsibidi": "ń岳向征"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:gọ́:zí:m"
     ]
   },
   {
     "id": "117",
     "word": "Nkiruka",
     "igboWord": "Nkiruka",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦",
+    "nsibidi": "縄収達環",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "What is ahead is greater"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦"
+        "nsibidi": "縄収達環"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ń:kí:rú:ká"
     ]
   },
   {
     "id": "118",
     "word": "Obumneme",
     "igboWord": "Obumneme",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲡𞲦𞲧",
+    "nsibidi": "ò姿征魚偶",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "The heart knows me"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲡𞲦𞲧"
+        "nsibidi": "ò姿征魚偶"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ò:bù:m:né:mé"
     ]
   },
   {
     "id": "119",
     "word": "Ogechioma",
     "igboWord": "Ogechioma",
-    "nsibidi": "𞲠𞲡𞲢𞲺",
+    "nsibidi": "潰鼓ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's good time"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲺"
+        "nsibidi": "潰鼓ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:gé:chí:ọ́:má"
     ]
   },
   {
     "id": "120",
     "word": "Ogechukwu",
     "igboWord": "Ogechukwu",
-    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "nsibidi": "潰魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's appointed time"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+        "nsibidi": "潰魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:gé:chí:úkwú"
     ]
   },
   {
     "id": "121",
     "word": "Okorie",
     "igboWord": "Okorie",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥",
+    "nsibidi": "ó沖軒",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Born on market day"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥"
+        "nsibidi": "ó沖軒"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:kó:rí"
     ]
   },
   {
     "id": "122",
     "word": "Oluchioma",
     "igboWord": "Oluchioma",
-    "nsibidi": "𞲠𞲡𞲢𞲺",
+    "nsibidi": "圏鼓ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good God's work"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲺"
+        "nsibidi": "圏鼓ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:lú:chí:ọ́:má"
     ]
   },
   {
     "id": "123",
     "word": "Onyebuchi",
     "igboWord": "Onyebuchi",
-    "nsibidi": "𞲾𞳀",
+    "nsibidi": "衣穫鼓",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Who is God"
         ],
-        "nsibidi": "𞲾𞳀"
+        "nsibidi": "衣穫鼓"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:bù:chí"
     ]
   },
   {
     "id": "124",
     "word": "Onyinyechukwu",
     "igboWord": "Onyinyechukwu",
-    "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲰𞲱",
+    "nsibidi": "衣角魂大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's gift"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲣𞲤𞲥𞲦𞲰𞲱"
+        "nsibidi": "衣角魂大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ó:nyé:nyé:chí:úkwú"
     ]
   },
   {
     "id": "125",
     "word": "Uchechioma",
     "igboWord": "Uchechioma",
-    "nsibidi": "𞲳𞲺",
+    "nsibidi": "虞鼓ọ́肢",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good God's will"
         ],
-        "nsibidi": "𞲳𞲺"
+        "nsibidi": "虞鼓ọ́肢"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:chè:chí:ọ́:má"
     ]
   },
   {
     "id": "126",
     "word": "Uchenna",
     "igboWord": "Uchenna",
-    "nsibidi": "𞲳𞲭",
+    "nsibidi": "虞寡",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's mind"
         ],
-        "nsibidi": "𞲳𞲭"
+        "nsibidi": "虞寡"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:úchè:nà"
     ]
   },
   {
     "id": "127",
     "word": "Udochukwu",
     "igboWord": "Udochukwu",
-    "nsibidi": "𞲠𞲡𞲢𞲰𞲱",
+    "nsibidi": "ù災襟大",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "God's peace"
         ],
-        "nsibidi": "𞲠𞲡𞲢𞲰𞲱"
+        "nsibidi": "ù災襟大"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:dò:chí:úkwú"
     ]
   },
   {
     "id": "128",
     "word": "Ugonne",
     "igboWord": "Ugonne",
-    "nsibidi": "𞲠𞲣𞲮",
+    "nsibidi": "古魚",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Mother's eagle"
         ],
-        "nsibidi": "𞲠𞲣𞲮"
+        "nsibidi": "古魚"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:gó:nè"
     ]
   },
   {
     "id": "129",
     "word": "Uzoma",
     "igboWord": "Uzoma",
-    "nsibidi": "𞲠𞲡𞲬",
+    "nsibidi": "ù窟拳",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Good path"
         ],
-        "nsibidi": "𞲠𞲡𞲬"
+        "nsibidi": "ù窟拳"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:ú:zó:má"
     ]
   },
   {
     "id": "130",
     "word": "Zikora",
     "igboWord": "Zikora",
-    "nsibidi": "𞲤𞲢𞲣𞲤𞲥",
+    "nsibidi": "航擬膳",
     "definitions": [
       {
         "wordClass": "NNP",
         "definitions": [
           "Show the world"
         ],
-        "nsibidi": "𞲤𞲢𞲣𞲤𞲥"
+        "nsibidi": "航擬膳"
       }
     ],
     "tags": [
-      "generated-v1",
-      "name"
+      "generated-v2-igbo-api",
+      "name",
+      "pro:zí:kó:rá"
     ]
   }
 ]
