@@ -31,3 +31,29 @@ Android now uses bundle ID `com.henryezeanyim.nketa`. iOS keeps `com.henryezeany
 ## External URLs
 
 Privacy, terms, and payment redirects use `https://nketa.netlify.app/` (deploy the same routes as before: `/privacy`, `/terms`, `/payment-success`, `/subscribe`, `/logo.png`).
+
+## Hackathon / Benchmark
+
+Sahara CodeSwitch Africa Challenge submission materials:
+
+- **Public docs site:** _https://nketa-hackathon.netlify.app_ (deploy from this repo via Netlify)
+- In-repo copies: [Solution](docs/HACKATHON_SOLUTION.md), [Benchmark report](benchmark/results/BENCHMARK_REPORT.md), [Demo script](docs/DEMO_VIDEO_SCRIPT.md)
+
+### Preview submission docs locally
+
+```bash
+pip install -r requirements-docs.txt
+python3 scripts/build_docs.py
+python3 -m mkdocs serve
+```
+
+Open http://127.0.0.1:8000 for the submission site (solution, benchmark report, listen-and-compare sample clips).
+
+### Netlify deploy
+
+1. Netlify -> Add site -> Import from Git (private repo is fine)
+2. Site name e.g. `nketa-hackathon`
+3. Build command and publish directory are set in [`netlify.toml`](netlify.toml)
+4. No env vars needed for the docs build
+
+Reproduce the STT benchmark: see [benchmark/README.md](benchmark/README.md).

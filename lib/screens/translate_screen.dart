@@ -53,8 +53,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
   String? _errorMessage;
   List<TranslationResult> _results = [];
   List<String> _originalWords = [];
-  bool _usedAI = false; // Track whether AI was used
-  bool _usedNamesList = false; // Track if result came from names list
+  bool _usedAI = false;
+  bool _usedNamesList = false;
   String _partialTranscript = '';
   String? _heardTranscript;
 
@@ -63,7 +63,7 @@ class _TranslateScreenState extends State<TranslateScreen> {
 
   Map<String, int> _usageStats = {'translations': 0, 'images': 0};
   bool _loadingUsage = true;
-  bool _isSubscribed = false; // Track subscription status
+  bool _isSubscribed = false;
 
   @override
   void initState() {
@@ -133,7 +133,6 @@ class _TranslateScreenState extends State<TranslateScreen> {
         return;
       }
 
-      // Use OpenAI to break text into words and word classes
       final wordBreakdownPrompt = '''
 Break "$inputText" into Igbo word components and their word classes using these codes: WH (wh-word), AV (adverb), NNC (common noun), etc.
 Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
@@ -147,7 +146,6 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
         throw Exception('Unable to process the text. Please try again.');
       }
 
-      // Parse the AI response to get individual words and classes
       final List<dynamic> parsedJson = jsonDecode(aiResponse);
       final List<WordWithClass> wordsWithClass =
           parsedJson.map((item) {
@@ -171,7 +169,6 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
         wordsWithClass,
       );
 
-      // Use AI to select the most contextually appropriate translations
       final contextAwareResults = await _selectContextAwareTranslations(
         inputText,
         words,
@@ -297,11 +294,8 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
       ambiguous,
       intendedMeaning: intendedMeaning,
     );
-    // debugPrint("Sending minimal ambiguity prompt to AI: $aiPrompt");
     final aiSelection = await _openAIService.generateTranslation(aiPrompt);
     if (aiSelection == null || aiSelection.isEmpty) {
-      // debugPrint("AI returned null or empty response, using fallback");
-      // Fallback: use first available translation for ambiguous
       for (final amb in ambiguous) {
         results[amb.index] = amb.options.first;
       }

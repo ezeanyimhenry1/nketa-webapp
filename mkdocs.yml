@@ -1,0 +1,32 @@
+site_name: Nketa - Sahara CodeSwitch Submission
+site_description: Igbo voice app and STT benchmark for the Intron Sahara CodeSwitch Africa Challenge
+site_url: https://nketa-hackathon.netlify.app
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: amber
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - md_in_html
+
+docs_dir: docs_site
+
+nav:
+  - Home: index.md
+  - Solution: solution.md
+  - Benchmark report: benchmark-report.md
+  - Sample clips: benchmark-samples.md
+  - Reproduce benchmark: benchmark-howto.md
+  - Ethics: ethics.md
+
+extra:
+  generator: false

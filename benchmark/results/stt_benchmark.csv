@@ -1,0 +1,201 @@
+id,category,source,language_pair,dialect,noise,recording_type,model,reference,hypothesis,wer,cer,exact_match,name_lookup_success,latency_s,error
+name_1,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chinedu,"Chinedu
+",0.0,0.0,True,True,16.282,
+name_2,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chidi,"Twid
+",1.0,0.6,False,False,11.714,
+name_3,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chiamaka,"Chiamaka
+",0.0,0.0,True,True,13.49,
+name_4,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chinonso,"She non
+",1.0,0.5,False,False,7.501,
+name_5,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chukwudi,"Chukwudi
+",0.0,0.0,True,True,7.285,
+name_6,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chukwuma,"Chukwu
+",1.0,0.25,False,True,4.232,
+name_7,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chibueze,"Chi bụ eze.
+",0.0,0.0,True,True,17.626,
+name_8,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chigozie,"Chika ozi
+",1.0,0.375,False,True,8.378,
+name_9,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chisom,"Chisom
+",0.0,0.0,True,True,10.866,
+name_10,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chinwe,"Chinue
+",1.0,0.1667,False,False,10.516,
+name_11,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chinweike,"Chinwe ike
+",0.0,0.0,True,True,7.18,
+name_12,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chizoba,"Chizọba!
+",0.0,0.0,True,True,6.993,
+name_13,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Chizitere,"Chizite
+",1.0,0.2222,False,True,12.038,
+name_14,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Ngozi,"Ngozi
+",0.0,0.0,True,True,9.918,
+name_15,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,intron,Amaka,"Amaka
+",0.0,0.0,True,True,13.035,
+cs_1,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,My name is Chinedu,"My name is Chinedu
+",0.0,0.0,True,True,9.157,
+cs_2,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Kedu aha gị,"Kedu aha?
+",1.0,0.2222,False,False,8.855,
+cs_3,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Nna m bụ Emeka,"Nna m bụ
+",1.0,0.4545,False,False,6.987,
+cs_4,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,I am from Enugu,"I am from
+",1.0,0.4167,False,False,6.919,
+cs_5,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Chukwu gozie gị,"Chukwu gozie
+",1.0,0.1538,False,False,8.224,
+cs_6,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Onye kwe chi ya ekwe,"Onye kwechi ya ekwe
+",0.0,0.0,True,False,7.08,
+cs_7,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Biko kwuo ya ọzọ,"Biko kwuo ya
+",1.0,0.2308,False,False,5.747,
+cs_8,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Nọ n'ụlọ,"
+",1.0,1.0,False,True,4.419,
+cs_9,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Igbo amaka,"Igbo ama
+",1.0,0.2222,False,False,8.99,
+cs_10,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,intron,Ndewo how are you,"Ndewo
+",1.0,0.6429,False,False,11.882,
+afriswitch_0000,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"O buru na ikariri the money, anyi ewere ya mee giveaway","Oburu i ka inye gi away
+",1.0,0.5909,False,False,17.79,
+afriswitch_0001,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,N nke na-as bekee b nke ma ihe Chukwu ozikwa d maka ihe pta kajuru m af ach m ikwete na ihe bla na-ebe a nnwagh na-as ass Igbo ji igbe egbuji chetakwa na nwatakr mta aka ike,"N nke na asu bekee bụ nke ma ihe Chukwu gozikwa petro maka na ihe m fotajuru m afọ achro m ikweta na onye obula no ebe a na nwa gi ma asu asusu Igbo obrokwa igbuji ikpo egbuji chetakwa na nwatakiri muta bụ aka ike m ga
+",1.0,0.391,False,False,41.979,
+afriswitch_0002,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"or they go for your wealth, no woman will say that she loves you because you have aku obi","Or they go for your wel woman will say that she locks you because you have approach
+",1.0,0.1857,False,False,20.614,
+afriswitch_0003,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Ekwy nwa, I so taa anụ udene n'agbaghị agba? I nwere ike, e wete mpala ya ọ karịa mpala ọkụkọ","Ebi nwa ise tanu udede na ama karia mpara
+",1.0,0.6,False,False,30.749,
+afriswitch_0004,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,Arears of five years with ihe ha na eme na data office,"Ariers are five years with ihe a na eme na data office
+",1.0,0.1395,False,False,15.755,
+afriswitch_0005,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,And joblessness. And to think that na Catholic will shelter and clothe and provide all those things for you,"And jobsness and to think that na Cadik will shorta and clowed and we provide all those things for you
+",1.0,0.1932,False,False,29.563,
+afriswitch_0006,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,Onye a na agaghari everywhere agba ncha with nwoke o bula o meet randomly,"Onye ala redio wee gwa ncha nwoke ọ bụla ọ meetiri randon
+",1.0,0.4333,False,False,36.877,
+afriswitch_0007,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Mgbe ọ bịara ị da agwa anyị na, na ọ ya-ebido helpụọ. Don't forget na ebe this China trip bidoro wụ","Mgbe ọ bịara ịta agwa anyị na ọ ya ebido help war don forget na ebe ndị China trip
+",1.0,0.24,False,False,24.273,
+afriswitch_0008,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"He also went to Mr elephant's house O gakwara na ulo maazi enyi, o gakwara na ulo maazi enyi Mr ram","He also went to Mr. Elephant house enyi ọ gakwara n'ụlọ Maazi enyi Maazi Ram
+",1.0,0.3117,False,False,49.276,
+afriswitch_0009,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,onion ndi a ka m na agwa gi,"
+",1.0,1.0,False,False,5.561,
+afriswitch_0010,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,prove otherwise nna ma lu ma,"
+",1.0,1.0,False,False,10.109,
+afriswitch_0011,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,Iweta ihe iji wee bia biko onye mettara n'obi obura godi igwe eji aga ije ka akporo wheel chair ka anyi biko,"I wete ihe anyi ji wee bia biko onye ọ metụtara n'obi ọbụlagodi igwe eji aga ije nke akpọrọ Wilche ka anyi
+",1.0,0.2209,False,False,27.243,
+afriswitch_0012,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Phone hundred, ga anwuru unu na thirty Ka unu ife a na eme","Foon 100 ife a na-eme
+",1.0,0.7556,False,False,13.863,
+afriswitch_0013,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Daalu, let's see, okay, okay, you guys are free, I love the, I love the interaction, I love","Daalụ you guys a bree, a love the love the ineraction aloeve
+",1.0,0.3485,False,False,26.5,
+afriswitch_0014,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Umu ezinaulo for Theresa Onuorah, okay yeah, egwu egwuriegwu, so","Ụmụ ezinụlọ for Toris Hon. Okay, that's a governor
+",1.0,0.5192,False,False,21.602,
+afriswitch_0015,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"almost na oburu na ahafuru that young guy, o ga destroy umu okorobia anyi niile. Kirikiri umu azu, o ka destroy ha complete iwotago. So they were thinking na continuous detention of akwa okuko","Almost na-ahapụ that young guard okay destroy ụmụokorobịa anyị niile kirikiri ụmụazi Okay destroy are complete so then we are thinking na continuous detention of akwa okuko
+",1.0,0.1871,False,False,17.539,
+afriswitch_0016,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"The water is full, mmịrị juru eju. Mmịrị","The water is full mmiri juru eju mmiri
+",0.0,0.0,True,False,15.455,
+afriswitch_0017,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Message mu, too much people anaghi ege ya","Meseji m too much people anaghị ege
+",1.0,0.2121,False,False,9.238,
+afriswitch_0018,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Hi friends it's me aunty udochi, and today we are going to be colouring with the ewu akka gawu igbo body part song colouring book,are your ready, let's go","High friends it's me at Udochi and today we are going to be coloring with the eho akụkọ ahụ Igbo body parts song coloring book are you ready let's go
+",1.0,0.124,False,False,11.745,
+afriswitch_0019,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"pia ya, rie ya ofuma, rie ya, ritaa ya, ahu na ihe anyi juu before anyi agbawa, hei ofe owerri a","Rie anya rie ya ofuma rie ya riba ya ahụ ira ofe anyi agbara ofe
+",1.0,0.4225,False,False,10.582,
+afriswitch_0020,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Chi na eji,well done","Chi na-eji well done
+",0.0,0.0,True,False,14.89,
+afriswitch_0021,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,Ehh erijurum afo Go wash your plate Ga asa efere gi I am washing my plate,"Ee eri juru m afọ go wash your plate gaa saa efere gị gaa saa efere gị I amashing my
+",1.0,0.3793,False,False,15.586,
+afriswitch_0022,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,"Did you guys change when I was inside, did you all fucking, you bitches change? mad woman, ikpu nne gi wu mad, umu nna gi wu mad","Did you like change when I was inside your footing you pitched his change mmadu wuma na ikwu nne gi wu mma ke mmad
+",1.0,0.3299,False,False,11.818,
+afriswitch_0023,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,anyi batara wee hu na ya bu mmemme graduation nke ha mere tata ebirila oku. Onye mbu anyi kporo ihu bu onye isi nke na-ahu maka ogo nke secondary,"Anyi batara wee hu na ya bụ mmemme graduation nke ha mere taata ebila oku onye mbụ anyi kporo ihu bụ onye isi nke na ahu maka ogo nke
+",1.0,0.1043,False,False,17.131,
+afriswitch_0024,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,intron,na-ekiri ugbua b ya kacha fma n'ass Igbo na klaas S,"I na-ekiri ugbu a bụ ya kacha mee ọfụma n'asụsụ Igbo na klas SS3 bụ ndị nke gụcha
+",1.0,0.6154,False,False,9.587,
+name_1,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chinedu,Chinatown,1.0,0.7143,False,False,0.599,
+name_2,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chidi,Qidi,1.0,0.4,False,False,1.124,
+name_3,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chiamaka,チェアマーカー,1.0,1.0,False,False,0.552,
+name_4,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chinonso,Chinnonso,1.0,0.125,False,False,0.535,
+name_5,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chukwudi,c'è tutti,1.0,0.75,False,False,0.559,
+name_6,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chukwuma,チュコーマ,1.0,1.0,False,False,0.54,
+name_7,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chibueze,too busy,1.0,0.75,False,False,0.53,
+name_8,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chigozie,Chicos e...,1.0,0.375,False,False,1.211,
+name_9,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chisom,She's so...,1.0,0.6667,False,False,0.521,
+name_10,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chinwe,C'è il noi?,1.0,0.6667,False,False,0.628,
+name_11,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chinweike,שינוי ככה?,1.0,1.0,False,False,0.552,
+name_12,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chizoba,Cizoba.,1.0,0.1429,False,False,1.379,
+name_13,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chizitere,"Cheesy, tell me.",1.0,0.7778,False,False,0.533,
+name_14,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Ngozi,um gozi,1.0,0.4,False,False,0.524,
+name_15,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Amaka,Amaka,0.0,0.0,True,True,0.529,
+cs_1,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,My name is Chinedu,My name is Chinedu,0.0,0.0,True,True,0.556,
+cs_2,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Kedu aha gị,Kiyadu ahagi,1.0,0.3333,False,False,0.534,
+cs_3,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Nna m bụ Emeka,nambu emeka,1.0,0.0909,False,True,0.523,
+cs_4,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,I am from Enugu,I am from Enugu.,0.0,0.0,True,False,0.538,
+cs_5,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Chukwu gozie gị,شكو جوز يجي,1.0,1.0,False,False,2.432,
+cs_6,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Onye kwe chi ya ekwe,Un'epoequia eque,1.0,0.5625,False,False,0.553,
+cs_7,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Biko kwuo ya ọzọ,Bico cuoiozo,1.0,0.3846,False,False,0.538,
+cs_8,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Nọ n'ụlọ,Non allo,1.0,0.3333,False,False,1.189,
+cs_9,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Igbo amaka,"Игбо, Амака.",1.0,1.0,False,False,0.553,
+cs_10,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper,Ndewo how are you,Do how are you?,1.0,0.2143,False,False,0.534,
+afriswitch_0000,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"O buru na ikariri the money, anyi ewere ya mee giveaway",I will make a name on it when I make you be with.,1.0,0.7727,False,False,0.707,
+afriswitch_0001,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,N nke na-as bekee b nke ma ihe Chukwu ozikwa d maka ihe pta kajuru m af ach m ikwete na ihe bla na-ebe a nnwagh na-as ass Igbo ji igbe egbuji chetakwa na nwatakr mta aka ike,"nong ke nasu bekei, bung ke mai he tu kut, gozi kwa te traka de mi matanian futata jumafo ato mi kwa te, nong elpna ne ba nong elge ma suas tu suigo au prou pi puji puji puji puji ce ta puan nongo ta kirengo ta ba ki kemi ta vi",1.0,0.6917,False,False,9.321,
+afriswitch_0002,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"or they go for your wealth, no woman will say that she loves you because you have aku obi","Or, be good for your wealth. No woman will say that she loves you because you have a good being.",1.0,0.1571,False,False,0.715,
+afriswitch_0003,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Ekwy nwa, I so taa anụ udene n'agbaghị agba? I nwere ike, e wete mpala ya ọ karịa mpala ọkụkọ","e bing, it's a tanu da na na mahama e wita na na na na na na na na na mahama",1.0,0.6571,False,False,8.12,
+afriswitch_0004,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,Arears of five years with ihe ha na eme na data office,"Arias, 5 years, with the enemy at that office",1.0,0.4186,False,False,2.362,
+afriswitch_0005,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,And joblessness. And to think that na Catholic will shelter and clothe and provide all those things for you,"...and your blissness. And to think that Nakarlik, who is shorter, ...and include and may provide all those things for you.",1.0,0.2614,False,False,0.809,
+afriswitch_0006,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,Onye a na agaghari everywhere agba ncha with nwoke o bula o meet randomly,"我們要來幹了,我們要去幹了,我們要去幹了。",1.0,1.0,False,False,6.079,
+afriswitch_0007,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Mgbe ọ bịara ị da agwa anyị na, na ọ ya-ebido helpụọ. Don't forget na ebe this China trip bidoro wụ","Ngwapia raida wai Nah, no ye video, help wap Don't forget nae bae bae bae bae bae bae bae bae bae bae bae bae bae",1.0,0.7067,False,False,0.959,
+afriswitch_0008,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"He also went to Mr elephant's house O gakwara na ulo maazi enyi, o gakwara na ulo maazi enyi Mr ram",He also went to Mr. Elephant's House. Ogakwara lula mazi eni Ogakwara lula mazi eni Mr. Ram,1.0,0.1299,False,False,0.882,
+afriswitch_0009,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,onion ndi a ka m na agwa gi,ว่ามันไม่ได้กันหน่ากันหน่ากัน,1.0,1.0,False,False,0.712,
+afriswitch_0010,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,prove otherwise nna ma lu ma,من أمانه أمان,1.0,1.0,False,False,2.213,
+afriswitch_0011,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,Iweta ihe iji wee bia biko onye mettara n'obi obura godi igwe eji aga ije ka akporo wheel chair ka anyi biko,Iwetan ihaj iwebia. Biko o nomet saranobi. Opera godi iwe ijagi jengat bero wiru cia. Kani biko.,1.0,0.314,False,False,0.974,
+afriswitch_0012,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Phone hundred, ga anwuru unu na thirty Ka unu ife a na eme",فومو ہندرے دی دا وغنا تاثے گنیسانے میں,1.0,1.0,False,False,0.742,
+afriswitch_0013,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Daalu, let's see, okay, okay, you guys are free, I love the, I love the interaction, I love",Dalo um let's see okay okay you guys are great I love the I love the interaction I love,1.0,0.0909,False,False,0.731,
+afriswitch_0014,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Umu ezinaulo for Theresa Onuorah, okay yeah, egwu egwuriegwu, so","humo, it is no law for Theresa on all right okay that's the problem egu, egu, egu, egu, egu, egu, egu so",1.0,0.7692,False,False,8.05,
+afriswitch_0015,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"almost na oburu na ahafuru that young guy, o ga destroy umu okorobia anyi niile. Kirikiri umu azu, o ka destroy ha complete iwotago. So they were thinking na continuous detention of akwa okuko","The century is almost another half of a back close, currently must restore coal mining power. written a few words, let's try this photograph. Complete. Be on 베 kre",1.0,0.8065,False,False,13.667,
+afriswitch_0016,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"The water is full, mmịrị juru eju. Mmịrị",The water is full. Miri juraju. Miri.,1.0,0.129,False,False,0.659,
+afriswitch_0017,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Message mu, too much people anaghi ege ya",Mas sejam-me em 2 maçãs para pular na Hege.,1.0,0.6667,False,False,2.28,
+afriswitch_0018,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Hi friends it's me aunty udochi, and today we are going to be colouring with the ewu akka gawu igbo body part song colouring book,are your ready, let's go","Hi friends, it's me, Ating Do Chi. And today, we are going to be coloring with the Iguakukaku Ibo Body Parts song coloring book. Are you ready? Let's go.",1.0,0.1322,False,False,1.023,
+afriswitch_0019,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"pia ya, rie ya ofuma, rie ya, ritaa ya, ahu na ihe anyi juu before anyi agbawa, hei ofe owerri a",薄餃 牛油 薄餃 薄餃,1.0,1.0,False,False,7.777,
+afriswitch_0020,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Chi na eji,well done",She made it Well done,1.0,0.375,False,False,0.692,
+afriswitch_0021,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,Ehh erijurum afo Go wash your plate Ga asa efere gi I am washing my plate,aeryjurum afo go wash your plates gasa eferregi gasa eferregi I am washing my plates,1.0,0.3103,False,False,0.78,
+afriswitch_0022,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,"Did you guys change when I was inside, did you all fucking, you bitches change? mad woman, ikpu nne gi wu mad, umu nna gi wu mad",Did you not change what I was inside? Did you have a thing with me? What mother? What mother?,1.0,0.5464,False,False,0.768,
+afriswitch_0023,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,anyi batara wee hu na ya bu mmemme graduation nke ha mere tata ebirila oku. Onye mbu anyi kporo ihu bu onye isi nke na-ahu maka ogo nke secondary,"Ayibatara, wae hon ayabu me make radiation kehanere tata ibiwi loko. Onyan white worry hu, bu, onyisi, mike na homaka, ogun ke se kondru.",1.0,0.2957,False,False,0.994,
+afriswitch_0024,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper,na-ekiri ugbua b ya kacha fma n'ass Igbo na klaas S,"Inekiriru boa, boyaka cha mofo ma nasu suibu na klas ss3. Bun din kego cha gola gocha.",1.0,0.9487,False,False,0.841,
+name_1,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chinedu,신내두,1.0,1.0,False,False,0.808,
+name_2,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chidi,七滴,1.0,1.0,False,False,0.661,
+name_3,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chiamaka,치언마카,1.0,1.125,False,False,0.379,
+name_4,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chinonso,She knows so.,1.0,0.625,False,False,0.274,
+name_5,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chukwudi,舍哭低,1.0,1.0,False,False,0.72,
+name_6,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chukwuma,チューコーな,1.0,1.0,False,False,0.29,
+name_7,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chibueze,Shibuese,1.0,0.25,False,False,0.279,
+name_8,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chigozie,チコーズ,1.0,1.0,False,False,0.277,
+name_9,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chisom,She's so...,1.0,0.6667,False,False,0.268,
+name_10,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chinwe,¿Chino es?,1.0,0.3333,False,False,0.273,
+name_11,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chinweike,"She's awake, eh?",1.0,0.8889,False,False,0.286,
+name_12,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chizoba,چزوبا,1.0,1.0,False,False,0.28,
+name_13,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chizitere,She's a terrible,1.0,0.8889,False,False,0.29,
+name_14,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Ngozi,ご視聴,1.0,1.0,False,False,0.821,
+name_15,igbo_name,local,ig,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Amaka,amat ha,1.0,0.4,False,False,0.625,
+cs_1,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,My name is Chinedu,My name is Chine-Doo.,1.0,0.1333,False,False,0.306,
+cs_2,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Kedu aha gị,کیا دو اہاگی۔,1.0,1.1111,False,False,0.306,
+cs_3,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Nna m bụ Emeka,Nambu Emeca,1.0,0.1818,False,False,0.288,
+cs_4,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,I am from Enugu,I am from Enugu.,0.0,0.0,True,False,0.288,
+cs_5,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Chukwu gozie gị,Tio Cougos e a G.,1.0,0.6923,False,False,0.895,
+cs_6,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Onye kwe chi ya ekwe,un'iequetia e qui,1.0,0.625,False,False,0.914,
+cs_7,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Biko kwuo ya ọzọ,Bico cuoyosa,1.0,0.4615,False,False,0.289,
+cs_8,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Nọ n'ụlọ,"No, no, no.",1.0,0.3333,False,False,0.28,
+cs_9,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Igbo amaka,いくぼうあまか,1.0,1.0,False,False,0.29,
+cs_10,code_switched,local,ig-en,Enugu,quiet,intron_tts_bootstrap,faster_whisper_small,Ndewo how are you,給我好愛 you,1.0,0.7857,False,False,0.81,
+afriswitch_0000,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"O buru na ikariri the money, anyi ewere ya mee giveaway","Abonei, cara, ele não é uma ideia de ver o quê?",1.0,0.7273,False,False,1.687,
+afriswitch_0001,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,N nke na-as bekee b nke ma ihe Chukwu ozikwa d maka ihe pta kajuru m af ach m ikwete na ihe bla na-ebe a nnwagh na-as ass Igbo ji igbe egbuji chetakwa na nwatakr mta aka ike,"No, you can ask, which bhai kaya bhai kaya. Chukutt, Kozi kota traka de mi maka hai, Fota traka jeu maa for. Aksao ne kota hai, no yaop na ne ba, no yaop na ne ba, no yaop ga maa sוא� when you are so srisi kutt. Oprah Pee Pooji poya booji. Ceta bawa nawa takiri mokhavaa ki kaya gavi.",1.0,1.0301,False,False,8.24,
+afriswitch_0002,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"or they go for your wealth, no woman will say that she loves you because you have aku obi","Ó, decou foi ao Welch. Não humano cê dá até se lance o vico se avababa o vico.",1.0,0.6571,False,False,1.994,
+afriswitch_0003,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Ekwy nwa, I so taa anụ udene n'agbaghị agba? I nwere ike, e wete mpala ya ọ karịa mpala ọkụkọ","di setanud dan enak menghama diholiknya, ewetem parai okar yang panogukok",1.0,0.5429,False,False,4.032,
+afriswitch_0004,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,Arears of five years with ihe ha na eme na data office,¡Ariá! ¡Vo a 5 días! ¡Vo a 3 días! ¡Vo a 3 días!,1.0,0.7674,False,False,0.422,
+afriswitch_0005,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,And joblessness. And to think that na Catholic will shelter and clothe and provide all those things for you,"and your blissness. To think that in a colleague who is shorter and include him, we will provide all those things for you.",1.0,0.3864,False,False,0.456,
+afriswitch_0006,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,Onye a na agaghari everywhere agba ncha with nwoke o bula o meet randomly,歐南大力主要不勇求武漢主要力主要不勇,1.0,1.0,False,False,2.335,
+afriswitch_0007,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Mgbe ọ bịara ị da agwa anyị na, na ọ ya-ebido helpụọ. Don't forget na ebe this China trip bidoro wụ","Boleh raya tak baik? Nah. No ya, video help, lo. Don't forget, nebebis saya, nah. Tribun Bidurung.",1.0,0.48,False,False,0.614,
+afriswitch_0008,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"He also went to Mr elephant's house O gakwara na ulo maazi enyi, o gakwara na ulo maazi enyi Mr ram","He also went to Mr. Elephant's house. Agacuara, no lo mazie, Amy. Agacuara, no lo mazie, Amy. Mr. Ram.",1.0,0.2338,False,False,0.55,
+afriswitch_0009,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,onion ndi a ka m na agwa gi,วันว่าเป็นหน่ากันหน่าบอกัน,1.0,1.0,False,False,0.391,
+afriswitch_0010,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,prove otherwise nna ma lu ma,またね! またね! またね! またね!,1.0,1.0,False,False,1.401,
+afriswitch_0011,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,Iweta ihe iji wee bia biko onye mettara n'obi obura godi igwe eji aga ije ka akporo wheel chair ka anyi biko,This is the place where we live Because we don't know what's going on Hope you are happy I am going to the place where we live Because we are happy,1.0,1.0233,False,False,6.107,
+afriswitch_0012,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Phone hundred, ga anwuru unu na thirty Ka unu ife a na eme",Fouh mi hundraati da wo nataate guni faanei me,1.0,0.6,False,False,6.852,
+afriswitch_0013,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Daalu, let's see, okay, okay, you guys are free, I love the, I love the interaction, I love","Da-lo. Um, let's see me. Okay. Okay. You guys are great. I love the- I love the interaction. I love-",1.0,0.1212,False,False,0.483,
+afriswitch_0014,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Umu ezinaulo for Theresa Onuorah, okay yeah, egwu egwuriegwu, so","Umu, uh, as you know, for uh, to be so I know, okay, that's a problem. Um, Ego, Ego, Ego, Ego, Ego, Ego, Ego, Ego, Ego, so...",1.0,1.0192,False,False,2.065,
+afriswitch_0015,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"almost na oburu na ahafuru that young guy, o ga destroy umu okorobia anyi niile. Kirikiri umu azu, o ka destroy ha complete iwotago. So they were thinking na continuous detention of akwa okuko","No matter how far back you got, okay, this story will not create any meaning Take care of yourself, okay, this story will not complete No matter how far back you got, this story will not complete So, there were thinking, nah, continuous detention of Apococo",1.0,0.8323,False,False,0.669,
+afriswitch_0016,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"The water is full, mmịrị juru eju. Mmịrị",The water is full Miri Jureju Miri,1.0,0.0968,False,False,0.438,
+afriswitch_0017,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Message mu, too much people anaghi ege ya",ne saisree dagim na tumajh pi pa' rana hai ga,1.0,0.697,False,False,6.671,
+afriswitch_0018,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Hi friends it's me aunty udochi, and today we are going to be colouring with the ewu akka gawu igbo body part song colouring book,are your ready, let's go","Hi friends, it's me, Artun Dochi, and today we are going to be coloring with the Edward Akukahu Ibo body parts song coloring book. Are you ready? Let's go.",1.0,0.1405,False,False,0.541,
+afriswitch_0019,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"pia ya, rie ya ofuma, rie ya, ritaa ya, ahu na ihe anyi juu before anyi agbawa, hei ofe owerri a",พี่อาย ยัง ยังยังยอีกผมอันยังยังยังยังคือมอันยัง อย่างนี่ไป อาทไทย อันยังยังความอย่างว่า ๆ.,1.0,1.0,False,False,6.292,
+afriswitch_0020,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Chi na eji,well done","Chi, me, Chi. Well done!",1.0,0.25,False,False,0.321,
+afriswitch_0021,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,Ehh erijurum afo Go wash your plate Ga asa efere gi I am washing my plate,"Hey, every dream, ever. Go wash your plates. Gas are efferiging. Gas are efferiging. I am washing my plates.",1.0,0.6207,False,False,0.738,
+afriswitch_0022,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,"Did you guys change when I was inside, did you all fucking, you bitches change? mad woman, ikpu nne gi wu mad, umu nna gi wu mad","Did you make change when I was inside? Give me a fucking good netty, oh my god, oh my god, oh my god, oh my god, oh my god, oh my god.",1.0,0.5773,False,False,0.527,
+afriswitch_0023,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,anyi batara wee hu na ya bu mmemme graduation nke ha mere tata ebirila oku. Onye mbu anyi kporo ihu bu onye isi nke na-ahu maka ogo nke secondary,"ayi batara, wihon ayabu medmekradition kehanereta ta kibiri loko onyem bai moriru bu, onisi mike na ho maka, ogunke sekondri",1.0,0.2783,False,False,3.494,
+afriswitch_0024,afriswitch,afriswitch,ig-en,Igbo (in-the-wild),in-the-wild,human,faster_whisper_small,na-ekiri ugbua b ya kacha fma n'ass Igbo na klaas S,"i nekiriyu bua, bojakaca mofoma na su suibu na klas SS3 bunting kegocha gola gocha",1.0,1.0,False,False,0.466,
