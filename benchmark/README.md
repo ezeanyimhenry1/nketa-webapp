@@ -2,7 +2,7 @@
 
 Benchmark Igbo speech recognition for the hackathon submission.
 
-Local bootstrap WAVs are **not** stored in git — regenerate with `bootstrap_local_audio.py`. AfriSwitch clips (`afriswitch_*.wav`) are committed.
+All 50 benchmark WAVs are committed under `benchmark/audio/` and copied to `docs_site/assets/audio/` during the docs build. Regenerate local bootstrap clips with `bootstrap_local_audio.py` if needed.
 
 **Audio naming:** `local_name_1.wav`, `local_cs_1.wav` = Intron TTS bootstrap; `afriswitch_0000.wav` = in-the-wild AfriSwitch human speech.
 

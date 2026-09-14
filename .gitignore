@@ -55,14 +55,3 @@ scripts/.chatgpt_cache/
 scripts/.github_data_repos/
 
 site/
-
-benchmark/audio/local_*.wav
-# legacy local bootstrap names (pre local_* prefix)
-benchmark/audio/ch*.wav
-benchmark/audio/cs_*.wav
-benchmark/audio/amaka.wav
-benchmark/audio/emeka.wav
-benchmark/audio/ngozi.wav
-benchmark/audio/uche.wav
-benchmark/audio/obinna.wav
-benchmark/audio/ifeanyi.wav

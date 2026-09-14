@@ -25,24 +25,30 @@ def sync_audio() -> int:
     wav_names = sorted({Path(e["audio_path"]).name for e in entries})
 
     copied = 0
+    reused = 0
     missing = []
     for name in wav_names:
         src = AUDIO_SRC / name
-        if not src.exists():
-            missing.append(name)
-            continue
         dst = AUDIO_DST / name
-        if not dst.exists() or src.stat().st_mtime > dst.stat().st_mtime:
-            shutil.copy2(src, dst)
-            copied += 1
+        if src.exists():
+            if not dst.exists() or src.stat().st_mtime > dst.stat().st_mtime:
+                shutil.copy2(src, dst)
+                copied += 1
+        elif dst.exists():
+            reused += 1
+        else:
+            missing.append(name)
 
     if missing:
-        print(f"Missing {len(missing)} WAV files in {AUDIO_SRC}", file=sys.stderr)
+        print(f"Missing {len(missing)} WAV files in {AUDIO_SRC} and {AUDIO_DST}", file=sys.stderr)
         for name in missing[:5]:
             print(f"  - {name}", file=sys.stderr)
         return 1
 
-    print(f"Synced {len(wav_names)} WAV files to {AUDIO_DST} ({copied} updated)")
+    print(
+        f"Synced {len(wav_names)} WAV files to {AUDIO_DST} "
+        f"({copied} copied, {reused} already present)"
+    )
     return 0
 
 
