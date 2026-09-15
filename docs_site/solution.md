@@ -4,7 +4,7 @@
 
 ## About Nketa
 
-Nketa is the new name for **The Igbo Bible**, an Igbo language and heritage app. The rebrand reflects a broader mission: Nsibidi, proverbs, cosmology, calendar, and voice-first learning - not only Bible-related content.
+Nketa is the new name for **The Igbo Bible**, an Igbo language and heritage app. The rebrand reflects a broader mission: Nsibidi, proverbs, cosmology, calendar, and voice-first learning.
 
 Live product page: [theigbobible.netlify.app](https://theigbobible.netlify.app)
 
