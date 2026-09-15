@@ -179,7 +179,7 @@ What you'll see:
 - Proverb practice with guided English + Igbo code-switch mode
 - STT benchmark: Intron vs Sunbird vs faster-whisper on 50 Igbo clips
 
-Links:
+Demo video: https://youtu.be/N06dcGXm1XM
 Docs (benchmark, ethics, sample clips): https://nketa-hackathon.netlify.app
 Product site: https://theigbobible.netlify.app
 
@@ -187,6 +187,6 @@ Tech: Flutter + Intron Voice AI (STT/TTS)
 Category: Education and Culture
 ```
 
-## Placeholder
+## Published video
 
-**YouTube URL:** _paste after recording_
+**YouTube URL:** https://youtu.be/N06dcGXm1XM

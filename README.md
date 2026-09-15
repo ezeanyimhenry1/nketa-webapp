@@ -36,7 +36,8 @@ Privacy, terms, and payment redirects use `https://nketa.netlify.app/` (deploy t
 
 Sahara CodeSwitch Africa Challenge submission materials:
 
-- **Public docs site:** _https://nketa-hackathon.netlify.app_ (deploy from this repo via Netlify)
+- **Public docs site:** https://nketa-hackathon.netlify.app
+- **Demo video:** https://youtu.be/N06dcGXm1XM
 - In-repo copies: [Solution](docs/HACKATHON_SOLUTION.md), [Benchmark report](benchmark/results/BENCHMARK_REPORT.md), [Demo script](docs/DEMO_VIDEO_SCRIPT.md)
 
 ### Preview submission docs locally

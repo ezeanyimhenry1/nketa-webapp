@@ -77,5 +77,5 @@ Speaker -> Intron TTS (ig) -> cache -> audioplayers
 
 - [Benchmark Report](../benchmark/results/BENCHMARK_REPORT.md)
 - [Ethics and Inclusion](./ETHICS_AND_INCLUSION.md)
-- [Demo Video Script](./DEMO_VIDEO_SCRIPT.md)
-- Public docs site (`docs_site/` + Netlify)
+- [Demo video](https://youtu.be/N06dcGXm1XM) | [Demo script](./DEMO_VIDEO_SCRIPT.md)
+- Public docs site: https://nketa-hackathon.netlify.app

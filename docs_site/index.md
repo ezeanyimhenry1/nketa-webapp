@@ -8,14 +8,14 @@ Nketa (formerly [The Igbo Bible](https://theigbobible.netlify.app)) is a Flutter
 
 ## Demo video
 
-YouTube (unlisted): https://youtu.be/N06dcGXm1XM
+[Watch on YouTube](https://youtu.be/N06dcGXm1XM)
 
 ## Submission checklist
 
 | Item | Where |
 |------|--------|
 | Solution write-up | [Solution](solution.md) |
-| Demo video | Link above |
+| Demo video | [YouTube](https://youtu.be/N06dcGXm1XM) |
 | Technical documentation | This site |
 | STT benchmark (4 models, 50 clips) | [Benchmark report](benchmark-report.md) + [Sample clips](benchmark-samples.md) |
 | Ethics and inclusion | [Ethics](ethics.md) |
