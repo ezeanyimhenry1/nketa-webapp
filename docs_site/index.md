@@ -8,7 +8,7 @@ Nketa (formerly [The Igbo Bible](https://theigbobible.netlify.app)) is a Flutter
 
 ## Demo video
 
-YouTube (unlisted): _add your link before submitting_
+YouTube (unlisted): https://youtu.be/N06dcGXm1XM
 
 ## Submission checklist
 
