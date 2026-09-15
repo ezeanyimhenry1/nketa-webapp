@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nketa/services/igbo_nsibidi_names_service.dart';
+import 'package:nketa/data/constants.dart';
+import 'package:nketa/services/proverb_practice_service.dart';
 import 'package:nketa/services/proverbs_service.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:nketa/theme/app_theme.dart';
@@ -15,12 +16,16 @@ class ProverbPracticeScreen extends StatefulWidget {
 }
 
 class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
+  static const _streakKey = 'proverb_practice_streak';
+  static const _guidedModeKey = 'proverb_guided_code_switch';
+
   List<Map<String, String>> _proverbs = [];
   int _index = 0;
   int _streak = 0;
   String _feedback = '';
   String _partial = '';
   bool _loading = true;
+  bool _guidedCodeSwitch = false;
 
   @override
   void initState() {
@@ -33,7 +38,8 @@ class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
     final proverbs = await ProverbsService().fetchProverbs();
     setState(() {
       _proverbs = proverbs;
-      _streak = prefs.getInt('proverb_practice_streak') ?? 0;
+      _streak = prefs.getInt(_streakKey) ?? 0;
+      _guidedCodeSwitch = prefs.getBool(_guidedModeKey) ?? false;
       _index = DateTime.now().millisecondsSinceEpoch % (proverbs.length);
       _loading = false;
     });
@@ -42,44 +48,49 @@ class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
   Map<String, String> get _current =>
       _proverbs.isEmpty ? {'igbo': '', 'english': ''} : _proverbs[_index];
 
-  double _similarity(String a, String b) {
-    final na = IgboNsibidiNamesService.normalizeIgbo(a);
-    final nb = IgboNsibidiNamesService.normalizeIgbo(b);
-    if (na.isEmpty || nb.isEmpty) return 0;
-    if (na == nb) return 1;
+  String get _guidedPrompt {
+    if (_proverbs.isEmpty) return proverbCodeSwitchPrompts.first;
+    return proverbCodeSwitchPrompts[_index % proverbCodeSwitchPrompts.length];
+  }
 
-    final shorter = na.length < nb.length ? na : nb;
-    final longer = na.length >= nb.length ? na : nb;
-    var matches = 0;
-    for (var i = 0; i < shorter.length; i++) {
-      if (shorter[i] == longer[i]) matches++;
-    }
-    return matches / longer.length;
+  Future<void> _setGuidedMode(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_guidedModeKey, value);
+    setState(() => _guidedCodeSwitch = value);
   }
 
   Future<void> _onTranscript(String transcript) async {
     final target = _current['igbo'] ?? '';
-    final score = _similarity(transcript, target);
+    final result = ProverbPracticeService.score(transcript, target);
     final prefs = await SharedPreferences.getInstance();
+    final scorePct = (result.score * 100).toStringAsFixed(0);
+    final matchedNote = result.matchedSegment != null &&
+            result.codeSwitchDetected(transcript)
+        ? ' Matched: "${result.matchedSegment}".'
+        : '';
 
-    if (score >= 0.75) {
+    if (result.passed) {
       final newStreak = _streak + 1;
-      await prefs.setInt('proverb_practice_streak', newStreak);
+      await prefs.setInt(_streakKey, newStreak);
       setState(() {
         _streak = newStreak;
-        _feedback = 'Excellent! Score: ${(score * 100).toStringAsFixed(0)}%';
+        _feedback = 'Excellent! Score: $scorePct%.$matchedNote';
         _index = (_index + 1) % _proverbs.length;
         _partial = '';
       });
-    } else if (score >= 0.5) {
+    } else if (result.close) {
       setState(() {
         _feedback =
-            'Close! Score: ${(score * 100).toStringAsFixed(0)}%. Try again.';
+            'Close! Score: $scorePct%. Try again.$matchedNote';
         _partial = '';
       });
     } else {
+      final partialNote = result.matchedSegment != null &&
+              result.score > 0
+          ? ' Partial match: "${result.matchedSegment}".'
+          : '';
       setState(() {
-        _feedback = 'Try again. Heard: "$transcript"';
+        _feedback = 'Try again. Heard: "$transcript".$partialNote';
         _partial = '';
       });
     }
@@ -112,7 +123,17 @@ class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
                       ),
                     ],
                   ),
-                  SizedBox(height: AppSpacing.lg),
+                  SizedBox(height: AppSpacing.md),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text('Guided code-switch mode'),
+                    subtitle: const Text(
+                      'Shows an English intro prompt. You can mix English and Igbo.',
+                    ),
+                    value: _guidedCodeSwitch,
+                    onChanged: _setGuidedMode,
+                  ),
+                  SizedBox(height: AppSpacing.sm),
                   Text(
                     _current['igbo'] ?? '',
                     style: theme.textTheme.headlineSmall?.copyWith(
@@ -129,6 +150,24 @@ class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  if (_guidedCodeSwitch) ...[
+                    SizedBox(height: AppSpacing.lg),
+                    Container(
+                      padding: EdgeInsets.all(AppSpacing.md),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[50],
+                        borderRadius: BorderRadius.circular(AppSpacing.sm),
+                        border: Border.all(color: Colors.blue[100]!),
+                      ),
+                      child: Text(
+                        'Try saying: "$_guidedPrompt" then recite the Igbo proverb.',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: Colors.blue[900],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                   SizedBox(height: AppSpacing.xl),
                   Center(
                     child: VoiceInputButton(
@@ -141,7 +180,9 @@ class _ProverbPracticeScreenState extends State<ProverbPracticeScreen> {
                   ),
                   SizedBox(height: AppSpacing.sm),
                   Text(
-                    'Tap mic and recite the proverb in Igbo',
+                    _guidedCodeSwitch
+                        ? 'English intro is OK. We score the Igbo proverb in your speech.'
+                        : 'Tap mic and recite the proverb. English framing also works.',
                     style: theme.textTheme.bodySmall,
                     textAlign: TextAlign.center,
                   ),

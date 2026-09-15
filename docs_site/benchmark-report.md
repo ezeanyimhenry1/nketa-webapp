@@ -82,6 +82,32 @@ Listen to clips and compare transcripts on the [Sample clips](benchmark-samples.
 - **Fallback:** User can edit the heard transcript before lookup; typed search still works offline for dictionary names.
 - **TTS:** Intron Igbo voice with on-device cache.
 
+## Interpretation
+
+### Why name lookup matters
+
+WER alone does not capture whether an app can act on speech. Nketa's speak-to-Nsibidi flow needs the dictionary to find the Igbo name inside a code-switched phrase like `"My name is Chinedu"`. Name lookup success (14/50 for Intron) is the metric closest to real user outcomes.
+
+### Category stories
+
+| Category | Best WER | Story |
+|----------|----------|-------|
+| Igbo names (local) | Intron 0.400 | Intron gets 9/15 exact match; baselines struggle with TTS bootstrap names |
+| Code-switched (local) | Sunbird 0.600 | Sunbird beats Intron (0.800) on mixed phrases, but Intron still wins name lookup overall |
+| AfriSwitch in-the-wild | All struggle | 0-2 exact match per model; in-the-wild human speech is hardest |
+
+### Example clips to listen
+
+| Clip | Link | What to notice |
+|------|------|----------------|
+| `name_1` (Chinedu) | [Sample clips](benchmark-samples.md#name_1) | Intron exact match; Whisper mishears as unrelated words |
+| `cs_6` (Onye kwe chi ya ekwe) | [Sample clips](benchmark-samples.md#cs_6) | Proverb-like code-switch; compare Intron vs Sunbird |
+| `afriswitch_0000` | [Sample clips](benchmark-samples.md#afriswitch_0000) | In-the-wild human speech; all models show high WER |
+
+### Production choice
+
+Intron Sahara has higher latency (~14.8s vs ~1.4-11.4s for local models) but wins on name lookup and diacritic-sensitive CER (0.295 vs 0.537+). For Nketa, a correct Nsibidi lookup matters more than raw speed. Sunbird is a strong second baseline for code-switched WER but weak on AfriSwitch and diacritics (CER 1.244).
+
 ## Limitations
 
 - AfriSwitch clips are in-the-wild human speech from [intronhealth/AfriSwitch](https://huggingface.co/datasets/intronhealth/AfriSwitch) (Igbo config).

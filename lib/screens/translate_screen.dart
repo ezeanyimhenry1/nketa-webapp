@@ -771,7 +771,12 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
         .map((result) => result.nsibidi)
         .where((nsibidi) => nsibidi != null && nsibidi.isNotEmpty)
         .join('');
-    final originalInput = _controller.text.trim();
+    final spokenInput = _controller.text.trim();
+    final displayInput = _usedNamesList && _results.isNotEmpty
+        ? (_originalWords.isNotEmpty
+            ? _originalWords.join(' ')
+            : _results.map((r) => r.igboWord).join(' '))
+        : spokenInput;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -857,7 +862,7 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                           ),
                         ),
                         SizedBox(height: AppSpacing.xs.h),
-                        Text(originalInput, style: textTheme.titleMedium),
+                        Text(displayInput, style: textTheme.titleMedium),
                         SizedBox(height: AppSpacing.xs.h),
                         Text(
                           fullNsibidi,
@@ -876,7 +881,7 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                               ),
                             ),
                             Text(
-                              originalInput,
+                              displayInput,
                               style: textTheme.labelSmall?.copyWith(
                                 fontFamily: 'Akagu',
                               ),
@@ -912,7 +917,11 @@ Respond with JSON: [{"word": "onye", "class": "WH"}, ...]
                               builder:
                                   (context) => NsibidiImagePage(
                                     nsibidiText: fullNsibidi,
-                                    originalInput: originalInput,
+                                    originalInput: displayInput,
+                                    spokenTranscript:
+                                        spokenInput != displayInput
+                                            ? spokenInput
+                                            : null,
                                     results: _results,
                                   ),
                             ),

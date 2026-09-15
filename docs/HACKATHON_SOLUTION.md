@@ -1,10 +1,14 @@
-# Nketa — Solution Description
+# Nketa - Solution Description
 
-**Sahara CodeSwitch Africa Challenge | Education & Culture**
+**Sahara CodeSwitch Africa Challenge | Education and Culture**
+
+## About Nketa
+
+Nketa is the new name for **The Igbo Bible**, an Igbo language and heritage app. Public product page: [theigbobible.netlify.app](https://theigbobible.netlify.app). Submission docs: hackathon MkDocs site in this repo.
 
 ## Problem
 
-Igbo is spoken by over 50 million people, yet most speech AI systems struggle with Igbo names, code-switched Igbo–English speech, and diacritics. Nsibidi — the indigenous Igbo writing system — is largely inaccessible to learners who cannot type or spell Igbo correctly. Existing translation apps require keyboard input and do not connect speech to cultural symbols.
+Igbo is spoken by over 50 million people, yet most speech AI systems struggle with Igbo names, code-switched Igbo-English speech, and diacritics. Nsibidi - the indigenous Igbo writing system - is largely inaccessible to learners who cannot type or spell Igbo correctly. Existing translation apps require keyboard input and do not connect speech to cultural symbols.
 
 ## Target users
 
@@ -17,18 +21,24 @@ Igbo is spoken by over 50 million people, yet most speech AI systems struggle wi
 
 **Nketa** is a Flutter mobile app that combines Igbo cultural content with Intron Voice AI:
 
-1. **Speak your Igbo name → get Nsibidi** — User speaks a name; Intron STT transcribes; the app looks up the name in a 130-entry Nsibidi dictionary and displays the symbol.
-2. **Proverb voice practice** — User recites an Igbo proverb; STT output is scored against the reference; streak tracking encourages learning.
-3. **Igbo TTS pronunciation** — Cosmology terms, proverbs, names, and translation results are read aloud in Igbo via Intron TTS with on-device caching.
+1. **Speak your Igbo name, get Nsibidi** - User speaks (e.g. "My name is Chinedu"); Intron STT transcribes; substring dictionary lookup finds Chinedu; Nsibidi displayed and shared with Igbo name on image.
+2. **Proverb voice practice** - User recites proverb (Igbo only or English intro + Igbo in guided code-switch mode); code-switch-aware scoring; streak tracking.
+3. **Igbo TTS pronunciation** - Cosmology terms, proverbs, names read aloud via Intron TTS with on-device caching.
+
+## Code-switching
+
+| Pattern | Example | Handling |
+|---------|---------|----------|
+| English + Igbo name | "My name is Chinedu" | `findName()` substring match |
+| English intro + proverb | "The proverb is..." + Igbo | `ProverbPracticeService` word-span extraction |
+| Pure Igbo | "Chinedu" | Direct match |
 
 ## Voice-driven actions
 
-Voice input drives downstream tasks:
-
 | Voice input | Downstream action |
 |-------------|-------------------|
-| Spoken Igbo name | Nsibidi symbol lookup + save/share |
-| Spoken proverb | Similarity score + feedback + next proverb |
+| Spoken Igbo name or phrase | Nsibidi lookup + save/share (Igbo name on image) |
+| Spoken proverb | Code-switch-aware similarity score + feedback |
 | Spoken search query | Filter names / dictionary results |
 | Tap speaker icon | Generate/play Igbo pronunciation |
 
@@ -36,23 +46,25 @@ Voice input drives downstream tasks:
 
 | Decision | Rationale |
 |----------|-----------|
-| Intron Sahara STT (`ig`) | Native Igbo–English code-switching support |
+| Intron Sahara STT (`ig`) | Native Igbo-English code-switching support |
 | Streaming STT WebSocket | Live partial transcript UX on Translate screen |
 | Sync STT fallback | Resilience when WebSocket unavailable |
+| Substring name lookup | Tolerates English framing in spoken input |
+| Proverb word-span scoring | Scores Igbo segment in mixed utterances |
 | Local name dictionary first | Fast, offline-capable Nsibidi lookup before AI/API |
 | Intron Igbo TTS + disk cache | Reduce API calls; faster repeat playback |
-| igbo_api Nsibidi source | 5,000+ real symbols vs placeholder Unicode |
+| igbo_api Nsibidi source | Real symbols vs placeholder Unicode |
 
 ## Architecture
 
 ```
-Mic → Intron STT (ig) → transcript
-                          ↓
+Mic -> Intron STT (ig) -> transcript
+                          |
               IgboNsibidiNamesService.findName()
-                          ↓
-              Nsibidi display / save / share
+                          |
+              Nsibidi display / share (Igbo name label)
 
-Speaker → Intron TTS (ig) → cache → audioplayers
+Speaker -> Intron TTS (ig) -> cache -> audioplayers
 ```
 
 ## Content
@@ -61,12 +73,9 @@ Speaker → Intron TTS (ig) → cache → audioplayers
 - Proverbs, cosmology, stories, history timeline (JSON, GitHub-first loading)
 - Offline asset fallback when remote JSON unavailable
 
-## Repository
-
-https://github.com/ezeanyimhenry1/the_igbo_bible
-
 ## Related documents
 
 - [Benchmark Report](../benchmark/results/BENCHMARK_REPORT.md)
-- [Ethics & Inclusion](./ETHICS_AND_INCLUSION.md)
+- [Ethics and Inclusion](./ETHICS_AND_INCLUSION.md)
 - [Demo Video Script](./DEMO_VIDEO_SCRIPT.md)
+- Public docs site (`docs_site/` + Netlify)

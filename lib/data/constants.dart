@@ -1,3 +1,11 @@
+/// English prompts shown in proverb practice guided code-switch mode.
+const List<String> proverbCodeSwitchPrompts = [
+  'The proverb is...',
+  'In Igbo we say...',
+  'My favorite proverb is...',
+  'Listen to this Igbo proverb...',
+];
+
 // List of common Igbo name fragments (easily updatable)
 const List<String> igboNameFragments = [
   'chi',

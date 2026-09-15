@@ -21,12 +21,14 @@ import 'package:nketa/screens/subscription_screen.dart';
 class NsibidiImagePage extends StatefulWidget {
   final String nsibidiText;
   final String originalInput;
+  final String? spokenTranscript;
   final List<TranslationResult> results;
 
   const NsibidiImagePage({
     super.key,
     required this.nsibidiText,
     required this.originalInput,
+    this.spokenTranscript,
     required this.results,
   });
 
@@ -336,6 +338,17 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                         },
                       ),
                     ),
+                    if (widget.spokenTranscript != null &&
+                        widget.spokenTranscript!.trim().isNotEmpty) ...[
+                      SizedBox(height: AppSpacing.sm.h),
+                      Text(
+                        'You said: "${widget.spokenTranscript}"',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.grey[700],
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
                     SizedBox(height: AppSpacing.lg.h),
                     // Display Options
                     Text(
