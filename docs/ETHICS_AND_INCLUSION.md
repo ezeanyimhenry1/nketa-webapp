@@ -22,7 +22,7 @@
 
 ## Bias and fairness awareness
 
-We report STT performance **stratified by subgroup** (Igbo names vs code-switched phrases vs AfriSwitch in-the-wild clips), not only aggregate WER.
+I report STT performance **stratified by subgroup** (Igbo names vs code-switched phrases vs AfriSwitch in-the-wild clips), not only aggregate WER.
 
 Known limitations:
 

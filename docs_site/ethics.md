@@ -8,7 +8,7 @@
 
 ## Privacy
 
-- **In-app:** Audio goes to Intron Voice API for STT/TTS only when the user taps mic or speaker. Nketa does not store voice recordings on our servers.
+- **In-app:** Audio goes to Intron Voice API for STT/TTS only when the user taps mic or speaker. I do not operate servers that store user voice recordings.
 - **TTS cache:** Pronunciation audio is cached on the user's device (`intron_tts_cache`), not uploaded.
 - **Translation:** Typed or spoken text may go to OpenAI or IgboAPI when the dictionary has no match.
 - **Benchmark scripts:** Python scripts send audio to STT APIs for evaluation only; results are CSV and Markdown files.
@@ -22,7 +22,7 @@
 
 ## Bias and fairness
 
-We report STT performance by subgroup (Igbo names, code-switched phrases, AfriSwitch clips), not only a single average WER.
+I report STT performance by subgroup (Igbo names, code-switched phrases, AfriSwitch clips), not only a single average WER.
 
 Known limitations:
 

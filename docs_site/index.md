@@ -27,7 +27,7 @@ YouTube (unlisted): _add your link before submitting_
 | [Solution](solution.md) | Product story, code-switching, user journeys, Intron integration |
 | [Benchmark report](benchmark-report.md) | STT comparison and interpretation |
 | [Sample clips](benchmark-samples.md) | Listen and compare model transcripts |
-| [Reproduce benchmark](benchmark-howto.md) | How we ran the evaluation |
+| [Reproduce benchmark](benchmark-howto.md) | How I ran the evaluation |
 | [Ethics](ethics.md) | Consent, privacy, fairness |
 
 ## Code-switch highlights in the app
@@ -51,7 +51,7 @@ Name lookup measures whether Nketa can find the correct dictionary entry from th
 
 ## Repository
 
-Application source is in a private repository. Organizer read access is available on request.
+Application source is in a private repository. I can grant organizer read access on request.
 
 Public product page: [theigbobible.netlify.app](https://theigbobible.netlify.app)
 

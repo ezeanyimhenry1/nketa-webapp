@@ -529,7 +529,7 @@ def write_benchmark_report(rows: list[dict], models: list[str]) -> None:
         )
     if "faster_whisper" in evaluated:
         limitation_lines.append(
-            "- Local Whisper baselines used **base** and **tiny** checkpoints; large-v3/medium downloads stalled on this machine."
+            "- Local Whisper baselines used **base** and **tiny** checkpoints; large-v3/medium downloads stalled on my machine."
         )
     limitation_lines.append("")
 

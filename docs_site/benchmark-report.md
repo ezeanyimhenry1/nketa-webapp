@@ -115,4 +115,4 @@ Intron Sahara has higher latency (~14.8s vs ~1.4-11.4s for local models) but win
 - Standard Whisper baselines use auto language detection (Igbo is not in Whisper's language list).
 - Sunbird forces Igbo via Whisper token `sa`; may not match English-heavy code-switch segments.
 - OpenAI Whisper-1 API was not evaluated (429 rate limits on batch runs).
-- Local Whisper checkpoints are base and tiny; large-v3 download stalled on our machine.
+- Local Whisper checkpoints are base and tiny; large-v3 download stalled on my machine.

@@ -48,7 +48,7 @@ Outputs: `benchmark/results/stt_benchmark.csv` and `benchmark/results/BENCHMARK_
 | `faster_whisper_small` | Open-source Whisper tiny (local, auto language) |
 | `sunbird_whisper` | Sunbird African fine-tune (Igbo via `sa` token; gated HF model) |
 
-Optional baselines (not in our final CSV): OpenAI Whisper API, Google STT.
+Optional baselines (not in my final CSV): OpenAI Whisper API, Google STT.
 
 ## API keys (.env)
 

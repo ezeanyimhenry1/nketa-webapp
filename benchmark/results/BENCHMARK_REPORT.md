@@ -82,7 +82,7 @@
 - Standard Whisper baselines use **auto language detection** (Igbo is not in Whisper's language list).
 - Sunbird baseline forces Igbo via Whisper token `sa`; may not match English-heavy code-switch segments.
 - **OpenAI Whisper-1 API** was not evaluated - batch runs hit 429 rate limits.
-- Local Whisper baselines used **base** and **tiny** checkpoints; large-v3/medium downloads stalled on this machine.
+- Local Whisper baselines used **base** and **tiny** checkpoints; large-v3/medium downloads stalled on my machine.
 
 ## 8. Raw Data
 

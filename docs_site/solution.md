@@ -32,7 +32,7 @@ Igbo is spoken by over 50 million people, but most speech tools struggle with Ig
 | Learn / content hub | No | Yes | Educational content |
 | Saved words | No | Yes | Review saved translations |
 
-## What we built
+## What I built
 
 **Nketa** is a Flutter mobile app using Intron Voice AI:
 
@@ -75,7 +75,7 @@ Code-switching appears wherever users naturally mix Igbo and English:
 | English intro + Igbo proverb | "The proverb is..." + proverb | Word-span extraction before scoring |
 | Pure Igbo | "Chinedu" | Direct match |
 
-**Why Intron Sahara:** Explicit Igbo language mode (`use_language_asr_input=ig`) targets African Igbo-English code-switch. Our [benchmark](benchmark-report.md) shows Intron leads on name lookup (14/50) vs Sunbird (8/50) and faster-whisper (0-3/50).
+**Why Intron Sahara:** Explicit Igbo language mode (`use_language_asr_input=ig`) targets African Igbo-English code-switch. My [benchmark](benchmark-report.md) shows Intron leads on name lookup (14/50) vs Sunbird (8/50) and faster-whisper (0-3/50).
 
 ## Voice features
 
