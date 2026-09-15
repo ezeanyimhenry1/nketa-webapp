@@ -14,9 +14,10 @@ CSV_PATH = ROOT / "benchmark" / "results" / "stt_benchmark.csv"
 TEST_SET_PATH = ROOT / "benchmark" / "test_set.json"
 OUTPUT_PATH = ROOT / "docs_site" / "benchmark-samples.md"
 
-MODEL_ORDER = ("intron", "faster_whisper", "faster_whisper_small")
+MODEL_ORDER = ("intron", "sunbird_whisper", "faster_whisper", "faster_whisper_small")
 MODEL_LABELS = {
     "intron": "Intron Sahara",
+    "sunbird_whisper": "Sunbird African",
     "faster_whisper": "faster-whisper base",
     "faster_whisper_small": "faster-whisper tiny",
 }
@@ -118,7 +119,7 @@ def generate() -> None:
     lines = [
         "# Sample clips",
         "",
-        "Each clip has one input recording and three STT transcripts (Intron Sahara, faster-whisper base, faster-whisper tiny).",
+        "Each clip has one input recording and four STT transcripts (Intron Sahara, Sunbird African, faster-whisper base, faster-whisper tiny).",
         "",
         "Jump to:",
         "- [Igbo names](#igbo_name)",

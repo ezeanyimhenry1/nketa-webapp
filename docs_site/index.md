@@ -20,15 +20,16 @@ YouTube (unlisted): _add your link before submitting_
 
 ## Benchmark at a glance
 
-Three STT systems on the same 50 clips (15 Igbo names, 10 code-switched phrases, 25 AfriSwitch in-the-wild samples):
+Four STT systems on the same 50 clips (15 Igbo names, 10 code-switched phrases, 25 AfriSwitch in-the-wild samples):
 
 | Model | Avg WER | Exact match | Name lookup |
 |-------|--------:|------------:|------------:|
 | Intron Sahara | 0.740 | 13/50 | 14/50 |
+| Sunbird African | 0.900 | 5/50 | 8/50 |
 | faster-whisper base | 0.940 | 3/50 | 3/50 |
 | faster-whisper tiny | 0.980 | 1/50 | 0/50 |
 
-Intron is what we ship in the app. Open-source Whisper baselines run locally with auto language detection.
+Intron is what we ship in the app. Sunbird and faster-whisper baselines run locally.
 
 ## Repository
 

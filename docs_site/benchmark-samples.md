@@ -1,6 +1,6 @@
 # Sample clips
 
-Each clip has one input recording and three STT transcripts (Intron Sahara, faster-whisper base, faster-whisper tiny).
+Each clip has one input recording and four STT transcripts (Intron Sahara, Sunbird African, faster-whisper base, faster-whisper tiny).
 
 Jump to:
 - [Igbo names](#igbo_name)
@@ -23,6 +23,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chinedu</td><td>0.000</td><td>yes</td><td>16.28</td></tr>
+<tr><td>Sunbird African</td><td>ịdị ntara n'obodo ndị nke na-apụkara ịhụnanya, mahadum a-naabu nke nne na-ethu obo n'obodo ndị nke na-apụkara ịhụnanya.</td><td>1.000</td><td>no</td><td>115.50</td></tr>
 <tr><td>faster-whisper base</td><td>Chinatown</td><td>1.000</td><td>no</td><td>0.60</td></tr>
 <tr><td>faster-whisper tiny</td><td>신내두</td><td>1.000</td><td>no</td><td>0.81</td></tr>
 </tbody>
@@ -44,6 +45,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chinue</td><td>1.000</td><td>no</td><td>10.52</td></tr>
+<tr><td>Sunbird African</td><td>ụnwe ndụmọdụ ndị ọbụla a na-achọ ịnwe onye na-achọ ịnwe.</td><td>1.000</td><td>no</td><td>7.55</td></tr>
 <tr><td>faster-whisper base</td><td>C'è il noi?</td><td>1.000</td><td>no</td><td>0.63</td></tr>
 <tr><td>faster-whisper tiny</td><td>¿Chino es?</td><td>1.000</td><td>no</td><td>0.27</td></tr>
 </tbody>
@@ -65,6 +67,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chinwe ike</td><td>0.000</td><td>yes</td><td>7.18</td></tr>
+<tr><td>Sunbird African</td><td>ịn weyikee.</td><td>1.000</td><td>no</td><td>16.90</td></tr>
 <tr><td>faster-whisper base</td><td>שינוי ככה?</td><td>1.000</td><td>no</td><td>0.55</td></tr>
 <tr><td>faster-whisper tiny</td><td>She's awake, eh?</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -86,6 +89,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chizọba!</td><td>0.000</td><td>yes</td><td>6.99</td></tr>
+<tr><td>Sunbird African</td><td>ọba n'obu a na-achọ ịnchọpụta n'obu a na-achọ ịnchọpụta n'obu a na-achọ ịnchọpụta.</td><td>1.000</td><td>no</td><td>9.13</td></tr>
 <tr><td>faster-whisper base</td><td>Cizoba.</td><td>1.000</td><td>no</td><td>1.38</td></tr>
 <tr><td>faster-whisper tiny</td><td>چزوبا</td><td>1.000</td><td>no</td><td>0.28</td></tr>
 </tbody>
@@ -107,6 +111,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chizite</td><td>1.000</td><td>no</td><td>12.04</td></tr>
+<tr><td>Sunbird African</td><td>zithere.</td><td>1.000</td><td>no</td><td>39.07</td></tr>
 <tr><td>faster-whisper base</td><td>Cheesy, tell me.</td><td>1.000</td><td>no</td><td>0.53</td></tr>
 <tr><td>faster-whisper tiny</td><td>She's a terrible</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -128,6 +133,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ngozi</td><td>0.000</td><td>yes</td><td>9.92</td></tr>
+<tr><td>Sunbird African</td><td>Ngozi.</td><td>0.000</td><td>yes</td><td>6.63</td></tr>
 <tr><td>faster-whisper base</td><td>um gozi</td><td>1.000</td><td>no</td><td>0.52</td></tr>
 <tr><td>faster-whisper tiny</td><td>ご視聴</td><td>1.000</td><td>no</td><td>0.82</td></tr>
 </tbody>
@@ -149,6 +155,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Amaka</td><td>0.000</td><td>yes</td><td>13.04</td></tr>
+<tr><td>Sunbird African</td><td>Amakha, maka, maka, maka, maka, maka.</td><td>1.000</td><td>no</td><td>5.66</td></tr>
 <tr><td>faster-whisper base</td><td>Amaka</td><td>0.000</td><td>yes</td><td>0.53</td></tr>
 <tr><td>faster-whisper tiny</td><td>amat ha</td><td>1.000</td><td>no</td><td>0.62</td></tr>
 </tbody>
@@ -170,6 +177,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Twid</td><td>1.000</td><td>no</td><td>11.71</td></tr>
+<tr><td>Sunbird African</td><td>ịdị.</td><td>1.000</td><td>no</td><td>13.53</td></tr>
 <tr><td>faster-whisper base</td><td>Qidi</td><td>1.000</td><td>no</td><td>1.12</td></tr>
 <tr><td>faster-whisper tiny</td><td>七滴</td><td>1.000</td><td>no</td><td>0.66</td></tr>
 </tbody>
@@ -191,6 +199,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chiamaka</td><td>0.000</td><td>yes</td><td>13.49</td></tr>
+<tr><td>Sunbird African</td><td>akara n'obu a na-akpọ n'obu na-abụghị n'obu a na-akpọ n'obu ma ndị n'abalị ọgụgụ na-enweghị ụtọ n'obu na-enweghị ụtọ.</td><td>1.000</td><td>no</td><td>28.97</td></tr>
 <tr><td>faster-whisper base</td><td>チェアマーカー</td><td>1.000</td><td>no</td><td>0.55</td></tr>
 <tr><td>faster-whisper tiny</td><td>치언마카</td><td>1.000</td><td>no</td><td>0.38</td></tr>
 </tbody>
@@ -212,6 +221,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>She non</td><td>1.000</td><td>no</td><td>7.50</td></tr>
+<tr><td>Sunbird African</td><td>ononso?</td><td>1.000</td><td>no</td><td>8.35</td></tr>
 <tr><td>faster-whisper base</td><td>Chinnonso</td><td>1.000</td><td>no</td><td>0.54</td></tr>
 <tr><td>faster-whisper tiny</td><td>She knows so.</td><td>1.000</td><td>no</td><td>0.27</td></tr>
 </tbody>
@@ -233,6 +243,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chukwudi</td><td>0.000</td><td>yes</td><td>7.29</td></tr>
+<tr><td>Sunbird African</td><td>ụtụ n'obu a na-achọ ịbụrụ na ọ na-achọ ịbụrụ na ọ na-achọ.</td><td>1.000</td><td>no</td><td>7.89</td></tr>
 <tr><td>faster-whisper base</td><td>c'è tutti</td><td>1.000</td><td>no</td><td>0.56</td></tr>
 <tr><td>faster-whisper tiny</td><td>舍哭低</td><td>1.000</td><td>no</td><td>0.72</td></tr>
 </tbody>
@@ -254,6 +265,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chukwu</td><td>1.000</td><td>no</td><td>4.23</td></tr>
+<tr><td>Sunbird African</td><td>ụkụma.</td><td>1.000</td><td>no</td><td>4.19</td></tr>
 <tr><td>faster-whisper base</td><td>チュコーマ</td><td>1.000</td><td>no</td><td>0.54</td></tr>
 <tr><td>faster-whisper tiny</td><td>チューコーな</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -275,6 +287,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chi bụ eze.</td><td>0.000</td><td>yes</td><td>17.63</td></tr>
+<tr><td>Sunbird African</td><td>hweze.</td><td>1.000</td><td>no</td><td>4.16</td></tr>
 <tr><td>faster-whisper base</td><td>too busy</td><td>1.000</td><td>no</td><td>0.53</td></tr>
 <tr><td>faster-whisper tiny</td><td>Shibuese</td><td>1.000</td><td>no</td><td>0.28</td></tr>
 </tbody>
@@ -296,6 +309,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chika ozi</td><td>1.000</td><td>no</td><td>8.38</td></tr>
+<tr><td>Sunbird African</td><td>ị.</td><td>1.000</td><td>no</td><td>41.65</td></tr>
 <tr><td>faster-whisper base</td><td>Chicos e...</td><td>1.000</td><td>no</td><td>1.21</td></tr>
 <tr><td>faster-whisper tiny</td><td>チコーズ</td><td>1.000</td><td>no</td><td>0.28</td></tr>
 </tbody>
@@ -317,6 +331,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chisom</td><td>0.000</td><td>yes</td><td>10.87</td></tr>
+<tr><td>Sunbird African</td><td>om-chisom.</td><td>1.000</td><td>no</td><td>12.31</td></tr>
 <tr><td>faster-whisper base</td><td>She's so...</td><td>1.000</td><td>no</td><td>0.52</td></tr>
 <tr><td>faster-whisper tiny</td><td>She's so...</td><td>1.000</td><td>no</td><td>0.27</td></tr>
 </tbody>
@@ -340,6 +355,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>My name is Chinedu</td><td>0.000</td><td>yes</td><td>9.16</td></tr>
+<tr><td>Sunbird African</td><td>My name is Chinedu.</td><td>0.000</td><td>yes</td><td>4.62</td></tr>
 <tr><td>faster-whisper base</td><td>My name is Chinedu</td><td>0.000</td><td>yes</td><td>0.56</td></tr>
 <tr><td>faster-whisper tiny</td><td>My name is Chine-Doo.</td><td>1.000</td><td>no</td><td>0.31</td></tr>
 </tbody>
@@ -361,6 +377,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ndewo</td><td>1.000</td><td>no</td><td>11.88</td></tr>
+<tr><td>Sunbird African</td><td>Ndiwo, how are you?</td><td>1.000</td><td>no</td><td>4.85</td></tr>
 <tr><td>faster-whisper base</td><td>Do how are you?</td><td>1.000</td><td>no</td><td>0.53</td></tr>
 <tr><td>faster-whisper tiny</td><td>給我好愛 you</td><td>1.000</td><td>no</td><td>0.81</td></tr>
 </tbody>
@@ -382,6 +399,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Kedu aha?</td><td>1.000</td><td>no</td><td>8.86</td></tr>
+<tr><td>Sunbird African</td><td>Kedu aha gị?</td><td>0.000</td><td>yes</td><td>4.33</td></tr>
 <tr><td>faster-whisper base</td><td>Kiyadu ahagi</td><td>1.000</td><td>no</td><td>0.53</td></tr>
 <tr><td>faster-whisper tiny</td><td>کیا دو اہاگی۔</td><td>1.000</td><td>no</td><td>0.31</td></tr>
 </tbody>
@@ -403,6 +421,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Nna m bụ</td><td>1.000</td><td>no</td><td>6.99</td></tr>
+<tr><td>Sunbird African</td><td>nna m bụ Emeka.</td><td>0.000</td><td>yes</td><td>4.48</td></tr>
 <tr><td>faster-whisper base</td><td>nambu emeka</td><td>1.000</td><td>no</td><td>0.52</td></tr>
 <tr><td>faster-whisper tiny</td><td>Nambu Emeca</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -424,6 +443,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>I am from</td><td>1.000</td><td>no</td><td>6.92</td></tr>
+<tr><td>Sunbird African</td><td>from enugu.</td><td>1.000</td><td>no</td><td>4.21</td></tr>
 <tr><td>faster-whisper base</td><td>I am from Enugu.</td><td>0.000</td><td>yes</td><td>0.54</td></tr>
 <tr><td>faster-whisper tiny</td><td>I am from Enugu.</td><td>0.000</td><td>yes</td><td>0.29</td></tr>
 </tbody>
@@ -445,6 +465,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chukwu gozie</td><td>1.000</td><td>no</td><td>8.22</td></tr>
+<tr><td>Sunbird African</td><td>ụkwụ gọzie gị.</td><td>1.000</td><td>no</td><td>11.36</td></tr>
 <tr><td>faster-whisper base</td><td>شكو جوز يجي</td><td>1.000</td><td>no</td><td>2.43</td></tr>
 <tr><td>faster-whisper tiny</td><td>Tio Cougos e a G.</td><td>1.000</td><td>no</td><td>0.90</td></tr>
 </tbody>
@@ -466,6 +487,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Onye kwechi ya ekwe</td><td>0.000</td><td>yes</td><td>7.08</td></tr>
+<tr><td>Sunbird African</td><td>ikwa onye kwesịrị onye kwesị ahụ.</td><td>1.000</td><td>no</td><td>6.65</td></tr>
 <tr><td>faster-whisper base</td><td>Un'epoequia eque</td><td>1.000</td><td>no</td><td>0.55</td></tr>
 <tr><td>faster-whisper tiny</td><td>un'iequetia e qui</td><td>1.000</td><td>no</td><td>0.91</td></tr>
 </tbody>
@@ -487,6 +509,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Biko kwuo ya</td><td>1.000</td><td>no</td><td>5.75</td></tr>
+<tr><td>Sunbird African</td><td>ọ dị ka okwu oyo ọzọ.</td><td>1.000</td><td>no</td><td>4.93</td></tr>
 <tr><td>faster-whisper base</td><td>Bico cuoiozo</td><td>1.000</td><td>no</td><td>0.54</td></tr>
 <tr><td>faster-whisper tiny</td><td>Bico cuoyosa</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -508,6 +531,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td></td><td>1.000</td><td>no</td><td>4.42</td></tr>
+<tr><td>Sunbird African</td><td>ụ ụlọ.</td><td>1.000</td><td>no</td><td>4.42</td></tr>
 <tr><td>faster-whisper base</td><td>Non allo</td><td>1.000</td><td>no</td><td>1.19</td></tr>
 <tr><td>faster-whisper tiny</td><td>No, no, no.</td><td>1.000</td><td>no</td><td>0.28</td></tr>
 </tbody>
@@ -529,6 +553,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Igbo ama</td><td>1.000</td><td>no</td><td>8.99</td></tr>
+<tr><td>Sunbird African</td><td>Igbo amaka.</td><td>0.000</td><td>yes</td><td>4.64</td></tr>
 <tr><td>faster-whisper base</td><td>Игбо, Амака.</td><td>1.000</td><td>no</td><td>0.55</td></tr>
 <tr><td>faster-whisper tiny</td><td>いくぼうあまか</td><td>1.000</td><td>no</td><td>0.29</td></tr>
 </tbody>
@@ -552,6 +577,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Oburu i ka inye gi away</td><td>1.000</td><td>no</td><td>17.79</td></tr>
+<tr><td>Sunbird African</td><td>ọ bụ na ị ka na edemọ na ewe na-eme edivi ewe.</td><td>1.000</td><td>no</td><td>6.13</td></tr>
 <tr><td>faster-whisper base</td><td>I will make a name on it when I make you be with.</td><td>1.000</td><td>no</td><td>0.71</td></tr>
 <tr><td>faster-whisper tiny</td><td>Abonei, cara, ele não é uma ideia de ver o quê?</td><td>1.000</td><td>no</td><td>1.69</td></tr>
 </tbody>
@@ -573,6 +599,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>N nke na asu bekee bụ nke ma ihe Chukwu gozikwa petro maka na ihe m fotajuru m afọ achro m ikweta na onye obula no ebe a na nwa gi ma asu asusu Igbo obrokwa igbuji ikpo egbuji chetakwa na nwatakiri muta bụ aka ike m ga</td><td>1.000</td><td>no</td><td>41.98</td></tr>
+<tr><td>Sunbird African</td><td>nke na-asụ bekee bụ nke ma ihe chukwu bozikwaa petro akademi maka na ihe mpụta ka juru ma afọ achọrọ m ikweta na onye ọbụla n'ebe a na nwa gị ma asụ asụsụ igbo ọkpọrọ ụkwụ igbo ji igbo egbu ji cheta kwa na nwatakịrị ịmụta bụ aka ike ndị agị.</td><td>1.000</td><td>no</td><td>17.88</td></tr>
 <tr><td>faster-whisper base</td><td>nong ke nasu bekei, bung ke mai he tu kut, gozi kwa te traka de mi matanian futata jumafo ato mi kwa te, nong elpna ne ba nong elge ma suas tu suigo au prou pi puji puji puji puji ce ta puan nongo ta kirengo ta ba ki kemi ta vi</td><td>1.000</td><td>no</td><td>9.32</td></tr>
 <tr><td>faster-whisper tiny</td><td>No, you can ask, which bhai kaya bhai kaya. Chukutt, Kozi kota traka de mi maka hai, Fota traka jeu maa for. Aksao ne kota hai, no yaop na ne ba, no yaop na ne ba, no yaop ga maa sוא� when you are so srisi kutt. Oprah Pee Pooji poya booji. Ceta bawa nawa takiri mokhavaa ki kaya gavi.</td><td>1.000</td><td>no</td><td>8.24</td></tr>
 </tbody>
@@ -594,6 +621,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Or they go for your wel woman will say that she locks you because you have approach</td><td>1.000</td><td>no</td><td>20.61</td></tr>
+<tr><td>Sunbird African</td><td>dey go for your wealth. No woman go say that she loves you because you have her for you.</td><td>1.000</td><td>no</td><td>6.55</td></tr>
 <tr><td>faster-whisper base</td><td>Or, be good for your wealth. No woman will say that she loves you because you have a good being.</td><td>1.000</td><td>no</td><td>0.71</td></tr>
 <tr><td>faster-whisper tiny</td><td>Ó, decou foi ao Welch. Não humano cê dá até se lance o vico se avababa o vico.</td><td>1.000</td><td>no</td><td>1.99</td></tr>
 </tbody>
@@ -615,6 +643,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ebi nwa ise tanu udede na ama karia mpara</td><td>1.000</td><td>no</td><td>30.75</td></tr>
+<tr><td>Sunbird African</td><td>nwa isota anụ ụdọ na-amụ ha amụ. i nwere ike iweta mpara ya ọ karịa mpara ọkụkọ.</td><td>1.000</td><td>no</td><td>7.89</td></tr>
 <tr><td>faster-whisper base</td><td>e bing, it's a tanu da na na mahama e wita na na na na na na na na na mahama</td><td>1.000</td><td>no</td><td>8.12</td></tr>
 <tr><td>faster-whisper tiny</td><td>di setanud dan enak menghama diholiknya, ewetem parai okar yang panogukok</td><td>1.000</td><td>no</td><td>4.03</td></tr>
 </tbody>
@@ -636,6 +665,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ariers are five years with ihe a na eme na data office</td><td>1.000</td><td>no</td><td>15.76</td></tr>
+<tr><td>Sunbird African</td><td>for five years, with the ire a na-eme na data office.</td><td>1.000</td><td>no</td><td>5.11</td></tr>
 <tr><td>faster-whisper base</td><td>Arias, 5 years, with the enemy at that office</td><td>1.000</td><td>no</td><td>2.36</td></tr>
 <tr><td>faster-whisper tiny</td><td>¡Ariá! ¡Vo a 5 días! ¡Vo a 3 días! ¡Vo a 3 días!</td><td>1.000</td><td>no</td><td>0.42</td></tr>
 </tbody>
@@ -657,6 +687,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>And jobsness and to think that na Cadik will shorta and clowed and we provide all those things for you</td><td>1.000</td><td>no</td><td>29.56</td></tr>
+<tr><td>Sunbird African</td><td>your blessings. To think that an academic will shelter and clothe and go provide all those things for you!</td><td>1.000</td><td>no</td><td>5.81</td></tr>
 <tr><td>faster-whisper base</td><td>...and your blissness. And to think that Nakarlik, who is shorter, ...and include and may provide all those things for you.</td><td>1.000</td><td>no</td><td>0.81</td></tr>
 <tr><td>faster-whisper tiny</td><td>and your blissness. To think that in a colleague who is shorter and include him, we will provide all those things for you.</td><td>1.000</td><td>no</td><td>0.46</td></tr>
 </tbody>
@@ -678,6 +709,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Onye ala redio wee gwa ncha nwoke ọ bụla ọ meetiri randon</td><td>1.000</td><td>no</td><td>36.88</td></tr>
+<tr><td>Sunbird African</td><td>nchụkwụ nwoke ọbụla onwe isi nwere ndọrọ ọmụrụ.</td><td>1.000</td><td>no</td><td>6.95</td></tr>
 <tr><td>faster-whisper base</td><td>我們要來幹了,我們要去幹了,我們要去幹了。</td><td>1.000</td><td>no</td><td>6.08</td></tr>
 <tr><td>faster-whisper tiny</td><td>歐南大力主要不勇求武漢主要力主要不勇</td><td>1.000</td><td>no</td><td>2.33</td></tr>
 </tbody>
@@ -699,6 +731,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Mgbe ọ bịara ịta agwa anyị na ọ ya ebido help war don forget na ebe ndị China trip</td><td>1.000</td><td>no</td><td>24.27</td></tr>
+<tr><td>Sunbird African</td><td>ọ bịara ịda àgwà anyị na na ọ ya ebido help wọọ. Don't forget na ebe dị China trip bụ bidoro ụwụ.</td><td>1.000</td><td>no</td><td>8.33</td></tr>
 <tr><td>faster-whisper base</td><td>Ngwapia raida wai Nah, no ye video, help wap Don't forget nae bae bae bae bae bae bae bae bae bae bae bae bae bae</td><td>1.000</td><td>no</td><td>0.96</td></tr>
 <tr><td>faster-whisper tiny</td><td>Boleh raya tak baik? Nah. No ya, video help, lo. Don't forget, nebebis saya, nah. Tribun Bidurung.</td><td>1.000</td><td>no</td><td>0.61</td></tr>
 </tbody>
@@ -720,6 +753,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>He also went to Mr. Elephant house enyi ọ gakwara n'ụlọ Maazi enyi Maazi Ram</td><td>1.000</td><td>no</td><td>49.28</td></tr>
+<tr><td>Sunbird African</td><td>. He also went to Mr. Elephant's house. Ọ gakwara n'ụlọ maazi enyi. Mr. Ram.</td><td>1.000</td><td>no</td><td>6.61</td></tr>
 <tr><td>faster-whisper base</td><td>He also went to Mr. Elephant's House. Ogakwara lula mazi eni Ogakwara lula mazi eni Mr. Ram</td><td>1.000</td><td>no</td><td>0.88</td></tr>
 <tr><td>faster-whisper tiny</td><td>He also went to Mr. Elephant's house. Agacuara, no lo mazie, Amy. Agacuara, no lo mazie, Amy. Mr. Ram.</td><td>1.000</td><td>no</td><td>0.55</td></tr>
 </tbody>
@@ -741,6 +775,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td></td><td>1.000</td><td>no</td><td>5.56</td></tr>
+<tr><td>Sunbird African</td><td>n'oge na-aga na-agbanyeghi.</td><td>1.000</td><td>no</td><td>12.85</td></tr>
 <tr><td>faster-whisper base</td><td>ว่ามันไม่ได้กันหน่ากันหน่ากัน</td><td>1.000</td><td>no</td><td>0.71</td></tr>
 <tr><td>faster-whisper tiny</td><td>วันว่าเป็นหน่ากันหน่าบอกัน</td><td>1.000</td><td>no</td><td>0.39</td></tr>
 </tbody>
@@ -762,6 +797,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td></td><td>1.000</td><td>no</td><td>10.11</td></tr>
+<tr><td>Sunbird African</td><td>. Ọ na-amaara ụmụ maka?</td><td>1.000</td><td>no</td><td>10.10</td></tr>
 <tr><td>faster-whisper base</td><td>من أمانه أمان</td><td>1.000</td><td>no</td><td>2.21</td></tr>
 <tr><td>faster-whisper tiny</td><td>またね! またね! またね! またね!</td><td>1.000</td><td>no</td><td>1.40</td></tr>
 </tbody>
@@ -783,6 +819,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>I wete ihe anyi ji wee bia biko onye ọ metụtara n'obi ọbụlagodi igwe eji aga ije nke akpọrọ Wilche ka anyi</td><td>1.000</td><td>no</td><td>27.24</td></tr>
+<tr><td>Sunbird African</td><td>iweta ihe anyị ji wee bịa biko onye o metụtara n'obi ọbụragodi igwe eji aga iji nke akpọrọ wheel chair ka anyị biko.</td><td>1.000</td><td>no</td><td>9.24</td></tr>
 <tr><td>faster-whisper base</td><td>Iwetan ihaj iwebia. Biko o nomet saranobi. Opera godi iwe ijagi jengat bero wiru cia. Kani biko.</td><td>1.000</td><td>no</td><td>0.97</td></tr>
 <tr><td>faster-whisper tiny</td><td>This is the place where we live Because we don't know what's going on Hope you are happy I am going to the place where we live Because we are happy</td><td>1.000</td><td>no</td><td>6.11</td></tr>
 </tbody>
@@ -804,6 +841,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Foon 100 ife a na-eme</td><td>1.000</td><td>no</td><td>13.86</td></tr>
+<tr><td>Sunbird African</td><td>hondirendị gaa ụwa ogu na paatị gu na ife a na-eme.</td><td>1.000</td><td>no</td><td>6.11</td></tr>
 <tr><td>faster-whisper base</td><td>فومو ہندرے دی دا وغنا تاثے گنیسانے میں</td><td>1.000</td><td>no</td><td>0.74</td></tr>
 <tr><td>faster-whisper tiny</td><td>Fouh mi hundraati da wo nataate guni faanei me</td><td>1.000</td><td>no</td><td>6.85</td></tr>
 </tbody>
@@ -825,6 +863,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Daalụ you guys a bree, a love the love the ineraction aloeve</td><td>1.000</td><td>no</td><td>26.50</td></tr>
+<tr><td>Sunbird African</td><td>Let's see. Okay, okay, you guys are great. I love the I love the interaction. I love.</td><td>1.000</td><td>no</td><td>5.69</td></tr>
 <tr><td>faster-whisper base</td><td>Dalo um let's see okay okay you guys are great I love the I love the interaction I love</td><td>1.000</td><td>no</td><td>0.73</td></tr>
 <tr><td>faster-whisper tiny</td><td>Da-lo. Um, let's see me. Okay. Okay. You guys are great. I love the- I love the interaction. I love-</td><td>1.000</td><td>no</td><td>0.48</td></tr>
 </tbody>
@@ -846,6 +885,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ụmụ ezinụlọ for Toris Hon. Okay, that's a governor</td><td>1.000</td><td>no</td><td>21.60</td></tr>
+<tr><td>Sunbird African</td><td>ụ ụmụ ezinụlọ egwuregwu.</td><td>1.000</td><td>no</td><td>5.83</td></tr>
 <tr><td>faster-whisper base</td><td>humo, it is no law for Theresa on all right okay that's the problem egu, egu, egu, egu, egu, egu, egu so</td><td>1.000</td><td>no</td><td>8.05</td></tr>
 <tr><td>faster-whisper tiny</td><td>Umu, uh, as you know, for uh, to be so I know, okay, that's a problem. Um, Ego, Ego, Ego, Ego, Ego, Ego, Ego, Ego, Ego, so...</td><td>1.000</td><td>no</td><td>2.06</td></tr>
 </tbody>
@@ -867,6 +907,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Almost na-ahapụ that young guard okay destroy ụmụokorobịa anyị niile kirikiri ụmụazi Okay destroy are complete so then we are thinking na continuous detention of akwa okuko</td><td>1.000</td><td>no</td><td>17.54</td></tr>
+<tr><td>Sunbird African</td><td>almost na ọbụna hapụ dat ọrụ ọrụ young guy, oka edystroyi ụmụ okorobịa ọhụrụ niile, kekele ụmụazị, ọka edystroyị her complete, here ọga go, so the we are thinking na continuous detention of akwa ọkụkọ.</td><td>1.000</td><td>no</td><td>12.11</td></tr>
 <tr><td>faster-whisper base</td><td>The century is almost another half of a back close, currently must restore coal mining power. written a few words, let's try this photograph. Complete. Be on 베 kre</td><td>1.000</td><td>no</td><td>13.67</td></tr>
 <tr><td>faster-whisper tiny</td><td>No matter how far back you got, okay, this story will not create any meaning Take care of yourself, okay, this story will not complete No matter how far back you got, this story will not complete So, there were thinking, nah, continuous detention of Apococo</td><td>1.000</td><td>no</td><td>0.67</td></tr>
 </tbody>
@@ -888,6 +929,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>The water is full mmiri juru eju mmiri</td><td>0.000</td><td>yes</td><td>15.46</td></tr>
+<tr><td>Sunbird African</td><td>. The water is full. Mmiri juru eju.</td><td>1.000</td><td>no</td><td>5.33</td></tr>
 <tr><td>faster-whisper base</td><td>The water is full. Miri juraju. Miri.</td><td>1.000</td><td>no</td><td>0.66</td></tr>
 <tr><td>faster-whisper tiny</td><td>The water is full Miri Jureju Miri</td><td>1.000</td><td>no</td><td>0.44</td></tr>
 </tbody>
@@ -909,6 +951,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Meseji m too much people anaghị ege</td><td>1.000</td><td>no</td><td>9.24</td></tr>
+<tr><td>Sunbird African</td><td>ọdụ ndị ọrụ ya nwoke ọrụ ya ọrụ ya ọrụ.</td><td>1.000</td><td>no</td><td>6.18</td></tr>
 <tr><td>faster-whisper base</td><td>Mas sejam-me em 2 maçãs para pular na Hege.</td><td>1.000</td><td>no</td><td>2.28</td></tr>
 <tr><td>faster-whisper tiny</td><td>ne saisree dagim na tumajh pi pa' rana hai ga</td><td>1.000</td><td>no</td><td>6.67</td></tr>
 </tbody>
@@ -930,6 +973,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>High friends it's me at Udochi and today we are going to be coloring with the eho akụkọ ahụ Igbo body parts song coloring book are you ready let's go</td><td>1.000</td><td>no</td><td>11.74</td></tr>
+<tr><td>Sunbird African</td><td>, it's me Ati Udochi and today we are going to be colouring with the Egwu Akụkụ Ahụ Igbo body parts song colouring book. Are you ready? Let's go.</td><td>1.000</td><td>no</td><td>7.44</td></tr>
 <tr><td>faster-whisper base</td><td>Hi friends, it's me, Ating Do Chi. And today, we are going to be coloring with the Iguakukaku Ibo Body Parts song coloring book. Are you ready? Let's go.</td><td>1.000</td><td>no</td><td>1.02</td></tr>
 <tr><td>faster-whisper tiny</td><td>Hi friends, it's me, Artun Dochi, and today we are going to be coloring with the Edward Akukahu Ibo body parts song coloring book. Are you ready? Let's go.</td><td>1.000</td><td>no</td><td>0.54</td></tr>
 </tbody>
@@ -951,6 +995,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Rie anya rie ya ofuma rie ya riba ya ahụ ira ofe anyi agbara ofe</td><td>1.000</td><td>no</td><td>10.58</td></tr>
+<tr><td>Sunbird African</td><td>ara n'oge na-adọba n'adọba ndị na-adọba ndị na-adọba ndị na-adọba.</td><td>1.000</td><td>no</td><td>7.19</td></tr>
 <tr><td>faster-whisper base</td><td>薄餃 牛油 薄餃 薄餃</td><td>1.000</td><td>no</td><td>7.78</td></tr>
 <tr><td>faster-whisper tiny</td><td>พี่อาย ยัง ยังยังยอีกผมอันยังยังยังยังคือมอันยัง อย่างนี่ไป อาทไทย อันยังยังความอย่างว่า ๆ.</td><td>1.000</td><td>no</td><td>6.29</td></tr>
 </tbody>
@@ -972,6 +1017,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Chi na-eji well done</td><td>0.000</td><td>yes</td><td>14.89</td></tr>
+<tr><td>Sunbird African</td><td>na eji? well done.</td><td>1.000</td><td>no</td><td>4.39</td></tr>
 <tr><td>faster-whisper base</td><td>She made it Well done</td><td>1.000</td><td>no</td><td>0.69</td></tr>
 <tr><td>faster-whisper tiny</td><td>Chi, me, Chi. Well done!</td><td>1.000</td><td>no</td><td>0.32</td></tr>
 </tbody>
@@ -993,6 +1039,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Ee eri juru m afọ go wash your plate gaa saa efere gị gaa saa efere gị I amashing my</td><td>1.000</td><td>no</td><td>15.59</td></tr>
+<tr><td>Sunbird African</td><td>Eri juru m afọ. Go wash your plate. Gaa saa efere gi. I am washing my plate.</td><td>1.000</td><td>no</td><td>6.08</td></tr>
 <tr><td>faster-whisper base</td><td>aeryjurum afo go wash your plates gasa eferregi gasa eferregi I am washing my plates</td><td>1.000</td><td>no</td><td>0.78</td></tr>
 <tr><td>faster-whisper tiny</td><td>Hey, every dream, ever. Go wash your plates. Gas are efferiging. Gas are efferiging. I am washing my plates.</td><td>1.000</td><td>no</td><td>0.74</td></tr>
 </tbody>
@@ -1014,6 +1061,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Did you like change when I was inside your footing you pitched his change mmadu wuma na ikwu nne gi wu mma ke mmad</td><td>1.000</td><td>no</td><td>11.82</td></tr>
+<tr><td>Sunbird African</td><td>Did you just change your side? Gịnị ọfọdụ gị ụmụnne gị ụmụnna gị madị?</td><td>1.000</td><td>no</td><td>7.21</td></tr>
 <tr><td>faster-whisper base</td><td>Did you not change what I was inside? Did you have a thing with me? What mother? What mother?</td><td>1.000</td><td>no</td><td>0.77</td></tr>
 <tr><td>faster-whisper tiny</td><td>Did you make change when I was inside? Give me a fucking good netty, oh my god, oh my god, oh my god, oh my god, oh my god, oh my god.</td><td>1.000</td><td>no</td><td>0.53</td></tr>
 </tbody>
@@ -1035,6 +1083,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>Anyi batara wee hu na ya bụ mmemme graduation nke ha mere taata ebila oku onye mbụ anyi kporo ihu bụ onye isi nke na ahu maka ogo nke</td><td>1.000</td><td>no</td><td>17.13</td></tr>
+<tr><td>Sunbird African</td><td>anyị batara wee hụ na ya bụ mmemme graduation nke ha mere taata ebirile ọkụ onye mgba ịkpọrọ ihu bụ onye isi nke na-ahụ maka ogo nke sekọndịrị.</td><td>1.000</td><td>no</td><td>9.40</td></tr>
 <tr><td>faster-whisper base</td><td>Ayibatara, wae hon ayabu me make radiation kehanere tata ibiwi loko. Onyan white worry hu, bu, onyisi, mike na homaka, ogun ke se kondru.</td><td>1.000</td><td>no</td><td>0.99</td></tr>
 <tr><td>faster-whisper tiny</td><td>ayi batara, wihon ayabu medmekradition kehanereta ta kibiri loko onyem bai moriru bu, onisi mike na ho maka, ogunke sekondri</td><td>1.000</td><td>no</td><td>3.49</td></tr>
 </tbody>
@@ -1056,6 +1105,7 @@ Jump to:
 <thead><tr><th>Model</th><th>Hypothesis</th><th>WER</th><th>Exact match</th><th>Latency (s)</th></tr></thead>
 <tbody>
 <tr><td>Intron Sahara</td><td>I na-ekiri ugbu a bụ ya kacha mee ọfụma n'asụsụ Igbo na klas SS3 bụ ndị nke gụcha</td><td>1.000</td><td>no</td><td>9.59</td></tr>
+<tr><td>Sunbird African</td><td>ị na-ekiri ugbu a bụ ya kacha m ọfụma n'asụsụ igbo na klas ss3 bụ ndị nke gụchagụla agụcha.</td><td>1.000</td><td>no</td><td>8.18</td></tr>
 <tr><td>faster-whisper base</td><td>Inekiriru boa, boyaka cha mofo ma nasu suibu na klas ss3. Bun din kego cha gola gocha.</td><td>1.000</td><td>no</td><td>0.84</td></tr>
 <tr><td>faster-whisper tiny</td><td>i nekiriyu bua, bojakaca mofoma na su suibu na klas SS3 bunting kegocha gola gocha</td><td>1.000</td><td>no</td><td>0.47</td></tr>
 </tbody>
