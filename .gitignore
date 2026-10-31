@@ -45,7 +45,6 @@ app.*.map.json
 /android/app/release
 
 .env
-/lib/firebase_options.dart
 upload_certificate.pem
 /android/app/src/main/res/values/secrets.xml
 /android/app/google-services.json

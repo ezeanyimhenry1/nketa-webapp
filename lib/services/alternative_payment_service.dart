@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:nketa/screens/payment_webview_screen.dart';
+import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/payment_checkout.dart';
+import 'package:nketa/services/web_backend.dart';
 
 class AlternativePaymentService {
   // Flutterwave configuration
@@ -29,6 +30,33 @@ class AlternativePaymentService {
     }
 
     return key;
+  }
+
+  static bool get _paymentsReady =>
+      WebBackend.isEnabled ||
+      (!_flutterwaveSecretKey.contains('missing_key') &&
+          !_flutterwaveSecretKey.contains('invalid_key_format'));
+
+  static Future<http.Response> _flutterwaveRequest({
+    required String method,
+    required String path,
+    Map<String, dynamic>? body,
+  }) {
+    if (WebBackend.isEnabled) {
+      return WebBackend.post(
+        '/flutterwaveProxy',
+        body: {'method': method, 'path': path, 'body': body},
+      );
+    }
+    final uri = Uri.parse('https://api.flutterwave.com/v3$path');
+    final headers = {
+      'Authorization': 'Bearer $_flutterwaveSecretKey',
+      'Content-Type': 'application/json',
+    };
+    if (method == 'GET') {
+      return http.get(uri, headers: headers);
+    }
+    return http.post(uri, headers: headers, body: json.encode(body));
   }
 
   // Country-specific pricing (in local currencies)
@@ -61,10 +89,7 @@ class AlternativePaymentService {
     if (!context.mounted) return;
 
     // Check if API key is configured
-    final apiKey = _flutterwaveSecretKey;
-    final isApiKeyConfigured =
-        !apiKey.contains('missing_key') &&
-        !apiKey.contains('invalid_key_format');
+    final isApiKeyConfigured = _paymentsReady;
 
     return showDialog<void>(
       context: context,
@@ -234,7 +259,7 @@ class AlternativePaymentService {
   static Future<String> getUserCountryCode() async {
     try {
       // Try to get country from device locale
-      final locale = Platform.localeName;
+      final locale = AppPlatform.localeName;
       debugPrint('Device locale: $locale');
 
       final countryCode = locale.split('_').last.toUpperCase();
@@ -323,22 +348,16 @@ class AlternativePaymentService {
     Map<String, dynamic> pricing,
   ) async {
     try {
-      final apiKey = _flutterwaveSecretKey;
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
+      if (!_paymentsReady) {
         debugPrint('Cannot find existing payment plan: API key not configured');
         return null;
       }
 
       debugPrint('_findExistingPaymentPlan called with pricing: $pricing');
-      final url = Uri.parse('https://api.flutterwave.com/v3/payment-plans');
-
-      final headers = {
-        'Authorization': 'Bearer $apiKey',
-        'Content-Type': 'application/json',
-      };
-
-      final response = await http.get(url, headers: headers);
+      final response = await _flutterwaveRequest(
+        method: 'GET',
+        path: '/payment-plans',
+      );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -371,19 +390,10 @@ class AlternativePaymentService {
     Map<String, dynamic> pricing,
   ) async {
     try {
-      final apiKey = _flutterwaveSecretKey;
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
+      if (!_paymentsReady) {
         debugPrint('Cannot create payment plan: API key not configured');
         return null;
       }
-
-      final url = Uri.parse('https://api.flutterwave.com/v3/payment-plans');
-
-      final headers = {
-        'Authorization': 'Bearer $apiKey',
-        'Content-Type': 'application/json',
-      };
 
       final body = {
         'amount': pricing['amount'],
@@ -395,10 +405,10 @@ class AlternativePaymentService {
 
       debugPrint('Creating payment plan with body: ${json.encode(body)}');
 
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: json.encode(body),
+      final response = await _flutterwaveRequest(
+        method: 'POST',
+        path: '/payment-plans',
+        body: body,
       );
 
       debugPrint('Payment plan response status: ${response.statusCode}');
@@ -438,10 +448,8 @@ class AlternativePaymentService {
 
     try {
       // Check if API key is properly configured
-      final apiKey = _flutterwaveSecretKey;
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
-        debugPrint('API key not properly configured: $apiKey');
+      if (!_paymentsReady) {
+        debugPrint('API key not properly configured');
         _showPaymentError(
           context,
           'Payment service is not properly configured. Please contact support or try the web version.',
@@ -499,14 +507,10 @@ class AlternativePaymentService {
         }
 
         // Navigate to web view for payment
-        final result = await Navigator.of(context).push<bool>(
-          MaterialPageRoute(
-            builder:
-                (context) => PaymentWebViewScreen(
-                  paymentUrl: paymentUrl,
-                  txRef: paymentData['txRef'],
-                ),
-          ),
+        final result = await openPaymentCheckout(
+          context,
+          paymentUrl: paymentUrl,
+          txRef: paymentData['txRef'],
         );
 
         // Handle the result from web view
@@ -554,15 +558,8 @@ class AlternativePaymentService {
       final txRef =
           'igbo_bible_payment_${DateTime.now().millisecondsSinceEpoch}';
 
-      // Check API key
-      final apiKey = _flutterwaveSecretKey;
-      debugPrint('API Key length: ${apiKey.length}');
-      debugPrint('API Key starts with: ${apiKey.substring(0, 10)}...');
-
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
-        debugPrint('API key not properly configured: $apiKey');
-        // Return a test payment URL for development
+      if (!_paymentsReady) {
+        debugPrint('API key not properly configured');
         return {
           'paymentLink': 'https://rave.flutterwave.com/donate/test_payment',
           'txRef': txRef,
@@ -572,37 +569,28 @@ class AlternativePaymentService {
         };
       }
 
-      final url = Uri.parse('https://api.flutterwave.com/v3/payments');
-      final headers = {
-        'Authorization': 'Bearer $apiKey',
-        'Content-Type': 'application/json',
-      };
-
       final body = {
         'tx_ref': txRef,
         'amount': pricing['amount'],
         'currency': pricing['currency'],
-        'redirect_url': 'https://nketa.netlify.app/payment-success',
+        'redirect_url': 'https://nketa.app/payment-success',
         'payment_options': 'card,mobilemoney,ussd,banktransfer',
-        // Attach the recurring payment plan so Flutterwave can validate the request
         'payment_plan': planId,
         'customer': {'email': customerEmail, 'name': customerName},
         'customizations': {
           'title': 'Nketa Premium Subscription',
           'description': 'Monthly premium subscription for unlimited access',
-          'logo': 'https://nketa.netlify.app/logo.png',
+          'logo': 'https://nketa.app/icon.png',
         },
         'meta': {'payment_plan_id': planId, 'subscription_type': 'monthly'},
       };
 
       debugPrint('Creating payment with body: ${json.encode(body)}');
-      debugPrint('Request URL: $url');
-      debugPrint('Request headers: $headers');
 
-      final response = await http.post(
-        url,
-        headers: headers,
-        body: json.encode(body),
+      final response = await _flutterwaveRequest(
+        method: 'POST',
+        path: '/payments',
+        body: body,
       );
 
       debugPrint('Payment creation response status: ${response.statusCode}');
@@ -756,25 +744,17 @@ class AlternativePaymentService {
     String transactionId,
   ) async {
     try {
-      final apiKey = _flutterwaveSecretKey;
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
+      if (!_paymentsReady) {
         debugPrint('Cannot verify payment: API key not configured');
         return null;
       }
 
-      // Use transaction ID for verification (more reliable than tx_ref)
-      final url = Uri.parse(
-        'https://api.flutterwave.com/v3/transactions/$transactionId/verify',
-      );
-      final headers = {
-        'Authorization': 'Bearer $apiKey',
-        'Content-Type': 'application/json',
-      };
-
       debugPrint('Verifying payment with transaction ID: $transactionId');
 
-      final response = await http.get(url, headers: headers);
+      final response = await _flutterwaveRequest(
+        method: 'GET',
+        path: '/transactions/$transactionId/verify',
+      );
 
       debugPrint(
         'Payment verification response status: ${response.statusCode}',
@@ -817,24 +797,17 @@ class AlternativePaymentService {
     String txRef,
   ) async {
     try {
-      final apiKey = _flutterwaveSecretKey;
-      if (apiKey.contains('missing_key') ||
-          apiKey.contains('invalid_key_format')) {
+      if (!_paymentsReady) {
         debugPrint('Cannot verify payment by tx_ref: API key not configured');
         return null;
       }
 
-      final url = Uri.parse(
-        'https://api.flutterwave.com/v3/transactions/verify_by_reference?tx_ref=$txRef',
-      );
-      final headers = {
-        'Authorization': 'Bearer $apiKey',
-        'Content-Type': 'application/json',
-      };
-
       debugPrint('Verifying payment by reference: $txRef');
 
-      final response = await http.get(url, headers: headers);
+      final response = await _flutterwaveRequest(
+        method: 'GET',
+        path: '/transactions/verify_by_reference?tx_ref=$txRef',
+      );
 
       debugPrint('Verify_by_reference status: ${response.statusCode}');
       debugPrint('Verify_by_reference body: ${response.body}');
@@ -1043,7 +1016,7 @@ class AlternativePaymentService {
   /// Open web-based subscription page
   static Future<void> openWebSubscription(BuildContext context) async {
     const url =
-        'https://nketa.netlify.app/subscribe'; // Replace with your actual URL
+        'https://web.nketa.app';
 
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
@@ -1174,7 +1147,7 @@ class AlternativePaymentService {
 
   /// Check if user should see alternative payment options
   static bool shouldShowAlternativePayment() {
-    return Platform.isAndroid;
+    return AppPlatform.isAndroid || AppPlatform.isWeb;
   }
 
   /// Get subscription status for Android users

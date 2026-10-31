@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MicrophonePermissionOutcome {
@@ -14,6 +15,9 @@ class MicrophonePermissionOutcome {
 
 class MicrophonePermissionService {
   static Future<MicrophonePermissionOutcome> ensureGranted() async {
+    if (kIsWeb) {
+      return const MicrophonePermissionOutcome(granted: true);
+    }
     var status = await Permission.microphone.status;
 
     if (status.isGranted) {
@@ -49,5 +53,8 @@ class MicrophonePermissionService {
     );
   }
 
-  static Future<void> openSettings() => openAppSettings();
+  static Future<void> openSettings() async {
+    if (kIsWeb) return;
+    await openAppSettings();
+  }
 }

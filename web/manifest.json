@@ -1,23 +1,28 @@
 {
+    "id": "/",
     "name": "Nketa",
     "short_name": "Nketa",
-    "start_url": ".",
+    "description": "Translate names to Nsịbịdị, learn Igbo culture, market days, cosmology, and ancestral wisdom.",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "display_override": ["standalone", "minimal-ui"],
+    "background_color": "#F35B28",
+    "theme_color": "#F35B28",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
             "src": "icons/Icon-192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "icons/Icon-512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         },
         {
             "src": "icons/Icon-maskable-192.png",
@@ -30,6 +35,15 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "icons/screenshot-narrow.png",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Nketa home"
         }
     ]
 }

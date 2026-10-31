@@ -1,6 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/pwa_install.dart';
+import 'package:nketa/widgets/pwa_install_sheet.dart';
 import 'package:nketa/screens/calendar_screen.dart';
 import 'package:nketa/screens/learn_screen.dart';
 import 'package:nketa/screens/translate_screen.dart';
@@ -241,7 +242,31 @@ class _MainScreenState extends State<MainScreen> {
                       );
                     },
                   ),
-                  if (Platform.isIOS)
+                  if (PwaInstall.shouldShowBanner)
+                    ListTile(
+                      leading: Icon(
+                        PwaInstall.isIosSafari
+                            ? Icons.ios_share
+                            : Icons.download,
+                        size: AppSpacing.iconSize.sp,
+                        color: AppColors.primary,
+                      ),
+                      title: Text(
+                        PwaInstall.isIosSafari
+                            ? 'Add to Home Screen'
+                            : 'Install Nketa',
+                        style: textTheme.bodyLarge,
+                      ),
+                      onTap: () async {
+                        Navigator.pop(context);
+                        if (PwaInstall.canPromptInstall) {
+                          await PwaInstall.promptInstall();
+                        } else if (PwaInstall.isIosSafari) {
+                          await showPwaIosInstallSheet(context);
+                        }
+                      },
+                    ),
+                  if (AppPlatform.isIOS)
                     ListTile(
                       leading: Icon(
                         Icons.star,
@@ -313,32 +338,33 @@ class _MainScreenState extends State<MainScreen> {
                       ),
                       SizedBox(height: 8),
                       Text('Version $version', style: textTheme.bodySmall),
-                      SizedBox(height: 8),
-                      ElevatedButton.icon(
-                        onPressed: () async {
-                          // Replace with your app store URL
-                          final url =
-                              Platform.isAndroid
-                                  ? 'https://drive.google.com/file/d/1NRwjGUIKJrFspVAH4CAawgnxDOcw6Fzt/view?usp=drive_link'
-                                  : 'https://apps.apple.com/us/app/the-igbo-bible/id6748525748';
-                          final uri = Uri.parse(url);
-                          if (await canLaunchUrl(uri)) {
-                            await launchUrl(
-                              uri,
-                              mode: LaunchMode.externalApplication,
-                            );
-                          }
-                        },
-                        icon: Icon(Icons.system_update),
-                        label: Text('Check for Update'),
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
+                      if (!AppPlatform.isWeb) ...[
+                        SizedBox(height: 8),
+                        ElevatedButton.icon(
+                          onPressed: () async {
+                            final url =
+                                AppPlatform.isAndroid
+                                    ? 'https://drive.google.com/file/d/1NRwjGUIKJrFspVAH4CAawgnxDOcw6Fzt/view?usp=drive_link'
+                                    : 'https://apps.apple.com/us/app/the-igbo-bible/id6748525748';
+                            final uri = Uri.parse(url);
+                            if (await canLaunchUrl(uri)) {
+                              await launchUrl(
+                                uri,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            }
+                          },
+                          icon: Icon(Icons.system_update),
+                          label: Text('Check for Update'),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            textStyle: textTheme.bodySmall,
                           ),
-                          textStyle: textTheme.bodySmall,
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 );

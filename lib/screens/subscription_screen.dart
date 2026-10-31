@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:io';
+import 'package:nketa/platform/app_platform.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/theme/app_theme.dart';
 import 'package:nketa/services/alternative_payment_service.dart';
@@ -15,7 +15,7 @@ class SubscriptionScreen extends StatefulWidget {
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   static String get _kSubscriptionId {
-    if (Platform.isIOS) {
+    if (AppPlatform.isIOS) {
       return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
     } else {
       return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
@@ -37,6 +37,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   }
 
   Future<void> _initIAP() async {
+    if (AppPlatform.isWeb) {
+      setState(() {
+        _iapInitialized = true;
+        _loading = false;
+      });
+      return;
+    }
     try {
       _iapAvailable = await InAppPurchase.instance.isAvailable();
 
@@ -142,7 +149,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
 
   Future<void> _buySubscription() async {
     // For Android users, show alternative payment options
-    if (Platform.isAndroid) {
+    if (AppPlatform.isAndroid || AppPlatform.isWeb) {
       await AlternativePaymentService.showAndroidSubscriptionOptions(context);
       return;
     }
@@ -261,7 +268,30 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             _buildFeatureItem('Access to all Igbo content'),
             _buildFeatureItem('Cross-device sync (optional)'),
             const SizedBox(height: 32),
-            if (_products.isNotEmpty) ...[
+            if (AppPlatform.isWeb || AppPlatform.isAndroid) ...[
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: _buySubscription,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Subscribe with Flutterwave',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ] else if (_products.isNotEmpty) ...[
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24.0),
@@ -343,23 +373,25 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 ),
               ),
             ],
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: _restorePurchases,
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+            if (!AppPlatform.isWeb) ...[
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: _restorePurchases,
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    'Restore Purchases',
+                    style: theme.textTheme.titleMedium,
                   ),
                 ),
-                child: Text(
-                  'Restore Purchases',
-                  style: theme.textTheme.titleMedium,
-                ),
               ),
-            ),
+            ],
             const SizedBox(height: 32),
             Container(
               padding: const EdgeInsets.all(24.0),

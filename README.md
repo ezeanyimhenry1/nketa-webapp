@@ -30,7 +30,7 @@ Android now uses bundle ID `com.henryezeanyim.nketa`. iOS keeps `com.henryezeany
 
 ## External URLs
 
-Privacy, terms, and payment redirects use `https://nketa.netlify.app/` (deploy the same routes as before: `/privacy`, `/terms`, `/payment-success`, `/subscribe`, `/logo.png`).
+Privacy, terms, and payment redirects use `https://nketa.app/` (`/privacy`, `/terms`, `/payment-success`, `/icon.png`). The web app is `https://web.nketa.app`.
 
 ## Hackathon / Benchmark
 

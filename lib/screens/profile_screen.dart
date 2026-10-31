@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'dart:io';
 import 'package:in_app_purchase/in_app_purchase.dart';
+import 'package:nketa/platform/app_platform.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/screens/subscription_screen.dart';
 
@@ -26,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // In-app purchase
   static String get _kSubscriptionId {
     // Fallback subscription IDs if environment variables are not available
-    if (Platform.isIOS) {
+    if (AppPlatform.isIOS) {
       return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
     } else {
       return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
@@ -41,17 +41,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   // ignore: unused_field
   bool _iapInitialized = false;
 
+  static String? _googleClientId(String key) {
+    final value = dotenv.env[key];
+    if (value == null || value.isEmpty) return null;
+    if (!value.endsWith('.apps.googleusercontent.com')) return null;
+    if (value.startsWith('your-') || value.startsWith('YOUR_')) return null;
+    return value;
+  }
+
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: ['email'],
-    serverClientId: dotenv.env['GOOGLE_SERVER_CLIENT_ID'],
+    clientId: AppPlatform.isWeb
+        ? (_googleClientId('GOOGLE_WEB_CLIENT_ID') ??
+            _googleClientId('GOOGLE_SERVER_CLIENT_ID'))
+        : null,
+    serverClientId: _googleClientId('GOOGLE_SERVER_CLIENT_ID'),
   );
 
   @override
   void initState() {
     super.initState();
     _checkSubscription();
-    if (FirebaseAuth.instance.currentUser != null) {
-      _initIAP(); // Initialize IAP if user is already logged in
+    if (!AppPlatform.isWeb && FirebaseAuth.instance.currentUser != null) {
+      _initIAP();
     }
 
     _googleSignIn.onCurrentUserChanged.listen((account) {
@@ -60,10 +72,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       }
     });
 
-    _periodicPurchaseCheck();
+    if (!AppPlatform.isWeb) {
+      _periodicPurchaseCheck();
+    }
   }
 
   Future<void> _initIAP() async {
+    if (AppPlatform.isWeb) {
+      setState(() => _iapInitialized = true);
+      return;
+    }
     try {
       _iapAvailable = await InAppPurchase.instance.isAvailable();
 
@@ -178,6 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _restorePurchases() async {
+    if (AppPlatform.isWeb) return;
     setState(() => _checkingPurchases = true);
     try {
       await InAppPurchase.instance.restorePurchases();
@@ -484,7 +503,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-                if (Platform.isIOS) ...[
+                if (AppPlatform.isIOS) ...[
                   const SizedBox(height: 8),
                   SizedBox(
                     width: double.infinity,

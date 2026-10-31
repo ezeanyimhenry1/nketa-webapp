@@ -1,6 +1,16 @@
 [build]
-  command = "pip install -r requirements-docs.txt && python3 scripts/build_docs.py && python3 -m mkdocs build"
-  publish = "site"
+  command = "bash scripts/netlify_build_web.sh"
+  publish = "build/web"
 
 [build.environment]
-  PYTHON_VERSION = "3.11"
+  FLUTTER_CHANNEL = "stable"
+
+[[headers]]
+  for = "/firebase-messaging-sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache"

@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:nketa/platform/app_platform.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +25,7 @@ class ReviewService {
   /// Check if it's appropriate to show the review prompt
   Future<bool> shouldShowReviewPrompt() async {
     // Only show on iOS devices
-    if (!Platform.isIOS) {
+    if (!AppPlatform.isIOS) {
       return false;
     }
 

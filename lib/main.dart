@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/screens/main_screen.dart';
@@ -11,27 +12,21 @@ import 'package:nketa/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:nketa/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'dart:io';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'package:nketa/services/network_status_provider.dart';
 import 'package:nketa/widgets/global_network_banner.dart';
 import 'firebase_options.dart';
 
-// Global navigator key for handling notification navigation
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase with proper options first
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  // Load environment variables
   await dotenv.load(fileName: ".env");
 
-  // Initialize timezone data
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
 
@@ -57,16 +52,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
 
-    // Add lifecycle observer
     WidgetsBinding.instance.addObserver(this);
 
-    // Initialize non-critical services after app starts
     _initializeServicesAsync();
 
-    // Clear badge on iOS when app is opened
     NotificationService.clearBadge();
 
-    // Show splash for shorter duration
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() => _showSplash = false);
@@ -84,7 +75,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
 
-    // Clear badge when app is resumed
     if (state == AppLifecycleState.resumed) {
       NotificationService.clearBadge();
     }
@@ -92,48 +82,30 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   Future<void> _initializeServicesAsync() async {
     try {
-      // Initialize notification service
       await NotificationService.initialize();
 
-      // Set up notification callback
       NotificationService.setNotificationCallback((payload) {
-        if (payload == 'proverb_of_the_day' && mounted) {
-          navigatorKey.currentState?.pushNamedAndRemoveUntil(
-            '/',
-            (route) => false,
-          );
+        if (!mounted) return;
+        if (payload == 'proverb_of_the_day') {
+          navigatorKey.currentState?.popUntil((route) => route.isFirst);
+        } else if (payload == 'event') {
+          navigatorKey.currentState?.popUntil((route) => route.isFirst);
         }
       });
 
-      // Request notification permissions
-      await _requestNotificationPermissions();
+      if (kIsWeb) return;
 
-      // --- Begin: Auto-enable notifications on first grant ---
       final prefs = await SharedPreferences.getInstance();
       final notificationsEnabled =
           prefs.getBool('notifications_enabled') ?? false;
       final eventNotificationsEnabled =
           prefs.getBool('event_notifications_enabled') ?? false;
 
-      // Check if notifications are enabled in system
-      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      bool permissionGranted = true;
-      if (Platform.isAndroid) {
-        final androidPlugin =
-            flutterLocalNotificationsPlugin
-                .resolvePlatformSpecificImplementation<
-                  AndroidFlutterLocalNotificationsPlugin
-                >();
-        if (androidPlugin != null) {
-          permissionGranted =
-              await androidPlugin.areNotificationsEnabled() ?? true;
-        }
-      }
-      // For iOS, assume permission is granted if we get here
+      final permissionGranted =
+          await NotificationService.areNotificationsEnabled();
 
       if (permissionGranted &&
           (!notificationsEnabled || !eventNotificationsEnabled)) {
-        // Set default notification time if not set
         final hour = prefs.getInt('notification_hour') ?? 8;
         final minute = prefs.getInt('notification_minute') ?? 0;
         final notificationTime = TimeOfDay(hour: hour, minute: minute);
@@ -151,34 +123,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           await NotificationService.scheduleEventNotifications();
         }
       }
-      // --- End: Auto-enable notifications on first grant ---
 
-      // Schedule notifications (in case user already enabled them)
       await _checkAndScheduleNotifications();
     } catch (e) {
       debugPrint('Error initializing services: $e');
-    }
-  }
-
-  Future<void> _requestNotificationPermissions() async {
-    final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-    if (Platform.isIOS) {
-      await flutterLocalNotificationsPlugin
-          .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin
-          >()
-          ?.requestPermissions(alert: true, badge: true, sound: true);
-    } else if (Platform.isAndroid) {
-      final androidPlugin =
-          flutterLocalNotificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
-
-      if (androidPlugin != null) {
-        await androidPlugin.requestNotificationsPermission();
-      }
     }
   }
 
@@ -210,22 +158,54 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(390, 844), // iPhone 13 Pro Max size
-      minTextAdapt: true,
-      splitScreenMode: true,
+    return MaterialApp(
+      title: AppStrings.appTitle,
+      theme: AppTheme.lightTheme,
+      navigatorKey: navigatorKey,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [Locale('en', '')],
       builder: (context, child) {
-        return MaterialApp(
-          title: AppStrings.appTitle,
-          theme: AppTheme.lightTheme,
-          navigatorKey: navigatorKey,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          supportedLocales: const [Locale('en', '')],
-          home: GlobalNetworkBanner(
-            child: _showSplash ? const SplashScreen() : const MainScreen(),
-          ),
+        final framed = _webPhoneFrame(context, child ?? const SizedBox.shrink());
+        return ScreenUtilInit(
+          designSize: const Size(390, 844),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (_, __) => framed,
         );
       },
+      home: GlobalNetworkBanner(
+        child: _showSplash ? const SplashScreen() : const MainScreen(),
+      ),
+    );
+  }
+
+  Widget _webPhoneFrame(BuildContext context, Widget child) {
+    if (!kIsWeb) return child;
+    final size = MediaQuery.sizeOf(context);
+    if (size.width <= 430) return child;
+    return ColoredBox(
+      color: AppColors.background,
+      child: Center(
+        child: Container(
+          width: 390,
+          height: size.height,
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Color(0x33000000),
+                blurRadius: 24,
+                offset: Offset(0, 8),
+              ),
+            ],
+          ),
+          child: MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              size: Size(390, size.height),
+            ),
+            child: child,
+          ),
+        ),
+      ),
     );
   }
 }

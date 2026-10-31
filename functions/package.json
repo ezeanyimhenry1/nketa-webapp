@@ -1,0 +1,14 @@
+{
+  "name": "nketa-functions",
+  "description": "Nketa web API proxy, web push, and scheduled reminders",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "firebase-functions": "^6.3.2",
+    "form-data": "^4.0.1",
+    "node-fetch": "^2.7.0"
+  }
+}

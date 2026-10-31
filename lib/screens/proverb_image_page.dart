@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gal/gal.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/image_export.dart';
 import 'package:nketa/data/image_templates.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:nketa/theme/app_theme.dart';
@@ -49,14 +47,7 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
     }
   }
 
-  Future<bool> _requestGalleryAccess() async {
-    bool hasAccess = await Gal.hasAccess();
-    if (!hasAccess) {
-      await Gal.requestAccess();
-      hasAccess = await Gal.hasAccess();
-    }
-    return hasAccess;
-  }
+  Future<bool> _requestGalleryAccess() => ImageExport.requestGalleryAccess();
 
   @override
   Widget build(BuildContext context) {
@@ -477,45 +468,27 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
         return;
       }
       final imageData = await _captureImage();
-      final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imagePath = '${directory.path}/proverb_image_$timestamp.png';
-      final file = File(imagePath);
-      await file.writeAsBytes(imageData);
-      try {
-        await Gal.putImage(file.path, album: 'Nketa');
-        await usageService.incrementImage();
-      } on GalException catch (e) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.type.message),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 5),
-          ),
-        );
-        setState(() => _isGenerating = false);
-        return;
-      }
+      final filename = 'proverb_image_$timestamp.png';
+      await ImageExport.savePng(imageData, filename);
+      await usageService.incrementImage();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Image saved to gallery successfully!'),
+          content: Text(
+            AppPlatform.isWeb
+                ? 'Image downloaded.'
+                : 'Image saved to gallery successfully!',
+          ),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
           action: SnackBarAction(
             label: 'Share',
             textColor: Colors.white,
-            onPressed: () => _shareImageFile(file),
+            onPressed: () => _shareImageBytes(imageData, filename),
           ),
         ),
       );
-      Future.delayed(const Duration(seconds: 5), () {
-        if (file.existsSync()) {
-          file.deleteSync();
-        }
-      });
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -540,12 +513,8 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
     setState(() => _isGenerating = true);
     try {
       final imageData = await _captureImage();
-      final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imagePath = '${directory.path}/proverb_share_$timestamp.png';
-      final file = File(imagePath);
-      await file.writeAsBytes(imageData);
-      await _shareImageFile(file);
+      await _shareImageBytes(imageData, 'proverb_share_$timestamp.png');
       await usageService.incrementImage();
     } catch (e) {
       if (!mounted) return;
@@ -571,13 +540,12 @@ class _ProverbImagePageState extends State<ProverbImagePage> {
     return byteData!.buffer.asUint8List();
   }
 
-  Future<void> _shareImageFile(File file) async {
-    await SharePlus.instance.share(
-      ShareParams(
-        files: [XFile(file.path, mimeType: 'image/png')],
-        text: 'Check out today\'s proverb on Nketa',
-        subject: 'Proverb of the Day',
-      ),
+  Future<void> _shareImageBytes(Uint8List bytes, String filename) {
+    return ImageExport.sharePng(
+      bytes,
+      filename,
+      text: 'Check out today\'s proverb on Nketa',
+      subject: 'Proverb of the Day',
     );
   }
 

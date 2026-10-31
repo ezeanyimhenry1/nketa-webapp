@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:nketa/platform/app_platform.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'dart:io';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -45,7 +45,7 @@ class _SupportScreenState extends State<SupportScreen> {
       setState(() {
         _appVersion = '${packageInfo.appName} v${packageInfo.version}';
         _deviceInfo =
-            '${Platform.operatingSystem} ${Platform.operatingSystemVersion}';
+            '${AppPlatform.operatingSystem} ${AppPlatform.operatingSystemVersion}';
       });
     } catch (e) {
       setState(() {
@@ -65,8 +65,7 @@ class _SupportScreenState extends State<SupportScreen> {
     setState(() => _isLoading = true);
 
     try {
-      final Email email = Email(
-        body: '''
+      final body = '''
 ${_messageController.text}
 
 ---
@@ -75,14 +74,21 @@ App Information:
 - Device: $_deviceInfo
 - User: ${_nameController.text}
 - User Email: ${_emailController.text}
-        ''',
-        subject: _subjectController.text,
-        recipients: ['theigbobible@gmail.com'],
-        cc: [_emailController.text],
-        isHTML: false,
-      );
+        ''';
 
-      await FlutterEmailSender.send(email);
+      final uri = Uri(
+        scheme: 'mailto',
+        path: 'theigbobible@gmail.com',
+        queryParameters: {
+          'subject': _subjectController.text,
+          'body': body,
+        },
+      );
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        throw Exception('Could not open the mail app');
+      }
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

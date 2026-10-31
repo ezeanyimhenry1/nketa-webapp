@@ -1,12 +1,10 @@
-import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:gal/gal.dart';
+import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/image_export.dart';
 import 'package:nketa/models/translation_result.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -115,15 +113,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     }
   }
 
-  // Use gal's recommended permission handling
-  Future<bool> _requestGalleryAccess() async {
-    bool hasAccess = await Gal.hasAccess();
-    if (!hasAccess) {
-      await Gal.requestAccess();
-      hasAccess = await Gal.hasAccess();
-    }
-    return hasAccess;
-  }
+  Future<bool> _requestGalleryAccess() => ImageExport.requestGalleryAccess();
 
   @override
   Widget build(BuildContext context) {
@@ -409,7 +399,7 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
                     ),
                     SizedBox(height: AppSpacing.lg.h),
                     // Action Buttons
-                    if (Platform.isAndroid)
+                    if (AppPlatform.isAndroid)
                       Row(
                         children: [
                           Expanded(
@@ -731,45 +721,27 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
         return;
       }
       final imageData = await _captureImage();
-      final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imagePath = '${directory.path}/nsibidi_image_$timestamp.png';
-      final file = File(imagePath);
-      await file.writeAsBytes(imageData);
-      try {
-        await Gal.putImage(file.path, album: 'Nketa');
-        await usageService.incrementImage();
-      } on GalException catch (e) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(e.type.message),
-            backgroundColor: Colors.red,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 5),
-          ),
-        );
-        setState(() => _isGenerating = false);
-        return;
-      }
+      final filename = 'nsibidi_image_$timestamp.png';
+      await ImageExport.savePng(imageData, filename);
+      await usageService.incrementImage();
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Image saved to gallery successfully!'),
+          content: Text(
+            AppPlatform.isWeb
+                ? 'Image downloaded.'
+                : 'Image saved to gallery successfully!',
+          ),
           backgroundColor: Colors.green,
           behavior: SnackBarBehavior.floating,
           action: SnackBarAction(
             label: 'Share',
             textColor: Colors.white,
-            onPressed: () => _shareImageFile(file),
+            onPressed: () => _shareImageBytes(imageData, filename),
           ),
         ),
       );
-      Future.delayed(const Duration(seconds: 5), () {
-        if (file.existsSync()) {
-          file.deleteSync();
-        }
-      });
     } catch (e) {
       debugPrint('Error saving image: $e');
       if (!mounted) return;
@@ -795,14 +767,8 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     setState(() => _isGenerating = true);
     try {
       final imageData = await _captureImage();
-      final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imagePath = '${directory.path}/nsibidi_share_$timestamp.png';
-
-      final file = File(imagePath);
-      await file.writeAsBytes(imageData);
-
-      await _shareImageFile(file);
+      await _shareImageBytes(imageData, 'nsibidi_share_$timestamp.png');
       await usageService.incrementImage();
     } catch (e) {
       debugPrint('Error sharing image: $e');
@@ -824,28 +790,12 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     setState(() => _isGenerating = true);
     try {
       final imageData = await _captureImage();
-      final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final imagePath = '${directory.path}/nsibidi_tiktok_$timestamp.png';
-      final file = File(imagePath);
-      await file.writeAsBytes(imageData);
-
-      if (Platform.isAndroid) {
-        // Save to gallery to ensure TikTok can access it
-        await Gal.putImage(file.path, album: 'Nketa');
-        // Use share_plus to open the share sheet
-        await SharePlus.instance.share(
-          ShareParams(
-            files: [XFile(file.path, mimeType: 'image/png')],
-            text:
-                'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
-            subject: 'Nsibidi Translation from Nketa',
-          ),
-        );
-      } else {
-        // iOS: just use the share sheet
-        await _shareImageFile(file);
+      final filename = 'nsibidi_tiktok_$timestamp.png';
+      if (AppPlatform.isAndroid) {
+        await ImageExport.savePng(imageData, filename);
       }
+      await _shareImageBytes(imageData, filename);
     } catch (e) {
       debugPrint('Error sharing to TikTok: $e');
       if (!mounted) return;
@@ -874,14 +824,13 @@ class _NsibidiImagePageState extends State<NsibidiImagePage> {
     return byteData!.buffer.asUint8List();
   }
 
-  Future<void> _shareImageFile(File file) async {
-    await SharePlus.instance.share(
-      ShareParams(
-        files: [XFile(file.path, mimeType: 'image/png')],
-        text:
-            'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
-        subject: 'Nsibidi Translation from Nketa',
-      ),
+  Future<void> _shareImageBytes(Uint8List bytes, String filename) {
+    return ImageExport.sharePng(
+      bytes,
+      filename,
+      text:
+          'Check out this beautiful Nsibidi translation: "${widget.originalInput}"',
+      subject: 'Nsibidi Translation from Nketa',
     );
   }
 

@@ -1,11 +1,12 @@
 import 'dart:async';
-import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nketa/services/intron_voice_service.dart';
 import 'package:nketa/services/microphone_permission_service.dart';
+import 'package:nketa/services/wav_bytes.dart';
 import 'package:nketa/theme/app_theme.dart' show AppColors;
-import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
 /// Mic button with Intron streaming STT (sync upload fallback).
@@ -40,7 +41,8 @@ class _VoiceInputButtonState extends State<VoiceInputButton>
   String _partial = '';
   IntronStreamingSession? _session;
   StreamSubscription<List<int>>? _audioSub;
-  File? _fallbackFile;
+  final BytesBuilder _pcmChunks = BytesBuilder();
+  bool _usingPcmFallback = false;
   bool _receivedFinalTranscript = false;
   late AnimationController _pulseController;
 
@@ -94,9 +96,18 @@ class _VoiceInputButtonState extends State<VoiceInputButton>
     widget.onPartialTranscript?.call('');
 
     try {
-      await _startStreaming();
+      if (kIsWeb) {
+        await _startPcmCapture();
+      } else {
+        try {
+          await _startStreaming();
+        } catch (e) {
+          await _startPcmCapture();
+        }
+      }
     } catch (e) {
-      await _startFallbackRecording();
+      _stopInternal(notify: true);
+      widget.onError?.call('Could not start the microphone: $e');
     }
   }
 
@@ -129,20 +140,17 @@ class _VoiceInputButtonState extends State<VoiceInputButton>
     });
   }
 
-  Future<void> _startFallbackRecording() async {
-    final dir = await getTemporaryDirectory();
-    _fallbackFile = File(
-      '${dir.path}/nketa_voice_${DateTime.now().millisecondsSinceEpoch}.wav',
-    );
-
-    await _recorder.start(
+  Future<void> _startPcmCapture() async {
+    _usingPcmFallback = true;
+    _pcmChunks.clear();
+    final stream = await _recorder.startStream(
       const RecordConfig(
-        encoder: AudioEncoder.wav,
+        encoder: AudioEncoder.pcm16bits,
         sampleRate: 16000,
         numChannels: 1,
       ),
-      path: _fallbackFile!.path,
     );
+    _audioSub = stream.listen(_pcmChunks.add);
   }
 
   Future<void> _stopRecording() async {
@@ -156,17 +164,18 @@ class _VoiceInputButtonState extends State<VoiceInputButton>
       await _session!.close();
       _session = null;
       transcript = _partial.trim().isNotEmpty ? _partial.trim() : null;
-    } else if (_fallbackFile != null) {
+    } else if (_usingPcmFallback) {
+      await _audioSub?.cancel();
+      _audioSub = null;
       await _recorder.stop();
       try {
-        transcript = await _voiceService.transcribeFileSync(_fallbackFile!);
+        final wav = pcm16ToWav(_pcmChunks.toBytes());
+        transcript = await _voiceService.transcribeBytes(wav);
       } catch (e) {
         widget.onError?.call('Transcription failed: $e');
       }
-      if (await _fallbackFile!.exists()) {
-        await _fallbackFile!.delete();
-      }
-      _fallbackFile = null;
+      _pcmChunks.clear();
+      _usingPcmFallback = false;
     } else {
       await _recorder.stop();
     }

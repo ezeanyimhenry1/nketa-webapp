@@ -1,1 +1,69 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"the-igbo-bible","appId":"1:994305615388:android:386d0f88e8a65dc85a21d9","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"the-igbo-bible","appId":"1:994305615388:ios:70483fe91c4bbff85a21d9","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"the-igbo-bible","configurations":{"android":"1:994305615388:android:386d0f88e8a65dc85a21d9","ios":"1:994305615388:ios:70483fe91c4bbff85a21d9"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "the-igbo-bible",
+          "appId": "1:994305615388:android:386d0f88e8a65dc85a21d9",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "the-igbo-bible",
+          "appId": "1:994305615388:ios:70483fe91c4bbff85a21d9",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "the-igbo-bible",
+          "configurations": {
+            "android": "1:994305615388:android:386d0f88e8a65dc85a21d9",
+            "ios": "1:994305615388:ios:70483fe91c4bbff85a21d9"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default"
+    }
+  ],
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/flutter_service_worker.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      },
+      {
+        "source": "/firebase-messaging-sw.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  }
+}

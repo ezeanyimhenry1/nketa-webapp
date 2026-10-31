@@ -23,6 +23,7 @@ import 'package:nketa/widgets/voice_input_button.dart';
 import 'package:nketa/screens/word_detail_screen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:nketa/screens/support_screen.dart';
+import 'package:nketa/widgets/pwa_install_banner.dart';
 import 'dart:math';
 
 class BrowseScreen extends StatefulWidget {
@@ -404,6 +405,7 @@ class _BrowseScreenState extends State<BrowseScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const PwaInstallBanner(),
                 // --- USER GREETING ---
                 StreamBuilder<User?>(
                   stream: FirebaseAuth.instance.authStateChanges(),

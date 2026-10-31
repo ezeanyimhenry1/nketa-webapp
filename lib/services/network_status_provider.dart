@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class NetworkStatusProvider extends ChangeNotifier {
   bool _hasConnection = true;
   String? _bannerMessage;
-  bool _wasDisconnected = false; // Track if we were previously disconnected
+  bool _wasDisconnected = false;
   bool get hasConnection => _hasConnection;
   String? get bannerMessage => _bannerMessage;
 
@@ -15,54 +15,57 @@ class NetworkStatusProvider extends ChangeNotifier {
 
   void _init() {
     Connectivity().onConnectivityChanged.listen((result) async {
-      if (result == ConnectivityResult.none) {
+      await _handleResult(result);
+    });
+    Connectivity().checkConnectivity().then(_handleResult);
+  }
+
+  Future<void> _handleResult(ConnectivityResult result) async {
+    if (result == ConnectivityResult.none) {
+      _hasConnection = false;
+      _wasDisconnected = true;
+      _bannerMessage = 'No internet connection. Please check your network.';
+      notifyListeners();
+      return;
+    }
+
+    try {
+      final stopwatch = Stopwatch()..start();
+      final response = await http
+          .get(Uri.parse('https://www.google.com/generate_204'))
+          .timeout(const Duration(seconds: 5));
+      stopwatch.stop();
+
+      final ok = response.statusCode == 204 || response.statusCode == 200;
+      if (!ok || stopwatch.elapsedMilliseconds > 2500) {
         _hasConnection = false;
         _wasDisconnected = true;
-        _bannerMessage = 'No internet connection. Please check your network.';
+        _bannerMessage = 'Network is very slow. Please try again later.';
         notifyListeners();
-      } else {
-        // Try a simple speed check (ping google.com)
-        try {
-          final stopwatch = Stopwatch()..start();
-          final lookup = await InternetAddress.lookup(
-            'google.com',
-          ).timeout(Duration(seconds: 5));
-          stopwatch.stop();
-
-          if (lookup.isEmpty || stopwatch.elapsedMilliseconds > 2500) {
-            _hasConnection = false;
-            _wasDisconnected = true;
-            _bannerMessage = 'Network is very slow. Please try again later.';
-            notifyListeners();
-            return;
-          }
-        } catch (_) {
-          _hasConnection = false;
-          _wasDisconnected = true;
-          _bannerMessage =
-              'Unable to reach the internet. Please check your connection.';
-          notifyListeners();
-          return;
-        }
-
-        // Connection restored - only show message if we were previously disconnected
-        if (_wasDisconnected) {
-          _hasConnection = true;
-          _wasDisconnected = false;
-          // Small delay to allow the UI to detect the transition
-          await Future.delayed(const Duration(milliseconds: 100));
-          _bannerMessage = null;
-          notifyListeners();
-        } else {
-          // Just update the connection status without showing a message
-          _hasConnection = true;
-          if (_bannerMessage != null) {
-            _bannerMessage = null;
-            notifyListeners();
-          }
-        }
+        return;
       }
-    });
+    } catch (_) {
+      _hasConnection = false;
+      _wasDisconnected = true;
+      _bannerMessage =
+          'Unable to reach the internet. Please check your connection.';
+      notifyListeners();
+      return;
+    }
+
+    if (_wasDisconnected) {
+      _hasConnection = true;
+      _wasDisconnected = false;
+      await Future.delayed(const Duration(milliseconds: 100));
+      _bannerMessage = null;
+      notifyListeners();
+    } else {
+      _hasConnection = true;
+      if (_bannerMessage != null) {
+        _bannerMessage = null;
+        notifyListeners();
+      }
+    }
   }
 
   void dismissBanner() {

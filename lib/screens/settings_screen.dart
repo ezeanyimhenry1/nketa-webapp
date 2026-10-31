@@ -6,7 +6,9 @@ import 'package:nketa/theme/app_theme.dart';
 import 'package:nketa/theme/app_spacing.dart';
 import 'package:nketa/theme/app_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/pwa_install.dart';
+import 'package:nketa/widgets/pwa_install_sheet.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/screens/support_screen.dart';
 import 'package:nketa/screens/profile_screen.dart';
@@ -90,72 +92,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   Future<void> _checkNotificationPermission() async {
     try {
-      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      final androidPlugin =
-          flutterLocalNotificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
-
-      if (androidPlugin != null) {
-        final granted = await androidPlugin.areNotificationsEnabled();
-        setState(() {
-          _permissionGranted =
-              granted ?? true; // Default to true if we can't determine
-        });
-      } else {
-        // If we can't check Android permissions, assume they're granted
-        setState(() {
-          _permissionGranted = true;
-        });
-      }
+      final granted = await NotificationService.areNotificationsEnabled();
+      setState(() => _permissionGranted = granted || AppPlatform.isWeb);
     } catch (e) {
       debugPrint('Error checking notification permission: $e');
-      // If there's an error checking permissions, assume they're granted
-      setState(() {
-        _permissionGranted = true;
-      });
+      setState(() => _permissionGranted = true);
     }
   }
 
   Future<void> _requestNotificationPermission() async {
     try {
-      final flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-      final androidPlugin =
-          flutterLocalNotificationsPlugin
-              .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin
-              >();
-
-      if (androidPlugin != null) {
-        final granted = await androidPlugin.requestNotificationsPermission();
-        setState(() {
-          _permissionGranted =
-              granted ?? true; // Default to true if we can't determine
-        });
-
-        if ((granted ?? true) && _notificationsEnabled) {
-          await NotificationService.scheduleDailyProverbNotification(
-            _notificationTime,
-          );
-        }
-      } else {
-        // If we can't request permissions, assume they're granted
-        setState(() {
-          _permissionGranted = true;
-        });
-        if (_notificationsEnabled) {
-          await NotificationService.scheduleDailyProverbNotification(
-            _notificationTime,
-          );
-        }
+      if (AppPlatform.isWeb &&
+          PwaInstall.isIosSafari &&
+          !PwaInstall.isStandalone) {
+        if (!mounted) return;
+        await showPwaIosInstallSheet(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Add Nketa to the Home Screen first, then turn on reminders.',
+            ),
+          ),
+        );
+        return;
+      }
+      final granted = await NotificationService.requestPermission();
+      setState(() => _permissionGranted = granted);
+      if (granted && _notificationsEnabled) {
+        await NotificationService.scheduleDailyProverbNotification(
+          _notificationTime,
+        );
       }
     } catch (e) {
       debugPrint('Error requesting notification permission: $e');
-      // If there's an error, assume permissions are granted
-      setState(() {
-        _permissionGranted = true;
-      });
+      setState(() => _permissionGranted = true);
       if (_notificationsEnabled) {
         await NotificationService.scheduleDailyProverbNotification(
           _notificationTime,
@@ -233,7 +203,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _openPrivacyPolicy() async {
-    const url = 'https://nketa.netlify.app/privacy';
+    const url = 'https://nketa.app/privacy';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -241,7 +211,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void _openTermsOfUse() async {
-    const url = 'https://nketa.netlify.app/terms';
+    const url = 'https://nketa.app/terms';
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -329,6 +299,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             SizedBox(height: AppSpacing.xl),
 
+            if (PwaInstall.shouldShowBanner) ...[
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                ),
+                child: ListTile(
+                  leading: Icon(
+                    PwaInstall.isIosSafari ? Icons.ios_share : Icons.download,
+                    color: AppColors.primary,
+                  ),
+                  title: Text(
+                    PwaInstall.isIosSafari
+                        ? 'Add to Home Screen'
+                        : 'Install Nketa',
+                  ),
+                  subtitle: Text(
+                    PwaInstall.isIosSafari
+                        ? 'Required on iPhone before reminders can be delivered.'
+                        : 'Install Nketa to your home screen and app list.',
+                  ),
+                  onTap: () async {
+                    if (PwaInstall.canPromptInstall) {
+                      await PwaInstall.promptInstall();
+                    } else {
+                      await showPwaIosInstallSheet(context);
+                    }
+                  },
+                ),
+              ),
+              SizedBox(height: AppSpacing.xl),
+            ],
+
             // Notifications Section
             Text(
               'Notifications',
@@ -337,7 +340,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: AppColors.secondary,
               ),
             ),
-            SizedBox(height: AppSpacing.sm),
+            if (AppPlatform.isWeb)
+              Padding(
+                padding: EdgeInsets.only(top: 4, bottom: AppSpacing.sm),
+                child: Text(
+                  PwaInstall.isIosSafari
+                      ? 'iPhone reminders need the Home Screen icon. Add Nketa first, then enable notifications.'
+                      : 'Android can install Nketa from the banner, then receive proverb and event reminders.',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.grey[700],
+                  ),
+                ),
+              )
+            else
+              SizedBox(height: AppSpacing.sm),
             Card(
               elevation: 2,
               shape: RoundedRectangleBorder(
