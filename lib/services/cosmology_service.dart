@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/models/cosmology_item.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/json_content_loader.dart';
 
 class CosmologyService {
-  static String cosmologyUrl =
-      '${dotenv.env['JSON_URL']}igbo-cosmology/main/igbo_cosmology.json';
+  static String get cosmologyUrl =>
+      AppEnv.jsonFile('igbo-cosmology/main/igbo_cosmology.json');
 
   static const String _assetPath = 'assets/data/igbo_cosmology.json';
 

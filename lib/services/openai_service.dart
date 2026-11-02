@@ -1,5 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/services/api_service.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/web_backend.dart';
 
 class OpenAIService extends ApiService {
@@ -7,11 +7,11 @@ class OpenAIService extends ApiService {
     : super(
         baseUrl: WebBackend.isEnabled
             ? WebBackend.baseUrl
-            : (dotenv.env['OPENAI_API_BASE_URL'] ?? 'https://api.openai.com/v1'),
+            : (AppEnv.get('OPENAI_API_BASE_URL') ?? 'https://api.openai.com/v1'),
         defaultHeaders: WebBackend.isEnabled
             ? const {'Content-Type': 'application/json'}
             : {
-                'Authorization': 'Bearer ${dotenv.env['OPENAI_API_KEY'] ?? ''}',
+                'Authorization': 'Bearer ${AppEnv.get('OPENAI_API_KEY') ?? ''}',
                 'Content-Type': 'application/json',
               },
       );

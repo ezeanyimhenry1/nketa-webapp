@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
@@ -12,7 +12,7 @@ import 'package:nketa/services/web_backend.dart';
 class AlternativePaymentService {
   // Flutterwave configuration
   static String get _flutterwaveSecretKey {
-    final key = dotenv.env['FLUTTERWAVE_API_KEY'];
+    final key = AppEnv.get('FLUTTERWAVE_API_KEY');
     debugPrint('Raw API key from env: $key');
 
     // Check if key is null or empty

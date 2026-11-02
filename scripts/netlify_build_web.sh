@@ -22,7 +22,6 @@ if [ "${NETLIFY:-}" = "true" ]; then
   cat > .env << EOF
 JSON_URL=${JSON_URL:-https://raw.githubusercontent.com/ezeanyimhenry1/}
 IGBO_API_BASE_URL=${IGBO_API_BASE_URL:-https://igboapi.com/api/v2}
-IGBO_API_KEY=${IGBO_API_KEY:-}
 OPENAI_API_BASE_URL=${OPENAI_API_BASE_URL:-https://api.openai.com/v1}
 WEB_API_BASE_URL=${WEB_API_BASE_URL:-https://us-central1-the-igbo-bible.cloudfunctions.net}
 GOOGLE_WEB_CLIENT_ID=${GOOGLE_WEB_CLIENT_ID:-994305615388-s61dbjj93dfms6hd0pe59pcrqud2lff0.apps.googleusercontent.com}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/platform/app_platform.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/widgets/shimmer_loader.dart';
 import 'package:nketa/theme/app_theme.dart';
 import 'package:nketa/services/alternative_payment_service.dart';
@@ -16,9 +16,9 @@ class SubscriptionScreen extends StatefulWidget {
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
   static String get _kSubscriptionId {
     if (AppPlatform.isIOS) {
-      return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
+      return AppEnv.get('APPLE_SUBSCRIPTION_ID') ?? 'theigbobible';
     } else {
-      return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
+      return AppEnv.get('SUBSCRIPTION_ID') ?? 'nketa';
     }
   }
 

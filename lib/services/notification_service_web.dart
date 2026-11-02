@@ -3,7 +3,7 @@ import 'dart:html' as html;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/pwa_install.dart';
 import 'package:nketa/services/web_backend.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -113,7 +113,7 @@ class NotificationService {
       return;
     }
 
-    final vapidKey = dotenv.env['FIREBASE_VAPID_KEY'] ?? '';
+    final vapidKey = AppEnv.get('FIREBASE_VAPID_KEY') ?? '';
     final token = await FirebaseMessaging.instance.getToken(
       vapidKey: vapidKey.isEmpty ? null : vapidKey,
     );

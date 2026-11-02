@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/models/translation_result.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/json_content_loader.dart';
 import 'package:diacritic/diacritic.dart';
 
 class IgboNsibidiNamesService {
-  static String resultsUrl =
-      '${dotenv.env['JSON_URL']}igbonsibidi-names/main/dictionary.json';
+  static String get resultsUrl =>
+      AppEnv.jsonFile('igbonsibidi-names/main/dictionary.json');
 
   static const String _assetPath = 'assets/data/dictionary.json';
 

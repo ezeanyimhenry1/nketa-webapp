@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/intron_ws.dart';
 import 'package:nketa/services/voice_audio_cache_service.dart';
 import 'package:nketa/services/web_backend.dart';
@@ -19,13 +19,13 @@ class IntronVoiceService {
   static const int _bitRate = 16;
   static const int _numChannels = 1;
 
-  String get _apiKey => dotenv.env['INTRON_API_KEY'] ?? '';
+  String get _apiKey => AppEnv.get('INTRON_API_KEY') ?? '';
 
   bool get _useProxy => WebBackend.isEnabled;
-  String get voiceLanguage => dotenv.env['INTRON_VOICE_LANGUAGE'] ?? 'ig';
-  String get voiceAccent => dotenv.env['INTRON_VOICE_ACCENT'] ?? 'igbo';
-  String get voiceGender => dotenv.env['INTRON_VOICE_GENDER'] ?? 'female';
-  String get asrLanguage => dotenv.env['INTRON_ASR_LANGUAGE'] ?? 'ig';
+  String get voiceLanguage => AppEnv.get('INTRON_VOICE_LANGUAGE') ?? 'ig';
+  String get voiceAccent => AppEnv.get('INTRON_VOICE_ACCENT') ?? 'igbo';
+  String get voiceGender => AppEnv.get('INTRON_VOICE_GENDER') ?? 'female';
+  String get asrLanguage => AppEnv.get('INTRON_ASR_LANGUAGE') ?? 'ig';
 
   bool get isConfigured => _apiKey.isNotEmpty || _useProxy;
 

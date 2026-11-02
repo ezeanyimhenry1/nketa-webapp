@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/json_content_loader.dart';
 import '../models/igbo_event.dart';
 
 class EventService {
-  static String eventsUrl =
-      '${dotenv.env['JSON_URL']}igbo-events/main/events.json';
+  static String get eventsUrl =>
+      AppEnv.jsonFile('igbo-events/main/events.json');
 
   static const String _assetPath = 'assets/data/events.json';
 

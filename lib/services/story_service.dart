@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/models/story_item.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/json_content_loader.dart';
 
 class StoryService {
-  static String storiesUrl =
-      '${dotenv.env['JSON_URL']}igbo-history/main/stories.json';
+  static String get storiesUrl =>
+      AppEnv.jsonFile('igbo-history/main/stories.json');
 
   static const String _assetPath = 'assets/data/stories.json';
 

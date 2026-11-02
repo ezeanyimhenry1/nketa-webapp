@@ -1,17 +1,49 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:nketa/models/translation_result.dart';
 import 'package:nketa/services/api_service.dart';
+import 'package:nketa/services/app_env.dart';
+import 'package:nketa/services/web_backend.dart';
 
 class TranslationService extends ApiService {
   TranslationService()
     : super(
-        baseUrl: dotenv.env['IGBO_API_BASE_URL'] ?? '',
-        defaultHeaders: {
-          'X-API-Key': dotenv.env['IGBO_API_KEY'] ?? '',
-          'Accept': 'application/json',
+        baseUrl: WebBackend.isEnabled
+            ? WebBackend.baseUrl
+            : (AppEnv.get('IGBO_API_BASE_URL') ?? ''),
+        defaultHeaders: WebBackend.isEnabled
+            ? const {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              }
+            : {
+                'X-API-Key': AppEnv.get('IGBO_API_KEY') ?? '',
+                'Accept': 'application/json',
+              },
+      );
+
+  @override
+  Future<dynamic> get(
+    String endpoint, {
+    Map<String, String>? queryParams,
+  }) async {
+    if (WebBackend.isEnabled) {
+      final response = await WebBackend.post(
+        '/igboProxy',
+        body: {
+          'method': 'GET',
+          'path': endpoint,
+          'query': queryParams,
         },
       );
+      if (response.statusCode != 200) {
+        throw Exception(
+          'GET request failed: ${response.statusCode} - ${response.body}',
+        );
+      }
+      return WebBackend.decode(response);
+    }
+    return super.get(endpoint, queryParams: queryParams);
+  }
 
   /// Translate an English word to Igbo using IgboAPI
   Future<String?> translateToIgbo(String englishWord) async {
@@ -86,7 +118,6 @@ class TranslationService extends ApiService {
   Future<TranslationResult?> fetchWordById(String id) async {
     try {
       final result = await get('/words/$id');
-      // print(result['data']);
       if (result != null && result['data'] != null) {
         return TranslationResult.fromJson(result['data']);
       }

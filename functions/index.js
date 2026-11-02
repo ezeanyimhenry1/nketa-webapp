@@ -10,6 +10,7 @@ setGlobalOptions({ region: "us-central1", maxInstances: 10 });
 
 const INTRON_BASE = "https://infer.voice.intron.io";
 const FLUTTERWAVE_BASE = "https://api.flutterwave.com/v3";
+const IGBO_API_BASE = "https://igboapi.com/api/v2";
 
 function cors(res) {
   res.set("Access-Control-Allow-Origin", "*");
@@ -82,6 +83,36 @@ exports.intronProxy = onRequest({ secrets: ["INTRON_API_KEY"] }, async (req, res
       method,
       headers: {
         Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: method === "GET" ? undefined : JSON.stringify(body.body || {}),
+    });
+    const json = await response.json();
+    res.status(response.status).json(json);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+exports.igboProxy = onRequest({ secrets: ["IGBO_API_KEY"] }, async (req, res) => {
+  if (handleOptions(req, res)) return;
+  cors(res);
+  try {
+    const body = await readJsonBody(req);
+    const method = (body.method || "GET").toUpperCase();
+    const path = body.path || "/words";
+    const url = new URL(`${IGBO_API_BASE}${path.startsWith("/") ? path : `/${path}`}`);
+    const query = body.query || {};
+    if (query && typeof query === "object") {
+      for (const [key, value] of Object.entries(query)) {
+        if (value != null && value !== "") url.searchParams.set(key, String(value));
+      }
+    }
+    const response = await fetch(url.toString(), {
+      method,
+      headers: {
+        "X-API-Key": process.env.IGBO_API_KEY,
+        Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: method === "GET" ? undefined : JSON.stringify(body.body || {}),

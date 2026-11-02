@@ -25,7 +25,7 @@ void main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: ".env", isOptional: kIsWeb);
 
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Africa/Lagos'));
@@ -170,6 +170,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           designSize: const Size(390, 844),
           minTextAdapt: true,
           splitScreenMode: true,
+          enableScaleWH: () => !kIsWeb,
+          enableScaleText: () => !kIsWeb,
           builder: (_, __) => framed,
         );
       },

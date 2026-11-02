@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:nketa/platform/app_platform.dart';
@@ -27,9 +27,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   static String get _kSubscriptionId {
     // Fallback subscription IDs if environment variables are not available
     if (AppPlatform.isIOS) {
-      return dotenv.env['APPLE_SUBSCRIPTION_ID'] ?? 'theigbobible';
+      return AppEnv.get('APPLE_SUBSCRIPTION_ID') ?? 'theigbobible';
     } else {
-      return dotenv.env['SUBSCRIPTION_ID'] ?? 'nketa';
+      return AppEnv.get('SUBSCRIPTION_ID') ?? 'nketa';
     }
   }
 
@@ -42,7 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool _iapInitialized = false;
 
   static String? _googleClientId(String key) {
-    final value = dotenv.env[key];
+    final value = AppEnv.get(key);
     if (value == null || value.isEmpty) return null;
     if (!value.endsWith('.apps.googleusercontent.com')) return null;
     if (value.startsWith('your-') || value.startsWith('YOUR_')) return null;

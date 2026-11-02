@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nketa/platform/app_platform.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,7 +96,7 @@ class ReviewService {
     try {
       final InAppReview inAppReview = InAppReview.instance;
       await inAppReview.openStoreListing(
-        appStoreId: dotenv.env['APP_STORE_ID'], // Your App Store ID
+        appStoreId: AppEnv.get('APP_STORE_ID'),
       );
       await _markReviewPromptShown();
     } catch (e) {

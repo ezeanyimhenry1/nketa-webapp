@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:nketa/services/app_env.dart';
 
 /// HTTPS proxy for secrets that must not ship in the web JS bundle.
 class WebBackend {
   WebBackend._();
 
   static String get baseUrl {
-    final raw = dotenv.env['WEB_API_BASE_URL'] ??
+    final raw = AppEnv.get('WEB_API_BASE_URL') ??
         'https://us-central1-the-igbo-bible.cloudfunctions.net';
     return raw.endsWith('/') ? raw.substring(0, raw.length - 1) : raw;
   }

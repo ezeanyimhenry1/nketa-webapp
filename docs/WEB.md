@@ -15,7 +15,7 @@ The Flutter app can be built for the browser as an installable PWA. A few Fireba
 
 ## 2. API proxy and reminders
 
-The web client must not ship OpenAI, Intron, or Flutterwave keys. Those live in Cloud Functions.
+The web client must not ship OpenAI, Intron, Flutterwave, or Igbo API keys. Those live in Cloud Functions.
 
 ```bash
 cd the_igbo_bible/functions
@@ -23,6 +23,7 @@ npm install
 firebase functions:secrets:set OPENAI_API_KEY
 firebase functions:secrets:set INTRON_API_KEY
 firebase functions:secrets:set FLUTTERWAVE_API_KEY
+firebase functions:secrets:set IGBO_API_KEY
 firebase deploy --only functions,firestore:rules
 ```
 
@@ -40,9 +41,9 @@ Host the Flutter web build at the **root** of `https://web.nketa.app`. A subpath
 
 `netlify.toml` builds this PWA with `scripts/netlify_build_web.sh` and publishes `build/web`. The MkDocs docs build lives in `netlify.docs.toml` and is not the web app site.
 
-On the web app Netlify site, set `IGBO_API_KEY` so dictionary lookup works. Set `FIREBASE_VAPID_KEY` when you want web push. Do not put `OPENAI_API_KEY`, `INTRON_API_KEY`, `FLUTTERWAVE_API_KEY`, or `HF_TOKEN` in Netlify. Those stay in Cloud Functions. The build writes a public `.env` and would publish any secret you add to that file.
+On the web app Netlify site, set `FIREBASE_VAPID_KEY` when you want web push. Do not put `OPENAI_API_KEY`, `INTRON_API_KEY`, `FLUTTERWAVE_API_KEY`, `IGBO_API_KEY`, or `HF_TOKEN` in Netlify. Those stay in Cloud Functions. The build writes a public `.env` and would publish any secret you add to that file.
 
-`web/index.html` registers `firebase-messaging-sw.js` as the page service worker. That worker caches the app shell and handles web push.
+`web/index.html` registers `firebase-messaging-sw.js` as the page service worker. That worker handles web push.
 
 ## 4. Marketing site
 

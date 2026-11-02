@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:nketa/services/app_env.dart';
 import 'package:nketa/services/json_content_loader.dart';
 
 class ProverbsService {
-  static String proverbsUrl =
-      '${dotenv.env['JSON_URL']}igbo-proverbs/main/proverbs.json';
+  static String get proverbsUrl =>
+      AppEnv.jsonFile('igbo-proverbs/main/proverbs.json');
 
   static const String _assetPath = 'assets/data/proverbs.json';
 

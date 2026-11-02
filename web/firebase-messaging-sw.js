@@ -11,54 +11,19 @@ firebase.initializeApp({
 });
 
 const messaging = firebase.messaging();
-const CACHE = "nketa-shell-v1";
-const PRECACHE = [
-  "/",
-  "/index.html",
-  "/main.dart.js",
-  "/flutter.js",
-  "/manifest.json",
-  "/pwa.js",
-  "/favicon.png",
-  "/icons/Icon-192.png",
-  "/icons/Icon-512.png",
-  "/icons/apple-touch-icon.png",
-];
 
-self.addEventListener("install", function (event) {
-  event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
-      return cache.addAll(PRECACHE);
-    })
-  );
+self.addEventListener("install", function () {
   self.skipWaiting();
 });
 
 self.addEventListener("activate", function (event) {
-  event.waitUntil(self.clients.claim());
-});
-
-self.addEventListener("fetch", function (event) {
-  var request = event.request;
-  if (request.method !== "GET") return;
-  var url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-  event.respondWith(
-    caches.match(request).then(function (cached) {
-      var fetched = fetch(request)
-        .then(function (response) {
-          if (response && response.status === 200) {
-            var copy = response.clone();
-            caches.open(CACHE).then(function (cache) {
-              cache.put(request, copy);
-            });
-          }
-          return response;
-        })
-        .catch(function () {
-          return cached;
-        });
-      return cached || fetched;
+  event.waitUntil(
+    caches.keys().then(function (keys) {
+      return Promise.all(keys.map(function (key) {
+        return caches.delete(key);
+      }));
+    }).then(function () {
+      return self.clients.claim();
     })
   );
 });
